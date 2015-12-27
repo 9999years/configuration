@@ -7,7 +7,7 @@ set showcmd "show partial commands in last line
 set guifont=terminus:h12 "set font
 set guioptions-=m	"remove menu bar
 set guioptions-=T	"remove toolbar
-set guioptions=c "console dialogs instead of popup dialogs
+set guioptions+=cr "console dialogs instead of popup dialogs
 set ignorecase "ignore case while searching
 set smartcase " ...unless search is all caps
 set hlsearch "highlight searches
