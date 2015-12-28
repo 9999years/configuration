@@ -29,8 +29,11 @@ set list
 set listchars=tab:\|\ ,trail:$ "show tabs as pipes and trailing spaces as $
 behave mswin
 set lines=59 columns=120
-colorscheme UBARYD "set colorscheme
-let g:user_emmet_install_global = 0 "something for vim html
-autocmd FileType html,css EmmetInstall "same deal
-let g:user_emmet_expandabbr_key = '<c-e>'
-let g:use_emmet_complete_tag = 1
+colorscheme UBARYD "set colorscheme"
+let filetype = fnamemodify(bufname("%"), ":e")
+if filetype ==? "html"
+	let g:user_emmet_install_global = 0 "something for vim html
+	autocmd FileType html,css EmmetInstall "same deal
+	let g:user_emmet_expandabbr_key = '<c-e>'
+	let g:use_emmet_complete_tag = 1
+endif
