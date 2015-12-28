@@ -20,12 +20,13 @@ set number "show line numbers
 set ruler "display cursor position
 set laststatus=2 "display status line
 set confirm "instead of failing cmd raise a confirm daialogue
-set visualbell "no fucking beeping
+set novisualbell "no fucking beeping
 set t_vb= "no fucking flashing either
 set cmdheight=2 "2 line command window
 set tabstop=4 "tabs are 4 chars
 set shiftwidth=4 "how many cols of indent with >> and <<
-set autoindent
+set autoindent "keep indent
+set showcmd "show leader
 filetype on
 filetype plugin on
 filetype indent on
@@ -40,4 +41,6 @@ if filetype ==? "html"
 	autocmd FileType html,css EmmetInstall "same deal
 	let g:user_emmet_expandabbr_key = '<c-e>'
 	let g:use_emmet_complete_tag = 1
+elseif filetype ==? "tex"
+	let g:vimtex_view_general_viewer = "C:/Program Files/SumatraPDF/SumatraPDF.exe"
 endif
