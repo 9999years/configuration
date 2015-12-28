@@ -4,7 +4,11 @@ syntax on "syntax highlighting
 filetype indent plugin on "determine lang from filename for indenting
 set wildmenu "command line completion
 set showcmd "show partial commands in last line
-set guifont=terminus:h12 "set font
+if $HOME ==? "C:\\Users\\xyz"
+	set guifont=terminus:h12 "set font
+else
+	set guifont=PragmataPro:h10
+endif
 set guioptions-=m	"remove menu bar
 set guioptions-=T	"remove toolbar
 set guioptions+=cr "console dialogs instead of popup dialogs
