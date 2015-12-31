@@ -6,7 +6,7 @@ set wildmenu "command line completion
 set showcmd "show partial commands in last line
 if $HOME ==? "C:\\Users\\xyz"
 	set guifont=terminus:h12 "set font
-elseif $HOME ==? "C:\\Users\\xyzs"
+elseif $HOME ==? "C:\\Users\\wxyz"
 	set guifont=PragmataPro:h10
 endif
 set guioptions-=m	"remove menu bar
