@@ -36,7 +36,7 @@ behave mswin
 set lines=59 columns=120
 colorscheme UBARYD "set colorscheme"
 let filetype = fnamemodify(bufname("%"), ":e")
-if filetype ==? "html"
+if filetype ==? "html" || filetype ==? "xml" || filetype ==? "php"
 	let g:user_emmet_install_global = 0 "something for vim html
 	autocmd FileType html,css EmmetInstall "same deal
 	let g:user_emmet_expandabbr_key = '<c-e>'
