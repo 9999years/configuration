@@ -46,4 +46,5 @@ if filetype ==? "html" || filetype ==? "xml" || filetype ==? "php"
 	let g:use_emmet_complete_tag = 1
 elseif filetype ==? "tex"
 	let g:vimtex_view_general_viewer = "C:/Program Files/SumatraPDF/SumatraPDF.exe"
+	map <f2> :w<cr><leader>ll
 endif
