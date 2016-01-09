@@ -27,12 +27,15 @@ set tabstop=4 "tabs are 4 chars
 set shiftwidth=4 "how many cols of indent with >> and <<
 set autoindent "keep indent
 set showcmd "show leader
-filetype on
+"set display += lastline "soft-wrap (dont cut lines that dont fit on screen)
+"bind ctrl+bs to delete previous word
+imap <C-BS> <C-W>
+filetype on "indenting
 filetype plugin on
 filetype indent on
 set list
 set listchars=tab:\|\ ,trail:$ "show tabs as pipes and trailing spaces as $
-behave mswin
+"behave mswin
 set lines=59 columns=120
 colorscheme UBARYD "set colorscheme"
 let filetype = fnamemodify(bufname("%"), ":e")
@@ -54,4 +57,5 @@ let g:user_emmet_settings = {
 \}
 if filetype ==? "tex"
 	let g:vimtex_view_general_viewer = "C:/Program Files/SumatraPDF/SumatraPDF.exe"
+	map <f2> :w<cr><leader>ll
 endif

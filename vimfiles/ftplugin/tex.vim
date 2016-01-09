@@ -13,6 +13,8 @@ if exists('b:did_ftplugin')
 endif
 let b:did_ftplugin = 1
 
+call IMAP('`''','`<++>''<++>','tex')
 call vimtex#init()
+
 
 " vim: fdm=marker sw=2
