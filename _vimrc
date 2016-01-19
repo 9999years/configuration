@@ -38,6 +38,8 @@ set listchars=tab:\|\ ,trail:$ "show tabs as pipes and trailing spaces as $
 "behave mswin
 set lines=59 columns=120
 colorscheme UBARYD "set colorscheme"
+"automatically cd into the directory that the file is in
+autocmd BufEnter * execute "chdir ".escape(expand("%:p:h"), ' ')
 let filetype = fnamemodify(bufname("%"), ":e")
 if filetype ==? "html" || filetype ==? "xml" || filetype ==? "php"
 	let g:user_emmet_install_global = 0 "something for vim html
@@ -47,4 +49,6 @@ if filetype ==? "html" || filetype ==? "xml" || filetype ==? "php"
 elseif filetype ==? "tex"
 	let g:vimtex_view_general_viewer = "C:/Program Files/SumatraPDF/SumatraPDF.exe"
 	map <f2> :w<cr><leader>ll
+	vnoremap <leader>$ <ESC>`>a$<ESC>`<i$<ESC>
+	vnoremap <leader>' <ESC>`>a'<ESC>`<i`<ESC>
 endif
