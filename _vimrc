@@ -51,4 +51,6 @@ elseif filetype ==? "tex"
 	map <f2> :w<cr><leader>ll
 	vnoremap <leader>$ <ESC>`>a$<ESC>`<i$<ESC>
 	vnoremap <leader>' <ESC>`>a'<ESC>`<i`<ESC>
+elseif filetype ==? "c"
+	map <f2> \rc:silent !gcc %:t -o %:t:r.exe<cr>:silent !git commit -am "save/compile"<cr>
 endif
