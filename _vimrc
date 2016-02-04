@@ -30,6 +30,11 @@ set showcmd "show leader
 let g:gitgutterenabled = 1
 let g:gitguttersigns = 1
 set updatetime=250
+let g:bufferline_echo = 0
+let g:bufferline_active_buffer_left = '<'
+let g:bufferline_active_buffer_left = '>'
+let g:bufferline_echo = 0
+autocmd VimEnter * let &statusline='%{bufferline#refresh_status()}'.bufferline#get_status_string()
 "set display += lastline "soft-wrap (dont cut lines that dont fit on screen)
 "bind ctrl+bs to delete previous word
 imap <C-BS> <C-W>
