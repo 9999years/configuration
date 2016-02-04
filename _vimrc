@@ -26,6 +26,7 @@ set tabstop=4 "tabs are 4 chars
 set shiftwidth=4 "how many cols of indent with >> and <<
 set autoindent "keep indent
 set showcmd "show leader
+:GitGutterSignsEnable
 "set display += lastline "soft-wrap (dont cut lines that dont fit on screen)
 "bind ctrl+bs to delete previous word
 imap <C-BS> <C-W>
@@ -52,4 +53,6 @@ elseif filetype ==? "tex"
 	vnoremap <leader>' <ESC>`>a'<ESC>`<i`<ESC>
 elseif filetype ==? "c"
 	map <f2> :silent !gcc %:t -o %:t:r.exe<cr>\rc:silent !git commit -am "save/compile"<cr>
+else
+	map <f2> :w|silent !git commit -am "vim save %"
 endif
