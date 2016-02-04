@@ -57,5 +57,5 @@ elseif filetype ==? "tex"
 elseif filetype ==? "c"
 	map <f2> :silent !gcc %:t -o %:t:r.exe<cr>\rc:silent !git commit -am "save/compile"<cr>
 else
-	map <f2> :w|silent !git commit -am "vim save %"
+	map <f2> :w<cr>:silent !git commit -am "vim save %:t"<cr>
 endif
