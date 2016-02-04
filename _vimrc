@@ -29,7 +29,7 @@ set showcmd "show leader
 "GitGutterSignsEnable
 let g:gitgutterenabled = 1
 let g:gitguttersigns = 1
-set updatetime = 250
+set updatetime=250
 "set display += lastline "soft-wrap (dont cut lines that dont fit on screen)
 "bind ctrl+bs to delete previous word
 imap <C-BS> <C-W>
