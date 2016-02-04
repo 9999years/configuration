@@ -26,7 +26,7 @@ set tabstop=4 "tabs are 4 chars
 set shiftwidth=4 "how many cols of indent with >> and <<
 set autoindent "keep indent
 set showcmd "show leader
-:GitGutterSignsEnable
+GitGutterSignsEnable
 "set display += lastline "soft-wrap (dont cut lines that dont fit on screen)
 "bind ctrl+bs to delete previous word
 imap <C-BS> <C-W>
