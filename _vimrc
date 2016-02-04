@@ -29,7 +29,7 @@ set showcmd "show leader
 "GitGutterSignsEnable
 let g:gitgutterenabled = 1
 let g:gitguttersigns = 1
-set updatetime=250
+set updatetime=750
 let g:bufferline_echo = 0
 let g:bufferline_active_buffer_left = '<'
 let g:bufferline_active_buffer_left = '>'
