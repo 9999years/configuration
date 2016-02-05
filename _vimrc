@@ -31,8 +31,8 @@ let g:gitgutterenabled = 1
 let g:gitguttersigns = 1
 set updatetime=750
 let g:bufferline_echo = 0
-let g:bufferline_active_buffer_left = '<'
-let g:bufferline_active_buffer_left = '>'
+let g:bufferline_active_buffer_left = '{'
+let g:bufferline_active_buffer_right = '}'
 let g:bufferline_echo = 0
 autocmd VimEnter * let &statusline='%{bufferline#refresh_status()}'.bufferline#get_status_string()
 "set display += lastline "soft-wrap (dont cut lines that dont fit on screen)
@@ -60,7 +60,7 @@ elseif filetype ==? "tex"
 	vnoremap <leader>$ <ESC>`>a$<ESC>`<i$<ESC>
 	vnoremap <leader>' <ESC>`>a'<ESC>`<i`<ESC>
 elseif filetype ==? "c"
-	map <f2> :silent !gcc %:t -o %:t:r.exe<cr>\rc:silent !git commit -am "save/compile"<cr>
+	map <f2> :silent !make %:t:r.exe<cr>:silent !git commit -am "save/compile"<cr>\rc
 else
 	map <f2> :w<cr>:silent !git commit -am "vim save %:t"<cr>
 endif
