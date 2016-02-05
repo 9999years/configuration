@@ -30,16 +30,38 @@ set showcmd "show leader
 "GitGutterSignsEnable
 let g:gitgutterenabled = 1
 let g:gitguttersigns = 1
+"let g:gitgutter_sign_added = '⍆'
+"let g:gitgutter_sign_modified = '≈'
+"let g:gitgutter_sign_removed = '⇠'
+"let g:gitgutter_sign_modified_removed = '≉'
 set updatetime=750
 let g:bufferline_echo = 0
 let g:bufferline_active_buffer_left = '{'
 let g:bufferline_active_buffer_right = '}'
 let g:bufferline_echo = 0
-let g:airline_left_sep=''
-let g:airline_right_sep=''
 let g:airline#extensions#bufferline#enabled = 1
 let g:airline#extensions#syntastic#enabled = 1
 let g:airline#extensions#whitespace#enabled = 1
+"airline symbols!
+  if !exists('g:airline_symbols')
+    let g:airline_symbols = {}
+  endif
+
+  " unicode symbols
+  "let g:airline_symbols.crypt = '🔒'
+  let g:airline_symbols.branch = '⎇'
+  let g:airline_symbols.paste = 'Þ'
+  let g:airline_symbols.whitespace = 'Ξ'
+
+  " powerline symbols
+  let g:airline_left_sep = ''
+  let g:airline_left_alt_sep = ''
+  let g:airline_right_sep = ''
+  let g:airline_right_alt_sep = ''
+  "let g:airline_symbols.branch = ''
+  let g:airline_symbols.readonly = ''
+  let g:airline_symbols.linenr = ''
+
 autocmd VimEnter * let &statusline='%{bufferline#refresh_status()}'.bufferline#get_status_string()
 "set display += lastline "soft-wrap (dont cut lines that dont fit on screen)
 "bind ctrl+bs to delete previous word
