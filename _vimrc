@@ -27,6 +27,8 @@ set tabstop=4 "tabs are 4 chars
 set shiftwidth=4 "how many cols of indent with >> and <<
 set autoindent "keep indent
 set showcmd "show leader
+"syntastic
+let g:airline_section_error = 'syntastic'
 "GitGutterSignsEnable
 let g:gitgutterenabled = 1
 let g:gitguttersigns = 1
@@ -39,6 +41,12 @@ let g:bufferline_echo = 0
 let g:bufferline_active_buffer_left = '{'
 let g:bufferline_active_buffer_right = '}'
 let g:bufferline_echo = 0
+"syntastic
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 1
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 0
+"airline
 let g:airline#extensions#bufferline#enabled = 1
 let g:airline#extensions#syntastic#enabled = 1
 let g:airline#extensions#whitespace#enabled = 1
