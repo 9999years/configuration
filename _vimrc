@@ -1,4 +1,5 @@
 set nocompatible "ward off 'unexpected things'
+set encoding=utf-8
 set hidden "same window for multiple files
 syntax on "syntax highlighting
 filetype indent plugin on "determine lang from filename for indenting
@@ -34,6 +35,11 @@ let g:bufferline_echo = 0
 let g:bufferline_active_buffer_left = '{'
 let g:bufferline_active_buffer_right = '}'
 let g:bufferline_echo = 0
+let g:airline_left_sep=''
+let g:airline_right_sep=''
+let g:airline#extensions#bufferline#enabled = 1
+let g:airline#extensions#syntastic#enabled = 1
+let g:airline#extensions#whitespace#enabled = 1
 autocmd VimEnter * let &statusline='%{bufferline#refresh_status()}'.bufferline#get_status_string()
 "set display += lastline "soft-wrap (dont cut lines that dont fit on screen)
 "bind ctrl+bs to delete previous word
