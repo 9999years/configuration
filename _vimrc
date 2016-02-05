@@ -29,6 +29,12 @@ set autoindent "keep indent
 set showcmd "show leader
 "syntastic
 let g:airline_section_error = 'syntastic'
+let g:syntastic_check_on_open = 1
+let g:syntastic_error_symbol = '‼'
+let g:syntastic_warning_symbol = "⚠"
+"When set to 3 the cursor will jump to the first error detected, if any. If
+"all issues detected are warnings, the cursor won't jump. >
+let g:syntastic_auto_jump = 3
 "GitGutterSignsEnable
 let g:gitgutterenabled = 1
 let g:gitguttersigns = 1
@@ -96,7 +102,7 @@ elseif filetype ==? "tex"
 	vnoremap <leader>$ <ESC>`>a$<ESC>`<i$<ESC>
 	vnoremap <leader>' <ESC>`>a'<ESC>`<i`<ESC>
 elseif filetype ==? "c"
-	map <f2> :silent !make %:t:r.exe<cr>:silent !git commit -am "save/compile"<cr>\rc
+	map <f2> :silent !make %:t:r.exe<cr>:silent !git commit -am "save/compile"<cr>
 else
 	map <f2> :w<cr>:silent !git commit -am "vim save %:t"<cr>
 endif
