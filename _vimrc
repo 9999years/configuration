@@ -35,6 +35,7 @@ let g:syntastic_warning_symbol = "⚠"
 "When set to 3 the cursor will jump to the first error detected, if any. If
 "all issues detected are warnings, the cursor won't jump. >
 let g:syntastic_auto_jump = 3
+let g:auto_save_no_updatetime = 1  " do not change the 'updatetime' option
 "GitGutterSignsEnable
 let g:gitgutterenabled = 1
 let g:gitguttersigns = 1
