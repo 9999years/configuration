@@ -39,15 +39,22 @@ let g:auto_save_no_updatetime = 1  " do not change the 'updatetime' option
 "GitGutterSignsEnable
 let g:gitgutterenabled = 1
 let g:gitguttersigns = 1
-"let g:gitgutter_sign_added = '⍆'
+"⋆≈❊╳⇠⍆≈⟡╬
+"line to be deleted
+"line to be deleted
+"line to be changed
+"line to be changed
+"line to be added
+"line to be added
+"let g:gitgutter_sign_added = '╬'
 "let g:gitgutter_sign_modified = '≈'
-"let g:gitgutter_sign_removed = '⇠'
+"let g:gitgutter_sign_removed = '╳'
 "let g:gitgutter_sign_modified_removed = '≉'
 set updatetime=750
 let g:bufferline_echo = 0
-let g:bufferline_active_buffer_left = '{'
-let g:bufferline_active_buffer_right = '}'
-let g:bufferline_echo = 0
+let g:bufferline_active_buffer_left = ''
+let g:bufferline_active_buffer_right = ''
+let g:bufferline_modified = '◇'
 "syntastic
 let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 1
