@@ -40,10 +40,14 @@ let g:auto_save_no_updatetime = 1  " do not change the 'updatetime' option
 let g:gitgutterenabled = 1
 let g:gitguttersigns = 1
 "⋆≈❊╳⇠⍆≈⟡╬
-"line to be deleted
-"line to be deleted
-"line to be changed
-"line to be changed
+"line to be deleted1
+"line to be deleted2
+"line to be deleted3
+"line to be deleted4
+"line to be changed0
+"line to be changed1
+"line to be added
+"line to be added
 "line to be added
 "line to be added
 "let g:gitgutter_sign_added = '╬'
