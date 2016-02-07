@@ -27,6 +27,14 @@ set tabstop=4 "tabs are 4 chars
 set shiftwidth=4 "how many cols of indent with >> and <<
 set autoindent "keep indent
 set showcmd "show leader
+"airline
+let g:airline#extensions#bufferline#overwrite_variables = 0
+let g:airline#extensions#bufferline#enabled = 1
+let g:airline#extensions#syntastic#enabled = 1
+let g:airline#extensions#whitespace#enabled = 1
+"let g:airline#extensions#tabline#enabled = 1
+"let g:airline#extensions#tabline#left_sep = ''
+"let g:airline#extensions#tabline#left_alt_sep = ''
 "syntastic
 let g:airline_section_error = 'syntastic'
 let g:syntastic_check_on_open = 1
@@ -39,35 +47,21 @@ let g:auto_save_no_updatetime = 1  " do not change the 'updatetime' option
 "GitGutterSignsEnable
 let g:gitgutterenabled = 1
 let g:gitguttersigns = 1
-"⋆≈❊╳⇠⍆≈⟡╬
-"line to be deleted1
-"line to be deleted2
-"line to be deleted3
-"line to be deleted4
-"line to be changed0
-"line to be changed1
-"line to be added
-"line to be added
-"line to be added
-"line to be added
-"let g:gitgutter_sign_added = '╬'
-"let g:gitgutter_sign_modified = '≈'
-"let g:gitgutter_sign_removed = '╳'
-"let g:gitgutter_sign_modified_removed = '≉'
+"⋆≈❊╳⇠⍆≈⟡╬✚⟪⟫
+let g:gitgutter_sign_added = '+'
+let g:gitgutter_sign_modified = '≈'
+let g:gitgutter_sign_removed = ''
+let g:gitgutter_sign_modified_removed = '≉'
 set updatetime=750
 let g:bufferline_echo = 0
-let g:bufferline_active_buffer_left = ''
-let g:bufferline_active_buffer_right = ''
+let g:bufferline_active_buffer_left = '{'
+let g:bufferline_active_buffer_right = '}'
 let g:bufferline_modified = '◇'
 "syntastic
 let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
-"airline
-let g:airline#extensions#bufferline#enabled = 1
-let g:airline#extensions#syntastic#enabled = 1
-let g:airline#extensions#whitespace#enabled = 1
 "airline symbols!
   if !exists('g:airline_symbols')
     let g:airline_symbols = {}
