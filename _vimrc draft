@@ -46,7 +46,7 @@ let g:auto_save_no_updatetime = 1  " do not change the 'updatetime' option
 "GitGutterSignsEnable
 let g:gitgutterenabled = 1
 let g:gitguttersigns = 1
-"⋆≈❊╳⇠⍆≈⟡╬✚⟪⟫◇
+"⋆≈❊╳⇠⍆≈⟡╬✚⟪⟫
 let g:gitgutter_sign_added = '+'
 let g:gitgutter_sign_modified = '≈'
 let g:gitgutter_sign_removed = ''
@@ -69,14 +69,15 @@ let g:syntastic_check_on_wq = 0
   let g:airline_symbols.whitespace = 'Ξ'
 
   " powerline symbols
-  let g:airline_left_sep = '' "''
-  let g:airline_left_alt_sep = '|' "''
-  let g:airline_right_sep = '' "''
-  let g:airline_right_alt_sep = '|' "''
+  let g:airline_left_sep = ''
+  let g:airline_left_alt_sep = ''
+  let g:airline_right_sep = ''
+  let g:airline_right_alt_sep = ''
   "let g:airline_symbols.branch = ''
   let g:airline_symbols.readonly = ''
   let g:airline_symbols.linenr = ''
 
+autocmd VimEnter * let &statusline='%{bufferline#refresh_status()}'.bufferline#get_status_string()
 "set display += lastline "soft-wrap (dont cut lines that dont fit on screen)
 "bind ctrl+bs to delete previous word
 imap <C-BS> <C-W>
