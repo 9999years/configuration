@@ -27,7 +27,7 @@ set tabstop=4 "tabs are 4 chars
 set shiftwidth=4 "how many cols of indent with >> and <<
 set autoindent "keep indent
 set showcmd "show leader
-"airline
+"airline stuff
 let g:airline#extensions#bufferline#enabled = 0
 let g:airline#extensions#syntastic#enabled = 1
 let g:airline#extensions#whitespace#enabled = 0
@@ -58,25 +58,17 @@ let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
 "airline symbols!
-  if !exists('g:airline_symbols')
-    let g:airline_symbols = {}
-  endif
-
-  " unicode symbols
-  "let g:airline_symbols.crypt = '🔒'
-  let g:airline_symbols.branch = '⎇'
-  let g:airline_symbols.paste = 'Þ'
-  let g:airline_symbols.whitespace = 'Ξ'
-
-  " powerline symbols
-  let g:airline_left_sep = '' "''
-  let g:airline_left_alt_sep = '|' "''
-  let g:airline_right_sep = '' "''
-  let g:airline_right_alt_sep = '|' "''
-  "let g:airline_symbols.branch = ''
-  let g:airline_symbols.readonly = ''
-  let g:airline_symbols.linenr = ''
-
+if !exists('g:airline_symbols')
+let g:airline_symbols = {}
+endif
+" unicode symbols
+let g:airline_symbols.branch = '⎇'
+let g:airline_left_sep = '' "''
+let g:airline_left_alt_sep = '|' "''
+let g:airline_right_sep = '' "''
+let g:airline_right_alt_sep = '|' "''
+let g:airline_symbols.readonly = ''
+let g:airline_symbols.linenr = ''
 "set display += lastline "soft-wrap (dont cut lines that dont fit on screen)
 "bind ctrl+bs to delete previous word
 imap <C-BS> <C-W>
@@ -84,19 +76,14 @@ filetype on "indenting
 filetype plugin on
 filetype indent on
 set list
-set listchars=tab:\|\ ,trail:$ "show tabs as pipes and trailing spaces as $
-"behave mswin
+set listchars=tab:\|\ ,trail:· "show tabs as pipes and trailing spaces as $
 set lines=59 columns=120
 colorscheme UBARYD "set colorscheme"
 "automatically cd into the directory that the file is in
 autocmd BufEnter * execute "chdir ".escape(expand("%:p:h"), ' ')
 let filetype = fnamemodify(bufname("%"), ":e")
-if filetype ==? "html" || filetype ==? "xml" || filetype ==? "php"
-	let g:user_emmet_install_global = 0 "something for vim html
-	autocmd FileType html,css EmmetInstall "same deal
-	let g:user_emmet_expandabbr_key = '<c-e>'
-	let g:use_emmet_complete_tag = 1
-elseif filetype ==? "tex"
+"filetype checks
+if filetype ==? "tex"
 	let g:vimtex_view_general_viewer = "C:/Program Files/SumatraPDF/SumatraPDF.exe"
 	map <f2> :w<cr><leader>ll
 	vnoremap <leader>$ <ESC>`>a$<ESC>`<i$<ESC>
