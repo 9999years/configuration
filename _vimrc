@@ -89,7 +89,7 @@ if filetype ==? "tex"
 	vnoremap <leader>$ <ESC>`>a$<ESC>`<i$<ESC>
 	vnoremap <leader>' <ESC>`>a'<ESC>`<i`<ESC>
 elseif filetype ==? "c"
-	map <f2> :silent !make %:t:r.exe<cr>:silent !git commit -am "save/compile"<cr>
+	map <f2> :w|silent !make %:t:r.exe<cr>:silent !git commit -am "save/compile"<cr>
 else
 	map <f2> :w<cr>:silent !git commit -am "vim save %:t"<cr>
 endif
