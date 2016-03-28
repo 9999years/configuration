@@ -71,10 +71,8 @@ let g:airline_symbols.readonly = ''
 let g:airline_symbols.linenr = ''
 "set display += lastline "soft-wrap (dont cut lines that dont fit on screen)
 "bind ctrl+bs to delete previous word
+set filetype=unix
 imap <C-BS> <C-W>
-filetype on "indenting
-filetype plugin on
-filetype indent on
 set list
 set listchars=tab:\|\ ,trail:· "show tabs as pipes and trailing spaces as $
 set lines=59 columns=120
