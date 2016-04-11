@@ -83,6 +83,7 @@ if filetype ==? "tex"
 	map <f2> :w<cr><leader>ll
 	vnoremap <leader>$ <ESC>`>a$<ESC>`<i$<ESC>
 	vnoremap <leader>' <ESC>`>a'<ESC>`<i`<ESC>
+	set spell
 elseif filetype ==? "c"
 	map <f2> :w|silent !make %:t:r.exe<cr>:silent !git commit -am "save/compile"<cr>
 else
