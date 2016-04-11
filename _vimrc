@@ -80,6 +80,7 @@ colorscheme UBARYD "set colorscheme"
 "automatically cd into the directory that the file is in
 autocmd BufEnter * execute "chdir ".escape(expand("%:p:h"), ' ')
 let filetype = fnamemodify(bufname("%"), ":e")
+nmap <C-p> :ls<cr>:b 
 "filetype checks
 if filetype ==? "tex"
 	let g:vimtex_view_general_viewer = "C:/Program Files/SumatraPDF/SumatraPDF.exe"
