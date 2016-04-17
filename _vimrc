@@ -32,8 +32,9 @@ let g:airline#extensions#whitespace#enabled = 0
 "let g:airline#extensions#tabline#left_alt_sep = ''
 "syntastic
 let g:airline_section_error = 'syntastic'
+let g:syntastic_loc_list_height = 3
 let g:syntastic_check_on_open = 1
-let g:syntastic_error_symbol = '‼'
+let g:syntastic_error_symbol = '✘'
 let g:syntastic_warning_symbol = "⚠"
 "When set to 3 the cursor will jump to the first error detected, if any. If
 "all issues detected are warnings, the cursor won't jump. >
@@ -42,7 +43,7 @@ let g:auto_save_no_updatetime = 1  " do not change the 'updatetime' option
 "GitGutterSignsEnable
 let g:gitgutterenabled = 1
 let g:gitguttersigns = 1
-"⋆≈❊╳⇠⍆≈⟡╬✚⟪⟫◇
+"⋆≈❊╳⇠⍆≈⟡╬✚⟪⟫◇‼⚠
 let g:gitgutter_sign_added = '+'
 let g:gitgutter_sign_modified = '≈'
 let g:gitgutter_sign_removed = ''
