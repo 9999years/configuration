@@ -85,6 +85,9 @@ if filetype ==? "tex"
 	vnoremap <leader>$ <ESC>`>a$<ESC>`<i$<ESC>
 	vnoremap <leader>' <ESC>`>a'<ESC>`<i`<ESC>
 	set spell
+	imap <C-i> \textit{
+	imap <C-b> \textbf{
+	imap <C-s> \textsc{
 elseif filetype ==? "c"
 	map <f2> :w|silent !make %:t:r.exe<cr>:silent !git commit -am "save/compile"<cr>
 else
