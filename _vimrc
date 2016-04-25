@@ -1,4 +1,5 @@
 set nocompatible "ward off 'unexpected things'
+set ff=unix
 set encoding=utf-8
 set hidden "same window for multiple files
 syntax on "syntax highlighting
@@ -46,7 +47,7 @@ let g:auto_save_no_updatetime = 1  " do not change the 'updatetime' option
 "GitGutterSignsEnable
 let g:gitgutterenabled = 1
 let g:gitguttersigns = 1
-"⋆≈❊╳⇠⍆≈⟡╬✚⟪⟫◇
+"⋆≈❊╳⇠⍆≈⟡╬✚⟪⟫◇‼⚠⎇
 let g:gitgutter_sign_added = '+'
 let g:gitgutter_sign_modified = '≈'
 let g:gitgutter_sign_removed = ''
@@ -89,7 +90,7 @@ if filetype ==? "tex"
 	vnoremap <leader>' <ESC>`>a'<ESC>`<i`<ESC>
 	set spell
 elseif filetype ==? "c"
-	map <f2> :w|silent !make %:t:r.exe<cr>:silent !git commit -am "save/compile"<cr>
+	"map <f2> :w|silent !make %:t:r.exe|silent !git commit -am "save/compile"<CR>
 else
 	map <f2> :w<cr>:silent !git commit -am "vim save %:t"<cr>
 endif
