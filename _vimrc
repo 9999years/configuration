@@ -6,11 +6,7 @@ syntax on "syntax highlighting
 filetype indent plugin on "determine lang from filename for indenting
 set wildmenu "command line completion
 set showcmd "show partial commands in last line
-if $HOME ==? "C:\\Users\\xyz"
-	set guifont=terminus:h12 "set font
-elseif $HOME ==? "C:\\Users\\wxyz"
-	set guifont=PragmataPro:h10
-endif
+set guifont=PragmataPro:h10
 set guioptions-=m	"remove menu bar
 set guioptions-=T	"remove toolbar
 set guioptions+=cr "console dialogs instead of popup dialogs
@@ -37,8 +33,9 @@ let g:airline#extensions#whitespace#enabled = 0
 "let g:airline#extensions#tabline#left_alt_sep = ''
 "syntastic
 let g:airline_section_error = 'syntastic'
+let g:syntastic_loc_list_height = 3
 let g:syntastic_check_on_open = 1
-let g:syntastic_error_symbol = '‼'
+let g:syntastic_error_symbol = '✘'
 let g:syntastic_warning_symbol = "⚠"
 "When set to 3 the cursor will jump to the first error detected, if any. If
 "all issues detected are warnings, the cursor won't jump. >
@@ -89,6 +86,9 @@ if filetype ==? "tex"
 	vnoremap <leader>$ <ESC>`>a$<ESC>`<i$<ESC>
 	vnoremap <leader>' <ESC>`>a'<ESC>`<i`<ESC>
 	set spell
+	imap <C-i> \textit{
+	imap <C-b> \textbf{
+	imap <C-s> \textsc{
 elseif filetype ==? "c"
 	"map <f2> :w|silent !make %:t:r.exe|silent !git commit -am "save/compile"<CR>
 else
