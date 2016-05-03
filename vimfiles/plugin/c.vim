@@ -2615,33 +2615,33 @@ function! s:CreateAdditionalMaps ()
 	" ---------- KEY MAPPINGS : MENU ENTRIES -------------------------------------
 	" ---------- comments menu  ------------------------------------------------
 	"
-	 noremap   <buffer>  <silent>  <LocalLeader>cl         :call C_EndOfLineComment()<CR>
-	inoremap   <buffer>  <silent>  <LocalLeader>cl    <Esc>:call C_EndOfLineComment()<CR>
-	""
-	nnoremap   <buffer>  <silent>  <LocalLeader>cj         :call C_AdjustLineEndComm()<CR>
-	vnoremap   <buffer>  <silent>  <LocalLeader>cj         :call C_AdjustLineEndComm()<CR>
-	inoremap   <buffer>  <silent>  <LocalLeader>cj    <Esc>:call C_AdjustLineEndComm()<CR>a
-	""
-	noremap    <buffer>  <silent>  <LocalLeader>cs         :call C_GetLineEndCommCol()<CR>
+	 "noremap   <buffer>  <silent>  <LocalLeader>cl         :call C_EndOfLineComment()<CR>
+	"inoremap   <buffer>  <silent>  <LocalLeader>cl    <Esc>:call C_EndOfLineComment()<CR>
+	"""
+	"nnoremap   <buffer>  <silent>  <LocalLeader>cj         :call C_AdjustLineEndComm()<CR>
+	"vnoremap   <buffer>  <silent>  <LocalLeader>cj         :call C_AdjustLineEndComm()<CR>
+	"inoremap   <buffer>  <silent>  <LocalLeader>cj    <Esc>:call C_AdjustLineEndComm()<CR>a
+	"""
+	"noremap    <buffer>  <silent>  <LocalLeader>cs         :call C_GetLineEndCommCol()<CR>
 
-	noremap    <buffer>  <silent>  <LocalLeader>c*         :call C_CodeToCommentC()<CR>:nohlsearch<CR>j
-	vnoremap   <buffer>  <silent>  <LocalLeader>c*         :call C_CodeToCommentC()<CR>:nohlsearch<CR>j
-	inoremap   <buffer>  <silent>  <LocalLeader>c*    <Esc>:call C_CodeToCommentC()<CR>:nohlsearch<CR>j
-  ""
-	noremap    <buffer>  <silent>  <LocalLeader>cc         :call C_CodeToCommentCpp()<CR>:nohlsearch<CR>j
-	vnoremap   <buffer>  <silent>  <LocalLeader>cc         :call C_CodeToCommentCpp()<CR>:nohlsearch<CR>j
-	inoremap   <buffer>  <silent>  <LocalLeader>cc    <Esc>:call C_CodeToCommentCpp()<CR>:nohlsearch<CR>j
-	noremap    <buffer>  <silent>  <LocalLeader>co         :call C_CommentToCode()<CR>:nohlsearch<CR>
-	vnoremap   <buffer>  <silent>  <LocalLeader>co         :call C_CommentToCode()<CR>:nohlsearch<CR>
-	inoremap   <buffer>  <silent>  <LocalLeader>co    <Esc>:call C_CommentToCode()<CR>:nohlsearch<CR>
-	"" 
-	 noremap   <buffer>  <silent>  <LocalLeader>cn         :call C_NonCCommentToggle( )<CR>
-	vnoremap   <buffer>  <silent>  <LocalLeader>cn         :call C_NonCCommentToggle( )<CR>
-	inoremap   <buffer>  <silent>  <LocalLeader>cn    <Esc>:call C_NonCCommentToggle( )<CR>
-	"" 
-	 noremap   <buffer>  <silent>  <LocalLeader>cx         :call C_CommentToggle( )<CR>
-	vnoremap   <buffer>  <silent>  <LocalLeader>cx         :call C_CommentToggle( )<CR>
-	inoremap   <buffer>  <silent>  <LocalLeader>cx    <Esc>:call C_CommentToggle( )<CR>
+	"noremap    <buffer>  <silent>  <LocalLeader>c*         :call C_CodeToCommentC()<CR>:nohlsearch<CR>j
+	"vnoremap   <buffer>  <silent>  <LocalLeader>c*         :call C_CodeToCommentC()<CR>:nohlsearch<CR>j
+	"inoremap   <buffer>  <silent>  <LocalLeader>c*    <Esc>:call C_CodeToCommentC()<CR>:nohlsearch<CR>j
+  """
+	"noremap    <buffer>  <silent>  <LocalLeader>cc         :call C_CodeToCommentCpp()<CR>:nohlsearch<CR>j
+	"vnoremap   <buffer>  <silent>  <LocalLeader>cc         :call C_CodeToCommentCpp()<CR>:nohlsearch<CR>j
+	"inoremap   <buffer>  <silent>  <LocalLeader>cc    <Esc>:call C_CodeToCommentCpp()<CR>:nohlsearch<CR>j
+	"noremap    <buffer>  <silent>  <LocalLeader>co         :call C_CommentToCode()<CR>:nohlsearch<CR>
+	"vnoremap   <buffer>  <silent>  <LocalLeader>co         :call C_CommentToCode()<CR>:nohlsearch<CR>
+	"inoremap   <buffer>  <silent>  <LocalLeader>co    <Esc>:call C_CommentToCode()<CR>:nohlsearch<CR>
+	""" 
+	 "noremap   <buffer>  <silent>  <LocalLeader>cn         :call C_NonCCommentToggle( )<CR>
+	"vnoremap   <buffer>  <silent>  <LocalLeader>cn         :call C_NonCCommentToggle( )<CR>
+	"inoremap   <buffer>  <silent>  <LocalLeader>cn    <Esc>:call C_NonCCommentToggle( )<CR>
+	""" 
+	 "noremap   <buffer>  <silent>  <LocalLeader>cx         :call C_CommentToggle( )<CR>
+	"vnoremap   <buffer>  <silent>  <LocalLeader>cx         :call C_CommentToggle( )<CR>
+	"inoremap   <buffer>  <silent>  <LocalLeader>cx    <Esc>:call C_CommentToggle( )<CR>
 	" 
 	" ---------- Doxygen menu  ---------------------------------------------------
 	"

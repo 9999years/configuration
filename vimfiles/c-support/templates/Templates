@@ -31,13 +31,13 @@ IncludeFile( 'snippets.template' )
 
 § different comments for styles "C", "CPP" and "Doxygen":
 
-== USE STYLES : C ==
-IncludeFile( 'c.comments.template' )
-== ENDSTYLES ==
+§== USE STYLES : C ==
+§IncludeFile( 'c.comments.template' )
+§== ENDSTYLES ==
 
-== USE STYLES : CPP ==
-IncludeFile( 'cpp.comments.template' )
-== ENDSTYLES ==
+§== USE STYLES : CPP ==
+§IncludeFile( 'cpp.comments.template' )
+§== ENDSTYLES ==
 
 §sets the style "Doxygen" internally
 §IncludeFile( 'doxygen.template' )

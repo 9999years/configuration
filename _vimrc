@@ -6,10 +6,6 @@ syntax on "syntax highlighting
 filetype indent plugin on "determine lang from filename for indenting
 set wildmenu "command line completion
 set showcmd "show partial commands in last line
-set guifont=PragmataPro:h10
-set guioptions-=m	"remove menu bar
-set guioptions-=T	"remove toolbar
-set guioptions+=cr "console dialogs instead of popup dialogs
 set ignorecase "ignore case while searching
 set smartcase " ...unless search is all caps
 set hlsearch "highlight searches
@@ -24,6 +20,33 @@ set tabstop=4 "tabs are 4 chars
 set shiftwidth=4 "how many cols of indent with >> and <<
 set autoindent "keep indent
 set showcmd "show leader
+"set display += lastline "soft-wrap (dont cut lines that dont fit on screen)
+"bind ctrl+bs to delete previous word
+set filetype=unix
+imap <C-BS> <C-W>
+set list
+set listchars=tab:\|\ ,trail:· "show tabs as pipes and trailing spaces as $
+set lines=30 columns=80
+colorscheme UBARYD "set colorscheme"
+"automatically cd into the directory that the file is in
+autocmd BufEnter * execute "chdir ".escape(expand("%:p:h"), ' ')
+let filetype = fnamemodify(bufname("%"), ":e")
+nmap <C-p> :ls<cr>:b 
+"filetype checks
+if filetype ==? "tex"
+	let g:vimtex_view_general_viewer = "C:/Program Files/SumatraPDF/SumatraPDF.exe"
+	map <f2> :w<cr><leader>ll
+	vnoremap <leader>$ <ESC>`>a$<ESC>`<i$<ESC>
+	vnoremap <leader>' <ESC>`>a'<ESC>`<i`<ESC>
+	set spell
+	imap <C-i> \textit{
+	imap <C-b> \textbf{
+	imap <C-s> \textsc{
+elseif filetype ==? "c"
+	"map <f2> :w|silent !make %:t:r.exe|silent !git commit -am "save/compile"<CR>
+else
+	map <f2> :w<cr>:silent !git commit -am "vim save %:t"<cr>
+endif
 "airline stuff
 let g:airline#extensions#bufferline#enabled = 0
 let g:airline#extensions#syntastic#enabled = 1
@@ -67,30 +90,3 @@ let g:airline_right_sep = '' "''
 let g:airline_right_alt_sep = '|' "''
 let g:airline_symbols.readonly = ''
 let g:airline_symbols.linenr = ''
-"set display += lastline "soft-wrap (dont cut lines that dont fit on screen)
-"bind ctrl+bs to delete previous word
-set filetype=unix
-imap <C-BS> <C-W>
-set list
-set listchars=tab:\|\ ,trail:· "show tabs as pipes and trailing spaces as $
-set lines=59 columns=120
-colorscheme UBARYD "set colorscheme"
-"automatically cd into the directory that the file is in
-autocmd BufEnter * execute "chdir ".escape(expand("%:p:h"), ' ')
-let filetype = fnamemodify(bufname("%"), ":e")
-nmap <C-p> :ls<cr>:b 
-"filetype checks
-if filetype ==? "tex"
-	let g:vimtex_view_general_viewer = "C:/Program Files/SumatraPDF/SumatraPDF.exe"
-	map <f2> :w<cr><leader>ll
-	vnoremap <leader>$ <ESC>`>a$<ESC>`<i$<ESC>
-	vnoremap <leader>' <ESC>`>a'<ESC>`<i`<ESC>
-	set spell
-	imap <C-i> \textit{
-	imap <C-b> \textbf{
-	imap <C-s> \textsc{
-elseif filetype ==? "c"
-	"map <f2> :w|silent !make %:t:r.exe|silent !git commit -am "save/compile"<CR>
-else
-	map <f2> :w<cr>:silent !git commit -am "vim save %:t"<cr>
-endif
