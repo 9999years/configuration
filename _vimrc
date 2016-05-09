@@ -69,7 +69,7 @@ let g:airline_symbols.readonly = ''
 let g:airline_symbols.linenr = ''
 "set display += lastline "soft-wrap (dont cut lines that dont fit on screen)
 "bind ctrl+bs to delete previous word
-set filetype=unix
+set ff=unix
 imap <C-BS> <C-W>
 set list
 set listchars=tab:\|\ ,trail:· "show tabs as pipes and trailing spaces as $
@@ -77,10 +77,10 @@ set lines=59 columns=120
 colorscheme UBARYD "set colorscheme"
 "automatically cd into the directory that the file is in
 autocmd BufEnter * execute "chdir ".escape(expand("%:p:h"), ' ')
-let filetype = fnamemodify(bufname("%"), ":e")
+let file_type_extension = fnamemodify(bufname("%"), ":e")
 nmap <C-p> :ls<cr>:b 
 "filetype checks
-if filetype ==? "tex"
+if file_type_extension ==? "tex"
 	let g:vimtex_view_general_viewer = "C:/Program Files/SumatraPDF/SumatraPDF.exe"
 	map <f2> :w<cr><leader>ll
 	vnoremap <leader>$ <ESC>`>a$<ESC>`<i$<ESC>
@@ -89,8 +89,12 @@ if filetype ==? "tex"
 	imap <C-i> \textit{
 	imap <C-b> \textbf{
 	imap <C-s> \textsc{
-elseif filetype ==? "c"
+	nmap <leader>b :s/\([.,]\) */\1\r/ge<cr>:noh<cr>
+	"imap <leader>b <esc>:s/\([.,]\) */\1\r/ge<cr>:noh<cr>A
+	vmap <leader>b :s/\([.,]\) */\1\r/ge<cr>:noh<cr>
+elseif file_type_extension ==? "c"
 	"map <f2> :w|silent !make %:t:r.exe|silent !git commit -am "save/compile"<CR>
 else
 	map <f2> :w<cr>:silent !git commit -am "vim save %:t"<cr>
 endif
+noh
