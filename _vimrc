@@ -84,8 +84,8 @@ if &ft ==? "tex"
 	imap <C-i> \textit{
 	imap <C-b> \textbf{
 	imap <C-s> \textsc{
-	nmap <leader>b :s/\([.;]\) */\1\r/ge<cr>:noh<cr>
-	vmap <leader>b :s/\([.;]\) */\1\r/ge<cr>:noh<cr>
+	nmap <leader>b :s/ *\([.;]\\|''\\|``\) */\1\r/ge<cr>:noh<cr>
+	vmap <leader>b :s/ *\([.;]\\|''\\|``\) */\1\r/ge<cr>:noh<cr>
 elseif &ft ==? "c"
 	"map <f2> :w|silent !make %:t:r.exe|silent !git commit -am "save/compile"<CR>
 else
