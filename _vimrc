@@ -26,7 +26,6 @@ set filetype=unix
 imap <C-BS> <C-W>
 set list
 set listchars=tab:\|\ ,trail:· "show tabs as pipes and trailing spaces as $
-set lines=30 columns=80
 colorscheme UBARYD "set colorscheme"
 "automatically cd into the directory that the file is in
 autocmd BufEnter * execute "chdir ".escape(expand("%:p:h"), ' ')
@@ -96,7 +95,6 @@ set ff=unix
 imap <C-BS> <C-W>
 set list
 set listchars=tab:\|\ ,trail:· "show tabs as pipes and trailing spaces as $
-set lines=59 columns=120
 colorscheme UBARYD
 "automatically cd into the directory that the file is in
 autocmd BufEnter * execute "chdir ".escape(expand("%:p:h"), ' ')
