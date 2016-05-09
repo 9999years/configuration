@@ -2,8 +2,6 @@ set nocompatible "ward off 'unexpected things'
 set ff=unix
 set encoding=utf-8
 set hidden "same window for multiple files
-syntax on "syntax highlighting
-filetype indent plugin on "determine lang from filename for indenting
 set wildmenu "command line completion
 set showcmd "show partial commands in last line
 set ignorecase "ignore case while searching
@@ -20,32 +18,12 @@ set tabstop=4 "tabs are 4 chars
 set shiftwidth=4 "how many cols of indent with >> and <<
 set autoindent "keep indent
 set showcmd "show leader
-"set display += lastline "soft-wrap (dont cut lines that dont fit on screen)
-"bind ctrl+bs to delete previous word
-set filetype=unix
-imap <C-BS> <C-W>
 set list
 set listchars=tab:\|\ ,trail:· "show tabs as pipes and trailing spaces as $
-colorscheme UBARYD "set colorscheme"
-"automatically cd into the directory that the file is in
-autocmd BufEnter * execute "chdir ".escape(expand("%:p:h"), ' ')
-let filetype = fnamemodify(bufname("%"), ":e")
-nmap <C-p> :ls<cr>:b 
-"filetype checks
-if filetype ==? "tex"
-	let g:vimtex_view_general_viewer = "C:/Program Files/SumatraPDF/SumatraPDF.exe"
-	map <f2> :w<cr><leader>ll
-	vnoremap <leader>$ <ESC>`>a$<ESC>`<i$<ESC>
-	vnoremap <leader>' <ESC>`>a'<ESC>`<i`<ESC>
-	set spell
-	imap <C-i> \textit{
-	imap <C-b> \textbf{
-	imap <C-s> \textsc{
-elseif filetype ==? "c"
-	"map <f2> :w|silent !make %:t:r.exe|silent !git commit -am "save/compile"<CR>
-else
-	map <f2> :w<cr>:silent !git commit -am "vim save %:t"<cr>
-endif
+set updatetime=750
+syntax on "syntax highlighting
+filetype indent plugin on "determine lang from filename for indenting
+"set display += lastline "soft-wrap (dont cut lines that dont fit on screen)
 "airline stuff
 let g:airline#extensions#bufferline#enabled = 0
 let g:airline#extensions#syntastic#enabled = 1
@@ -71,7 +49,6 @@ let g:gitgutter_sign_added = '+'
 let g:gitgutter_sign_modified = '≈'
 let g:gitgutter_sign_removed = ''
 let g:gitgutter_sign_modified_removed = '≉'
-set updatetime=750
 "syntastic
 let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 1
@@ -79,7 +56,7 @@ let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
 "airline symbols!
 if !exists('g:airline_symbols')
-let g:airline_symbols = {}
+	let g:airline_symbols = {}
 endif
 " unicode symbols
 let g:airline_symbols.branch = '⎇'
@@ -91,17 +68,14 @@ let g:airline_symbols.readonly = ''
 let g:airline_symbols.linenr = ''
 "set display += lastline "soft-wrap (dont cut lines that dont fit on screen)
 "bind ctrl+bs to delete previous word
-set ff=unix
 imap <C-BS> <C-W>
-set list
-set listchars=tab:\|\ ,trail:· "show tabs as pipes and trailing spaces as $
 colorscheme UBARYD
 "automatically cd into the directory that the file is in
-autocmd BufEnter * execute "chdir ".escape(expand("%:p:h"), ' ')
-let file_type_extension = fnamemodify(bufname("%"), ":e")
+"autocmd BufEnter * execute "chdir ".escape(expand("%:p:h"), ' ')
+
+"hack
 nmap <C-p> :ls<cr>:b 
-"filetype checks
-if file_type_extension ==? "tex"
+if &ft ==? "tex"
 	let g:vimtex_view_general_viewer = "C:/Program Files/SumatraPDF/SumatraPDF.exe"
 	map <f2> :w<cr><leader>ll
 	vnoremap <leader>$ <ESC>`>a$<ESC>`<i$<ESC>
@@ -110,10 +84,9 @@ if file_type_extension ==? "tex"
 	imap <C-i> \textit{
 	imap <C-b> \textbf{
 	imap <C-s> \textsc{
-	nmap <leader>b :s/\([.,]\) */\1\r/ge<cr>:noh<cr>
-	"imap <leader>b <esc>:s/\([.,]\) */\1\r/ge<cr>:noh<cr>A
-	vmap <leader>b :s/\([.,]\) */\1\r/ge<cr>:noh<cr>
-elseif file_type_extension ==? "c"
+	nmap <leader>b :s/\([.;]\) */\1\r/ge<cr>:noh<cr>
+	vmap <leader>b :s/\([.;]\) */\1\r/ge<cr>:noh<cr>
+elseif &ft ==? "c"
 	"map <f2> :w|silent !make %:t:r.exe|silent !git commit -am "save/compile"<CR>
 else
 	map <f2> :w<cr>:silent !git commit -am "vim save %:t"<cr>
