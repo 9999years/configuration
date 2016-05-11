@@ -18,13 +18,15 @@ set tabstop=4 "tabs are 4 chars
 set shiftwidth=4 "how many cols of indent with >> and <<
 set autoindent "keep indent
 set showcmd "show leader
+set wrap
 set list
-set listchars=tab:\|\ ,trail:· "show tabs as pipes and trailing spaces as $
+set listchars=tab:\|\ ,trail:·
+"-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 set updatetime=750
 syntax on "syntax highlighting
 filetype indent plugin on "determine lang from filename for indenting
 "set display += lastline "soft-wrap (dont cut lines that dont fit on screen)
-"airline stuff
+"airline stuff↪⋱
 let g:airline#extensions#bufferline#enabled = 0
 let g:airline#extensions#syntastic#enabled = 1
 let g:airline#extensions#whitespace#enabled = 0
@@ -76,7 +78,6 @@ colorscheme UBARYD
 "hack
 nmap <C-p> :ls<cr>:b 
 if &ft ==? "tex"
-	let g:vimtex_view_general_viewer = "C:/Program Files/SumatraPDF/SumatraPDF.exe"
 	map <f2> :w<cr><leader>ll
 	vnoremap <leader>$ <ESC>`>a$<ESC>`<i$<ESC>
 	vnoremap <leader>' <ESC>`>a'<ESC>`<i`<ESC>
