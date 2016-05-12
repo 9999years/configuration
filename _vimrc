@@ -21,8 +21,8 @@ set showcmd "show leader
 set wrap
 set list
 set listchars=tab:\|\ ,trail:·
-"-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 set updatetime=750
+let $PROFILE = "~/Documents/WindowsPowerShell/Microsoft.PowerShell_profile.ps1"
 syntax on "syntax highlighting
 filetype indent plugin on "determine lang from filename for indenting
 "set display += lastline "soft-wrap (dont cut lines that dont fit on screen)
