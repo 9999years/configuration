@@ -16,56 +16,62 @@ set vb t_vb= "no fucking flashing either
 set cmdheight=2 "2 line command window
 set tabstop=4 "tabs are 4 chars
 set shiftwidth=4 "how many cols of indent with >> and <<
+set shiftround
+set shortmess=lmnrwxoOsA
+"just :help that if you ever need to understand it
 set autoindent "keep indent
 set showcmd "show leader
 set wrap
 set list
 set listchars=tab:\|\ ,trail:·
 set updatetime=750
-let $PROFILE = "~/Documents/WindowsPowerShell/Microsoft.PowerShell_profile.ps1"
+let $PROFILE="~/Documents/WindowsPowerShell/Microsoft.PowerShell_profile.ps1"
 syntax on "syntax highlighting
 filetype indent plugin on "determine lang from filename for indenting
-"set display += lastline "soft-wrap (dont cut lines that dont fit on screen)
-"airline stuff↪⋱
-let g:airline#extensions#bufferline#enabled = 0
-let g:airline#extensions#syntastic#enabled = 1
-let g:airline#extensions#whitespace#enabled = 0
-"let g:airline#extensions#tabline#enabled = 1
-"let g:airline#extensions#tabline#left_sep = ''
-"let g:airline#extensions#tabline#left_alt_sep = ''
+"let &showbreak="↪ "
+"set cpo=n
+"ooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooo
+set display+=lastline "soft-wrap (dont cut lines that dont fit on screen)
+"airline stuff↪⋱↳
+let g:airline#extensions#bufferline#enabled=0
+let g:airline#extensions#syntastic#enabled=1
+let g:airline#extensions#whitespace#enabled=0
+"let g:airline#extensions#tabline#enabled=1
+"let g:airline#extensions#tabline#left_sep=''
+"let g:airline#extensions#tabline#left_alt_sep=''
 "syntastic
-let g:airline_section_error = 'syntastic'
-let g:syntastic_enable_signs = 1
-let g:syntastic_loc_list_height = 3
-let g:syntastic_check_on_open = 1
-let g:syntastic_error_symbol = '✘'
-let g:syntastic_warning_symbol = "⚠"
-let g:syntastic_style_warning_symbol = "○"
-let g:syntastic_style_error_symbol = "⚡"
+let g:airline_section_error='syntastic'
+let g:syntastic_enable_signs=1
+let g:syntastic_loc_list_height=3
+let g:syntastic_check_on_open=1
+let g:syntastic_error_symbol='✘'
+let g:syntastic_warning_symbol="⚠"
+let g:syntastic_style_warning_symbol="○"
+let g:syntastic_style_error_symbol="⚡"
 "When set to 3 the cursor will jump to the first error detected, if any. If
 "all issues detected are warnings, the cursor won't jump. >
-let g:syntastic_auto_jump = 3
-let g:auto_save_no_updatetime = 1  " do not change the 'updatetime' option
+let g:syntastic_auto_jump=3
+let g:auto_save_no_updatetime=1  " do not change the 'updatetime' option
 "GitGutterSignsEnable
-let g:gitgutterenabled = 1
-let g:gitguttersigns = 1
+let g:gitgutterenabled=1
+let g:gitguttersigns=1
 "⋆≈❊╳⇠⍆≈⟡╬✚⟪⟫◇‼⚠⎇⚡↪⋱○
-let g:gitgutter_sign_added = '+'
-let g:gitgutter_sign_modified = '≈'
-let g:gitgutter_sign_removed = ''
-let g:gitgutter_sign_modified_removed = '≉'
+let g:gitgutter_sign_added='+'
+let g:gitgutter_sign_modified='≈'
+let g:gitgutter_sign_removed=''
+let g:gitgutter_sign_modified_removed='≉'
 "airline symbols!
 if !exists('g:airline_symbols')
-	let g:airline_symbols = {}
+	let g:airline_symbols={}
 endif
 " unicode symbols
-let g:airline_symbols.branch = '⎇'
-let g:airline_left_sep = '' "''
-let g:airline_left_alt_sep = '|' "''
-let g:airline_right_sep = '' "''
-let g:airline_right_alt_sep = '|' "''
-let g:airline_symbols.readonly = ''
-let g:airline_symbols.linenr = ''
+let g:airline_symbols.branch='⎇'
+let g:airline_left_sep='' "''
+let g:airline_left_alt_sep='|' "''
+let g:airline_right_sep='' "''
+let g:airline_right_alt_sep='|' "''
+let g:airline_symbols.readonly=''
+let g:airline_symbols.linenr=''
 "set display += lastline "soft-wrap (dont cut lines that dont fit on screen)
 "bind ctrl+bs to delete previous word
 imap <C-BS> <C-W>
@@ -86,7 +92,7 @@ if &ft ==? "tex"
 	nmap <leader>b :s/ *\([.;]\\|''\\|``\) */\1\r/ge<cr>:noh<cr>
 	vmap <leader>b :s/ *\([.;]\\|''\\|``\) */\1\r/ge<cr>:noh<cr>
 	"silence that warning 38 (no punct. before quotes) bullshit
-	let g:syntastic_quiet_messages = {
+	let g:syntastic_quiet_messages={
 		\ "level": "warnings",
 		\ "type": "style",
 		\ "regex": "warning  38" }
