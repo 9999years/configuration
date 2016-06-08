@@ -21,6 +21,9 @@ set shortmess=lmnrwxoOsA
 "just :help that if you ever need to understand it
 set autoindent "keep indent
 set showcmd "show leader
+set lazyredraw
+set showmatch
+set wildmenu
 set wrap
 set list
 set listchars=tab:\|\ ,trail:·
@@ -28,6 +31,11 @@ set updatetime=750
 let $PROFILE="~/Documents/WindowsPowerShell/Microsoft.PowerShell_profile.ps1"
 syntax on "syntax highlighting
 filetype indent plugin on "determine lang from filename for indenting
+set backup
+set backupdir=~/.vim-tmp,~/.tmp,~/tmp,/var/tmp,/tmp
+set backupskip=/tmp/*,/private/tmp/*
+set directory=~/.vim-tmp,~/.tmp,~/tmp,/var/tmp,/tmp
+set writebackup
 "let &showbreak="↪ "
 "set cpo=n
 "ooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooo

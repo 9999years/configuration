@@ -1,5 +1,5 @@
 set guifont=PragmataPro:h10
-set guioptions-=m	"remove menu bar
-set guioptions-=T	"remove toolbar
+set guioptions-=m "remove menu bar
+set guioptions-=T "remove toolbar
 set guioptions+=cr "console dialogs instead of popup dialogs
 set lines=48 columns=120
