@@ -1,6 +1,3 @@
-"ward off 'unexpected things'
-set nocompatible
-
 "tell nlcr to fuck off
 set ff=unix
 
@@ -42,11 +39,14 @@ set laststatus=2
 
 "instead of failing a command show a confirm dialogue
 set confirm
-set vb t_vb= "no fucking flashing either
+
+"no visual bell
+set vb t_vb=
 
 "2-line high command window to prevent many PRESS ENTER TO CONTINUE dialogues
 set cmdheight=2
 
+"---INDENT---
 "tabs
 set tabstop=8
 set shiftwidth=8
@@ -130,7 +130,7 @@ nnoremap gk k
 
 "let &showbreak="↪ "
 "set cpo=n
-"airline stuff↪⋱↳
+"⋆≈❊╳⇠⍆≈⟡╬✚⟪⟫◇‼⚠⎇⚡↪↳⋱○
 
 "---CONCEAL---
 set conceallevel=1
@@ -157,9 +157,9 @@ let g:syntastic_enable_signs=1
 let g:syntastic_loc_list_height=3
 let g:syntastic_check_on_open=1
 let g:syntastic_error_symbol='✘'
-let g:syntastic_warning_symbol="⚠"
-let g:syntastic_style_warning_symbol="○"
-let g:syntastic_style_error_symbol="⚡"
+let g:syntastic_warning_symbol='⚠'
+let g:syntastic_style_warning_symbol='○'
+let g:syntastic_style_error_symbol='⚡'
 
 "When set to 3 the cursor will jump to the first error detected, if any. If
 "all issues detected are warnings, the cursor won't jump.
@@ -172,7 +172,6 @@ let g:auto_save_no_updatetime=1
 "---GITGUTTER---
 let g:gitgutterenabled=1
 let g:gitguttersigns=1
-"⋆≈❊╳⇠⍆≈⟡╬✚⟪⟫◇‼⚠⎇⚡↪⋱○
 let g:gitgutter_sign_added='+'
 let g:gitgutter_sign_modified='≈'
 let g:gitgutter_sign_removed=''
