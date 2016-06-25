@@ -48,8 +48,8 @@ set vb t_vb= "no fucking flashing either
 set cmdheight=2
 
 "tabs
-set tabstop=4
-set shiftwidth=4
+set tabstop=8
+set shiftwidth=8
 
 "keep indent when i create a new line
 set autoindent

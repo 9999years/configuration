@@ -1,4 +1,5 @@
 set guifont=Pragmata_Pro_Mono_Regular:h10:w5
+set guifontwide=Pragmata_Pro_Mono_Regular:h10:w5
 set guioptions-=m "remove menu bar
 set guioptions-=T "remove toolbar
 set guioptions+=cr "console dialogs instead of popup dialogs
