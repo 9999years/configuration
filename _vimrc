@@ -48,9 +48,8 @@ set cmdheight=2
 
 "---INDENT---
 "tabs
-set tabstop=4
-set shiftwidth=4
-"set expandtab
+set tabstop=8
+set shiftwidth=8
 
 "keep indent when i create a new line
 set autoindent
@@ -88,9 +87,6 @@ set shortmess=aoOsWA
 "don't redraw while executing macros, etc
 set lazyredraw
 
-"when a close bracket is inserted, jump to the matching one (if on screen)
-set showmatch
-
 "overwritten by airline i think but still cool
 set wildmenu
 
@@ -105,7 +101,7 @@ set linebreak
 
 "display tabs and trailing spaces
 set list
-set listchars=tab:\|\ ,trail:·
+set listchars=tab:\|\ ,trail:·,conceal:…,nbsp:␣
 
 "let's keep it Chill howabout
 "helps with gitgutter and power consumption
@@ -135,6 +131,9 @@ nnoremap gk k
 "let &showbreak="↪ "
 "set cpo=n
 "⋆≈❊╳⇠⍆≈⟡╬✚⟪⟫◇‼⚠⎇⚡↪↳⋱○
+
+"---CONCEAL---
+set conceallevel=1
 
 "---AIRLINE---
 let g:airline#extensions#bufferline#enabled=0
