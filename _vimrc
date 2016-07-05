@@ -50,7 +50,7 @@ set cmdheight=2
 "tabs
 set tabstop=4
 set shiftwidth=4
-set expandtab
+"set expandtab
 
 "keep indent when i create a new line
 set autoindent
