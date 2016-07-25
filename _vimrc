@@ -1,20 +1,88 @@
-"tell nlcr to fuck off
-set ff=unix
+"this is my vimrc! hello!
+"just chill, represent chars as utf-8 internally
+set encoding=utf-8
+
+"---MISC---
+"mostly things that should probably be default in the first place
+
+"show line numbers jesus christ why isn't this on by default
+"seriously what the fuck. even if im in an 80x24 terminal i want this shit.
+"christ
+set number
+
+"syntax highlighting
+syntax on
+
+"show cursor position
+set ruler
+
+"no visual bell
+set vb t_vb=
+
+"tell nlcr to fuck off in every file
+"but also if it's read only don't complain when
+"it doesn't work
+autocmd BufNewFile,BufRead * silent set ff=unix
 
 "tell cp437 to fuck off
-set encoding=utf-8
+autocmd BufNewFile,BufRead * silent set encoding=utf-8
 
 "don't just abandon buffers when i switch buffers
 set hidden
 
-"i hope this does what i imagine it does
-set autowrite
+"make backspacing work the way it should
+set backspace=indent,eol,start
+
+"figure out filetype from file
+filetype indent plugin on
+
+"overwritten by airline i think but still cool
+set wildmenu
+
+"yeah this should be default too. wraps text
+set wrap
+
+"don't cut off the last line when it wont fit on the screen
+set display+=lastline
+
+"break at a character in breakat rather than last char on screen
+set linebreak
+
+"display tabs and trailing spaces
+set list
+set listchars=tab:\|\ ,trail:·,conceal:…,nbsp:␣
+
+"i end up using this a lot ok
+let $PROFILE="~/Documents/WindowsPowerShell/Microsoft.PowerShell_profile.ps1"
+
+"make j and k operate on screen lines.
+"text selection still operates on file lines.
+"this might cause problems with macros, idk
+nnoremap j gj
+nnoremap k gk
+nnoremap gj j
+nnoremap gk k
+
+"---COMMAND LINE---
+"also other stuff in the bottom few lines of the screen
 
 "visual command line completion
 set wildmenu
 
+"display status line
+set laststatus=2
+
 "show commands in the bottom right as i enter them
 set showcmd
+
+"2-line high command window to prevent many PRESS ENTER TO CONTINUE dialogues
+set cmdheight=2
+
+"let &showbreak="↪ "
+"set cpo=n
+"⋆≈❊╳⇠⍆≈⟡╬✚⟪⟫◇‼⚠⎇⚡↪↳⋱○
+
+"---SEARCHING---
 
 "ignore case while searching
 set ignorecase
@@ -25,29 +93,24 @@ set smartcase
 "highlight all matches of a search
 set hlsearch
 
-"make backspacing work the way it should
-set backspace=indent,eol,start
+"---UNICODE---
+"i made these bindings and i am extremely proud of them
 
-"show line numbers jesus christ why isn't this on by default
-set number
+"make \u insert the unicode point of the char under the cursor in nl above
+nmap <Leader>p mz"zylo<C-r>=printf('U+%x', char2nr(@z))<CR><ESC>:call NERDComment(0, 'norm')<CR>`z
 
-"show cursor position
-set ruler
+"make \U insert the unicode point of the char under the cursor in nl below
+nmap <Leader>P mz"zylO<C-r>=printf('U+%x', char2nr(@z))<CR><ESC>:call NERDComment(0, 'norm')<CR>`z
 
-"display status line
-set laststatus=2
+"\f prints char literal's codepoint inline in a parenthetical
+nmap <Leader>f "zyla (<C-r>=printf('U+%x', char2nr(@z))<CR>) <ESC>
 
-"instead of failing a command show a confirm dialogue
-set confirm
-
-"no visual bell
-set vb t_vb=
-
-"2-line high command window to prevent many PRESS ENTER TO CONTINUE dialogues
-set cmdheight=2
+"\F converts codepoint under cursor to char literal
+nmap <Leader>F "zyawea <C-r>=nr2char('0x' . @z)<CR><ESC>
 
 "---INDENT---
-"tabs
+
+"tabs are 8 characters wide
 set tabstop=8
 set shiftwidth=8
 
@@ -57,8 +120,18 @@ set autoindent
 "use C-t and C-d in i-mode to round the indent to a multiple of shiftwidth
 set shiftround
 
-"figure out filetype from file
-filetype indent plugin on
+"---BACKUP---
+"saying this is broken would imply it worked in the first place
+"which it didn't
+
+"set backup
+"set backupdir=~/.vim-tmp,~/.tmp,~/tmp,/var/tmp,/tmp
+"set backupskip=/tmp/*,/private/tmp/*
+"set directory=~/.vim-tmp,~/.tmp,~/tmp,/var/tmp,/tmp
+"set writebackup
+
+"---CONCISENESS---
+"keep stuff short and clean, in general
 
 "help avoid hit-enter prompts
 set shortmess=aoOsWA
@@ -87,50 +160,8 @@ set shortmess=aoOsWA
 "don't redraw while executing macros, etc
 set lazyredraw
 
-"overwritten by airline i think but still cool
-set wildmenu
-
-"yeah this should be default too. wraps text
-set wrap
-
-"don't cut off the last line when it wont fit on the screen
-set display+=lastline
-
-"break at a character in breakat rather than last char on screen
-set linebreak
-
-"display tabs and trailing spaces
-set list
-set listchars=tab:\|\ ,trail:·,conceal:…,nbsp:␣
-
 "let's keep it Chill howabout
-"helps with gitgutter and power consumption
 set updatetime=750
-
-"i end up using this a lot ok
-let $PROFILE="~/Documents/WindowsPowerShell/Microsoft.PowerShell_profile.ps1"
-
-"syntax highlighting
-syntax on
-
-"make j and k operate on screen lines.
-"text selection still operates on file lines.
-"this might cause problems with macros, idk
-"actually this whole thing is not confirmed to work
-nnoremap j gj
-nnoremap k gk
-nnoremap gj j
-nnoremap gk k
-
-"set backup
-"set backupdir=~/.vim-tmp,~/.tmp,~/tmp,/var/tmp,/tmp
-"set backupskip=/tmp/*,/private/tmp/*
-"set directory=~/.vim-tmp,~/.tmp,~/tmp,/var/tmp,/tmp
-"set writebackup
-
-"let &showbreak="↪ "
-"set cpo=n
-"⋆≈❊╳⇠⍆≈⟡╬✚⟪⟫◇‼⚠⎇⚡↪↳⋱○
 
 "---CONCEAL---
 set conceallevel=1
@@ -184,7 +215,6 @@ imap <C-BS> <C-W>
 
 "i should probably change this at some point
 colorscheme UBARYD
-
 
 "dirty hack for a quick buffer list/switch
 nmap <C-p> :ls<cr>:b 
