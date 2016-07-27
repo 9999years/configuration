@@ -53,6 +53,10 @@ set linebreak
 set list
 set listchars=tab:\|\ ,trail:·,conceal:…,nbsp:␣
 
+"instead of giving a ridiculous error just ask are you sure?
+"if i :q when i meant :q!
+set confirm
+
 "i end up using this a lot ok
 let $PROFILE="~/Documents/WindowsPowerShell/Microsoft.PowerShell_profile.ps1"
 
