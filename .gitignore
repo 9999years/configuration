@@ -1,5 +1,6 @@
-*~
-vim74/
-*.swp
+*
+!vimfiles/
 vimfiles/.netrwhist
-vimfiles\.netrwhist
+!_vimrc
+!_gvimrc
+!.gitignore

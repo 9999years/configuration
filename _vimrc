@@ -21,11 +21,12 @@ set vb t_vb=
 
 "tell nlcr to fuck off in every file
 "but also if it's read only don't complain when
+"the ! is very important apparently
 "it doesn't work
-autocmd BufNewFile,BufRead * silent set ff=unix
+autocmd BufNewFile,BufRead * silent! set ff=unix
 
 "tell cp437 to fuck off
-autocmd BufNewFile,BufRead * silent set encoding=utf-8
+autocmd BufNewFile,BufRead * silent! set encoding=utf-8
 
 "don't just abandon buffers when i switch buffers
 set hidden
@@ -62,6 +63,16 @@ nnoremap j gj
 nnoremap k gk
 nnoremap gj j
 nnoremap gk k
+
+"muscle memory
+"this is unreliable
+"why is this unreliable? shouldn't vim just intercept the keystrokes?
+"make c-bs delete the current word
+imap <C-BS> <C-W>
+
+"dirty hack for a quick buffer list/switch
+"sorry Ctrl-P users
+nmap <C-p> :ls<cr>:b 
 
 "---COMMAND LINE---
 "also other stuff in the bottom few lines of the screen
@@ -207,17 +218,6 @@ let g:gitgutter_sign_added='+'
 let g:gitgutter_sign_modified='≈'
 let g:gitgutter_sign_removed=''
 let g:gitgutter_sign_modified_removed='≉'
-
-"muscle memory
-"this is unreliable
-"make c-bs delete the current word
-imap <C-BS> <C-W>
-
-"i should probably change this at some point
-colorscheme UBARYD
-
-"dirty hack for a quick buffer list/switch
-nmap <C-p> :ls<cr>:b 
 
 if &ft ==? "tex"
 	"spellcheck
