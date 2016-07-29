@@ -1,5 +1,6 @@
 "this is my vimrc! hello!
-"just chill, represent chars as utf-8 internally
+
+"chill, represent chars as utf-8 internally
 set encoding=utf-8
 
 "---MISC---
@@ -21,8 +22,8 @@ set vb t_vb=
 
 "tell nlcr to fuck off in every file
 "but also if it's read only don't complain when
-"the ! is very important apparently
 "it doesn't work
+"the ! is very important apparently
 autocmd BufNewFile,BufRead * silent! set ff=unix
 
 "tell cp437 to fuck off
@@ -59,6 +60,9 @@ set confirm
 
 "i end up using this a lot ok
 let $PROFILE="~/Documents/WindowsPowerShell/Microsoft.PowerShell_profile.ps1"
+
+"make the diff windows make sense
+set splitright
 
 "make j and k operate on screen lines.
 "text selection still operates on file lines.
@@ -180,6 +184,9 @@ set updatetime=750
 
 "---CONCEAL---
 set conceallevel=1
+
+"---CONQUE TERM---
+let g:ConqueTerm_PyVersion = 3
 
 "---AIRLINE---
 let g:airline#extensions#bufferline#enabled=0

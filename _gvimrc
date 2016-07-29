@@ -3,6 +3,9 @@ set guifontwide=Pragmata_Pro_Mono_Regular:h10:w5
 set guioptions-=m "remove menu bar
 set guioptions-=T "remove toolbar
 set guioptions+=cr "console dialogs instead of popup dialogs
-set lines=48 columns=120
+set lines=48 columns=84
 "i should probably change this at some point
-colorscheme UBARYD
+colorscheme molokai-italic-fix
+"colorscheme UBARYD
+
+"let g:airline_theme='ubaryd'
