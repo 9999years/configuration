@@ -1,4 +1,7 @@
 "this is my vimrc! hello!
+"useful symbols:
+"⋆≈❊╳⇠⍆≈⟡╬✚⟪⟫◇‼⚠⎇⚡↪↳⋱○✎
+"all the arrows: https://pbs.twimg.com/media/CeKEybXWwAA2UkH.jpg:orig
 
 "chill, represent chars as utf-8 internally
 set encoding=utf-8
@@ -97,9 +100,7 @@ set showcmd
 "2-line high command window to prevent many PRESS ENTER TO CONTINUE dialogues
 set cmdheight=2
 
-"let &showbreak="↪ "
 "set cpo=n
-"⋆≈❊╳⇠⍆≈⟡╬✚⟪⟫◇‼⚠⎇⚡↪↳⋱○
 
 "---SEARCHING---
 
@@ -138,6 +139,13 @@ set autoindent
 
 "use C-t and C-d in i-mode to round the indent to a multiple of shiftwidth
 set shiftround
+
+"preserve indent when wrapping lines
+set breakindent
+
+let &showbreak="↪ "
+
+let &breakindentopt='min:30,shift:-2'
 
 "---BACKUP---
 "saying this is broken would imply it worked in the first place
@@ -184,6 +192,39 @@ set updatetime=750
 
 "---CONCEAL---
 set conceallevel=1
+
+"---READ INTERNAL COMMANDS---
+"useful with:
+"ga/:ascii, g8, :=, :Print, :changes, :history, jumps, :list, :pwd,
+":py, :py3, :version, i_<C-g>, g<, :display/:registers, :messages
+":echo getfsize(expand(@%)), printing the stuff in :h function-list
+"without using I<C-r>=...
+
+function! PrintInternal (command)
+	normal mx
+	redir @x
+	let l:len = strlen(a:command)
+	if(a:command[0] == ':')
+		"execute the command after :, eg
+		":registers
+		silent! execute a:command[1 : len]
+	elseif(a:command[0] == '=')
+		"evaluate the expression after =, eg
+		"=0xffff
+		"or
+		"=localtime()
+		silent! echo eval(a:command[1 : len])
+	else
+		"execute the command in normal mode, eg
+		"ga
+		silent! execute 'normal ' . a:command
+	endif
+	redir END
+	normal $"xp`x
+endfunction
+
+command! -nargs=1 -complete=command Internal call PrintInternal(<q-args>)
+nmap <Leader>a :call PrintInternal(input('✎⮤', '', 'command'))<CR>
 
 "---CONQUE TERM---
 let g:ConqueTerm_PyVersion = 3
@@ -257,4 +298,16 @@ if &ft ==? "tex"
 	"map <f2> :w|silent !make %:t:r.exe|silent !git commit -am "save/compile"<CR>
 "else
 	"map <f2> :w<cr>:silent !git commit -am "vim save %:t"<cr>
+endif
+
+"---GUI---
+"sometimes re-sourcing the vimrc messes up the colorscheme
+"so just resource the gvimrc if we source the vimrc
+
+"autocmd GUIEnter * source $MYGVIMRC
+if(has("gui_running"))
+	if($MYGVIMRC == '')
+		let $MYGVIMRC = $VIM . '\_gvimrc'
+	endif
+	source $MYGVIMRC
 endif
