@@ -9,3 +9,6 @@ colorscheme molokai-italic-fix
 "colorscheme UBARYD
 
 "let g:airline_theme='ubaryd'
+
+"some directx stuff??? gives it a diff look
+set renderoptions=type:directx,geom:1,renmode:4,taamode:0

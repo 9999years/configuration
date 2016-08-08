@@ -23,15 +23,6 @@ set ruler
 "no visual bell
 set vb t_vb=
 
-"tell nlcr to fuck off in every file
-"but also if it's read only don't complain when
-"it doesn't work
-"the ! is very important apparently
-autocmd BufNewFile,BufRead * silent! set ff=unix
-
-"tell cp437 to fuck off
-autocmd BufNewFile,BufRead * silent! set encoding=utf-8
-
 "don't just abandon buffers when i switch buffers
 set hidden
 
@@ -49,6 +40,9 @@ set wrap
 
 "don't cut off the last line when it wont fit on the screen
 set display+=lastline
+
+"
+set breakat=" 	!@*-+;:,./?="
 
 "break at a character in breakat rather than last char on screen
 set linebreak
@@ -85,6 +79,9 @@ imap <C-BS> <C-W>
 "sorry Ctrl-P users
 nmap <C-p> :ls<cr>:b 
 
+"relative line numbers??? im trying this out
+set relativenumber
+
 "---COMMAND LINE---
 "also other stuff in the bottom few lines of the screen
 
@@ -117,16 +114,37 @@ set hlsearch
 "i made these bindings and i am extremely proud of them
 
 "make \u insert the unicode point of the char under the cursor in nl above
-nmap <Leader>p mz"zylo<C-r>=printf('U+%x', char2nr(@z))<CR><ESC>:call NERDComment(0, 'norm')<CR>`z
+nmap <Leader>p mf"fylo<C-r>=printf('U+%x', char2nr(@f))<CR><ESC>:call NERDComment(0, 'norm')<CR>`f
 
 "make \U insert the unicode point of the char under the cursor in nl below
-nmap <Leader>P mz"zylO<C-r>=printf('U+%x', char2nr(@z))<CR><ESC>:call NERDComment(0, 'norm')<CR>`z
+nmap <Leader>P mf"fylO<C-r>=printf('U+%x', char2nr(@f))<CR><ESC>:call NERDComment(0, 'norm')<CR>`f
 
 "\f prints char literal's codepoint inline in a parenthetical
-nmap <Leader>f "zyla (<C-r>=printf('U+%x', char2nr(@z))<CR>) <ESC>
+"commented out for now, not sure what ill do with this
+"nmap <Leader>f "fyla (<C-r>=printf('U+%x', char2nr(@f))<CR>) <ESC>
+
+"\f replaces char under cursor with codepoint
+nmap <Leader>f "fcl<C-r>=printf('%x', char2nr(@f))<CR><ESC>
 
 "\F converts codepoint under cursor to char literal
-nmap <Leader>F "zyawea <C-r>=nr2char('0x' . @z)<CR><ESC>
+nmap <Leader>F "fyawea <C-r>=nr2char('0x' . @f)<CR><ESC>
+
+"simple function to fix crlf and weird encodings
+function! NormalizeCurrentFile()
+	set fileformat=unix
+	set fileencoding=utf-8
+endfunction
+
+command! -nargs=0 Normalize call NormalizeCurrentFile()
+
+"tell nlcr and cp437 to fuck off in every file
+"but also if it's read only don't complain when
+"it doesn't work
+"the ! is very important apparently
+autocmd BufNewFile,BufRead,BufAdd,BufCreate,BufNew * silent! Normalize
+
+"why not
+nmap <Leader>n :Normalize<CR>
 
 "---INDENT---
 
@@ -143,8 +161,11 @@ set shiftround
 "preserve indent when wrapping lines
 set breakindent
 
+"show a cool arrow to indicate that's what happened
 let &showbreak="↪ "
 
+"minimum 30col text and shift it back -2 so that it isn't pushed forward by
+"the arrow
 let &breakindentopt='min:30,shift:-2'
 
 "---BACKUP---
@@ -193,7 +214,32 @@ set updatetime=750
 "---CONCEAL---
 set conceallevel=1
 
-"---READ INTERNAL COMMANDS---
+"---REGISTERS---
+"
+"swap system and unnamed reg
+function! SwapUnnamedAndSystem()
+	let @h=@"
+	let @"=@*
+	let @*=@h
+	registers *"
+endfunction
+
+"give three registers, jk and ", cycle between them
+function! CycleYankRing()
+	let @i=@"
+	let @"=@k
+	let @k=@j
+	let @j=@i
+	registers jk"
+endfunction
+
+"\s to cycle yank ring
+nnoremap <Leader>s :call CycleYankRing()<CR>
+
+"swap unnamed and system reg with \s
+nnoremap <Leader>S :call SwapUnnamedAndSystem()<CR>
+
+"---PRINT INTERNAL COMMANDS---
 "useful with:
 "ga/:ascii, g8, :=, :Print, :changes, :history, jumps, :list, :pwd,
 ":py, :py3, :version, i_<C-g>, g<, :display/:registers, :messages
@@ -225,6 +271,10 @@ endfunction
 
 command! -nargs=1 -complete=command Internal call PrintInternal(<q-args>)
 nmap <Leader>a :call PrintInternal(input('✎⮤', '', 'command'))<CR>
+
+"---MISC---
+"mappings?
+command! -nargs=0 PrintHighlightGroups so $VIMRUNTIME/syntax/hitest.vim
 
 "---CONQUE TERM---
 let g:ConqueTerm_PyVersion = 3
