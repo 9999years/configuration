@@ -1,0 +1,34 @@
+\documentclass{article}
+\usepackage[letterpaper, portrait, margin=1in, tmargin=1.5in, bmargin=1.35in]{geometry}
+\usepackage{fancyhdr}
+\usepackage[small,sf,bf]{titlesec}
+%\usepackage{enumerate}
+%\renewcommand{\labelitemi}{---}
+\newcommand{\Title}{Title}
+\newcommand{\Name}{Name}
+\pagestyle{fancy}
+\fancyhf{}
+\lhead{\textsc{\Title},\hskip 1em \Name}
+\rhead{\thepage}
+\headheight=24pt
+\fancypagestyle{plain}{%
+\fancyhead[L]{}}
+\setlength{\parindent}{0em}
+\setlength{\parskip}{1em}
+
+\begin{document}
+\thispagestyle{empty}
+
+\begin{center}
+	\par\textsc{\Large \Title}
+	\par\Name%
+\end{center}
+
+\vspace{2em}
+\hrule
+\vspace{1em}
+
+Body Text
+
+\vfill
+\end{document}
