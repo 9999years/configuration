@@ -13,15 +13,6 @@ if exists("loaded_boilervim") || &cp
 endif
 let loaded_boilervim = 1
 
-let s:MSWIN = has("win16") || has("win32")   || has("win64")    || has("win95")
-let s:UNIX  = has("unix")  || has("macunix") || has("win32unix")
-
-if s:MSWIN
-	let s:cat = "type"
-elseif s:UNIX
-	let s:cat = "cat"
-endif
-
 function InsertBoilerplate(...)
 	let s:file = "$VIM/vimfiles/boilerplate/boiler."
 	"defer to arguments
@@ -31,6 +22,14 @@ function InsertBoilerplate(...)
 		let s:file .= &filetype
 	endif
 	silent! execute "0read " . fnameescape(s:file)
+	normal Gddgg
+	if /{{EDIT}}
+		normal dd
+	endif
 endfunction
 
-nmap <Leader>i :call InsertBoilerplate()<CR>
+command -nargs=? InsertBoilerplate :call InsertBoilerplate(<args>)
+
+nmap <Leader>i :InsertBoilerplate<CR>
+
+autocmd BufNewFile * InsertBoilerplate
