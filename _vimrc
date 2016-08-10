@@ -77,10 +77,7 @@ imap <C-BS> <C-W>
 
 "dirty hack for a quick buffer list/switch
 "sorry Ctrl-P users
-nmap <C-p> :ls<cr>:b 
-
-"relative line numbers??? im trying this out
-set relativenumber
+nmap <C-p> :ls<cr>:b
 
 "---COMMAND LINE---
 "also other stuff in the bottom few lines of the screen
@@ -167,6 +164,16 @@ let &showbreak="↪ "
 "minimum 30col text and shift it back -2 so that it isn't pushed forward by
 "the arrow
 let &breakindentopt='min:30,shift:-2'
+
+"get rid of whitespace at line ends
+function! StripWhitespace()
+	normal mx
+	%s/\s*$//g
+	noh
+	normal `x
+endfunction
+
+command! -nargs=0 StripWhitespace call StripWhitespace()
 
 "---BACKUP---
 "saying this is broken would imply it worked in the first place
@@ -324,7 +331,7 @@ let g:gitgutter_sign_modified_removed='≉'
 if &ft ==? "tex"
 	"spellcheck
 	set spell
-	
+
 	"wrap selection with $
 	vnoremap <leader>$ <ESC>`>a$<ESC>`<i$<ESC>
 	vnoremap <leader>' <ESC>`>a'<ESC>`<i`<ESC>

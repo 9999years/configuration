@@ -1,5 +1,5 @@
 *
-!vimfiles/
+!vimfiles/*
 vimfiles/.netrwhist
 !_vimrc
 !_gvimrc
