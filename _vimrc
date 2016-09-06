@@ -158,7 +158,7 @@ let g:syntastic_loc_list_height=3
 let g:syntastic_check_on_open=1
 let g:syntastic_error_symbol='✘'
 let g:syntastic_warning_symbol='⚠'
-let g:syntastic_style_warning_symbol='○'
+let g:syntastic_style_warning_symbol='⍤' "○
 let g:syntastic_style_error_symbol='⚡'
 
 "When set to 3 the cursor will jump to the first error detected, if any. If
@@ -185,35 +185,31 @@ imap <C-BS> <C-W>
 "i should probably change this at some point
 colorscheme UBARYD
 
-
 "dirty hack for a quick buffer list/switch
 nmap <C-p> :ls<cr>:b 
 
-if &ft ==? "tex"
-	"spellcheck
-	set spell
-	
-	"wrap selection with $
-	vnoremap <leader>$ <ESC>`>a$<ESC>`<i$<ESC>
-	vnoremap <leader>' <ESC>`>a'<ESC>`<i`<ESC>
+"---FILETYPES---
 
-	"various insert mode formatting things
-	imap <C-e> \textit{
-	imap <C-b> \textbf{
-	imap <C-s> \textsc{
+"spellcheck for markdown and tex
+au BufNewFile,BufRead *.md,*.tex setlocal spell
 
-	"split lines in a semi-intelligent manner
-	"this sux don't use it
-	nmap <leader>b :s/ *\([.;]\\|''\\|``\) */\1\r/ge<cr>:noh<cr>
-	vmap <leader>b :s/ *\([.;]\\|''\\|``\) */\1\r/ge<cr>:noh<cr>
+"oh christ, tex stuff
+"wrap selection with $
+au BufNewFile,BufRead *.tex vnoremap <leader>$ <ESC>`>a$<ESC>`<i$<ESC>
+au BufNewFile,BufRead *.tex vnoremap <leader>' <ESC>`>a'<ESC>`<i`<ESC>
+"various insert mode formatting things
+au BufNewFile,BufRead *.tex imap <C-e> \textit{
+au BufNewFile,BufRead *.tex imap <C-b> \textbf{
+au BufNewFile,BufRead *.tex imap <C-s> \textsc{
+"split lines in a semi-intelligent manner
+"this sux don't use it
+au BufNewFile,BufRead *.tex nmap <leader>b :s/ *\([.;]\\|''\\|``\) */\1\r/ge<cr>:noh<cr>
+au BufNewFile,BufRead *.tex vmap <leader>b :s/ *\([.;]\\|''\\|``\) */\1\r/ge<cr>:noh<cr>
+"silence that warning 38 (no punct. before quotes) bullshit
+au BufNewFile,BufRead *.tex let g:syntastic_quiet_messages={
+	\ "level": "warnings",
+	\ "type": "style",
+	\ "regex": "warning  38" }
+"map <f2> :w<cr>:silent !git commit -am "vim save %:t"<cr>
 
-	"silence that warning 38 (no punct. before quotes) bullshit
-	let g:syntastic_quiet_messages={
-		\ "level": "warnings",
-		\ "type": "style",
-		\ "regex": "warning  38" }
-"elseif &ft ==? "c"
-	"map <f2> :w|silent !make %:t:r.exe|silent !git commit -am "save/compile"<CR>
-"else
-	"map <f2> :w<cr>:silent !git commit -am "vim save %:t"<cr>
-endif
+au BufNewFile,BufRead *.md setf markdown
