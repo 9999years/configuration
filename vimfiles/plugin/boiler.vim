@@ -23,9 +23,9 @@ function InsertBoilerplate(...)
 	endif
 	silent! execute "0read " . fnameescape(s:file)
 	normal Gddgg
-	if /{{EDIT}}
-		normal dd
-	endif
+	"if /{{EDIT}}
+		"normal dd
+	"endif
 endfunction
 
 command -nargs=? InsertBoilerplate :call InsertBoilerplate(<args>)

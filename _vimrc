@@ -32,8 +32,10 @@ set backspace=indent,eol,start
 "figure out filetype from file
 filetype indent plugin on
 
-"overwritten by airline i think but still cool
+"visual command line completion
 set wildmenu
+
+set wildignore=.svn,CVS,.git,*.o,*.a,*.class,*.mo,*.la,*.so,*.obj,*.swp,*.jpg,*.png,*.xpm,*.gif,*.pdf,*.bak,*.beam,*.exe,*.sw*,*~
 
 "yeah this should be default too. wraps text
 set wrap
@@ -173,6 +175,8 @@ function! StripWhitespace()
 	normal `x
 endfunction
 
+set cinoptions='(1s,M1'
+
 command! -nargs=0 StripWhitespace call StripWhitespace()
 
 "---BACKUP---
@@ -219,7 +223,7 @@ set lazyredraw
 set updatetime=750
 
 "---CONCEAL---
-set conceallevel=1
+"set conceallevel=1
 
 "---REGISTERS---
 "
@@ -312,9 +316,12 @@ let g:syntastic_warning_symbol='⚠'
 let g:syntastic_style_warning_symbol='⍤' "○
 let g:syntastic_style_error_symbol='⚡'
 
-"When set to 3 the cursor will jump to the first error detected, if any. If
-"all issues detected are warnings, the cursor won't jump.
-let g:syntastic_auto_jump=3
+"dont fuck w my cursor
+let g:syntastic_auto_jump=0
+
+"use \sk and \sj to navigate errors
+nmap <Leader>sk :lprevious<CR>
+nmap <Leader>sj :lnext<CR>
 
 "---AUTOSAVE---
 "don't change updatetime
