@@ -23,8 +23,8 @@
 "            - initial creation of html-enhanced php indent-file
 
 " Options: 
-let php_noindent_switch=0    " set this to '1' to not try to indent switch/case statements
-set sw=4                     " default shiftwidth of 3 spaces
+"let php_noindent_switch=0    " set this to '1' to not try to indent switch/case statements
+"set sw=4                     " default shiftwidth of 3 spaces
 
 
 if exists("b:did_indent")

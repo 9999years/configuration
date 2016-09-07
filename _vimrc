@@ -1,20 +1,102 @@
-"tell nlcr to fuck off
-set ff=unix
+"this is my vimrc! hello!
+"useful symbols:
+"⋆≈❊╳⇠⍆≈⟡╬✚⟪⟫◇‼⚠⎇⚡↪↳⋱○✎
+"all the arrows: https://pbs.twimg.com/media/CeKEybXWwAA2UkH.jpg:orig
 
-"tell cp437 to fuck off
+"chill, represent chars as utf-8 internally
 set encoding=utf-8
+
+"---MISC---
+"mostly things that should probably be default in the first place
+
+"show line numbers jesus christ why isn't this on by default
+"seriously what the fuck. even if im in an 80x24 terminal i want this shit.
+"christ
+set number
+
+"syntax highlighting
+syntax on
+
+"show cursor position
+set ruler
+
+"no visual bell
+set vb t_vb=
 
 "don't just abandon buffers when i switch buffers
 set hidden
 
-"i hope this does what i imagine it does
-set autowrite
+"make backspacing work the way it should
+set backspace=indent,eol,start
+
+"figure out filetype from file
+filetype indent plugin on
+
+"overwritten by airline i think but still cool
+set wildmenu
+
+"yeah this should be default too. wraps text
+set wrap
+
+"don't cut off the last line when it wont fit on the screen
+set display+=lastline
+
+"
+set breakat=" 	!@*-+;:,./?="
+
+"break at a character in breakat rather than last char on screen
+set linebreak
+
+"display tabs and trailing spaces
+set list
+set listchars=tab:\|\ ,trail:·,conceal:…,nbsp:␣
+
+"instead of giving a ridiculous error just ask are you sure?
+"if i :q when i meant :q!
+set confirm
+
+"i end up using this a lot ok
+let $PROFILE="~/Documents/WindowsPowerShell/Microsoft.PowerShell_profile.ps1"
+
+"make the diff windows make sense
+set splitright
+
+"make j and k operate on screen lines.
+"text selection still operates on file lines.
+"this might cause problems with macros, idk
+nnoremap j gj
+nnoremap k gk
+nnoremap gj j
+nnoremap gk k
+
+"muscle memory
+"this is unreliable
+"why is this unreliable? shouldn't vim just intercept the keystrokes?
+"make c-bs delete the current word
+imap <C-BS> <C-W>
+
+"dirty hack for a quick buffer list/switch
+"sorry Ctrl-P users
+nmap <C-p> :ls<cr>:b
+
+"---COMMAND LINE---
+"also other stuff in the bottom few lines of the screen
 
 "visual command line completion
 set wildmenu
 
+"display status line
+set laststatus=2
+
 "show commands in the bottom right as i enter them
 set showcmd
+
+"2-line high command window to prevent many PRESS ENTER TO CONTINUE dialogues
+set cmdheight=2
+
+"set cpo=n
+
+"---SEARCHING---
 
 "ignore case while searching
 set ignorecase
@@ -25,29 +107,45 @@ set smartcase
 "highlight all matches of a search
 set hlsearch
 
-"make backspacing work the way it should
-set backspace=indent,eol,start
+"---UNICODE---
+"i made these bindings and i am extremely proud of them
 
-"show line numbers jesus christ why isn't this on by default
-set number
+"make \u insert the unicode point of the char under the cursor in nl above
+nmap <Leader>p mf"fylo<C-r>=printf('U+%x', char2nr(@f))<CR><ESC>:call NERDComment(0, 'norm')<CR>`f
 
-"show cursor position
-set ruler
+"make \U insert the unicode point of the char under the cursor in nl below
+nmap <Leader>P mf"fylO<C-r>=printf('U+%x', char2nr(@f))<CR><ESC>:call NERDComment(0, 'norm')<CR>`f
 
-"display status line
-set laststatus=2
+"\f prints char literal's codepoint inline in a parenthetical
+"commented out for now, not sure what ill do with this
+"nmap <Leader>f "fyla (<C-r>=printf('U+%x', char2nr(@f))<CR>) <ESC>
 
-"instead of failing a command show a confirm dialogue
-set confirm
+"\f replaces char under cursor with codepoint
+nmap <Leader>f "fcl<C-r>=printf('%x', char2nr(@f))<CR><ESC>
 
-"no visual bell
-set vb t_vb=
+"\F converts codepoint under cursor to char literal
+nmap <Leader>F "fyawea <C-r>=nr2char('0x' . @f)<CR><ESC>
 
-"2-line high command window to prevent many PRESS ENTER TO CONTINUE dialogues
-set cmdheight=2
+"simple function to fix crlf and weird encodings
+function! NormalizeCurrentFile()
+	set fileformat=unix
+	set fileencoding=utf-8
+endfunction
+
+command! -nargs=0 Normalize call NormalizeCurrentFile()
+
+"tell nlcr and cp437 to fuck off in every file
+"but also if it's read only don't complain when
+"it doesn't work
+"the ! is very important apparently
+autocmd BufNewFile,BufRead,BufAdd,BufCreate,BufNew * silent! Normalize
+
+"why not
+nmap <Leader>n :Normalize<CR>
 
 "---INDENT---
-"tabs
+
+"tabs are 8 characters wide
 set tabstop=8
 set shiftwidth=8
 
@@ -57,8 +155,38 @@ set autoindent
 "use C-t and C-d in i-mode to round the indent to a multiple of shiftwidth
 set shiftround
 
-"figure out filetype from file
-filetype indent plugin on
+"preserve indent when wrapping lines
+set breakindent
+
+"show a cool arrow to indicate that's what happened
+let &showbreak="↪ "
+
+"minimum 30col text and shift it back -2 so that it isn't pushed forward by
+"the arrow
+let &breakindentopt='min:30,shift:-2'
+
+"get rid of whitespace at line ends
+function! StripWhitespace()
+	normal mx
+	%s/\s*$//g
+	noh
+	normal `x
+endfunction
+
+command! -nargs=0 StripWhitespace call StripWhitespace()
+
+"---BACKUP---
+"saying this is broken would imply it worked in the first place
+"which it didn't
+
+"set backup
+"set backupdir=~/.vim-tmp,~/.tmp,~/tmp,/var/tmp,/tmp
+"set backupskip=/tmp/*,/private/tmp/*
+"set directory=~/.vim-tmp,~/.tmp,~/tmp,/var/tmp,/tmp
+"set writebackup
+
+"---CONCISENESS---
+"keep stuff short and clean, in general
 
 "help avoid hit-enter prompts
 set shortmess=aoOsWA
@@ -87,53 +215,76 @@ set shortmess=aoOsWA
 "don't redraw while executing macros, etc
 set lazyredraw
 
-"overwritten by airline i think but still cool
-set wildmenu
-
-"yeah this should be default too. wraps text
-set wrap
-
-"don't cut off the last line when it wont fit on the screen
-set display+=lastline
-
-"break at a character in breakat rather than last char on screen
-set linebreak
-
-"display tabs and trailing spaces
-set list
-set listchars=tab:\|\ ,trail:·,conceal:…,nbsp:␣
-
 "let's keep it Chill howabout
-"helps with gitgutter and power consumption
 set updatetime=750
-
-"i end up using this a lot ok
-let $PROFILE="~/Documents/WindowsPowerShell/Microsoft.PowerShell_profile.ps1"
-
-"syntax highlighting
-syntax on
-
-"make j and k operate on screen lines.
-"text selection still operates on file lines.
-"this might cause problems with macros, idk
-"actually this whole thing is not confirmed to work
-nnoremap j gj
-nnoremap k gk
-nnoremap gj j
-nnoremap gk k
-
-"set backup
-"set backupdir=~/.vim-tmp,~/.tmp,~/tmp,/var/tmp,/tmp
-"set backupskip=/tmp/*,/private/tmp/*
-"set directory=~/.vim-tmp,~/.tmp,~/tmp,/var/tmp,/tmp
-"set writebackup
-
-"let &showbreak="↪ "
-"set cpo=n
-"⋆≈❊╳⇠⍆≈⟡╬✚⟪⟫◇‼⚠⎇⚡↪↳⋱○
 
 "---CONCEAL---
 set conceallevel=1
+
+"---REGISTERS---
+"
+"swap system and unnamed reg
+function! SwapUnnamedAndSystem()
+	let @h=@"
+	let @"=@*
+	let @*=@h
+	registers *"
+endfunction
+
+"give three registers, jk and ", cycle between them
+function! CycleYankRing()
+	let @i=@"
+	let @"=@k
+	let @k=@j
+	let @j=@i
+	registers jk"
+endfunction
+
+"\s to cycle yank ring
+nnoremap <Leader>s :call CycleYankRing()<CR>
+
+"swap unnamed and system reg with \s
+nnoremap <Leader>S :call SwapUnnamedAndSystem()<CR>
+
+"---PRINT INTERNAL COMMANDS---
+"useful with:
+"ga/:ascii, g8, :=, :Print, :changes, :history, jumps, :list, :pwd,
+":py, :py3, :version, i_<C-g>, g<, :display/:registers, :messages
+":echo getfsize(expand(@%)), printing the stuff in :h function-list
+"without using I<C-r>=...
+
+function! PrintInternal (command)
+	normal mx
+	redir @x
+	let l:len = strlen(a:command)
+	if(a:command[0] == ':')
+		"execute the command after :, eg
+		":registers
+		silent! execute a:command[1 : len]
+	elseif(a:command[0] == '=')
+		"evaluate the expression after =, eg
+		"=0xffff
+		"or
+		"=localtime()
+		silent! echo eval(a:command[1 : len])
+	else
+		"execute the command in normal mode, eg
+		"ga
+		silent! execute 'normal ' . a:command
+	endif
+	redir END
+	normal $"xp`x
+endfunction
+
+command! -nargs=1 -complete=command Internal call PrintInternal(<q-args>)
+nmap <Leader>a :call PrintInternal(input('✎⮤', '', 'command'))<CR>
+
+"---MISC---
+"mappings?
+command! -nargs=0 PrintHighlightGroups so $VIMRUNTIME/syntax/hitest.vim
+
+"---CONQUE TERM---
+let g:ConqueTerm_PyVersion = 3
 
 "---AIRLINE---
 let g:airline#extensions#bufferline#enabled=0
@@ -213,3 +364,18 @@ au BufNewFile,BufRead *.tex let g:syntastic_quiet_messages={
 "map <f2> :w<cr>:silent !git commit -am "vim save %:t"<cr>
 
 au BufNewFile,BufRead *.md setf markdown
+
+"map <f2> :w|silent !make %:t:r.exe|silent !git commit -am "save/compile"<CR>
+"map <f2> :w<cr>:silent !git commit -am "vim save %:t"<cr>
+
+"---GUI---
+"sometimes re-sourcing the vimrc messes up the colorscheme
+"so just resource the gvimrc if we source the vimrc
+
+"autocmd GUIEnter * source $MYGVIMRC
+if(has("gui_running"))
+	if($MYGVIMRC == '')
+		let $MYGVIMRC = $VIM . '\_gvimrc'
+	endif
+	source $MYGVIMRC
+endif

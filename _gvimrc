@@ -4,3 +4,11 @@ set guioptions-=m "remove menu bar
 set guioptions-=T "remove toolbar
 set guioptions+=cr "console dialogs instead of popup dialogs
 set lines=48 columns=84
+"i should probably change this at some point
+colorscheme molokai-italic-fix
+"colorscheme UBARYD
+
+"let g:airline_theme='ubaryd'
+
+"some directx stuff??? gives it a diff look
+set renderoptions=type:directx,geom:1,renmode:4,taamode:0
