@@ -287,9 +287,6 @@ nmap <Leader>a :call PrintInternal(input('✎⮤', '', 'command'))<CR>
 "mappings?
 command! -nargs=0 PrintHighlightGroups so $VIMRUNTIME/syntax/hitest.vim
 
-"---CONQUE TERM---
-let g:ConqueTerm_PyVersion = 3
-
 "---AIRLINE---
 let g:airline#extensions#bufferline#enabled=0
 let g:airline#extensions#syntastic#enabled=1
@@ -323,25 +320,17 @@ let g:syntastic_auto_jump=0
 nmap <Leader>sk :lprevious<CR>
 nmap <Leader>sj :lnext<CR>
 
+"---NERD COMMENTS---
+let NERD_c_alt_style=1
+
 "---AUTOSAVE---
 "don't change updatetime
 let g:auto_save_no_updatetime=1
-
-"---GITGUTTER---
-let g:gitgutterenabled=1
-let g:gitguttersigns=1
-let g:gitgutter_sign_added='+'
-let g:gitgutter_sign_modified='≈'
-let g:gitgutter_sign_removed=''
-let g:gitgutter_sign_modified_removed='≉'
 
 "muscle memory
 "this is unreliable
 "make c-bs delete the current word
 imap <C-BS> <C-W>
-
-"i should probably change this at some point
-colorscheme UBARYD
 
 "dirty hack for a quick buffer list/switch
 nmap <C-p> :ls<cr>:b 
@@ -352,6 +341,7 @@ nmap <C-p> :ls<cr>:b
 au BufNewFile,BufRead *.md,*.tex setlocal spell
 
 "oh christ, tex stuff
+"vim probably has a better way to do this
 "wrap selection with $
 au BufNewFile,BufRead *.tex vnoremap <leader>$ <ESC>`>a$<ESC>`<i$<ESC>
 au BufNewFile,BufRead *.tex vnoremap <leader>' <ESC>`>a'<ESC>`<i`<ESC>
@@ -370,7 +360,13 @@ au BufNewFile,BufRead *.tex let g:syntastic_quiet_messages={
 	\ "regex": "warning  38" }
 "map <f2> :w<cr>:silent !git commit -am "vim save %:t"<cr>
 
-au BufNewFile,BufRead *.md setf markdown
+"md is for markdown
+au BufNewFile,BufRead *.md setfiletype markdown
+
+"space tabs in markdown
+au BufNewFile,BufRead *.md setlocal tabstop=4
+au BufNewFile,BufRead *.md setlocal shiftwidth=4
+au BufNewFile,BufRead *.md setlocal expandtab
 
 "map <f2> :w|silent !make %:t:r.exe|silent !git commit -am "save/compile"<CR>
 "map <f2> :w<cr>:silent !git commit -am "vim save %:t"<cr>

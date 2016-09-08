@@ -7,6 +7,7 @@ set lines=48 columns=84
 "i should probably change this at some point
 colorscheme molokai-italic-fix
 "colorscheme UBARYD
+let g:airline_theme='molokai'
 
 "let g:airline_theme='ubaryd'
 

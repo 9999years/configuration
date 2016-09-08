@@ -1,20 +1,9 @@
-" ------------------------------------------------------------------------------
-"
-" Vim filetype plugin file
-"
-"   Language :  C / C++
-"     Plugin :  c.vim 
-" Maintainer :  Fritz Mehner <mehner@fh-swf.de>
-"
-" ------------------------------------------------------------------------------
-"
-" Only do this when not done yet for this buffer
-"
+"Only do this when not done yet for this buffer
 if exists("b:did_C_ftplugin")
   finish
 endif
 let b:did_C_ftplugin = 1
-"
+
 "-------------------------------------------------------------------------------
 " additional mapping : complete a classical C comment: '/*' => '/* | */'
 "-------------------------------------------------------------------------------
