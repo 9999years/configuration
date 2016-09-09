@@ -81,6 +81,9 @@ imap <C-BS> <C-W>
 "sorry Ctrl-P users
 nmap <C-p> :ls<cr>:b
 
+"join comments, make numbered lists (!!) work
+set formatoptions+=jnroc
+
 "---COMMAND LINE---
 "also other stuff in the bottom few lines of the screen
 
@@ -321,10 +324,12 @@ nmap <Leader>sk :lprevious<CR>
 nmap <Leader>sj :lnext<CR>
 
 "---NERD COMMENTS---
+"use //
 let NERD_c_alt_style=1
 
 "---AUTOSAVE---
 "don't change updatetime
+"i dont even think i still have this
 let g:auto_save_no_updatetime=1
 
 "muscle memory
@@ -332,44 +337,10 @@ let g:auto_save_no_updatetime=1
 "make c-bs delete the current word
 imap <C-BS> <C-W>
 
-"dirty hack for a quick buffer list/switch
-nmap <C-p> :ls<cr>:b 
-
 "---FILETYPES---
-
-"spellcheck for markdown and tex
-au BufNewFile,BufRead *.md,*.tex setlocal spell
-
-"oh christ, tex stuff
-"vim probably has a better way to do this
-"wrap selection with $
-au BufNewFile,BufRead *.tex vnoremap <leader>$ <ESC>`>a$<ESC>`<i$<ESC>
-au BufNewFile,BufRead *.tex vnoremap <leader>' <ESC>`>a'<ESC>`<i`<ESC>
-"various insert mode formatting things
-au BufNewFile,BufRead *.tex imap <C-e> \textit{
-au BufNewFile,BufRead *.tex imap <C-b> \textbf{
-au BufNewFile,BufRead *.tex imap <C-s> \textsc{
-"split lines in a semi-intelligent manner
-"this sux don't use it
-au BufNewFile,BufRead *.tex nmap <leader>b :s/ *\([.;]\\|''\\|``\) */\1\r/ge<cr>:noh<cr>
-au BufNewFile,BufRead *.tex vmap <leader>b :s/ *\([.;]\\|''\\|``\) */\1\r/ge<cr>:noh<cr>
-"silence that warning 38 (no punct. before quotes) bullshit
-au BufNewFile,BufRead *.tex let g:syntastic_quiet_messages={
-	\ "level": "warnings",
-	\ "type": "style",
-	\ "regex": "warning  38" }
-"map <f2> :w<cr>:silent !git commit -am "vim save %:t"<cr>
 
 "md is for markdown
 au BufNewFile,BufRead *.md setfiletype markdown
-
-"space tabs in markdown
-au BufNewFile,BufRead *.md setlocal tabstop=4
-au BufNewFile,BufRead *.md setlocal shiftwidth=4
-au BufNewFile,BufRead *.md setlocal expandtab
-
-"map <f2> :w|silent !make %:t:r.exe|silent !git commit -am "save/compile"<CR>
-"map <f2> :w<cr>:silent !git commit -am "vim save %:t"<cr>
 
 "---GUI---
 "sometimes re-sourcing the vimrc messes up the colorscheme
