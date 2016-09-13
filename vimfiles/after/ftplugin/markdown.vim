@@ -1,4 +1,8 @@
 if exists("b:did_md_ftplugin") | finish | endif
+let b:did_md_ftplugin=1
+
+"wrap text
+setlocal textwidth=80
 
 "spellcheck
 setlocal spell
@@ -13,4 +17,9 @@ setlocal formatoptions+=rojn
 
 setlocal comments=b:*,b:-,b:+,n:>
 
-let b:did_md_ftplugin=1
+command! Integral :normal o⌠<CR>⌡<ESC>ka <ESC>
+command! Sum :normal o⎲<CR>⎳<CR><ESC>kA <ESC>
+command! Parenl :normal mzo⎛<CR>⎜<CR>⎝<ESC><C-V>kk"gyVjj"jd`z"gP
+command! Parenr :normal mzo⎞<CR>⎟<CR>⎠<ESC><C-V>kk"gyVjj"jd`z"gP
+command! Bar :s/-/─/g | s/\([^─]\)─\([^─]\)/\1-\2/g
+command! Barv :s/|/│/g
