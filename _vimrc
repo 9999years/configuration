@@ -340,7 +340,9 @@ imap <C-BS> <C-W>
 "---FILETYPES---
 
 "md is for markdown
-au BufNewFile,BufRead *.md setfiletype markdown
+autocmd BufNewFile,BufRead *.md setfiletype markdown
+
+autocmd BufReadPre *.tex let b:did_indent = 1
 
 "---GUI---
 "sometimes re-sourcing the vimrc messes up the colorscheme
