@@ -23,3 +23,12 @@ let g:syntastic_quiet_messages={
 command! Enum normal A\begin{enumerate}<CR>\end{enumerate}<ESC>O	\item 
 command! Item normal A\begin{itemize}<CR>\end{itemize}<ESC>O	\item 
 command! Align normal A\ensuremath{\begin{aligned}<CR>\end{aligned}}<ESC>O	
+
+"enter on a line with just an \item deletes the \item
+imap <expr> <CR> getline('.') =~ '^\s*\\item\s\?$' ? '<C-u>' : '<CR>'
+
+"autocomplete \begin{...} environments
+"if line ends with a \begin{}, auto insert the matching \end and return to the
+"env, having added an indent. the <SPACE><BS> makes vim not clear out the line
+"so that indent is kept
+imap <expr> }<CR> getline('.') =~ '\\begin{[^}]\{1,}$' ? '}<CR><SPACE><BS><CR>' . substitute(getline('.'), '^.*\(\\begin\)\({[^}]\{1,}\)', '\\end\2}', '') . '<UP><END>'  : '}<CR>'
