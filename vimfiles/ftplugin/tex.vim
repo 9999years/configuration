@@ -1,6 +1,8 @@
-let b:did_ftplugin = 1
 if exists("b:did_tex_ftplugin") | finish | endif
 let b:did_tex_ftplugin = 1
+let b:did_ftplugin = 1
+
+set syntax=plaintex
 
 "let b:did_indent = 1
 "let g:tex_indent_brace = 0
@@ -32,3 +34,6 @@ imap <expr> <CR> getline('.') =~ '^\s*\\item\s\?$' ? '<C-u>' : '<CR>'
 "env, having added an indent. the <SPACE><BS> makes vim not clear out the line
 "so that indent is kept
 imap <expr> }<CR> getline('.') =~ '\\begin{[^}]\{1,}$' ? '}<CR><SPACE><BS><CR>' . substitute(getline('.'), '^.*\(\\begin\)\({[^}]\{1,}\)', '\\end\2}', '') . '<UP><END>'  : '}<CR>'
+
+"how did this even get fucked up. why is the right key before the left key
+let b:NERDCommenterDelims = {'right': '', 'rightAlt': '', 'left': '%', 'leftAlt': ''}
