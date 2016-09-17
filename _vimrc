@@ -52,6 +52,8 @@ set linebreak
 "display tabs and trailing spaces
 set list
 set listchars=tab:\|\ ,trail:·,conceal:…,nbsp:␣
+set fillchars=vert:║,fold:═,diff:
+"⋆≈❊╳⇠⍆≈⟡╬✚⟪⟫◇‼⚠⎇⚡↪↳⋱○✎‖
 
 "instead of giving a ridiculous error just ask are you sure?
 "if i :q when i meant :q!

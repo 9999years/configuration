@@ -1,5 +1,5 @@
 "STANDIN FOR SURFACE, FIX WHEN MERGING
-set guifont=PragmataPro:h10:w5
+set guifont=PragmataPro_Mono:h10:w5
 set guifontwide=PragmataPro:h10:w10
 set guioptions-=m "remove menu bar
 set guioptions-=T "remove toolbar
