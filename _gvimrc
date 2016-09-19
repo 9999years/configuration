@@ -1,6 +1,6 @@
 "STANDIN FOR SURFACE, FIX WHEN MERGING
-set guifont=PragmataPro_Mono:h10:w5
-set guifontwide=PragmataPro:h10:w10
+set guifont=Pragmata_Pro_Mono:h11
+set guifontwide=PragmataPro:h11
 set guioptions-=m "remove menu bar
 set guioptions-=T "remove toolbar
 set guioptions+=cr "console dialogs instead of popup dialogs
@@ -13,4 +13,8 @@ let g:airline_theme='molokai'
 "let g:airline_theme='ubaryd'
 
 "some directx stuff??? gives it a diff look
-set renderoptions=type:directx,geom:1,renmode:4,taamode:0
+"change renmode to 4 for aa
+set renderoptions=type:directx,geom:1,renmode:1,taamode:0
+
+"fix for box drawing line space
+set linespace=-1

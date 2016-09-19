@@ -21,3 +21,6 @@ inoremap  <buffer>  /*<CR>  /*<CR><CR>/<Esc>kA<Space>
 " additional mapping : {<CR> always opens a block
 "-------------------------------------------------------------------------------
 inoremap  <buffer>  {<CR>    {<CR>}<Esc>O
+
+"<CR> on line with only // deletes comment
+imap <expr> <CR> getline('.') =~ '^\s*\/\/\s\?$' ? '<C-u>' : '<CR>'
