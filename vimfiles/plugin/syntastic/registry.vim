@@ -65,6 +65,7 @@ let s:_DEFAULT_CHECKERS = {
         \ 'ocaml':         ['camlp4o'],
         \ 'perl':          ['perlcritic'],
         \ 'php':           ['php', 'phpcs', 'phpmd'],
+        \ 'plaintex':      ['lacheck', 'chktex'],
         \ 'po':            ['msgfmt'],
         \ 'pod':           ['podchecker'],
         \ 'puppet':        ['puppet', 'puppetlint'],

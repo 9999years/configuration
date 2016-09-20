@@ -4,10 +4,11 @@ let b:did_ftplugin = 1
 
 set syntax=plaintex
 
-"let b:did_indent = 1
-"let g:tex_indent_brace = 0
+let b:did_indent = 1
+let g:tex_indent_brace = 0
 
 setlocal spell
+
 "vim probably has a better way to do this
 "wrap selection with $
 vnoremap <leader>$ <ESC>`>a$<ESC>`<i$<ESC>

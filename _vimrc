@@ -345,6 +345,8 @@ imap <C-BS> <C-W>
 autocmd BufNewFile,BufRead *.md setfiletype markdown
 
 "autocmd BufReadPre *.tex let b:did_indent = 1
+"no spellchecking in tex comments
+let g:tex_comment_nospell= 1
 
 "---GUI---
 "sometimes re-sourcing the vimrc messes up the colorscheme
