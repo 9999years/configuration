@@ -34,6 +34,7 @@ command! Align normal! A\ensuremath{\begin{aligned}<CR>\end{aligned}}<ESC>O
 
 "enter on a line with just an \item deletes the \item
 imap <expr> <CR> getline('.') =~ '^\s*\\item\s\?$' ? '<C-u>' : '<CR>'
+imap <expr> <CR> getline('.') =~ '^\s*%\s*$' ? '<C-u>' : '<CR>'
 
 "autocomplete \begin{...} environments
 "if line ends with a \begin{}, auto insert the matching \end and return to the
