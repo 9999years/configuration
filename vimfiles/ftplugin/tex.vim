@@ -17,11 +17,14 @@ vnoremap <leader>' <ESC>`>a'<ESC>`<i`<ESC>
 imap <C-e> \textit{
 imap <C-b> \textbf{
 imap <C-s> \textsc{
+
+"no signs
+let g:syntastic_enable_signs = 0
 "silence that warning 38 (no punct. before quotes) bullshit
-let g:syntastic_quiet_messages={
-	\ "level": "warnings",
-	\ "type": "style",
-	\ "regex": "warning  38" }
+"let g:syntastic_quiet_messages={
+	"\ 'level': 'warnings',
+	"\ 'type': 'style',
+	"\ 'regex': 'warning  38' }
 
 command! Enum normal A\begin{enumerate}<CR>\end{enumerate}<ESC>O	\item 
 command! Item normal A\begin{itemize}<CR>\end{itemize}<ESC>O	\item 
