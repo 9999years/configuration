@@ -1,13 +1,18 @@
 if exists("b:did_tex_ftplugin") | finish | endif
 let b:did_tex_ftplugin = 1
-let b:did_ftplugin = 1
-
 set syntax=plaintex
 
+let b:did_ftplugin = 1
+
+"dont indent pleas
 let b:did_indent = 1
 let g:tex_indent_brace = 0
 
+
+"spellcheck
 setlocal spell
+"but not in comments
+let g:tex_comment_nospell= 1
 
 "vim probably has a better way to do this
 "wrap selection with $
@@ -18,13 +23,10 @@ imap <C-e> \textit{
 imap <C-b> \textbf{
 imap <C-s> \textsc{
 
+"no syntax
+let g:syntastic_tex_checkers = []
 "no signs
 let g:syntastic_enable_signs = 0
-"silence that warning 38 (no punct. before quotes) bullshit
-"let g:syntastic_quiet_messages={
-	"\ 'level': 'warnings',
-	"\ 'type': 'style',
-	"\ 'regex': 'warning  38' }
 
 command! Enum normal A\begin{enumerate}<CR>\end{enumerate}<ESC>O	\item 
 command! Item normal A\begin{itemize}<CR>\end{itemize}<ESC>O	\item 
@@ -37,7 +39,11 @@ imap <expr> <CR> getline('.') =~ '^\s*\\item\s\?$' ? '<C-u>' : '<CR>'
 "if line ends with a \begin{}, auto insert the matching \end and return to the
 "env, having added an indent. the <SPACE><BS> makes vim not clear out the line
 "so that indent is kept
-imap <expr> }<CR> getline('.') =~ '\\begin{[^}]\{1,}$' ? '}<CR><SPACE><BS><CR>' . substitute(getline('.'), '^.*\(\\begin\)\({[^}]\{1,}\)', '\\end\2}', '') . '<UP><END>'  : '}<CR>'
+"\v^.*(\\begin)\zs(\[[^\]]*\])?(\{(\a*\*?)+\})(\{.+\})(\[[^\]]*\])?$
+imap <expr> }<CR> getline('.') =~ '\v^.*(\\begin)\zs(\[[^\]]*\])?(\{(\a*\*?)+\})(\{.+\})(\[[^\]]*\])?$' ? '}<CR><SPACE><BS><CR>' . substitute(getline('.'), '\v^.*(\\begin)\zs(\[[^\]]*\])?(\{(\a*\*?)+\})(\{.+\})(\[[^\]]*\])?$', '\\end\3', '') . '<UP><END>' : '}<CR>'
+"imap <expr> ]<CR> getline('.') =~ '^.*{-}\\begin{.*}\(\[[^\]]*\]\)\?$' ? '}<CR><SPACE><BS><CR>' . substitute(getline('.'), '^.*\(\\begin\)\({.\{1,}\)\(\[[^\]]*\]\)\?', '\\end\2', '') . '<UP><END>' : '}<CR>'
+
+"\\begin{.*}\[[^\]]*]$
 
 "how did this even get fucked up. why is the right key before the left key
 let b:NERDCommenterDelims = {'right': '', 'rightAlt': '', 'left': '%', 'leftAlt': ''}

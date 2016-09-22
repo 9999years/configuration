@@ -25,4 +25,5 @@ command! Bar :s/-/─/g | s/\([^─]\)─\([^─]\)/\1-\2/g
 command! Barv :s/|/│/g
 
 "enter on a line with just a bullet deletes the bullet
-imap <expr> <CR> getline('.') =~ '^\s*\* $' ? '<C-u>' : '<CR>'
+inoremap <expr> <CR> getline('.') =~ '^\s*\* $' ? '<C-u>' : '<CR>'
+inoremap <expr> *<Space> getline('.') =~ '\v^\s*$' ? '<BS><BS>* ' : '* '
