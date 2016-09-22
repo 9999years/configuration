@@ -39,11 +39,8 @@ imap <expr> <CR> getline('.') =~ '^\s*\\item\s\?$' ? '<C-u>' : '<CR>'
 "if line ends with a \begin{}, auto insert the matching \end and return to the
 "env, having added an indent. the <SPACE><BS> makes vim not clear out the line
 "so that indent is kept
-"\v^.*(\\begin)\zs(\[[^\]]*\])?(\{(\a*\*?)+\})(\{.+\})(\[[^\]]*\])?$
-imap <expr> }<CR> getline('.') =~ '\v^.*(\\begin)\zs(\[[^\]]*\])?(\{(\a*\*?)+\})(\{.+\})(\[[^\]]*\])?$' ? '}<CR><SPACE><BS><CR>' . substitute(getline('.'), '\v^.*(\\begin)\zs(\[[^\]]*\])?(\{(\a*\*?)+\})(\{.+\})(\[[^\]]*\])?$', '\\end\3', '') . '<UP><END>' : '}<CR>'
-"imap <expr> ]<CR> getline('.') =~ '^.*{-}\\begin{.*}\(\[[^\]]*\]\)\?$' ? '}<CR><SPACE><BS><CR>' . substitute(getline('.'), '^.*\(\\begin\)\({.\{1,}\)\(\[[^\]]*\]\)\?', '\\end\2', '') . '<UP><END>' : '}<CR>'
-
-"\\begin{.*}\[[^\]]*]$
+inoremap <expr> }<CR> getline('.') =~ '\v^.*(\\begin)(\[[^\]]*\])?\{\zs([[:alpha:]\*]*)\ze\}?(\{.*\})*(\[[^\]]*\]?)?$' ? '}<CR><SPACE><BS><CR>\end{' . matchstr(getline('.'), '\v^.*(\\begin)(\[[^\]]*\])?\{\zs([[:alpha:]\*]*)\ze\}?(\{.*\})*(\[[^\]]*\]?)?$') . '}<UP><END>' : '}<CR>'
+inoremap <expr> ]<CR> getline('.') =~ '\v^.*(\\begin)(\[[^\]]*\])?\{\zs([[:alpha:]\*]*)\ze\}?(\{.*\})*(\[[^\]]*\]?)?$' ? ']<CR><SPACE><BS><CR>\end{' . matchstr(getline('.'), '\v^.*(\\begin)(\[[^\]]*\])?\{\zs([[:alpha:]\*]*)\ze\}?(\{.*\})*(\[[^\]]*\]?)?$') . '}<UP><END>' : ']<CR>'
 
 "how did this even get fucked up. why is the right key before the left key
 let b:NERDCommenterDelims = {'right': '', 'rightAlt': '', 'left': '%', 'leftAlt': ''}
