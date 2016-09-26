@@ -1,5 +1,6 @@
 if exists("b:did_tex_ftplugin") | finish | endif
 let b:did_tex_ftplugin = 1
+
 set syntax=plaintex
 
 let b:did_ftplugin = 1

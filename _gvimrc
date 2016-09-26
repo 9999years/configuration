@@ -1,16 +1,13 @@
-"STANDIN FOR SURFACE, FIX WHEN MERGING
 set guifont=PragmataPro_Mono:h11
-set guifontwide=PragmataPro:h11
+"set guifontwide=PragmataPro
 set guioptions-=m "remove menu bar
 set guioptions-=T "remove toolbar
 set guioptions+=cr "console dialogs instead of popup dialogs
 set lines=48 columns=84
 "i should probably change this at some point
-colorscheme molokai-italic-fix
-"colorscheme UBARYD
-let g:airline_theme='molokai'
+colorscheme UBARYD-fix
 
-"let g:airline_theme='ubaryd'
+let g:airline_theme='ubaryd'
 
 "some directx stuff??? gives it a diff look
 "change renmode to 4 for aa
