@@ -44,7 +44,7 @@ set wrap
 set display+=lastline
 
 "
-set breakat=" 	!@*-+;:,./?="
+let &breakat=" 	!@*-+;:,./?="
 
 "break at a character in breakat rather than last char on screen
 set linebreak
@@ -241,16 +241,18 @@ function! SwapUnnamedAndSystem()
 endfunction
 
 "give three registers, jk and ", cycle between them
-function! CycleYankRing()
-	let @i=@"
-	let @"=@k
-	let @k=@j
-	let @j=@i
-	registers jk"
-endfunction
+"function! CycleYankRing()
+	"let @i=@"
+	"let @"=@k
+	"let @k=@j
+	"let @j=@i
+	"registers jk"
+"endfunction
 
 "\s to cycle yank ring
-nnoremap <Leader>s :call CycleYankRing()<CR>
+"nnoremap <Leader>s :call CycleYankRing()<CR>
+"map \s to clear search
+nnoremap <Leader>s /í ½í´¥á»Ÿ<CR>
 
 "swap unnamed and system reg with \s
 nnoremap <Leader>S :call SwapUnnamedAndSystem()<CR>
