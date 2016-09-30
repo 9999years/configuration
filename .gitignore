@@ -1,5 +1,6 @@
 vimfiles/.netrwhist
 vimfiles/spell/*
+vimfiles/packs/**
 vim80/**
 !_vimrc
 !_gvimrc
