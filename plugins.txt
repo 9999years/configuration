@@ -1,0 +1,6 @@
+airline: https://github.com/vim-airline/vim-airline
+airline themes: https://github.com/vim-airline/vim-airline-themes
+kiss-boilerplate: https://github.com/9999years/kiss-boilerplate.vim.git
+nerd-commenter: https://github.com/scrooloose/nerdcommenter.git
+syntastic: https://github.com/scrooloose/syntastic
+tabular: https://github.com/godlygeek/tabular

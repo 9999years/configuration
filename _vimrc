@@ -327,6 +327,11 @@ let g:syntastic_auto_jump=0
 nmap <Leader>sk :lprevious<CR>
 nmap <Leader>sj :lnext<CR>
 
+"---YOU COMPLETE ME---
+"christ
+"fucking hell
+packadd YouCompleteMe
+
 "---NERD COMMENTS---
 "use //
 let NERD_c_alt_style=1
