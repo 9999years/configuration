@@ -345,6 +345,7 @@ imap <C-BS> <C-W>
 
 "md is for markdown
 autocmd BufNewFile,BufRead *.md setfiletype markdown
+autocmd BufNewFile,BufRead *.tex source $VIM/vimfiles/ftplugin/tex.vim
 
 "autocmd BufReadPre *.tex let b:did_indent = 1
 "no spellchecking in tex comments

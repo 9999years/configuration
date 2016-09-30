@@ -1,4 +1,4 @@
-set guifont=PragmataPro_Mono:h11
+set guifont=PragmataPro_Mono:h11:qANTIALIASED
 "set guifontwide=PragmataPro
 set guioptions-=m "remove menu bar
 set guioptions-=T "remove toolbar
@@ -11,7 +11,7 @@ let g:airline_theme='ubaryd'
 
 "some directx stuff??? gives it a diff look
 "change renmode to 4 for aa
-set renderoptions=type:directx,geom:1,renmode:1,taamode:0
+"set renderoptions=type:directx,geom:1,renmode:1,taamode:0
 
 "fix for box drawing line space
 set linespace=-1
@@ -28,6 +28,7 @@ if has('windows')
 		\'\%x01\|\%x0a\|\%x0a\|\%xff\|\%xfe', '', 'g'),
 		\'=.*$'), 1))
 	if dpi > 100
-		set renderoptions+=renmode:4
+		"set renderoptions+=renmode:4
+		set guifont=PragmataPro_Mono:h11:qCLEARTYPE
 	endif
 endif
