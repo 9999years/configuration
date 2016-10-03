@@ -331,6 +331,8 @@ nmap <Leader>sj :lnext<CR>
 "christ
 "fucking hell
 packadd YouCompleteMe
+let g:ycm_autoclose_preview_window_after_completion=1
+let g:ycm_autoclose_preview_window_after_insertion=1
 
 "---NERD COMMENTS---
 "use //
@@ -350,9 +352,10 @@ imap <C-BS> <C-W>
 
 "md is for markdown
 autocmd BufNewFile,BufRead *.md setfiletype markdown
-autocmd BufNewFile,BufRead *.tex source $VIM/vimfiles/ftplugin/tex.vim
+"autocmd BufNewFile,BufRead *.tex source $VIM/vimfiles/ftplugin/tex.vim
 
 "autocmd BufReadPre *.tex let b:did_indent = 1
+let g:tex_flavor = 'latex'
 "no spellchecking in tex comments
 let g:tex_comment_nospell= 1
 

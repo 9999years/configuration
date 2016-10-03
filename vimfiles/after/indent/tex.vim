@@ -1,0 +1,2 @@
+"fuck thiiiis
+setlocal indentexpr=

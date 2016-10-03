@@ -1,5 +1,5 @@
-if exists("b:did_tex_ftplugin") | finish | endif
-let b:did_tex_ftplugin = 1
+if exists("b:did_customtex_ftplugin") | finish | endif
+let b:did_customtex_ftplugin = 1
 
 set syntax=plaintex
 
@@ -8,6 +8,7 @@ let b:did_ftplugin = 1
 "dont indent pleas
 let b:did_indent = 1
 let g:tex_indent_brace = 0
+setlocal indentexpr=
 
 
 "spellcheck
