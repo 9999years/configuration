@@ -15,7 +15,7 @@ let g:airline_theme='ubaryd'
 "set renderoptions=type:directx,geom:1,renmode:1,taamode:0
 
 "fix for box drawing line space
-set linespace=-1
+set linespace=0
 
 if has('windows')
 	"get dpi, strip out utf-16 chars and new lines
