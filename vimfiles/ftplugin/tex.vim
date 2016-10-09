@@ -1,14 +1,11 @@
 if exists("b:did_customtex_ftplugin") | finish | endif
 let b:did_customtex_ftplugin = 1
 
-"set syntax=plaintex
-
 let b:did_ftplugin = 1
 
 "dont indent pleas
 let b:did_indent = 1
 let g:tex_indent_brace = 0
-setlocal indentexpr=
 
 
 "spellcheck
@@ -42,11 +39,13 @@ imap <expr> <CR> getline('.') =~ '^\s*%\s*$' ? '<C-u>' : '<CR>'
 "if line ends with a \begin{}, auto insert the matching \end and return to the
 "env, having added an indent. the <SPACE><BS> makes vim not clear out the line
 "so that indent is kept
+"dont think about this too hard or youll explode and die
 inoremap <expr> }<CR> getline('.') =~ '\v^.*(\\begin)(\[[^\]]*\])?\{\zs([[:alpha:]\*]*)\ze\}?(\{.*\})*(\[[^\]]*\]?)?$' ? '}<CR><SPACE><BS><CR>\end{' . matchstr(getline('.'), '\v^.*(\\begin)(\[[^\]]*\])?\{\zs([[:alpha:]\*]*)\ze\}?(\{.*\})*(\[[^\]]*\]?)?$') . '}<UP><END>' : '}<CR>'
 inoremap <expr> ]<CR> getline('.') =~ '\v^.*(\\begin)(\[[^\]]*\])?\{\zs([[:alpha:]\*]*)\ze\}?(\{.*\})*(\[[^\]]*\]?)?$' ? ']<CR><SPACE><BS><CR>\end{' . matchstr(getline('.'), '\v^.*(\\begin)(\[[^\]]*\])?\{\zs([[:alpha:]\*]*)\ze\}?(\{.*\})*(\[[^\]]*\]?)?$') . '}<UP><END>' : ']<CR>'
 
 "how did this even get fucked up. why is the right key before the left key
 let b:NERDCommenterDelims = {'right': '', 'rightAlt': '', 'left': '%', 'leftAlt': ''}
 
+"(siiighs)
 hi clear texComment
 hi link texComment Comment
