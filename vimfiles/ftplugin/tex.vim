@@ -1,7 +1,7 @@
 if exists("b:did_customtex_ftplugin") | finish | endif
 let b:did_customtex_ftplugin = 1
 
-set syntax=plaintex
+"set syntax=plaintex
 
 let b:did_ftplugin = 1
 
@@ -47,3 +47,6 @@ inoremap <expr> ]<CR> getline('.') =~ '\v^.*(\\begin)(\[[^\]]*\])?\{\zs([[:alpha
 
 "how did this even get fucked up. why is the right key before the left key
 let b:NERDCommenterDelims = {'right': '', 'rightAlt': '', 'left': '%', 'leftAlt': ''}
+
+hi clear texComment
+hi link texComment Comment
