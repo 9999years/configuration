@@ -1,7 +1,14 @@
 vimfiles/.netrwhist
 vimfiles/spell/*
+<<<<<<< HEAD
 vimfiles/pack/**
 **/pack/**
+||||||| merged common ancestors
+vimfiles/packs/**
+=======
+vimfiles/packs/**
+vimfiles/packs/**/*
+>>>>>>> refs/remotes/origin/master
 vim80/**
 !_vimrc
 !_gvimrc
