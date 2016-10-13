@@ -35,7 +35,9 @@ filetype indent plugin on
 "visual command line completion
 set wildmenu
 
-set wildignore=.svn,CVS,.git,*.o,*.a,*.class,*.mo,*.la,*.so,*.obj,*.swp,*.jpg,*.png,*.xpm,*.gif,*.pdf,*.bak,*.beam,*.exe,*.sw*,*~
+set wildignore=
+\.svn,CVS,.git,*.o,*.a,*.class,*.mo,*.la,*.so,*.obj,*.swp,*.jpg,*.png,*.xpm,
+\*.gif,*.pdf,*.bak,*.beam,*.exe,*.sw*,*~,*fls
 
 "yeah this should be default too. wraps text
 set wrap
