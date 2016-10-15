@@ -45,7 +45,3 @@ inoremap <expr> ]<CR> getline('.') =~ '\v^.*(\\begin)(\[[^\]]*\])?\{\zs([[:alpha
 
 "how did this even get fucked up. why is the right key before the left key
 let b:NERDCommenterDelims = {'right': '', 'rightAlt': '', 'left': '%', 'leftAlt': ''}
-
-"(siiighs)
-hi clear texComment
-hi link texComment Comment
