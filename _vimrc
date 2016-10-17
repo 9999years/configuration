@@ -53,7 +53,7 @@ set linebreak
 
 "display tabs and trailing spaces
 set list
-set listchars=tab:\|\ ,trail:·,conceal:…,nbsp:␣
+set listchars=tab:│\ ,trail:·,conceal:…,nbsp:␣
 set fillchars=vert:║,fold:═,diff:
 "⋆≈❊╳⇠⍆≈⟡╬✚⟪⟫◇‼⚠⎇⚡↪↳⋱○✎‖
 
@@ -200,7 +200,7 @@ command! -nargs=0 StripWhitespace call StripWhitespace()
 "keep stuff short and clean, in general
 
 "help avoid hit-enter prompts
-set shortmess=aoOsWA
+set shortmess=aoOsWAc
 "f: use '(3 of 5)' instead of '(file 3 of 5)'
 "i: use '[noeol]' instead of '[Incomplete last line]'
 "l: use '999L, 888C' instead of '999 lines, 888 characters'
@@ -220,8 +220,8 @@ set shortmess=aoOsWA
 "on the command-line, '<' will appear in the left most column.
 "Ignored in Ex mode.
 "W: don't give 'written' or '[w]' when writing a file
-"A: don't give the 'ATTENTION' message when an existing swap file
-"is found.
+"A: don't give the 'ATTENTION' message when an existing swap file is found.
+"c: no completion messages
 
 "don't redraw while executing macros, etc
 set lazyredraw
@@ -332,13 +332,14 @@ nmap <Leader>sj :lnext<CR>
 "---YOU COMPLETE ME---
 "christ
 "fucking hell
-packadd YouCompleteMe
+silent packadd YouCompleteMe
+let g:ycm_global_ycm_extra_conf =
+	\'$VIM\vimfiles\pack\youcompleteme\opt\YouCompleteMe\'
+	\'.ycm_extra_conf_default.py'
 let g:ycm_autoclose_preview_window_after_completion=1
 let g:ycm_autoclose_preview_window_after_insertion=1
-
-"---NERD COMMENTS---
-"use //
-let NERD_c_alt_style=1
+let g:ycm_seed_identifiers_with_syntax=1
+"let g:ycm_enable_diagnostic_signs=0
 
 "---AUTOSAVE---
 "don't change updatetime
@@ -360,6 +361,8 @@ autocmd BufNewFile,BufRead *.md setfiletype markdown
 let g:tex_flavor = 'latex'
 "no spellchecking in tex comments
 let g:tex_comment_nospell= 1
+"no syntax
+let g:syntastic_tex_checkers = []
 
 "---GUI---
 "sometimes re-sourcing the vimrc messes up the colorscheme
