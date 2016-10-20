@@ -10,20 +10,16 @@ setlocal textwidth=80
 
 "vim probably has a better way to do this
 "wrap selection with $
-vnoremap <leader>$ <ESC>`>a$<ESC>`<i$<ESC>
-vnoremap <leader>' <ESC>`>a'<ESC>`<i`<ESC>
+vnoremap <buffer> <leader>$ <ESC>`>a$<ESC>`<i$<ESC>
+vnoremap <buffer> <leader>' <ESC>`>a'<ESC>`<i`<ESC>
 "various insert mode formatting things
-imap <C-e> \textit{
-imap <C-b> \textbf{
-imap <C-s> \textsc{
-
-command! Enum normal A\begin{enumerate}<CR>\end{enumerate}<ESC>O	\item 
-command! Item normal A\begin{itemize}<CR>\end{itemize}<ESC>O	\item 
-command! Align normal! A\ensuremath{\begin{aligned}<CR>\end{aligned}}<ESC>O	
+imap <buffer> <C-e> \textit{
+imap <buffer> <C-b> \textbf{
+imap <buffer> <C-s> \textsc{
 
 "enter on a line with just an \item deletes the \item
-imap <expr> <CR> getline('.') =~ '^\s*\\item\s\?$' ? '<C-u>' : '<CR>'
-imap <expr> <CR> getline('.') =~ '^\s*%\s*$' ? '<C-u>' : '<CR>'
+imap <buffer> <expr> <CR> getline('.') =~ '^\s*\\item\s\?$' ? '<C-u>' : '<CR>'
+imap <buffer> <expr> <CR> getline('.') =~ '^\s*%\s*$' ? '<C-u>' : '<CR>'
 
 "autocomplete \begin{...} environments
 "if line ends with a \begin{}, auto insert the matching \end and return to the
@@ -33,7 +29,7 @@ imap <expr> <CR> getline('.') =~ '^\s*%\s*$' ? '<C-u>' : '<CR>'
 inoremap <expr> }<CR> getline('.') =~ '\v^.*(\\begin)(\[[^\]]*\])?\{\zs([[:alpha:]\*]*)\ze\}?(\{.*\})*(\[[^\]]*\]?)?$' ? '}<CR><SPACE><BS><CR>\end{' . matchstr(getline('.'), '\v^.*(\\begin)(\[[^\]]*\])?\{\zs([[:alpha:]\*]*)\ze\}?(\{.*\})*(\[[^\]]*\]?)?$') . '}<UP><END>' : '}<CR>'
 inoremap <expr> ]<CR> getline('.') =~ '\v^.*(\\begin)(\[[^\]]*\])?\{\zs([[:alpha:]\*]*)\ze\}?(\{.*\})*(\[[^\]]*\]?)?$' ? ']<CR><SPACE><BS><CR>\end{' . matchstr(getline('.'), '\v^.*(\\begin)(\[[^\]]*\])?\{\zs([[:alpha:]\*]*)\ze\}?(\{.*\})*(\[[^\]]*\]?)?$') . '}<UP><END>' : ']<CR>'
 
-"how did this even get fucked up. why is the right key before the left key
+"how did this even get fucked up
 let b:NERDCommenterDelims = {'right': '', 'rightAlt': '', 'left': '%', 'leftAlt': ''}
 
 packadd YouCompleteMe

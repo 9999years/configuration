@@ -26,4 +26,3 @@ nnoremap <buffer> gD :YcmCompleter GoToDefinition<CR>
 "use //
 let NERD_c_alt_style=1
 let g:NERDAltDelims_c = 1
-"nnoremap <plug>NERDCommenterAltDelims :call <SID>SwitchToAlternativeDelimiters(1)<cr>
