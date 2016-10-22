@@ -302,10 +302,9 @@ function! AirlineInit()
 	let g:airline#extensions#syntastic#enabled=0
 	let g:airline#extensions#whitespace#enabled=0
 	"let g:airline_section_error = airline#section#create(['branch'])
-	let g:airline_section_a     = '%{substitute(mode(), "CTRL-", "^", "")}'
+	let g:airline_section_a     = '%{substitute(mode(), "CTRL-", "^", "g")}'
 	let g:airline_section_b     = airline#section#create(['ffenc'])
-	let g:airline_section_error = airline#section#create(
-		\ ['ycm_error_count', 'syntastic'])
+	let g:airline_section_error = airline#section#create(['ycm_error_count', 'syntastic'])
 	"see 'statusline'
 	let g:airline_section_c     = '%{expand(''%:h:t'')}/%t %m %#__accent_red#%{airline#util#wrap(airline#parts#readonly(),0)}%#__restore__#'
 	if !exists('g:airline_symbols')
