@@ -371,6 +371,12 @@ let g:tex_comment_nospell= 1
 "no syntax
 let g:syntastic_tex_checkers = []
 
+"---KISS---
+command! -nargs=? InsertBoilerplate KISSInsertBoilerplate <args>
+command! -nargs=? IBoilerplate KISSInsertBoilerplate <args>
+command! -nargs=1 EditBoilerplate KISSEditBoilerplate <args>
+command! -nargs=1 EBoilerplate KISSEditBoilerplate <args>
+
 "---GUI---
 "sometimes re-sourcing the vimrc messes up the colorscheme
 "so just resource the gvimrc if we source the vimrc
