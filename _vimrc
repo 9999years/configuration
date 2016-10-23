@@ -297,21 +297,29 @@ nmap <Leader>a :call PrintInternal(input('✎⮤', '', 'command'))<CR>
 command! -nargs=0 PrintHighlightGroups so $VIMRUNTIME/syntax/hitest.vim
 
 "---AIRLINE---
-let g:airline#extensions#bufferline#enabled=0
-let g:airline#extensions#syntastic#enabled=1
-let g:airline#extensions#whitespace#enabled=0
-if !exists('g:airline_symbols')
-	let g:airline_symbols={}
-endif
-let g:airline_symbols.branch='⎇'
-let g:airline_left_sep='' "''
-let g:airline_left_alt_sep='|' "''
-let g:airline_right_sep='' "''
-let g:airline_right_alt_sep='|' "''
-let g:airline_symbols.readonly=''
-let g:airline_symbols.linenr=''
-
-let g:airline_section_error='syntastic'
+function! AirlineInit()
+	let g:airline#extensions#bufferline#enabled=0
+	let g:airline#extensions#syntastic#enabled=0
+	let g:airline#extensions#whitespace#enabled=0
+	"let g:airline_section_error = airline#section#create(['branch'])
+	let g:airline_section_a     = '%{substitute(mode(), "CTRL-", "^", "")}'
+	let g:airline_section_b     = airline#section#create(['ffenc'])
+	let g:airline_section_error = airline#section#create(
+		\ ['ycm_error_count', 'syntastic'])
+	"see 'statusline'
+	let g:airline_section_c     = '%{expand(''%:h:t'')}/%t %m %#__accent_red#%{airline#util#wrap(airline#parts#readonly(),0)}%#__restore__#'
+	if !exists('g:airline_symbols')
+		let g:airline_symbols={}
+	endif
+	let g:airline_symbols.branch='⎇'
+	let g:airline_left_sep='' "''
+	let g:airline_left_alt_sep='│' "''
+	let g:airline_right_sep='' "''
+	let g:airline_right_alt_sep='│' "''
+	let g:airline_symbols.readonly=''
+	let g:airline_symbols.linenr=''
+endfunction
+autocmd User AirlineAfterInit call AirlineInit()
 
 "---SYNTASTIC---
 let g:syntastic_enable_signs=1

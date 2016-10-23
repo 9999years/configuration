@@ -17,12 +17,12 @@ inoremap  <buffer>  /*<CR>  /*<CR><CR>/<Esc>kA<Space>
 inoremap  <buffer>  {<CR>    {<CR>}<Esc>O
 
 "<CR> on line with only // deletes comment
-imap <expr> <CR> getline('.') =~ '^\s*\/\/\s\?$' ? '<C-u>' : '<CR>'
+imap <expr> <CR> getline('.') =~ '^\s*\/\/\s*$' ? '<C-u>' : '<CR>'
 
 "ycm's gotodefinition is better
 nnoremap <buffer> gd :YcmCompleter GoToImprecise<CR>
 nnoremap <buffer> gD :YcmCompleter GoToDefinition<CR>
 
 "use //
-let g:NERD_c_alt_style=1
+let NERD_c_alt_style=1
 let g:NERDAltDelims_c = 1
