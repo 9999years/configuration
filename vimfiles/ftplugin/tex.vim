@@ -7,6 +7,7 @@ setlocal spell
 let g:tex_comment_nospell= 1
 
 setlocal textwidth=80
+setlocal formatoptions+=t
 
 "vim probably has a better way to do this
 "wrap selection with $
