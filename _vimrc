@@ -376,6 +376,18 @@ command! -nargs=? InsertBoilerplate KISSInsertBoilerplate <args>
 command! -nargs=? IBoilerplate KISSInsertBoilerplate <args>
 command! -nargs=1 EditBoilerplate KISSEditBoilerplate <args>
 command! -nargs=1 EBoilerplate KISSEditBoilerplate <args>
+let g:kiss_boilerplate_synonyms = {
+	\ 'cc': 'c',
+	\ 'plaintex': 'tex',
+	\ 'expat': 'mit',
+	\ 'mit/expat': 'mit',
+	\ 'youcompleteme': 'ycm',
+	\ 'pgf': 'pgfplots',
+	\ 'cpp': 'c',
+	\ 'c++': 'c',
+	\ 'winscp': 'scp',
+	\ 'winscp': 'bounce'
+	\ }
 
 "---GUI---
 "sometimes re-sourcing the vimrc messes up the colorscheme
