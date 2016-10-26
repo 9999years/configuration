@@ -301,12 +301,22 @@ function! AirlineInit()
 	let g:airline#extensions#bufferline#enabled=0
 	let g:airline#extensions#syntastic#enabled=0
 	let g:airline#extensions#whitespace#enabled=0
+	let g:airline#extensions#wordcount#enabled=1
+	let g:airline#extensions#wordcount#filetypes =
+	\ ['markdown', 'rst', 'org', 'help', 'text', 'tex', 'vim']
 	"let g:airline_section_error = airline#section#create(['branch'])
 	let g:airline_section_a     = '%{substitute(mode(), "CTRL-", "^", "g")}'
 	let g:airline_section_b     = airline#section#create(['ffenc'])
 	let g:airline_section_error = airline#section#create(['ycm_error_count', 'syntastic'])
 	"see 'statusline'
 	let g:airline_section_c     = '%{expand(''%:h:t'')}/%t %m %#__accent_red#%{airline#util#wrap(airline#parts#readonly(),0)}%#__restore__#'
+	let g:airline_section_gutter = '%='
+	let g:airline_section_warning = ''
+	"let g:airline_section_x = '%{airline#util#wrap(airline#parts#filetype(),0)}'
+	let g:airline_section_x = '%{&ft}'
+	let g:airline_section_y = ''
+	let g:airline_section_z = '%{airline#extensions#wordcount#formatters#default#format()}%3p%% %{g:airline_symbols.linenr}%4l:%3v'
+
 	if !exists('g:airline_symbols')
 		let g:airline_symbols={}
 	endif
