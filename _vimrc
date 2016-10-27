@@ -395,8 +395,8 @@ let g:kiss_boilerplate_synonyms = {
 	\ 'pgf': 'pgfplots',
 	\ 'cpp': 'c',
 	\ 'c++': 'c',
-	\ 'winscp': 'scp',
-	\ 'winscp': 'bounce'
+	\ 'scp': 'winscp',
+	\ 'bounce': 'winscp'
 	\ }
 
 "---GUI---
