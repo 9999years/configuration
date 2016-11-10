@@ -315,7 +315,7 @@ function! AirlineInit()
 	"let g:airline_section_x = '%{airline#util#wrap(airline#parts#filetype(),0)}'
 	let g:airline_section_x = '%{&ft}'
 	let g:airline_section_y = ''
-	let g:airline_section_z = '%{airline#extensions#wordcount#formatters#default#format()}%3p%% %{g:airline_symbols.linenr}%4l:%3v'
+	let g:airline_section_z = '%3p%% %{g:airline_symbols.linenr}%4l:%3v'
 
 	if !exists('g:airline_symbols')
 		let g:airline_symbols={}
