@@ -87,6 +87,7 @@ nmap <C-p> :ls<cr>:b
 
 "join comments, make numbered lists (!!) work
 set formatoptions+=jnroc
+set formatlistpat=^\s*\d\+[\]:.)}]\s*
 
 "---COMMAND LINE---
 "also other stuff in the bottom few lines of the screen
@@ -115,6 +116,12 @@ set smartcase
 
 "highlight all matches of a search
 set hlsearch
+
+"map \s to clear search
+nnoremap <Leader>s /í ½í´¥á»Ÿ<CR>
+
+"and \n to clear highlight
+nnoremap <Leader>n :noh<CR>
 
 "---UNICODE---
 "i made these bindings and i am extremely proud of them
@@ -148,9 +155,6 @@ command! -nargs=0 Normalize call NormalizeCurrentFile()
 "it doesn't work
 "the ! is very important apparently
 autocmd BufNewFile,BufRead,BufAdd,BufCreate,BufNew * silent! Normalize
-
-"why not
-nmap <Leader>n :Normalize<CR>
 
 "---INDENT---
 
@@ -253,11 +257,9 @@ endfunction
 
 "\s to cycle yank ring
 "nnoremap <Leader>s :call CycleYankRing()<CR>
-"map \s to clear search
-nnoremap <Leader>s /í ½í´¥á»Ÿ<CR>
 
 "swap unnamed and system reg with \s
-nnoremap <Leader>S :call SwapUnnamedAndSystem()<CR>
+"nnoremap <Leader>S :call SwapUnnamedAndSystem()<CR>
 
 "---PRINT INTERNAL COMMANDS---
 "useful with:
@@ -287,6 +289,7 @@ function! PrintInternal (command)
 	endif
 	redir END
 	normal $"xp`x
+
 endfunction
 
 command! -nargs=1 -complete=command Internal call PrintInternal(<q-args>)
@@ -296,6 +299,17 @@ nmap <Leader>a :call PrintInternal(input('âœŽâ®¤', '', 'command'))<CR>
 "mappings?
 command! -nargs=0 PrintHighlightGroups so $VIMRUNTIME/syntax/hitest.vim
 
+function! NoDistractions()
+	setlocal nolist
+	setlocal laststatus=0
+	setlocal rulerformat=%{wordcount().words}
+	setlocal nonumber
+	setlocal cmdheight=1
+	inoremap <buffer> <C-s> <C-\><C-o>:w<CR>
+endfunction
+
+command! -nargs=0 NoDistractions call NoDistractions()
+
 "---AIRLINE---
 function! AirlineInit()
 	let g:airline#extensions#bufferline#enabled=0
@@ -303,7 +317,7 @@ function! AirlineInit()
 	let g:airline#extensions#whitespace#enabled=0
 	let g:airline#extensions#wordcount#enabled=1
 	let g:airline#extensions#wordcount#filetypes =
-	\ ['markdown', 'rst', 'org', 'help', 'text', 'tex', 'vim']
+	\ ['markdown', 'rst', 'org', 'help', 'text']
 	"let g:airline_section_error = airline#section#create(['branch'])
 	let g:airline_section_a     = '%{substitute(mode(), "CTRL-", "^", "g")}'
 	let g:airline_section_b     = airline#section#create(['ffenc'])
@@ -315,7 +329,7 @@ function! AirlineInit()
 	"let g:airline_section_x = '%{airline#util#wrap(airline#parts#filetype(),0)}'
 	let g:airline_section_x = '%{&ft}'
 	let g:airline_section_y = ''
-	let g:airline_section_z = '%{airline#extensions#wordcount#formatters#default#format()}%3p%% %{g:airline_symbols.linenr}%4l:%3v'
+	let g:airline_section_z = '%3p%% %{g:airline_symbols.linenr}%4l:%3v'
 
 	if !exists('g:airline_symbols')
 		let g:airline_symbols={}
@@ -346,18 +360,6 @@ let g:syntastic_auto_jump=0
 nmap <Leader>sk :lprevious<CR>
 nmap <Leader>sj :lnext<CR>
 
-"---YOU COMPLETE ME---
-"christ
-"fucking hell
-silent packadd YouCompleteMe
-let g:ycm_global_ycm_extra_conf =
-	\'$VIM\vimfiles\pack\youcompleteme\opt\YouCompleteMe\'
-	\'.ycm_extra_conf_default.py'
-let g:ycm_autoclose_preview_window_after_completion=1
-let g:ycm_autoclose_preview_window_after_insertion=1
-let g:ycm_seed_identifiers_with_syntax=1
-"let g:ycm_enable_diagnostic_signs=0
-
 "---AUTOSAVE---
 "don't change updatetime
 "i dont even think i still have this
@@ -369,10 +371,8 @@ let g:auto_save_no_updatetime=1
 imap <C-BS> <C-W>
 
 "---FILETYPES---
-
 "md is for markdown
 autocmd BufNewFile,BufRead *.md setfiletype markdown
-"autocmd BufNewFile,BufRead *.tex source $VIM/vimfiles/ftplugin/tex.vim
 
 "autocmd BufReadPre *.tex let b:did_indent = 1
 let g:tex_flavor = 'latex'
@@ -395,8 +395,7 @@ let g:kiss_boilerplate_synonyms = {
 	\ 'pgf': 'pgfplots',
 	\ 'cpp': 'c',
 	\ 'c++': 'c',
-	\ 'scp': 'winscp',
-	\ 'bounce': 'winscp'
+	\ 'bounce': 'dir'
 	\ }
 
 "---GUI---
