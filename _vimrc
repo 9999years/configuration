@@ -32,8 +32,12 @@ set backspace=indent,eol,start
 "figure out filetype from file
 filetype indent plugin on
 
-"overwritten by airline i think but still cool
+"visual command line completion
 set wildmenu
+
+set wildignore=
+\.svn,CVS,.git,*.o,*.a,*.class,*.mo,*.la,*.so,*.obj,*.swp,*.jpg,*.png,*.xpm,
+\*.gif,*.pdf,*.bak,*.beam,*.exe,*.sw*,*~,*fls
 
 "yeah this should be default too. wraps text
 set wrap
@@ -42,14 +46,16 @@ set wrap
 set display+=lastline
 
 "
-set breakat=" 	!@*-+;:,./?="
+let &breakat=" 	!@*-+;:,./?="
 
 "break at a character in breakat rather than last char on screen
 set linebreak
 
 "display tabs and trailing spaces
 set list
-set listchars=tab:\|\ ,trail:·,conceal:…,nbsp:␣
+set listchars=tab:│\ ,trail:·,conceal:…,nbsp:␣
+set fillchars=vert:║,fold:═,diff:
+"⋆≈❊╳⇠⍆≈⟡╬✚⟪⟫◇‼⚠⎇⚡↪↳⋱○✎‖
 
 "instead of giving a ridiculous error just ask are you sure?
 "if i :q when i meant :q!
@@ -79,6 +85,10 @@ imap <C-BS> <C-W>
 "sorry Ctrl-P users
 nmap <C-p> :ls<cr>:b
 
+"join comments, make numbered lists (!!) work
+set formatoptions+=jnroc
+set formatlistpat=^\s*\d\+[\]:.)}]\s*
+
 "---COMMAND LINE---
 "also other stuff in the bottom few lines of the screen
 
@@ -106,6 +116,12 @@ set smartcase
 
 "highlight all matches of a search
 set hlsearch
+
+"map \s to clear search
+nnoremap <Leader>s /������ở<CR>
+
+"and \n to clear highlight
+nnoremap <Leader>n :noh<CR>
 
 "---UNICODE---
 "i made these bindings and i am extremely proud of them
@@ -140,9 +156,6 @@ command! -nargs=0 Normalize call NormalizeCurrentFile()
 "the ! is very important apparently
 autocmd BufNewFile,BufRead,BufAdd,BufCreate,BufNew * silent! Normalize
 
-"why not
-nmap <Leader>n :Normalize<CR>
-
 "---INDENT---
 
 "tabs are 8 characters wide
@@ -173,6 +186,8 @@ function! StripWhitespace()
 	normal `x
 endfunction
 
+set cinoptions='(1s,M1'
+
 command! -nargs=0 StripWhitespace call StripWhitespace()
 
 "---BACKUP---
@@ -189,7 +204,7 @@ command! -nargs=0 StripWhitespace call StripWhitespace()
 "keep stuff short and clean, in general
 
 "help avoid hit-enter prompts
-set shortmess=aoOsWA
+set shortmess=aoOsWAc
 "f: use '(3 of 5)' instead of '(file 3 of 5)'
 "i: use '[noeol]' instead of '[Incomplete last line]'
 "l: use '999L, 888C' instead of '999 lines, 888 characters'
@@ -209,8 +224,8 @@ set shortmess=aoOsWA
 "on the command-line, '<' will appear in the left most column.
 "Ignored in Ex mode.
 "W: don't give 'written' or '[w]' when writing a file
-"A: don't give the 'ATTENTION' message when an existing swap file
-"is found.
+"A: don't give the 'ATTENTION' message when an existing swap file is found.
+"c: no completion messages
 
 "don't redraw while executing macros, etc
 set lazyredraw
@@ -219,7 +234,7 @@ set lazyredraw
 set updatetime=750
 
 "---CONCEAL---
-set conceallevel=1
+"set conceallevel=1
 
 "---REGISTERS---
 "
@@ -232,19 +247,19 @@ function! SwapUnnamedAndSystem()
 endfunction
 
 "give three registers, jk and ", cycle between them
-function! CycleYankRing()
-	let @i=@"
-	let @"=@k
-	let @k=@j
-	let @j=@i
-	registers jk"
-endfunction
+"function! CycleYankRing()
+	"let @i=@"
+	"let @"=@k
+	"let @k=@j
+	"let @j=@i
+	"registers jk"
+"endfunction
 
 "\s to cycle yank ring
-nnoremap <Leader>s :call CycleYankRing()<CR>
+"nnoremap <Leader>s :call CycleYankRing()<CR>
 
 "swap unnamed and system reg with \s
-nnoremap <Leader>S :call SwapUnnamedAndSystem()<CR>
+"nnoremap <Leader>S :call SwapUnnamedAndSystem()<CR>
 
 "---PRINT INTERNAL COMMANDS---
 "useful with:
@@ -274,6 +289,7 @@ function! PrintInternal (command)
 	endif
 	redir END
 	normal $"xp`x
+
 endfunction
 
 command! -nargs=1 -complete=command Internal call PrintInternal(<q-args>)
@@ -283,25 +299,50 @@ nmap <Leader>a :call PrintInternal(input('✎⮤', '', 'command'))<CR>
 "mappings?
 command! -nargs=0 PrintHighlightGroups so $VIMRUNTIME/syntax/hitest.vim
 
-"---CONQUE TERM---
-let g:ConqueTerm_PyVersion = 3
+function! NoDistractions()
+	setlocal nolist
+	setlocal laststatus=0
+	setlocal rulerformat=%{wordcount().words}
+	setlocal nonumber
+	setlocal cmdheight=1
+	inoremap <buffer> <C-s> <C-\><C-o>:w<CR>
+endfunction
+
+command! -nargs=0 NoDistractions call NoDistractions()
 
 "---AIRLINE---
-let g:airline#extensions#bufferline#enabled=0
-let g:airline#extensions#syntastic#enabled=1
-let g:airline#extensions#whitespace#enabled=0
-if !exists('g:airline_symbols')
-	let g:airline_symbols={}
-endif
-let g:airline_symbols.branch='⎇'
-let g:airline_left_sep='' "''
-let g:airline_left_alt_sep='|' "''
-let g:airline_right_sep='' "''
-let g:airline_right_alt_sep='|' "''
-let g:airline_symbols.readonly=''
-let g:airline_symbols.linenr=''
+function! AirlineInit()
+	let g:airline#extensions#bufferline#enabled=0
+	let g:airline#extensions#syntastic#enabled=0
+	let g:airline#extensions#whitespace#enabled=0
+	let g:airline#extensions#wordcount#enabled=1
+	let g:airline#extensions#wordcount#filetypes =
+	\ ['markdown', 'rst', 'org', 'help', 'text']
+	"let g:airline_section_error = airline#section#create(['branch'])
+	let g:airline_section_a     = '%{substitute(mode(), "CTRL-", "^", "g")}'
+	let g:airline_section_b     = airline#section#create(['ffenc'])
+	let g:airline_section_error = airline#section#create(['ycm_error_count', 'syntastic'])
+	"see 'statusline'
+	let g:airline_section_c     = '%{expand(''%:h:t'')}/%t %m %#__accent_red#%{airline#util#wrap(airline#parts#readonly(),0)}%#__restore__#'
+	let g:airline_section_gutter = '%='
+	let g:airline_section_warning = ''
+	"let g:airline_section_x = '%{airline#util#wrap(airline#parts#filetype(),0)}'
+	let g:airline_section_x = '%{&ft}'
+	let g:airline_section_y = ''
+	let g:airline_section_z = '%3p%% %{g:airline_symbols.linenr}%4l:%3v'
 
-let g:airline_section_error='syntastic'
+	if !exists('g:airline_symbols')
+		let g:airline_symbols={}
+	endif
+	let g:airline_symbols.branch='⎇'
+	let g:airline_left_sep='' "''
+	let g:airline_left_alt_sep='│' "''
+	let g:airline_right_sep='' "''
+	let g:airline_right_alt_sep='│' "''
+	let g:airline_symbols.readonly=''
+	let g:airline_symbols.linenr=''
+endfunction
+autocmd User AirlineAfterInit call AirlineInit()
 
 "---SYNTASTIC---
 let g:syntastic_enable_signs=1
@@ -309,53 +350,53 @@ let g:syntastic_loc_list_height=3
 let g:syntastic_check_on_open=1
 let g:syntastic_error_symbol='✘'
 let g:syntastic_warning_symbol='⚠'
-let g:syntastic_style_warning_symbol='○'
+let g:syntastic_style_warning_symbol='⍤' "○
 let g:syntastic_style_error_symbol='⚡'
 
-"When set to 3 the cursor will jump to the first error detected, if any. If
-"all issues detected are warnings, the cursor won't jump.
-let g:syntastic_auto_jump=3
+"dont fuck w my cursor
+let g:syntastic_auto_jump=0
+
+"use \sk and \sj to navigate errors
+nmap <Leader>sk :lprevious<CR>
+nmap <Leader>sj :lnext<CR>
 
 "---AUTOSAVE---
 "don't change updatetime
+"i dont even think i still have this
 let g:auto_save_no_updatetime=1
 
-"---GITGUTTER---
-let g:gitgutterenabled=1
-let g:gitguttersigns=1
-let g:gitgutter_sign_added='+'
-let g:gitgutter_sign_modified='≈'
-let g:gitgutter_sign_removed=''
-let g:gitgutter_sign_modified_removed='≉'
+"muscle memory
+"this is unreliable
+"make c-bs delete the current word
+imap <C-BS> <C-W>
 
-if &ft ==? "tex"
-	"spellcheck
-	set spell
+"---FILETYPES---
+"md is for markdown
+autocmd BufNewFile,BufRead *.md setfiletype markdown
 
-	"wrap selection with $
-	vnoremap <leader>$ <ESC>`>a$<ESC>`<i$<ESC>
-	vnoremap <leader>' <ESC>`>a'<ESC>`<i`<ESC>
+"autocmd BufReadPre *.tex let b:did_indent = 1
+let g:tex_flavor = 'latex'
+"no spellchecking in tex comments
+let g:tex_comment_nospell= 1
+"no syntax
+let g:syntastic_tex_checkers = []
 
-	"various insert mode formatting things
-	imap <C-e> \textit{
-	imap <C-b> \textbf{
-	imap <C-s> \textsc{
-
-	"split lines in a semi-intelligent manner
-	"this sux don't use it
-	nmap <leader>b :s/ *\([.;]\\|''\\|``\) */\1\r/ge<cr>:noh<cr>
-	vmap <leader>b :s/ *\([.;]\\|''\\|``\) */\1\r/ge<cr>:noh<cr>
-
-	"silence that warning 38 (no punct. before quotes) bullshit
-	let g:syntastic_quiet_messages={
-		\ "level": "warnings",
-		\ "type": "style",
-		\ "regex": "warning  38" }
-"elseif &ft ==? "c"
-	"map <f2> :w|silent !make %:t:r.exe|silent !git commit -am "save/compile"<CR>
-"else
-	"map <f2> :w<cr>:silent !git commit -am "vim save %:t"<cr>
-endif
+"---KISS---
+command! -nargs=? InsertBoilerplate KISSInsertBoilerplate <args>
+command! -nargs=? IBoilerplate KISSInsertBoilerplate <args>
+command! -nargs=1 EditBoilerplate KISSEditBoilerplate <args>
+command! -nargs=1 EBoilerplate KISSEditBoilerplate <args>
+let g:kiss_boilerplate_synonyms = {
+	\ 'cc': 'c',
+	\ 'plaintex': 'tex',
+	\ 'expat': 'mit',
+	\ 'mit/expat': 'mit',
+	\ 'youcompleteme': 'ycm',
+	\ 'pgf': 'pgfplots',
+	\ 'cpp': 'c',
+	\ 'c++': 'c',
+	\ 'bounce': 'dir'
+	\ }
 
 "---GUI---
 "sometimes re-sourcing the vimrc messes up the colorscheme

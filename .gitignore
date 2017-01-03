@@ -1,6 +1,8 @@
 */**
 vimfiles/.netrwhist
-vim74/**
+vimfiles/spell/**
+vimfiles/pack/**
+vim80/**
 !_vimrc
 !_gvimrc
 !.gitignore

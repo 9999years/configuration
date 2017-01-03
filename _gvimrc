@@ -1,14 +1,52 @@
-set guifont=Pragmata_Pro_Mono_Regular:h10:w5
-set guifontwide=Pragmata_Pro_Mono_Regular:h10:w5
+set guifont=PragmataPro_Mono:h11:qANTIALIASED
+"set guifontwide=PragmataPro
 set guioptions-=m "remove menu bar
 set guioptions-=T "remove toolbar
 set guioptions+=cr "console dialogs instead of popup dialogs
 set lines=48 columns=84
-"i should probably change this at some point
-colorscheme molokai-italic-fix
-"colorscheme UBARYD
 
-"let g:airline_theme='ubaryd'
+"gghhghgh
+hi NonText gui=NONE
+
+"i should probably change this at some point
+colorscheme UBARYD-fix
+
+packadd! vim-airline-themes
+let g:airline_theme='ubaryd'
 
 "some directx stuff??? gives it a diff look
-set renderoptions=type:directx,geom:1,renmode:4,taamode:0
+"change renmode to 4 for aa
+"set renderoptions=type:directx,geom:1,renmode:1,taamode:0
+
+"fix for box drawing line space
+set linespace=0
+
+if has('windows')
+	"get dpi, strip out utf-16 chars and new lines
+	"system() converts 0x00 to 0x01 for 'platform independence'
+	"should return something like 'PixelsPerXLogicalInch=192'
+	"get the part from the = to the end of the line (eg '=192') and strip
+	"the first character
+	"and convert to a number
+	let dpi = str2nr(strpart(matchstr(substitute(
+		\system('wmic desktopmonitor get PixelsPerXLogicalInch /value'),
+		\'\%x01\|\%x0a\|\%x0a\|\%xff\|\%xfe', '', 'g'),
+		\'=.*$'), 1))
+	if dpi > 100
+		"set renderoptions+=renmode:4
+		set guifont=PragmataPro_Mono:h11:qCLEARTYPE
+	endif
+endif
+
+"---YOU COMPLETE ME---
+"christ
+"fucking hell
+silent packadd YouCompleteMe
+let g:ycm_global_ycm_extra_conf =
+	\'$VIM\vimfiles\pack\youcompleteme\opt\YouCompleteMe\'
+	\'.ycm_extra_conf_default.py'
+let g:ycm_autoclose_preview_window_after_completion=1
+let g:ycm_autoclose_preview_window_after_insertion=1
+let g:ycm_seed_identifiers_with_syntax=1
+"let g:ycm_enable_diagnostic_signs=0
+
