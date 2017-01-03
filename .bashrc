@@ -111,3 +111,8 @@ if ! shopt -oq posix; then
     . /etc/bash_completion
   fi
 fi
+
+export PATH=$PATH:~/.gem/bin
+
+export GEM_HOME=~/.gem
+export GEM_PATH=~/.gem

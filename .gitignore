@@ -1,5 +1,35 @@
+*/**
 vimfiles/.netrwhist
 vim74/**
 !_vimrc
 !_gvimrc
 !.gitignore
+/*
+!.gitignore
+!.gitconfig
+!.latexmkrc
+!.xmaximarc
+!.minttyrc
+!.config
+#look, get Off my Tail
+	new file:   .config/git/gitk
+	new file:   .config/git/gitk.bak
+	modified:   .gitconfig
+	new file:   .gitignore_global
+	new file:   .latexmkrc
+	new file:   .minttyrc
+	new file:   .ssh/github_rsa
+	new file:   .ssh/github_rsa.pub
+	new file:   .ssh/known_hosts
+	new file:   .xmaximarc
+	both added:      .gitignore
+	modified:   .bash_history
+	modified:   .bashrc
+	modified:   .lesshst
+	modified:   .viminfo
+
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+
+	.config/PowerShellModules/
+	.config/powershell/
