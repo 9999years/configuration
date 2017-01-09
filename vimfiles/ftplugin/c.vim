@@ -24,5 +24,5 @@ nnoremap <buffer> gd :YcmCompleter GoToImprecise<CR>
 nnoremap <buffer> gD :YcmCompleter GoToDefinition<CR>
 
 "use //
-let NERD_c_alt_style=1
-let g:NERDAltDelims_c = 1
+autocmd BufEnter,BufWinEnter *.c,*.h let b:NERD_c_alt_style = 1
+"autocmd BufEnter *.c,*.h let g:NERDAltDelims_c = 1
