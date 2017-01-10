@@ -310,6 +310,12 @@ endfunction
 
 command! -nargs=0 NoDistractions call NoDistractions()
 
+"load netrw if we open vim with no files
+augroup VimStartup
+	au!
+	au VimEnter * if expand("%") == "" | e . | endif
+augroup END
+
 "---AIRLINE---
 function! AirlineInit()
 	let g:airline#extensions#bufferline#enabled=0
@@ -317,7 +323,7 @@ function! AirlineInit()
 	let g:airline#extensions#whitespace#enabled=0
 	let g:airline#extensions#wordcount#enabled=1
 	let g:airline#extensions#wordcount#filetypes =
-	\ ['markdown', 'rst', 'org', 'help', 'text']
+	\ 'markdown|rst|org|help|text'
 	"let g:airline_section_error = airline#section#create(['branch'])
 	let g:airline_section_a     = '%{substitute(mode(), "CTRL-", "^", "g")}'
 	let g:airline_section_b     = airline#section#create(['ffenc'])
