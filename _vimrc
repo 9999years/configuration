@@ -53,7 +53,7 @@ set linebreak
 
 "display tabs and trailing spaces
 set list
-set listchars=tab:│\ ,trail:·,conceal:…,nbsp:␣
+set listchars=tab:│\ ,trail:·,extends:…,nbsp:␣,conceal:
 set fillchars=vert:║,fold:═,diff:
 "⋆≈❊╳⇠⍆≈⟡╬✚⟪⟫◇‼⚠⎇⚡↪↳⋱○✎‖
 
@@ -149,6 +149,28 @@ function! NormalizeCurrentFile()
 endfunction
 
 command! -nargs=0 Normalize call NormalizeCurrentFile()
+
+function! Base64Encode() range
+    " go to first line, last line, delete into @b, insert text
+    exe "normal! " . a:firstline . "GV" . a:lastline . "G"
+    \ . "\"bdO0\<C-d>\<C-r>\<C-o>"
+    \ . "=substitute(system('python -m base64 -e', @b), "
+    \ . "'\\n', '', 'g')\<CR>\<ESC>"
+endfunction
+
+function! Base64Decode() range
+	let l:join = "\"bc"
+	if a:firstline != a:lastline
+		" gJ exits vis mode so we need a cc to change two lines
+		let l:join = "gJ" . l:join . "c"
+	endif
+	exe "normal! " . a:firstline . "GV" . a:lastline . "G" . l:join
+	\ . "0\<C-d>\<C-r>\<C-o>"
+	\ . "=system('python -m base64 -d', @b)\<CR>\<BS>\<ESC>"
+endfunction
+
+command! -nargs=0 -range Base64Encode <line1>,<line2>call Base64Encode()
+command! -nargs=0 -range Base64Decode <line1>,<line2>call Base64Decode()
 
 "tell nlcr and cp437 to fuck off in every file
 "but also if it's read only don't complain when
