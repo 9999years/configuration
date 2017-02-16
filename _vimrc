@@ -333,10 +333,10 @@ endfunction
 command! -nargs=0 NoDistractions call NoDistractions()
 
 "load netrw if we open vim with no files
-augroup VimStartup
-	au!
-	au VimEnter * if expand("%") == "" | e . | endif
-augroup END
+"augroup VimStartup
+	"au!
+	"au VimEnter * if expand("%") == "" | e . | endif
+"augroup END
 
 "---AIRLINE---
 function! AirlineInit()
