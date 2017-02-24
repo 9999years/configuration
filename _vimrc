@@ -151,11 +151,15 @@ endfunction
 command! -nargs=0 Normalize call NormalizeCurrentFile()
 
 function! Base64Encode() range
-    " go to first line, last line, delete into @b, insert text
-    exe "normal! " . a:firstline . "GV" . a:lastline . "G"
-    \ . "\"bdO0\<C-d>\<C-r>\<C-o>"
-    \ . "=substitute(system('python -m base64 -e', @b), "
-    \ . "'\\n', '', 'g')\<CR>\<ESC>"
+	" go to first line, last line, delete into @b, insert text note the
+	" substitute() call to join the b64 into one line this lets
+	" `:Base64Encode | Base64Decode` work without modifying the text at
+	" all, regardless of line length -- although that particular command
+	" is useless, lossless editing is a plus
+	exe "normal! " . a:firstline . "GV" . a:lastline . "G"
+	\ . "\"bdO0\<C-d>\<C-r>\<C-o>"
+	\ . "=substitute(system('python -m base64 -e', @b), "
+	\ . "'\\n', '', 'g')\<CR>\<ESC>"
 endfunction
 
 function! Base64Decode() range
@@ -169,8 +173,8 @@ function! Base64Decode() range
 	\ . "=system('python -m base64 -d', @b)\<CR>\<BS>\<ESC>"
 endfunction
 
-command! -nargs=0 -range Base64Encode <line1>,<line2>call Base64Encode()
-command! -nargs=0 -range Base64Decode <line1>,<line2>call Base64Decode()
+command! -nargs=0 -range -bar Base64Encode <line1>,<line2>call Base64Encode()
+command! -nargs=0 -range -bar Base64Decode <line1>,<line2>call Base64Decode()
 
 "tell nlcr and cp437 to fuck off in every file
 "but also if it's read only don't complain when
@@ -332,11 +336,49 @@ endfunction
 
 command! -nargs=0 NoDistractions call NoDistractions()
 
+function! UnsavedDiff()
+	"create mark d, copy buffer and return to mark
+	normal! mdgg"dyG`d
+	"save syntax for later
+	let l:syn=&syntax
+	"turn diff on, new buffer, paste, refresh syntax
+	diffthis
+	vnew
+	normal! "dpggdd
+	let &syntax=l:syn
+	diffthis
+	set buftype=nofile
+	set nobuflisted noswapfile readonly
+	"switch windows, refresh content, switch back
+	normal! p
+	edit!
+	normal! p
+endfunction
+
+"will this work in a tab with more than two windows? who knows!
+function! UnsavedDiffOff()
+	"set mark o to jump back to
+	if expand("%") != ""
+		normal! mop
+	else
+		normal! pmop
+	endif
+	"on the local (no filename) window now
+	"copy unsaved changes
+	normal! gg"dyG
+	"get rid of buffer, delete/paste in new buffer, go back to mark o
+	bwipe!
+	lockmarks normal! gg"gdG"dpggdd`o
+endfunction
+
+command! -nargs=0 UnsavedDiffOff call UnsavedDiffOff()
+command! -nargs=0 UnsavedDiff call UnsavedDiff()
+
 "load netrw if we open vim with no files
-augroup VimStartup
-	au!
-	au VimEnter * if expand("%") == "" | e . | endif
-augroup END
+"augroup VimStartup
+	"au!
+	"au VimEnter * if expand("%") == "" | e . | endif
+"augroup END
 
 "---AIRLINE---
 function! AirlineInit()
