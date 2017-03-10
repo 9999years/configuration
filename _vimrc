@@ -443,7 +443,7 @@ imap <C-BS> <C-W>
 "---FILETYPES---
 "md is for markdown
 autocmd BufNewFile,BufRead *.md setfiletype markdown
-autocmd BufNewFile,BufRead *.maxima setfiletype maxima
+autocmd BufEnter *.mac let b:syntastic_checkers = [] | setfiletype maxima | SyntasticReset
 
 "autocmd BufReadPre *.tex let b:did_indent = 1
 let g:tex_flavor = 'latex'
