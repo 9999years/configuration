@@ -325,6 +325,9 @@ nmap <Leader>a :call PrintInternal(input('✎⮤', '', 'command'))<CR>
 "mappings?
 command! -nargs=0 PrintHighlightGroups so $VIMRUNTIME/syntax/hitest.vim
 
+nnoremap <Leader>z 1z=
+inoremap <C-z> <ESC>1z=ea
+
 function! NoDistractions()
 	setlocal nolist
 	setlocal laststatus=0
