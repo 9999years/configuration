@@ -325,6 +325,7 @@ nmap <Leader>a :call PrintInternal(input('✎⮤', '', 'command'))<CR>
 "mappings?
 command! -nargs=0 PrintHighlightGroups so $VIMRUNTIME/syntax/hitest.vim
 
+"\z and c-z insert best guess for spell checking
 nnoremap <Leader>z 1z=
 inoremap <C-z> <ESC>1z=ea
 
