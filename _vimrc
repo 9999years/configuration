@@ -466,22 +466,11 @@ let g:kiss_boilerplate_synonyms = {
 	\ 'plaintex': 'tex',
 	\ 'expat': 'mit',
 	\ 'mit/expat': 'mit',
-	\ 'youcompleteme': 'ycm',
 	\ 'pgf': 'pgfplots',
 	\ 'cpp': 'c',
 	\ 'c++': 'c',
 	\ 'bounce': 'dir'
 	\ }
-
-"---YOU COMPLETE ME---
-"christ
-"fucking hell
-silent packadd YouCompleteMe
-let g:ycm_global_ycm_extra_conf='~/.ycm_extra_conf.py'
-let g:ycm_autoclose_preview_window_after_completion=1
-let g:ycm_autoclose_preview_window_after_insertion=1
-let g:ycm_seed_identifiers_with_syntax=1
-"let g:ycm_enable_diagnostic_signs=0
 
 "---GUI---
 "sometimes re-sourcing the vimrc messes up the colorscheme
