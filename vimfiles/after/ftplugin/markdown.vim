@@ -26,4 +26,4 @@ command! Pipe :s/|/│/g
 
 "enter on a line with just a bullet deletes the bullet
 inoremap <expr> <CR> getline('.') =~ '^\s*\* $' ? '<C-u>' : '<CR>'
-inoremap <expr> *<Space> getline('.') =~ '\v^\s*$' ? '<BS><BS>* ' : '* '
+"inoremap <expr> *<Space> getline('.') =~ '\v^\s*$' ? '<BS><BS>* ' : '* '

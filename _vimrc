@@ -466,7 +466,6 @@ let g:kiss_boilerplate_synonyms = {
 	\ 'plaintex': 'tex',
 	\ 'expat': 'mit',
 	\ 'mit/expat': 'mit',
-	\ 'youcompleteme': 'ycm',
 	\ 'pgf': 'pgfplots',
 	\ 'cpp': 'c',
 	\ 'c++': 'c',
