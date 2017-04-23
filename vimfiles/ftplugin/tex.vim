@@ -32,8 +32,3 @@ inoremap <expr> ]<CR> getline('.') =~ '\v^.*(\\begin)(\[[^\]]*\])?\{\zs([[:alpha
 
 "how did this even get fucked up
 let b:NERDCommenterDelims = {'right': '', 'rightAlt': '', 'left': '%', 'leftAlt': ''}
-
-packadd YouCompleteMe
-let g:ycm_semantic_triggers = {
-	\ 'tex' : ['{','\'],
-	\ }

@@ -395,7 +395,7 @@ function! AirlineInit()
 	"let g:airline_section_error = airline#section#create(['branch'])
 	let g:airline_section_a     = '%{substitute(mode(), "CTRL-", "^", "g")}'
 	let g:airline_section_b     = airline#section#create(['ffenc'])
-	let g:airline_section_error = airline#section#create(['ycm_error_count', 'syntastic'])
+	let g:airline_section_error = airline#section#create(['syntastic'])
 	"see 'statusline'
 	let g:airline_section_c     = '%{expand(''%:h:t'')}/%t %m %#__accent_red#%{airline#util#wrap(airline#parts#readonly(),0)}%#__restore__#'
 	let g:airline_section_gutter = '%='
@@ -476,6 +476,7 @@ let g:kiss_boilerplate_synonyms = {
 set completeopt=menu,menuone,longest
 set pumheight=10
 let g:SuperTabDefaultCompletionType = 'context'
+let g:acp_autoselectFirstCompletion = 0
 
 "---GUI---
 "sometimes re-sourcing the vimrc messes up the colorscheme
