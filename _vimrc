@@ -118,7 +118,7 @@ set smartcase
 set hlsearch
 
 "map \s to clear search
-nnoremap <Leader>s /í ½í´¥á»Ÿ<CR>
+nnoremap <Leader>ss :let @/ = ""<CR>
 
 "and \n to clear highlight
 nnoremap <Leader>n :noh<CR>

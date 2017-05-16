@@ -32,3 +32,5 @@ inoremap <expr> ]<CR> getline('.') =~ '\v^.*(\\begin)(\[[^\]]*\])?\{\zs([[:alpha
 
 "how did this even get fucked up
 let b:NERDCommenterDelims = {'right': '', 'rightAlt': '', 'left': '%', 'leftAlt': ''}
+
+let g:acp_behaviorFileLength = -1
