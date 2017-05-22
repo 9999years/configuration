@@ -475,8 +475,10 @@ let g:kiss_boilerplate_synonyms = {
 "---COMPLETIONS---
 set completeopt=menu,menuone,longest
 set pumheight=10
-let g:SuperTabDefaultCompletionType = 'context'
+"let g:SuperTabDefaultCompletionType = 'context'
 let g:acp_autoselectFirstCompletion = 0
+let g:SuperTabDefaultCompletionType = "<c-n>"
+let g:SuperTabContextDefaultCompletionType = "<c-n>"
 
 "---GUI---
 "sometimes re-sourcing the vimrc messes up the colorscheme
