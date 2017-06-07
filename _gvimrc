@@ -11,7 +11,7 @@ hi NonText gui=NONE
 "i should probably change this at some point
 colorscheme UBARYD-fix
 
-packadd! vim-airline-themes
+packadd! airline-themes
 let g:airline_theme='ubaryd'
 
 "some directx stuff??? gives it a diff look

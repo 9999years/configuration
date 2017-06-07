@@ -33,4 +33,31 @@ inoremap <expr> ]<CR> getline('.') =~ '\v^.*(\\begin)(\[[^\]]*\])?\{\zs([[:alpha
 "how did this even get fucked up
 let b:NERDCommenterDelims = {'right': '', 'rightAlt': '', 'left': '%', 'leftAlt': ''}
 
+"vim thinks latex commands like a\b{x} for any printing a, b, x are
+"filenames if they end a line. so let's prevent that
 let g:acp_behaviorFileLength = -1
+
+"good formatting
+let g:vimtex_format_enabled=0
+let g:vimtex_imaps_enabled=0
+let g:vimtex_indent_on_ampersands = 0
+let g:vimtex_view_enabled=0
+
+nnoremap <silent><buffer> } :call vimtex#motion#next_paragraph(0,0)<cr>
+nnoremap <silent><buffer> { :call vimtex#motion#next_paragraph(1,0)<cr>
+xnoremap <silent><buffer> } :<c-u>call vimtex#motion#next_paragraph(0,1)<cr>
+xnoremap <silent><buffer> { :<c-u>call vimtex#motion#next_paragraph(1,1)<cr>
+onoremap <silent><buffer> } :execute "normal v}"<cr>
+onoremap <silent><buffer> { :execute "normal v{"<cr>
+
+"function! s:map(mode, lhs, rhs, ...)
+  "if !hasmapto(a:rhs, a:mode)
+        "\ && (a:0 > 0 || maparg(a:lhs, a:mode) ==# '')
+    "silent execute a:mode . 'map <silent><buffer>' a:lhs a:rhs
+  "endif
+"endfunction
+
+"call s:map('x', 'ip', '<plug>(vimtex-ip)')
+"call s:map('x', 'ap', '<plug>(vimtex-ap)')
+"call s:map('o', 'ip', '<plug>(vimtex-ip)')
+"call s:map('o', 'ap', '<plug>(vimtex-ap)')
