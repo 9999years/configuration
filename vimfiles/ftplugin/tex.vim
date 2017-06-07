@@ -40,7 +40,7 @@ let g:acp_behaviorFileLength = -1
 "good formatting
 let g:vimtex_format_enabled=0
 let g:vimtex_imaps_enabled=0
-let g:vimtex_indent_on_ampersands = 0
+let g:vimtex_indent_on_ampersands=0
 let g:vimtex_view_enabled=0
 
 nnoremap <silent><buffer> } :call vimtex#motion#next_paragraph(0,0)<cr>
