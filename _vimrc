@@ -117,11 +117,8 @@ set smartcase
 "highlight all matches of a search
 set hlsearch
 
-"map \s to clear search
-nnoremap <Leader>ss :let @/ = ""<CR>
-
-"and \n to clear highlight
-nnoremap <Leader>n :noh<CR>
+"map \cs to clear search
+nnoremap <Leader>cs :let @/ = ""<CR>
 
 "---UNICODE---
 "i made these bindings and i am extremely proud of them
