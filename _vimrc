@@ -469,6 +469,13 @@ let g:kiss_boilerplate_synonyms = {
 	\ 'bounce': 'dir'
 	\ }
 
+"---GITGUTTER---
+let g:gitgutter_sign_added = '+'
+let g:gitgutter_sign_modified = '≈'
+let g:gitgutter_sign_removed = ''
+let g:gitgutter_sign_modified_removed = '<≈'
+let g:gitgutter_sign_removed_first_line = '⤉'
+
 "---COMPLETIONS---
 set completeopt=menu,menuone,longest
 set pumheight=10
