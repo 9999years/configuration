@@ -392,7 +392,7 @@ function! AirlineInit()
 	"let g:airline_section_error = airline#section#create(['branch'])
 	let g:airline_section_a     = '%{substitute(mode(), "CTRL-", "^", "g")}'
 	let g:airline_section_b     = airline#section#create(['ffenc'])
-	let g:airline_section_error = airline#section#create(['syntastic'])
+	"let g:airline_section_error = airline#section#create(['syntastic'])
 	"see 'statusline'
 	let g:airline_section_c     = '%{expand(''%:h:t'')}/%t %m %#__accent_red#%{airline#util#wrap(airline#parts#readonly(),0)}%#__restore__#'
 	let g:airline_section_gutter = '%='
@@ -416,16 +416,16 @@ endfunction
 autocmd User AirlineAfterInit call AirlineInit()
 
 "---SYNTASTIC---
-let g:syntastic_enable_signs=1
-let g:syntastic_loc_list_height=3
-let g:syntastic_check_on_open=1
-let g:syntastic_error_symbol='✘'
-let g:syntastic_warning_symbol='⚠'
-let g:syntastic_style_warning_symbol='⍤' "○
-let g:syntastic_style_error_symbol='⚡'
+"let g:syntastic_enable_signs=1
+"let g:syntastic_loc_list_height=3
+"let g:syntastic_check_on_open=1
+"let g:syntastic_error_symbol='✘'
+"let g:syntastic_warning_symbol='⚠'
+"let g:syntastic_style_warning_symbol='⍤' "○
+"let g:syntastic_style_error_symbol='⚡'
 
 "dont fuck w my cursor
-let g:syntastic_auto_jump=0
+"let g:syntastic_auto_jump=0
 
 "use \sk and \sj to navigate errors
 nmap <Leader>sk :lprevious<CR>
@@ -444,14 +444,14 @@ imap <C-BS> <C-W>
 "---FILETYPES---
 "md is for markdown
 autocmd BufNewFile,BufRead *.md setfiletype markdown
-autocmd BufEnter *.mac let b:syntastic_checkers = [] | setfiletype maxima | SyntasticReset
+"autocmd BufEnter *.mac let b:syntastic_checkers = [] | setfiletype maxima | SyntasticReset
 
 "autocmd BufReadPre *.tex let b:did_indent = 1
 let g:tex_flavor = 'latex'
 "no spellchecking in tex comments
 let g:tex_comment_nospell= 1
 "no syntax
-let g:syntastic_tex_checkers = []
+"let g:syntastic_tex_checkers = []
 
 "---KISS---
 command! -nargs=? InsertBoilerplate KISSInsertBoilerplate <args>
@@ -470,11 +470,11 @@ let g:kiss_boilerplate_synonyms = {
 	\ }
 
 "---GITGUTTER---
-let g:gitgutter_sign_added = '+'
-let g:gitgutter_sign_modified = '≈'
-let g:gitgutter_sign_removed = ''
-let g:gitgutter_sign_modified_removed = '<≈'
-let g:gitgutter_sign_removed_first_line = '⤉'
+"let g:gitgutter_sign_added = '+'
+"let g:gitgutter_sign_modified = '≈'
+"let g:gitgutter_sign_removed = ''
+"let g:gitgutter_sign_modified_removed = '<≈'
+"let g:gitgutter_sign_removed_first_line = '⤉'
 
 "---COMPLETIONS---
 set completeopt=menu,menuone,longest

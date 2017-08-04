@@ -3,7 +3,7 @@ set guifont=PragmataPro_Mono:h11:qANTIALIASED
 set guioptions-=m "remove menu bar
 set guioptions-=T "remove toolbar
 set guioptions+=cr "console dialogs instead of popup dialogs
-set lines=48 columns=84
+set lines=48 columns=85
 
 "gghhghgh
 hi NonText gui=NONE
