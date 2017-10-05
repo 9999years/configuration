@@ -12,6 +12,7 @@ hi NonText gui=NONE
 colorscheme UBARYD-fix
 
 packadd! airline-themes
+source $VIM/vimfiles/pack/airline/opt/airline-themes/autoload/airline/themes/ubaryd.vim
 let g:airline_theme='ubaryd'
 
 "some directx stuff??? gives it a diff look
