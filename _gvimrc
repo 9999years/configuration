@@ -34,7 +34,7 @@ if has('windows')
 		\'\%x01\|\%x0a\|\%x0a\|\%xff\|\%xfe', '', 'g'),
 		\'=.*$'), 1))
 	if dpi > 100
-		"set renderoptions+=renmode:4
+		set renderoptions=
 		set guifont=PragmataPro_Mono:h11:qCLEARTYPE
 	endif
 endif
