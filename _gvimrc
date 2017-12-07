@@ -14,10 +14,6 @@ colorscheme UBARYD-fix
 packadd! airline-themes
 let g:airline_theme='ubaryd'
 
-"some directx stuff??? gives it a diff look
-"change renmode to 4 for aa
-"set renderoptions=type:directx,geom:1,renmode:1,taamode:0
-
 "fix for box drawing line space
 set linespace=0
 
@@ -35,5 +31,8 @@ if has('windows')
 	if dpi > 100
 		"set renderoptions+=renmode:4
 		set guifont=PragmataPro_Mono:h11:qCLEARTYPE
+	else
+		"magic to make ligatures work
+		set renderoptions=type:directx,renmode:1
 	endif
 endif
