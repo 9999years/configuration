@@ -6,6 +6,9 @@
 "chill, represent chars as utf-8 internally
 set encoding=utf-8
 
+set packpath+=~/vimfiles/pack,
+packloadall!
+
 "---MISC---
 "mostly things that should probably be default in the first place
 
@@ -493,7 +496,7 @@ let g:SuperTabContextDefaultCompletionType = "<c-n>"
 "autocmd GUIEnter * source $MYGVIMRC
 if(has("gui_running"))
 	if($MYGVIMRC == '')
-		let $MYGVIMRC = $VIM . '\_gvimrc'
+		let $MYGVIMRC = fnamemodify($MYVIMRC, ':h') . '/_gvimrc'
 	endif
 	source $MYGVIMRC
 endif

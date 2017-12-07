@@ -12,6 +12,7 @@ hi NonText gui=NONE
 colorscheme UBARYD-fix
 
 packadd! airline-themes
+source $VIM/vimfiles/pack/airline/opt/airline-themes/autoload/airline/themes/ubaryd.vim
 let g:airline_theme='ubaryd'
 
 "fix for box drawing line space
@@ -29,7 +30,7 @@ if has('windows')
 		\'\%x01\|\%x0a\|\%x0a\|\%xff\|\%xfe', '', 'g'),
 		\'=.*$'), 1))
 	if dpi > 100
-		"set renderoptions+=renmode:4
+		set renderoptions=
 		set guifont=PragmataPro_Mono:h11:qCLEARTYPE
 	else
 		"magic to make ligatures work
