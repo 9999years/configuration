@@ -446,7 +446,6 @@ imap <C-BS> <C-W>
 
 "---FILETYPES---
 "md is for markdown
-autocmd BufNewFile,BufRead *.md setfiletype markdown
 "autocmd BufEnter *.mac let b:syntastic_checkers = [] | setfiletype maxima | SyntasticReset
 
 "autocmd BufReadPre *.tex let b:did_indent = 1
@@ -498,3 +497,16 @@ if(has("gui_running"))
 	endif
 	source $MYGVIMRC
 endif
+
+function! EditFtplugin(ftname)
+	exe "edit $VIM/vimfiles/ftplugin/" . a:ftname . ".vim"
+endfunction
+command! -complete=filetype -nargs=1 EditFtplugin call EditFtplugin(<args>)
+
+function! EditFtdetect(ftname)
+	exe "edit $VIM/vimfiles/ftdetect/" . a:ftname . ".vim"
+endfunction
+command! -complete=filetype -nargs=1 EditFtdetect call EditFtdetect(<args>)
+
+"---NERD---
+let g:NERDAltDelims_fsharp = 1
