@@ -48,6 +48,8 @@ set wrap
 "don't cut off the last line when it wont fit on the screen
 set display+=lastline
 
+set scrolloff=5
+
 "
 let &breakat=" 	!@*-+;:,./?="
 
