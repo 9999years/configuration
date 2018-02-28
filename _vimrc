@@ -5,9 +5,46 @@
 
 "chill, represent chars as utf-8 internally
 set encoding=utf-8
+set nocompatible
 
-set packpath+=~/vimfiles/pack,
-packloadall!
+"---VUNDLE---
+filetype off
+set rtp+=$HOME/.vim/bundle/Vundle.vim/
+call vundle#begin()
+
+Plugin 'VundleVim/Vundle.vim'
+
+"status line
+Plugin 'vim-airline/vim-airline'
+"show autocomplete menu w/o prompt
+Plugin 'vim-scripts/AutoComplPop'
+"tab-completion
+Plugin 'ervandew/supertab'
+"better % matching
+Plugin 'tmhedberg/matchit'
+"better comment toggling
+Plugin 'scrooloose/nerdcommenter'
+"alignment
+Plugin 'godlygeek/tabular'
+"titlecasing commands
+Plugin '9999years/vim-titlecase'
+
+"snippets
+Plugin 'SirVer/ultisnips'
+Plugin 'honza/vim-snippets'
+
+if(has("gui_running"))
+	Plugin 'vim-airline/vim-airline-themes'
+endif
+
+
+"lang-specific
+Plugin 'lervag/vimtex'
+Plugin 'rust-lang/rust.vim'
+
+call vundle#end()
+"figure out filetype from file
+filetype indent plugin on
 
 "---MISC---
 "mostly things that should probably be default in the first place
@@ -31,9 +68,6 @@ set hidden
 
 "make backspacing work the way it should
 set backspace=indent,eol,start
-
-"figure out filetype from file
-filetype indent plugin on
 
 "visual command line completion
 set wildmenu
@@ -65,9 +99,6 @@ set fillchars=vert:║,fold:═,diff:
 "instead of giving a ridiculous error just ask are you sure?
 "if i :q when i meant :q!
 set confirm
-
-"i end up using this a lot ok
-let $PROFILE="~/Documents/WindowsPowerShell/Microsoft.PowerShell_profile.ps1"
 
 "make the diff windows make sense
 set splitright
@@ -109,8 +140,6 @@ set showcmd
 "2-line high command window to prevent many PRESS ENTER TO CONTINUE dialogues
 set cmdheight=2
 
-"set cpo=n
-
 "---SEARCHING---
 
 "ignore case while searching
@@ -125,66 +154,10 @@ set hlsearch
 "map \cs to clear search
 nnoremap <Leader>cs :let @/ = ""<CR>
 
-"---UNICODE---
-"i made these bindings and i am extremely proud of them
-
-"make \u insert the unicode point of the char under the cursor in nl above
-nmap <Leader>p mf"fylo<C-r>=printf('U+%x', char2nr(@f))<CR><ESC>:call NERDComment(0, 'norm')<CR>`f
-
-"make \U insert the unicode point of the char under the cursor in nl below
-nmap <Leader>P mf"fylO<C-r>=printf('U+%x', char2nr(@f))<CR><ESC>:call NERDComment(0, 'norm')<CR>`f
-
-"\f prints char literal's codepoint inline in a parenthetical
-"commented out for now, not sure what ill do with this
-"nmap <Leader>f "fyla (<C-r>=printf('U+%x', char2nr(@f))<CR>) <ESC>
-
-"\f replaces char under cursor with codepoint
-nmap <Leader>f "fcl<C-r>=printf('%x', char2nr(@f))<CR><ESC>
-
-"\F converts codepoint under cursor to char literal
-nmap <Leader>F "fyawea <C-r>=nr2char('0x' . @f)<CR><ESC>
-
-"simple function to fix crlf and weird encodings
-function! NormalizeCurrentFile()
-	set fileformat=unix
-	set fileencoding=utf-8
-endfunction
-
-command! -nargs=0 Normalize call NormalizeCurrentFile()
-
-function! Base64Encode() range
-	" go to first line, last line, delete into @b, insert text note the
-	" substitute() call to join the b64 into one line this lets
-	" `:Base64Encode | Base64Decode` work without modifying the text at
-	" all, regardless of line length -- although that particular command
-	" is useless, lossless editing is a plus
-	exe "normal! " . a:firstline . "GV" . a:lastline . "G"
-	\ . "\"bdO0\<C-d>\<C-r>\<C-o>"
-	\ . "=substitute(system('python -m base64 -e', @b), "
-	\ . "'\\n', '', 'g')\<CR>\<ESC>"
-endfunction
-
-function! Base64Decode() range
-	let l:join = "\"bc"
-	if a:firstline != a:lastline
-		" gJ exits vis mode so we need a cc to change two lines
-		let l:join = "gJ" . l:join . "c"
-	endif
-	exe "normal! " . a:firstline . "GV" . a:lastline . "G" . l:join
-	\ . "0\<C-d>\<C-r>\<C-o>"
-	\ . "=system('python -m base64 -d', @b)\<CR>\<BS>\<ESC>"
-endfunction
-
-command! -nargs=0 -range -bar Base64Encode <line1>,<line2>call Base64Encode()
-command! -nargs=0 -range -bar Base64Decode <line1>,<line2>call Base64Decode()
-
-"tell nlcr and cp437 to fuck off in every file
-"but also if it's read only don't complain when
-"it doesn't work
-"the ! is very important apparently
-autocmd BufNewFile,BufRead,BufAdd,BufCreate,BufNew * silent! Normalize
-
 "---INDENT---
+
+"???
+set cinoptions='(1s,M1'
 
 "tabs are 8 characters wide
 set tabstop=8
@@ -206,6 +179,66 @@ let &showbreak="↪ "
 "the arrow
 let &breakindentopt='min:30,shift:-2'
 
+"---CONCISENESS---
+"keep stuff short and clean, in general
+
+"help avoid hit-enter prompts
+set shortmess=aoOsWAc
+
+"don't redraw while executing macros, etc
+set lazyredraw
+
+"let's keep it Chill howabout
+set updatetime=750
+
+"---COMPLETIONS---
+set completeopt=menu,menuone,longest
+set pumheight=10
+"let g:SuperTabDefaultCompletionType = 'context'
+let g:acp_autoselectFirstCompletion = 0
+let g:SuperTabDefaultCompletionType = "<c-n>"
+let g:SuperTabContextDefaultCompletionType = "<c-n>"
+
+"---GUI---
+"sometimes re-sourcing the vimrc messes up the colorscheme
+"so just resource the gvimrc if we source the vimrc
+
+"autocmd GUIEnter * source $MYGVIMRC
+if(has("gui_running"))
+	if($MYGVIMRC == '')
+		let $MYGVIMRC = fnamemodify($MYVIMRC, ':h') . '/_gvimrc'
+	endif
+	source $MYGVIMRC
+endif
+
+"---MISC---
+
+"i end up using this a lot ok
+let $PROFILE="~/Documents/WindowsPowerShell/Microsoft.PowerShell_profile.ps1"
+
+"---UNICODE---
+"i made these bindings and i am extremely proud of them
+
+"make \u insert the unicode point of the char under the cursor in nl above
+nmap <Leader>p mf"fylo<C-r>=printf('U+%x', char2nr(@f))<CR><ESC>:call NERDComment(0, 'norm')<CR>`f
+
+"\f replaces char under cursor with codepoint
+nmap <Leader>f "fcl<C-r>=printf('%x', char2nr(@f))<CR><ESC>
+
+"\F converts codepoint under cursor to char literal
+nmap <Leader>F "fyawea <C-r>=nr2char('0x' . @f)<CR><ESC>
+
+"simple function to fix crlf and weird encodings
+function! NormalizeCurrentFile()
+	set fileformat=unix
+	set fileencoding=utf-8
+endfunction
+
+"but also if it's read only don't complain when
+"it doesn't work
+"the ! is very important apparently
+autocmd BufNewFile,BufRead,BufAdd,BufCreate,BufNew * silent! call NormalizeCurrentFile()
+
 "get rid of whitespace at line ends
 function! StripWhitespace()
 	normal mx
@@ -214,131 +247,11 @@ function! StripWhitespace()
 	normal `x
 endfunction
 
-set cinoptions='(1s,M1'
-
 command! -nargs=0 StripWhitespace call StripWhitespace()
-
-"---BACKUP---
-"saying this is broken would imply it worked in the first place
-"which it didn't
-
-"set backup
-"set backupdir=~/.vim-tmp,~/.tmp,~/tmp,/var/tmp,/tmp
-"set backupskip=/tmp/*,/private/tmp/*
-"set directory=~/.vim-tmp,~/.tmp,~/tmp,/var/tmp,/tmp
-"set writebackup
-
-"---CONCISENESS---
-"keep stuff short and clean, in general
-
-"help avoid hit-enter prompts
-set shortmess=aoOsWAc
-"f: use '(3 of 5)' instead of '(file 3 of 5)'
-"i: use '[noeol]' instead of '[Incomplete last line]'
-"l: use '999L, 888C' instead of '999 lines, 888 characters'
-"m: use '[+]' instead of '[Modified]'
-"n: use '[New]' instead of '[New File]'
-"r: use '[RO]' instead of '[readonly]'
-"w: use '[w]' instead of 'written' for file write message and '[a]' instead of 'appended' for ':w >> file' command
-"x: use '[dos]' instead of '[dos format]', '[unix]' instead of '[unix format]' and '[mac]' instead of '[mac format]'.
-"a: all of the above abbreviations
-
-"o: overwrite message for writing a file with subsequent message
-"for reading a file (useful for ':wn' or when 'autowrite' on)
-"O: message for reading a file overwrites any previous message.
-"Also for quickfix message (e.g., ':cn').
-"s: don't give 'search hit BOTTOM, continuing at TOP' or 'search
-"hit TOP, continuing at BOTTOM' messages
-"on the command-line, '<' will appear in the left most column.
-"Ignored in Ex mode.
-"W: don't give 'written' or '[w]' when writing a file
-"A: don't give the 'ATTENTION' message when an existing swap file is found.
-"c: no completion messages
-
-"don't redraw while executing macros, etc
-set lazyredraw
-
-"let's keep it Chill howabout
-set updatetime=750
-
-"---CONCEAL---
-"set conceallevel=1
-
-"---REGISTERS---
-"
-"swap system and unnamed reg
-function! SwapUnnamedAndSystem()
-	let @h=@"
-	let @"=@*
-	let @*=@h
-	registers *"
-endfunction
-
-"give three registers, jk and ", cycle between them
-"function! CycleYankRing()
-	"let @i=@"
-	"let @"=@k
-	"let @k=@j
-	"let @j=@i
-	"registers jk"
-"endfunction
-
-"\s to cycle yank ring
-"nnoremap <Leader>s :call CycleYankRing()<CR>
-
-"swap unnamed and system reg with \s
-"nnoremap <Leader>S :call SwapUnnamedAndSystem()<CR>
-
-"---PRINT INTERNAL COMMANDS---
-"useful with:
-"ga/:ascii, g8, :=, :Print, :changes, :history, jumps, :list, :pwd,
-":py, :py3, :version, i_<C-g>, g<, :display/:registers, :messages
-":echo getfsize(expand(@%)), printing the stuff in :h function-list
-"without using I<C-r>=...
-
-function! PrintInternal (command)
-	normal mx
-	redir @x
-	let l:len = strlen(a:command)
-	if(a:command[0] == ':')
-		"execute the command after :, eg
-		":registers
-		silent! execute a:command[1 : len]
-	elseif(a:command[0] == '=')
-		"evaluate the expression after =, eg
-		"=0xffff
-		"or
-		"=localtime()
-		silent! echo eval(a:command[1 : len])
-	else
-		"execute the command in normal mode, eg
-		"ga
-		silent! execute 'normal ' . a:command
-	endif
-	redir END
-	normal $"xp`x
-
-endfunction
-
-command! -nargs=1 -complete=command Internal call PrintInternal(<q-args>)
-nmap <Leader>a :call PrintInternal(input('✎⮤', '', 'command'))<CR>
-
-"---MISC---
-"mappings?
-command! -nargs=0 PrintHighlightGroups so $VIMRUNTIME/syntax/hitest.vim
 
 "\z and c-z insert best guess for spell checking
 nnoremap <Leader>z 1z=
 inoremap <C-z> <ESC>1z=ea
-
-function! NoDistractions()
-	setlocal nolist
-	setlocal laststatus=0
-	setlocal rulerformat=%{wordcount().words}
-	setlocal nonumber
-	setlocal cmdheight=1
-	inoremap <buffer> <C-s> <C-\><C-o>:w<CR>
-endfunction
 
 command! -nargs=0 NoDistractions call NoDistractions()
 
@@ -380,12 +293,6 @@ endfunction
 command! -nargs=0 UnsavedDiffOff call UnsavedDiffOff()
 command! -nargs=0 UnsavedDiff call UnsavedDiff()
 
-"load netrw if we open vim with no files
-"augroup VimStartup
-	"au!
-	"au VimEnter * if expand("%") == "" | e . | endif
-"augroup END
-
 "---AIRLINE---
 function! AirlineInit()
 	let g:airline#extensions#bufferline#enabled=0
@@ -420,95 +327,15 @@ function! AirlineInit()
 endfunction
 autocmd User AirlineAfterInit call AirlineInit()
 
-"---SYNTASTIC---
-"let g:syntastic_enable_signs=1
-"let g:syntastic_loc_list_height=3
-"let g:syntastic_check_on_open=1
-"let g:syntastic_error_symbol='✘'
-"let g:syntastic_warning_symbol='⚠'
-"let g:syntastic_style_warning_symbol='⍤' "○
-"let g:syntastic_style_error_symbol='⚡'
-
-"dont fuck w my cursor
-"let g:syntastic_auto_jump=0
-
-"use \sk and \sj to navigate errors
-nmap <Leader>sk :lprevious<CR>
-nmap <Leader>sj :lnext<CR>
-
-"---AUTOSAVE---
-"don't change updatetime
-"i dont even think i still have this
-let g:auto_save_no_updatetime=1
-
 "muscle memory
 "this is unreliable
 "make c-bs delete the current word
 imap <C-BS> <C-W>
 
-"---FILETYPES---
-"md is for markdown
-"autocmd BufEnter *.mac let b:syntastic_checkers = [] | setfiletype maxima | SyntasticReset
-
 "autocmd BufReadPre *.tex let b:did_indent = 1
 let g:tex_flavor = 'latex'
 "no spellchecking in tex comments
 let g:tex_comment_nospell= 1
-"no syntax
-"let g:syntastic_tex_checkers = []
-
-"---KISS---
-command! -nargs=? InsertBoilerplate KISSInsertBoilerplate <args>
-command! -nargs=? IBoilerplate KISSInsertBoilerplate <args>
-command! -nargs=1 EditBoilerplate KISSEditBoilerplate <args>
-command! -nargs=1 EBoilerplate KISSEditBoilerplate <args>
-let g:kiss_boilerplate_synonyms = {
-	\ 'cc': 'c',
-	\ 'plaintex': 'tex',
-	\ 'expat': 'mit',
-	\ 'mit/expat': 'mit',
-	\ 'pgf': 'pgfplots',
-	\ 'cpp': 'c',
-	\ 'c++': 'c',
-	\ 'bounce': 'dir'
-	\ }
-
-"---GITGUTTER---
-"let g:gitgutter_sign_added = '+'
-"let g:gitgutter_sign_modified = '≈'
-"let g:gitgutter_sign_removed = ''
-"let g:gitgutter_sign_modified_removed = '<≈'
-"let g:gitgutter_sign_removed_first_line = '⤉'
-
-"---COMPLETIONS---
-set completeopt=menu,menuone,longest
-set pumheight=10
-"let g:SuperTabDefaultCompletionType = 'context'
-let g:acp_autoselectFirstCompletion = 0
-let g:SuperTabDefaultCompletionType = "<c-n>"
-let g:SuperTabContextDefaultCompletionType = "<c-n>"
-
-"---GUI---
-"sometimes re-sourcing the vimrc messes up the colorscheme
-"so just resource the gvimrc if we source the vimrc
-
-"autocmd GUIEnter * source $MYGVIMRC
-if(has("gui_running"))
-	if($MYGVIMRC == '')
-		let $MYGVIMRC = fnamemodify($MYVIMRC, ':h') . '/_gvimrc'
-	endif
-	source $MYGVIMRC
-endif
-
-function! EditFtplugin(ftname)
-	exe "edit $VIM/vimfiles/ftplugin/" . a:ftname . ".vim"
-endfunction
-command! -complete=filetype -nargs=1 EditFtplugin call EditFtplugin(<args>)
-
-function! EditFtdetect(ftname)
-	exe "edit $VIM/vimfiles/ftdetect/" . a:ftname . ".vim"
-endfunction
-command! -complete=filetype -nargs=1 EditFtdetect call EditFtdetect(<args>)
 
 "---NERD---
 let g:NERDAltDelims_fsharp = 1
