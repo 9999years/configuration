@@ -16,6 +16,7 @@ Plugin 'VundleVim/Vundle.vim'
 
 "status line
 Plugin 'vim-airline/vim-airline'
+Plugin 'vim-airline/vim-airline-themes'
 "show autocomplete menu w/o prompt
 Plugin 'vim-scripts/AutoComplPop'
 "tab-completion
@@ -32,11 +33,6 @@ Plugin '9999years/vim-titlecase'
 "snippets
 Plugin 'SirVer/ultisnips'
 Plugin 'honza/vim-snippets'
-
-if(has("gui_running"))
-	Plugin 'vim-airline/vim-airline-themes'
-endif
-
 
 "lang-specific
 Plugin 'lervag/vimtex'
