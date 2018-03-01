@@ -45,6 +45,9 @@ set wildignore=
 "yeah this should be default too. wraps text
 set wrap
 
+"no 2 spaces after . in gq
+set joinspaces
+
 "don't cut off the last line when it wont fit on the screen
 set display+=lastline
 
