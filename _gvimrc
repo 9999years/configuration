@@ -1,5 +1,4 @@
 set guifont=PragmataPro_Mono:h11:qANTIALIASED
-"set guifontwide=PragmataPro
 set guioptions-=m "remove menu bar
 set guioptions-=T "remove toolbar
 set guioptions+=cr "console dialogs instead of popup dialogs
@@ -11,8 +10,6 @@ hi NonText gui=NONE
 "i should probably change this at some point
 colorscheme UBARYD-fix
 
-packadd! airline-themes
-source $VIM/vimfiles/pack/airline/opt/airline-themes/autoload/airline/themes/ubaryd.vim
 let g:airline_theme='ubaryd'
 
 "fix for box drawing line space

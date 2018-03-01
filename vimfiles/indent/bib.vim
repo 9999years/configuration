@@ -9,9 +9,6 @@ if exists('b:did_indent')
 endif
 let b:did_indent = 1
 
-call vimtex#util#set_default('g:vimtex_indent_bib_enabled', 1)
-if !g:vimtex_indent_bib_enabled | finish | endif
-
 let s:cpo_save = &cpo
 set cpo&vim
 
