@@ -17,13 +17,5 @@ setlocal formatoptions+=rojn
 
 setlocal comments=b:*,b:-,b:+,n:>
 
-command! Integral :normal o⌠<CR>⌡<ESC>ka <ESC>
-command! Sum :normal o⎲<CR>⎳<CR><ESC>kA <ESC>
-command! Parenl :normal mzo⎛<CR>⎜<CR>⎝<ESC><C-V>kk"gyVjj"jd`z"gP
-command! Parenr :normal mzo⎞<CR>⎟<CR>⎠<ESC><C-V>kk"gyVjj"jd`z"gP
-command! Bar :s/-/─/g | s/\([^─]\)─\([^─]\)/\1-\2/g
-command! Pipe :s/|/│/g
-
 "enter on a line with just a bullet deletes the bullet
 inoremap <expr> <CR> getline('.') =~ '^\s*\* $' ? '<C-u>' : '<CR>'
-"inoremap <expr> *<Space> getline('.') =~ '\v^\s*$' ? '<BS><BS>* ' : '* '
