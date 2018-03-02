@@ -17,7 +17,7 @@ Plugin 'VundleVim/Vundle.vim'
 "status line
 Plugin 'vim-airline/vim-airline'
 "show autocomplete menu w/o prompt
-Plugin 'vim-scripts/AutoComplPop'
+"Plugin 'vim-scripts/AutoComplPop'
 "tab-completion
 Plugin 'ervandew/supertab'
 "better % matching
@@ -32,6 +32,8 @@ Plugin '9999years/vim-titlecase'
 "snippets
 Plugin 'SirVer/ultisnips'
 Plugin 'honza/vim-snippets'
+"boilerplate insertion
+Plugin '9999years/boilerplate-ultisnips'
 
 if(has("gui_running"))
 	Plugin 'vim-airline/vim-airline-themes'
@@ -39,7 +41,6 @@ endif
 
 
 "lang-specific
-Plugin 'lervag/vimtex'
 Plugin 'rust-lang/rust.vim'
 
 call vundle#end()
@@ -195,9 +196,13 @@ set updatetime=750
 set completeopt=menu,menuone,longest
 set pumheight=10
 "let g:SuperTabDefaultCompletionType = 'context'
-let g:acp_autoselectFirstCompletion = 0
+"let g:acp_autoselectFirstCompletion = 0
 let g:SuperTabDefaultCompletionType = "<c-n>"
 let g:SuperTabContextDefaultCompletionType = "<c-n>"
+
+let g:UltiSnipsExpandTrigger="<tab>"
+let g:UltiSnipsJumpForwardTrigger="<c-b>"
+let g:UltiSnipsJumpBackwardTrigger="<c-z>"
 
 "---GUI---
 "sometimes re-sourcing the vimrc messes up the colorscheme
@@ -339,3 +344,9 @@ let g:tex_comment_nospell= 1
 
 "---NERD---
 let g:NERDAltDelims_fsharp = 1
+
+"---ULTISNIPS---
+let g:UltiSnipsUsePythonVersion = 3
+let g:UltiSnipsSnippetsDir = expand('~/.vim/bundle/ultisnippets/')
+let g:UltiSnipsEditSplit = 'horizontal'
+let g:UltiSnipsSnippetDirectories = ['UltiSnips', g:UltiSnipsSnippetsDir]
