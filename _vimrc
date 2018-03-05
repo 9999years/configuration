@@ -16,6 +16,7 @@ Plugin 'VundleVim/Vundle.vim'
 
 "status line
 Plugin 'vim-airline/vim-airline'
+Plugin 'vim-airline/vim-airline-themes'
 "show autocomplete menu w/o prompt
 "Plugin 'vim-scripts/AutoComplPop'
 "tab-completion
@@ -35,8 +36,6 @@ Plugin 'SirVer/ultisnips'
 Plugin 'honza/vim-snippets'
 "boilerplate insertion
 Plugin '9999years/boilerplate-ultisnips'
-
-Plugin 'vim-airline/vim-airline-themes'
 
 "lang-specific
 Plugin 'rust-lang/rust.vim'
@@ -77,6 +76,9 @@ set wildignore=
 
 "yeah this should be default too. wraps text
 set wrap
+
+"no 2 spaces after . in gq
+set joinspaces
 
 "don't cut off the last line when it wont fit on the screen
 set display+=lastline
@@ -201,18 +203,6 @@ let g:SuperTabContextDefaultCompletionType = "<c-n>"
 let g:UltiSnipsExpandTrigger="<tab>"
 let g:UltiSnipsJumpForwardTrigger="<c-b>"
 let g:UltiSnipsJumpBackwardTrigger="<c-z>"
-
-"---GUI---
-"sometimes re-sourcing the vimrc messes up the colorscheme
-"so just resource the gvimrc if we source the vimrc
-
-"autocmd GUIEnter * source $MYGVIMRC
-"if(has("gui_running"))
-	"if($MYGVIMRC == '')
-		"let $MYGVIMRC = fnamemodify($MYVIMRC, ':h') . '/_gvimrc'
-	"endif
-	"source $MYGVIMRC
-"endif
 
 "---MISC---
 
