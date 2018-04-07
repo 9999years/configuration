@@ -39,6 +39,9 @@ Plugin '9999years/boilerplate-ultisnips'
 
 "lang-specific
 Plugin 'rust-lang/rust.vim'
+Plugin 'cespare/vim-toml'
+Plugin 'stephenway/postcss.vim'
+"Plugin 'vim-scripts/Sass'
 
 call vundle#end()
 "figure out filetype from file
@@ -152,6 +155,9 @@ set smartcase
 "highlight all matches of a search
 set hlsearch
 
+"jump to results as we find them
+set incsearch
+
 "map \cs to clear search
 nnoremap <Leader>cs :let @/ = ""<CR>
 
@@ -207,7 +213,7 @@ let g:UltiSnipsJumpBackwardTrigger="<c-z>"
 "---MISC---
 
 "i end up using this a lot ok
-let $PROFILE="~/Documents/WindowsPowerShell/Microsoft.PowerShell_profile.ps1"
+let $PROFILE="~/Documents/PowerShell/Microsoft.PowerShell_profile.ps1"
 
 "---UNICODE---
 "i made these bindings and i am extremely proud of them
