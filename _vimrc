@@ -42,6 +42,7 @@ Plugin 'rust-lang/rust.vim'
 Plugin 'cespare/vim-toml'
 Plugin 'stephenway/postcss.vim'
 "Plugin 'vim-scripts/Sass'
+Plugin 'isobit/vim-caddyfile'
 
 call vundle#end()
 "figure out filetype from file
