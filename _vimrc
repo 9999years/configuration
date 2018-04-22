@@ -82,14 +82,12 @@ set wildignore=
 set wrap
 
 "no 2 spaces after . in gq
-set joinspaces
+set nojoinspaces
 
 "don't cut off the last line when it wont fit on the screen
 set display+=lastline
 
-set scrolloff=5
-
-"
+"make linebreaks a bit better
 let &breakat=" 	!@*-+;:,./?="
 
 "break at a character in breakat rather than last char on screen
