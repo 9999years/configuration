@@ -27,6 +27,8 @@ Plugin 'tmhedberg/matchit'
 Plugin 'scrooloose/nerdcommenter'
 "alignment
 Plugin 'godlygeek/tabular'
+" bulleted lists
+Plugin 'dkarter/bullets.vim'
 "titlecasing commands
 Plugin '9999years/vim-titlecase'
 Plugin 'tpope/vim-unimpaired'
@@ -43,6 +45,7 @@ Plugin 'cespare/vim-toml'
 Plugin 'stephenway/postcss.vim'
 "Plugin 'vim-scripts/Sass'
 Plugin 'isobit/vim-caddyfile'
+Plugin 'plasticboy/vim-markdown'
 
 call vundle#end()
 "figure out filetype from file
@@ -290,6 +293,26 @@ endfunction
 
 command! -nargs=0 UnsavedDiffOff call UnsavedDiffOff()
 command! -nargs=0 UnsavedDiff call UnsavedDiff()
+
+function! EditFtplugin(...)
+	if a:0 == 0
+		let ft = &ft
+	else
+		let ft = a:1
+	endif
+	exe "split" $VIM . "/vimfiles/ftplugin/" . ft . ".vim"
+endfunction
+command! -nargs=? -complete=filetype EditFtplugin call EditFtplugin(<f-args>)
+
+function! EditAfterFtplugin(...)
+	if a:0 == 0
+		let ft = &ft
+	else
+		let ft = a:1
+	endif
+	exe "split" $VIM . "/vimfiles/after/ftplugin/" . ft . ".vim"
+endfunction
+command! -nargs=? -complete=filetype EditAfterFtplugin call EditAfterFtplugin(<f-args>)
 
 "---AIRLINE---
 function! AirlineInit()

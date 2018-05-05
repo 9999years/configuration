@@ -27,7 +27,7 @@ if has('windows')
 		\'\%x01\|\%x0a\|\%x0a\|\%xff\|\%xfe', '', 'g'),
 		\'=.*$'), 1))
 	if dpi > 100
-		set renderoptions=
+		set renderoptions=type:directx,renmode:0
 		set guifont=PragmataPro_Mono:h11:qCLEARTYPE
 	else
 		"magic to make ligatures work
