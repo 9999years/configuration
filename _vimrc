@@ -81,13 +81,10 @@ set wildignore=
 "yeah this should be default too. wraps text
 set wrap
 
-"no 2 spaces after . in gq
-set joinspaces
-
 "don't cut off the last line when it wont fit on the screen
 set display+=lastline
 
-set scrolloff=5
+set scrolloff=0
 
 "
 let &breakat=" 	!@*-+;:,./?="
@@ -129,6 +126,8 @@ nmap <C-p> :ls<cr>:b
 "join comments, make numbered lists (!!) work
 set formatoptions+=jnroc
 set formatlistpat=^\s*\d\+[\]:.)}]\s*
+"no 2 spaces after . when gq
+set nojoinspaces
 
 "---COMMAND LINE---
 "also other stuff in the bottom few lines of the screen
@@ -253,7 +252,11 @@ command! -nargs=0 StripWhitespace call StripWhitespace()
 nnoremap <Leader>z 1z=
 inoremap <C-z> <ESC>1z=ea
 
-command! -nargs=0 NoDistractions call NoDistractions()
+
+function! HighlightNonASCII()
+	normal! /[^\x0a\x09\x20-\x7e]
+endfunction
+command! -nargs=0 HighlightNonASCII call HighlightNonASCII()
 
 function! UnsavedDiff()
 	"create mark d, copy buffer and return to mark
