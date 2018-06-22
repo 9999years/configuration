@@ -9,42 +9,42 @@ set nocompatible
 
 "---VUNDLE---
 filetype off
-set rtp+=$HOME/.vim/bundle/Vundle.vim/
-call vundle#begin()
+call plug#begin()
 
-Plugin 'VundleVim/Vundle.vim'
+Plug 'VundleVim/Vundle.vim'
 
 "status line
-Plugin 'vim-airline/vim-airline'
-Plugin 'vim-airline/vim-airline-themes'
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
 "show autocomplete menu w/o prompt
-"Plugin 'vim-scripts/AutoComplPop'
+"Plug 'vim-scripts/AutoComplPop'
 "tab-completion
-Plugin 'ervandew/supertab'
+Plug 'ervandew/supertab'
 "better % matching
-Plugin 'tmhedberg/matchit'
+Plug 'tmhedberg/matchit'
 "better comment toggling
-Plugin 'scrooloose/nerdcommenter'
+Plug 'scrooloose/nerdcommenter'
 "alignment
-Plugin 'godlygeek/tabular'
+Plug 'godlygeek/tabular'
 "titlecasing commands
-Plugin '9999years/vim-titlecase'
-Plugin 'tpope/vim-unimpaired'
+Plug '9999years/vim-titlecase'
+Plug 'tpope/vim-unimpaired'
 
 "snippets
-Plugin 'SirVer/ultisnips'
-Plugin 'honza/vim-snippets'
+Plug 'SirVer/ultisnips'
+Plug 'honza/vim-snippets'
+Plug '9999years/snips'
 "boilerplate insertion
-Plugin '9999years/boilerplate-ultisnips'
+Plug '9999years/boilerplate-ultisnips'
 
 "lang-specific
-Plugin 'rust-lang/rust.vim'
-Plugin 'cespare/vim-toml'
-Plugin 'stephenway/postcss.vim'
-"Plugin 'vim-scripts/Sass'
-Plugin 'isobit/vim-caddyfile'
+Plug 'rust-lang/rust.vim'
+Plug 'cespare/vim-toml'
+Plug 'stephenway/postcss.vim'
+"Plug 'vim-scripts/Sass'
+Plug 'isobit/vim-caddyfile'
 
-call vundle#end()
+call plug#end()
 "figure out filetype from file
 filetype indent plugin on
 
@@ -345,6 +345,5 @@ let g:NERDAltDelims_fsharp = 1
 
 "---ULTISNIPS---
 let g:UltiSnipsUsePythonVersion = 3
-let g:UltiSnipsSnippetsDir = expand('~/.vim/bundle/ultisnippets/')
 let g:UltiSnipsEditSplit = 'horizontal'
-let g:UltiSnipsSnippetDirectories = ['UltiSnips', g:UltiSnipsSnippetsDir]
+let g:UltiSnipsSnippetDirectories = ['UltiSnips', 'plugged/snips']
