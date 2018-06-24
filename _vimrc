@@ -61,6 +61,7 @@ set scrolloff=0
 let &breakat=" 	!@*-+;:,./?="
 set linebreak " break at a character in breakat rather than last char on screen
 set list      " display tabs and trailing spaces
+set listchars=tab:│\ ,trail:·,extends:…,nbsp:␣,conceal:
 set fillchars=vert:║,fold:═,diff:
 set splitright "make the diff windows make sense
 
