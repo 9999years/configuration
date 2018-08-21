@@ -20,7 +20,7 @@ Plug 'tmhedberg/matchit'        " better % matching
 Plug 'scrooloose/nerdcommenter' " better comment toggling
 Plug 'godlygeek/tabular'        " alignment
 Plug '9999years/vim-titlecase'  " titlecasing commands
-Plug 'tpope/vim-unimpaired'
+"Plug 'tpope/vim-unimpaired'
 
 Plug 'SirVer/ultisnips' " snippets!
 Plug 'honza/vim-snippets'
