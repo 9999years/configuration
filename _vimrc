@@ -273,4 +273,6 @@ let g:NERDAltDelims_fsharp = 1
 "---ULTISNIPS---
 let g:UltiSnipsUsePythonVersion = 3
 let g:UltiSnipsEditSplit = 'horizontal'
-let g:UltiSnipsSnippetDirectories = ['UltiSnips', 'plugged/snips']
+let g:UltiSnipsSnippetDirectories = [
+	\ expand('~/vimfiles/plugged/vim-snippets/UltiSnips'),
+	\ expand('~/vimfiles/plugged/snips')]
