@@ -45,3 +45,15 @@ let g:acp_behaviorFileLength = -1
 "call s:map('x', 'ap', '<plug>(vimtex-ap)')
 "call s:map('o', 'ip', '<plug>(vimtex-ip)')
 "call s:map('o', 'ap', '<plug>(vimtex-ap)')
+
+function! Acronymize(mode)
+	if a:mode ==# 'n'
+		normal viw
+	elseif a:mode ==? 'v'
+		normal gv
+	endif
+	normal gu`>a}`<i\Sc{
+endfunction
+
+vmap <Leader>sc :call Acronymize(visualmode())
+nmap <Leader>sc :call Acronymize(mode(1))

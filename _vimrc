@@ -7,47 +7,32 @@
 set encoding=utf-8
 set nocompatible
 
-"---VUNDLE---
-filetype off
-set rtp+=$HOME/.vim/bundle/Vundle.vim/
-call vundle#begin()
+"---VIM-PLUG---
+call plug#begin()
+Plug 'vim-airline/vim-airline' "status line
+Plug 'vim-airline/vim-airline-themes'
+"Plug 'vim-scripts/AutoComplPop' "show autocomplete menu w/o prompt
+Plug 'ervandew/supertab'        " tab-completion
+Plug 'tmhedberg/matchit'        " better % matching
+Plug 'scrooloose/nerdcommenter' " better comment toggling
+Plug 'godlygeek/tabular'        " alignment
+Plug '9999years/vim-titlecase'  " titlecasing commands
+"Plug 'tpope/vim-unimpaired'
 
-Plugin 'VundleVim/Vundle.vim'
+Plug 'SirVer/ultisnips' " snippets!
+Plug 'honza/vim-snippets'
+Plug '9999years/snips'
+Plug '9999years/boilerplate-ultisnips' "boilerplate insertion
 
-"status line
-Plugin 'vim-airline/vim-airline'
-Plugin 'vim-airline/vim-airline-themes'
-"show autocomplete menu w/o prompt
-"Plugin 'vim-scripts/AutoComplPop'
-"tab-completion
-Plugin 'ervandew/supertab'
-"better % matching
-Plugin 'tmhedberg/matchit'
-"better comment toggling
-Plugin 'scrooloose/nerdcommenter'
-"alignment
-Plugin 'godlygeek/tabular'
-" bulleted lists
-Plugin 'dkarter/bullets.vim'
-"titlecasing commands
-Plugin '9999years/vim-titlecase'
-Plugin 'tpope/vim-unimpaired'
+"lang-specific plugins
+Plug 'rust-lang/rust.vim'
+Plug 'cespare/vim-toml'
+Plug 'stephenway/postcss.vim'
+"Plug 'vim-scripts/Sass'
+Plug 'isobit/vim-caddyfile'
 
-"snippets
-Plugin 'SirVer/ultisnips'
-Plugin 'honza/vim-snippets'
-"boilerplate insertion
-Plugin '9999years/boilerplate-ultisnips'
+call plug#end()
 
-"lang-specific
-Plugin 'rust-lang/rust.vim'
-Plugin 'cespare/vim-toml'
-Plugin 'stephenway/postcss.vim'
-"Plugin 'vim-scripts/Sass'
-Plugin 'isobit/vim-caddyfile'
-Plugin 'plasticboy/vim-markdown'
-
-call vundle#end()
 "figure out filetype from file
 filetype indent plugin on
 
@@ -58,56 +43,28 @@ filetype indent plugin on
 "seriously what the fuck. even if im in an 80x24 terminal i want this shit.
 "christ
 set number
-
-"syntax highlighting
-syntax on
-
-"show cursor position
-set ruler
-
-"no visual bell
-set vb t_vb=
-
-"don't just abandon buffers when i switch buffers
-set hidden
-
-"make backspacing work the way it should
-set backspace=indent,eol,start
-
-"visual command line completion
-set wildmenu
-
+syntax on                      " syntax highlighting
+set ruler                      " show cursor position
+set vb t_vb=                   " no visual bell
+set hidden                     " don't just abandon buffers when i switch buffers
+set backspace=indent,eol,start " make backspacing work the way it should
+set wildmenu                   " visual command line completion
 set wildignore=
 \.svn,CVS,.git,*.o,*.a,*.class,*.mo,*.la,*.so,*.obj,*.swp,*.jpg,*.png,*.xpm,
 \*.gif,*.pdf,*.bak,*.beam,*.exe,*.sw*,*~,*fls
-
-"yeah this should be default too. wraps text
-set wrap
-
-"no 2 spaces after . in gq
-set nojoinspaces
-
-"don't cut off the last line when it wont fit on the screen
-set display+=lastline
-
-"make linebreaks a bit better
+set wrap              " yeah this should be default too. wraps text
+set display+=lastline " don't cut off the last line when it wont fit on the screen
+set scrolloff=0
 let &breakat=" 	!@*-+;:,./?="
-
-"break at a character in breakat rather than last char on screen
-set linebreak
-
-"display tabs and trailing spaces
-set list
+set linebreak " break at a character in breakat rather than last char on screen
+set list      " display tabs and trailing spaces
 set listchars=tab:│\ ,trail:·,extends:…,nbsp:␣,conceal:
 set fillchars=vert:║,fold:═,diff:
-"⋆≈❊╳⇠⍆≈⟡╬✚⟪⟫◇‼⚠⎇⚡↪↳⋱○✎‖
+set splitright "make the diff windows make sense
 
 "instead of giving a ridiculous error just ask are you sure?
 "if i :q when i meant :q!
 set confirm
-
-"make the diff windows make sense
-set splitright
 
 "make j and k operate on screen lines.
 "text selection still operates on file lines.
@@ -130,75 +87,45 @@ nmap <C-p> :ls<cr>:b
 "join comments, make numbered lists (!!) work
 set formatoptions+=jnroc
 set formatlistpat=^\s*\d\+[\]:.)}]\s*
+"no 2 spaces after . when gq
+set nojoinspaces
 
 "---COMMAND LINE---
 "also other stuff in the bottom few lines of the screen
 
-"visual command line completion
-set wildmenu
-
-"display status line
-set laststatus=2
-
-"show commands in the bottom right as i enter them
-set showcmd
-
-"2-line high command window to prevent many PRESS ENTER TO CONTINUE dialogues
-set cmdheight=2
+set wildmenu     " visual command line completion
+set laststatus=2 " display status line
+set showcmd      " show commands in the bottom right as i enter them
+set cmdheight=2  " 2-row cmd-window; avoids PRESS ENTER TO CONTINUE
 
 "---SEARCHING---
 
-"ignore case while searching
-set ignorecase
-
-"unless the search contains caps
-set smartcase
-
-"highlight all matches of a search
-set hlsearch
-
-"jump to results as we find them
-set incsearch
-
+set ignorecase " ignore case while searching
+set smartcase  " unless the search contains caps
+set hlsearch   " highlight all matches of a search
+set incsearch  " jump to results as we find them
 "map \cs to clear search
 nnoremap <Leader>cs :let @/ = ""<CR>
 
 "---INDENT---
 
-"???
-set cinoptions='(1s,M1'
-
-"tabs are 8 characters wide
-set tabstop=8
+set cinoptions='(1s,M1' " read the docs yourself lol
+set tabstop=8 "tabs are 8 characters wide
 set shiftwidth=8
-
-"keep indent when i create a new line
-set autoindent
-
-"use C-t and C-d in i-mode to round the indent to a multiple of shiftwidth
-set shiftround
-
-"preserve indent when wrapping lines
-set breakindent
-
-"show a cool arrow to indicate that's what happened
-let &showbreak="↪ "
-
-"minimum 30col text and shift it back -2 so that it isn't pushed forward by
-"the arrow
+set autoindent "keep indent when i create a new line
+set shiftround "use C-t and C-d in i-mode to round the indent to a multiple of shiftwidth
+set breakindent "preserve indent when wrapping lines
+" make wrapped lines at least 30 columns wide, and offset -2 columns to
+" account for the cool arrow on the next line
 let &breakindentopt='min:30,shift:-2'
+let &showbreak="↪ " " show a cool arrow to indicate that's what happened
 
 "---CONCISENESS---
 "keep stuff short and clean, in general
 
-"help avoid hit-enter prompts
-set shortmess=aoOsWAc
-
-"don't redraw while executing macros, etc
-set lazyredraw
-
-"let's keep it Chill howabout
-set updatetime=750
+set shortmess=aoOsWAc "help avoid hit-enter prompts
+set lazyredraw "don't redraw while executing macros, etc
+set updatetime=750 "let's keep it Chill howabout
 
 "---COMPLETIONS---
 set completeopt=menu,menuone,longest
@@ -254,7 +181,11 @@ command! -nargs=0 StripWhitespace call StripWhitespace()
 nnoremap <Leader>z 1z=
 inoremap <C-z> <ESC>1z=ea
 
-command! -nargs=0 NoDistractions call NoDistractions()
+
+function! HighlightNonASCII()
+	normal! /[^\x0a\x09\x20-\x7e]
+endfunction
+command! -nargs=0 HighlightNonASCII call HighlightNonASCII()
 
 function! UnsavedDiff()
 	"create mark d, copy buffer and return to mark
@@ -348,11 +279,6 @@ function! AirlineInit()
 endfunction
 autocmd User AirlineAfterInit call AirlineInit()
 
-"muscle memory
-"this is unreliable
-"make c-bs delete the current word
-imap <C-BS> <C-W>
-
 "autocmd BufReadPre *.tex let b:did_indent = 1
 let g:tex_flavor = 'latex'
 "no spellchecking in tex comments
@@ -363,6 +289,7 @@ let g:NERDAltDelims_fsharp = 1
 
 "---ULTISNIPS---
 let g:UltiSnipsUsePythonVersion = 3
-let g:UltiSnipsSnippetsDir = expand('~/.vim/bundle/ultisnippets/')
 let g:UltiSnipsEditSplit = 'horizontal'
-let g:UltiSnipsSnippetDirectories = ['UltiSnips', g:UltiSnipsSnippetsDir]
+let g:UltiSnipsSnippetDirectories = [
+	\ expand('~/vimfiles/plugged/vim-snippets/UltiSnips'),
+	\ expand('~/vimfiles/plugged/snips')]
