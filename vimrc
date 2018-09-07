@@ -11,6 +11,7 @@ set nocompatible
 call plug#begin()
 Plug 'vim-airline/vim-airline' "status line
 Plug 'vim-airline/vim-airline-themes'
+Plug 'tpope/vim-repeat'
 "Plug 'vim-scripts/AutoComplPop' "show autocomplete menu w/o prompt
 Plug 'ervandew/supertab'        " tab-completion
 Plug 'tmhedberg/matchit'        " better % matching
@@ -231,7 +232,7 @@ function! EditFtplugin(...)
 	else
 		let ft = a:1
 	endif
-	exe "split" $VIM . "/vimfiles/ftplugin/" . ft . ".vim"
+	exe "split ~/vimfiles/ftplugin/" . ft . ".vim"
 endfunction
 command! -nargs=? -complete=filetype EditFtplugin call EditFtplugin(<f-args>)
 
@@ -241,7 +242,7 @@ function! EditAfterFtplugin(...)
 	else
 		let ft = a:1
 	endif
-	exe "split" $VIM . "/vimfiles/after/ftplugin/" . ft . ".vim"
+	exe "split ~/vimfiles/after/ftplugin/" . ft . ".vim"
 endfunction
 command! -nargs=? -complete=filetype EditAfterFtplugin call EditAfterFtplugin(<f-args>)
 
@@ -291,5 +292,5 @@ let g:NERDAltDelims_fsharp = 1
 let g:UltiSnipsUsePythonVersion = 3
 let g:UltiSnipsEditSplit = 'horizontal'
 let g:UltiSnipsSnippetDirectories = [
-	\ expand('~/vimfiles/plugged/vim-snippets/UltiSnips'),
-	\ expand('~/vimfiles/plugged/snips')]
+	\ expand('~/vimfiles/plugged/snips'),
+	\ expand('~/vimfiles/plugged/vim-snippets/UltiSnips')]

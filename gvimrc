@@ -1,4 +1,5 @@
 set guifont=PragmataPro_Mono:h12:qANTIALIASED
+"ligatures: -> == =? // <> [ERROR]
 set guioptions-=m "remove menu bar
 set guioptions-=T "remove toolbar
 set guioptions+=cr "console dialogs instead of popup dialogs

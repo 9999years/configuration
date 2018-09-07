@@ -9,9 +9,21 @@ let g:tex_comment_nospell= 1
 setlocal textwidth=76
 setlocal formatoptions+=t
 
+function! s:Mathize(mode)
+	if a:mode =~ '[vV]'
+		exe "normal \<ESC>`>a$\<ESC>`<i$\<ESC>"
+	elseif a:mode =~ 'n'
+		exe "normal a$\<ESC>hi$\<ESC>l"
+	endif
+	silent! call repeat#set("\<Plug>Mathize", v:count)
+endfunction
+
 "vim probably has a better way to do this
 "wrap selection with $
-vnoremap <buffer> <leader>$ <ESC>`>a$<ESC>`<i$<ESC>
+noremap <buffer> <Plug>Mathize :<C-U>call <SID>Mathize('n')<CR>
+vnoremap <buffer> <Plug>Mathize :<C-U>call <SID>Mathize('v')<CR>
+nmap <buffer> <leader>$ <Plug>Mathize
+vmap <buffer> <leader>$ <Plug>Mathize
 vnoremap <buffer> <leader>' <ESC>`>a'<ESC>`<i`<ESC>
 
 "how did this even get fucked up
