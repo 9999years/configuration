@@ -169,19 +169,18 @@ endfunction
 autocmd BufNewFile,BufRead,BufAdd,BufCreate,BufNew * silent! call NormalizeCurrentFile()
 
 "get rid of whitespace at line ends
-function! StripWhitespace()
+function! StripWhitespace(start, end)
 	normal mx
-	%s/\s*$//g
+	exe a:start . "," . a:end . " s/\s*$//g"
 	noh
 	normal `x
 endfunction
 
-command! -nargs=0 StripWhitespace call StripWhitespace()
+command! -range=% -nargs=0 StripWhitespace call StripWhitespace(<line1>, <line2>)
 
 "\z and c-z insert best guess for spell checking
 nnoremap <Leader>z 1z=
 inoremap <C-z> <ESC>1z=ea
-
 
 function! HighlightNonASCII()
 	normal! /[^\x0a\x09\x20-\x7e]
@@ -245,6 +244,16 @@ function! EditAfterFtplugin(...)
 	exe "split ~/vimfiles/after/ftplugin/" . ft . ".vim"
 endfunction
 command! -nargs=? -complete=filetype EditAfterFtplugin call EditAfterFtplugin(<f-args>)
+
+function! EditUltiSnips(...)
+	if a:0 == 0
+		let ft = &ft
+	else
+		let ft = a:1
+	endif
+	exe "sp ~/vimfiles/plugged/vim-snippets/UltiSnips/" . ft . ".snippets"
+endfunction
+command! -nargs=? -complete=filetype EditUltiSnips call EditUltiSnips(<f-args>)
 
 "---AIRLINE---
 function! AirlineInit()
