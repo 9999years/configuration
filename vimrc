@@ -171,7 +171,8 @@ autocmd BufNewFile,BufRead,BufAdd,BufCreate,BufNew * silent! call NormalizeCurre
 "get rid of whitespace at line ends
 function! StripWhitespace(start, end)
 	normal mx
-	exe a:start . "," . a:end . " s/\s*$//g"
+	exe a:start . "," . a:end . " s/\\s\\+$//n"
+	exe a:start . "," . a:end . " s/\\s\\+$//eg"
 	noh
 	normal `x
 endfunction
