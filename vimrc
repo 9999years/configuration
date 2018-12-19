@@ -256,6 +256,38 @@ function! EditUltiSnips(...)
 endfunction
 command! -nargs=? -complete=filetype EditUltiSnips call EditUltiSnips(<f-args>)
 
+function! CJKDefine(...)
+	if a:0 == 0
+		let b:cjk_char = matchstr(getline('.'), '\%' . col('.') . 'c.')
+	else
+		let b:cjk_char = a:1
+	endif
+	python3 << EOF
+# unbelievable bullshit
+setattr(sys, '__stdout__', sys.stdout)
+from cihai.core import Cihai
+from cihai.bootstrap import bootstrap_unihan
+
+c = Cihai()
+if not c.is_bootstrapped:
+    bootstrap_unihan(c.metadata)
+    c.reflect_db()
+
+char = vim.current.buffer.vars['cjk_char'].decode('utf-8')
+query = c.lookup_char(char)
+glyph = query.first()
+if glyph:
+	print('{} ({}): {}'.format(
+		char,
+		glyph.kMandarin,
+		glyph.kDefinition))
+else:
+	print('(No definition found)')
+EOF
+endfunction
+command! -nargs=? CJKDefine call CJKDefine(<f-args>)
+nmap <Leader>d :CJKDefine<CR>
+
 "---AIRLINE---
 function! AirlineInit()
 	let g:airline#extensions#bufferline#enabled=0
