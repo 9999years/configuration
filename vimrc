@@ -52,7 +52,7 @@ set backspace=indent,eol,start " make backspacing work the way it should
 set wildmenu                   " visual command line completion
 set wildignore=
 \.svn,CVS,.git,*.o,*.a,*.class,*.mo,*.la,*.so,*.obj,*.swp,*.jpg,*.png,*.xpm,
-\*.gif,*.pdf,*.bak,*.beam,*.exe,*.sw*,*~,*fls
+\*.gif,*.pdf,*.bak,*.beam,*.exe,*.sw*,*~,*fls,*.hi
 set wrap              " yeah this should be default too. wraps text
 set display+=lastline " don't cut off the last line when it wont fit on the screen
 set scrolloff=0
