@@ -322,6 +322,7 @@ function! AirlineInit()
 endfunction
 autocmd User AirlineAfterInit call AirlineInit()
 
+autocmd BufRead *.cls set filetype=tex
 "autocmd BufReadPre *.tex let b:did_indent = 1
 let g:tex_flavor = 'latex'
 "no spellchecking in tex comments

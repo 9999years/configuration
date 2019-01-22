@@ -67,5 +67,5 @@ function! Acronymize(mode)
 	normal gu`>a}`<i\Sc{
 endfunction
 
-vmap <Leader>sc :call Acronymize(visualmode())
-nmap <Leader>sc :call Acronymize(mode(1))
+vmap <Leader>sc :<C-U>call Acronymize(visualmode())<CR>
+nmap <Leader>sc :<C-U>call Acronymize(mode(1))<CR>
