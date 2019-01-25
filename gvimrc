@@ -9,9 +9,7 @@ set lines=48 columns=85
 hi NonText gui=NONE
 
 "i should probably change this at some point
-colorscheme UBARYD
-
-let g:airline_theme='ubaryd'
+colorscheme ubaryd
 
 "fix for box drawing line space
 set linespace=0

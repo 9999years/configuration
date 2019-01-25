@@ -9,8 +9,8 @@ set nocompatible
 
 "---VIM-PLUG---
 call plug#begin()
-Plug 'vim-airline/vim-airline' "status line
 Plug 'vim-airline/vim-airline-themes'
+Plug 'vim-airline/vim-airline' "status line
 Plug 'tpope/vim-repeat'
 "Plug 'vim-scripts/AutoComplPop' "show autocomplete menu w/o prompt
 Plug 'ervandew/supertab'        " tab-completion
@@ -32,6 +32,8 @@ Plug 'stephenway/postcss.vim'
 "Plug 'vim-scripts/Sass'
 Plug 'isobit/vim-caddyfile'
 
+" color scheme
+Plug 'Donearm/Ubaryd'
 call plug#end()
 
 "figure out filetype from file
@@ -289,6 +291,7 @@ command! -nargs=? CJKDefine call CJKDefine(<f-args>)
 nmap <Leader>d :CJKDefine<CR>
 
 "---AIRLINE---
+let g:airline_theme='ubaryd'
 function! AirlineInit()
 	let g:airline#extensions#bufferline#enabled=0
 	let g:airline#extensions#syntastic#enabled=0
