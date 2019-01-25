@@ -291,7 +291,7 @@ command! -nargs=? CJKDefine call CJKDefine(<f-args>)
 nmap <Leader>d :CJKDefine<CR>
 
 "---AIRLINE---
-let g:airline_theme='ubaryd'
+let g:airline_theme='zenburn'
 function! AirlineInit()
 	let g:airline#extensions#bufferline#enabled=0
 	let g:airline#extensions#syntastic#enabled=0
