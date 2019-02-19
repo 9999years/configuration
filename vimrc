@@ -26,11 +26,12 @@ Plug '9999years/snips'
 Plug '9999years/boilerplate-ultisnips' "boilerplate insertion
 
 "lang-specific plugins
-Plug 'rust-lang/rust.vim'
-Plug 'cespare/vim-toml'
-Plug 'stephenway/postcss.vim'
+Plug 'rust-lang/rust.vim', { 'for': 'rust' }
+Plug 'cespare/vim-toml', { 'for': 'toml' }
+Plug 'stephenway/postcss.vim', { 'for': ['sass', 'scss'] }
 "Plug 'vim-scripts/Sass'
-Plug 'isobit/vim-caddyfile'
+Plug 'isobit/vim-caddyfile', { 'for': 'Caddyfile' }
+Plug 'idris-hackers/idris-vim', { 'for': 'idris' }
 
 " color scheme
 Plug 'Donearm/Ubaryd'
