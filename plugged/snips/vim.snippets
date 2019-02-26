@@ -1,6 +1,12 @@
 snippet guard "if g:var exists then exit" b
-if exists('g:did_$1_plugin') | finish | endif
-let g:did_$1_plugin = 1
+if exists('b:did_custom_$1_ftplugin') | finish | endif
+let b:did_custom_$1_ftplugin = 1
 
 $0
+endsnippet
+
+snippet _skel "boilerplate" b
+if exists('b:did_custom_`!p snip.rv = snip.basename`_ftplugin') | finish | endif
+let b:did_custom_`!p snip.rv = snip.basename`_ftplugin = 1
+
 endsnippet

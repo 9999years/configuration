@@ -56,3 +56,15 @@ snippet ktf "keyval boolean" b
 \newif\if$1@$2
 \define@key{${1:keyset}}{${2:keyname}}[true]{\\$1@$2true}
 endsnippet
+
+snippet al "alignat"
+\begin{alignat}{${1:1}}
+	$0
+\end{alignat}
+endsnippet
+
+snippet al* "alignat*"
+\begin{alignat*}{${1:1}}
+	$0
+\end{alignat*}
+endsnippet
