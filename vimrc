@@ -7,6 +7,14 @@
 set encoding=utf-8
 set nocompatible
 
+function! BuildCommandT(info)
+	if a:info.status != 'unchanged' || a:info.force
+		cd ./ruby/command-t/ext/command-t
+		!ruby ./extconf.rb
+		!make
+	endif
+endfunction
+
 "---VIM-PLUG---
 call plug#begin()
 Plug 'vim-airline/vim-airline-themes'
@@ -19,18 +27,18 @@ Plug 'scrooloose/nerdcommenter' " better comment toggling
 Plug 'godlygeek/tabular'        " alignment
 Plug '9999years/vim-titlecase'  " titlecasing commands
 "Plug 'tpope/vim-unimpaired'
+Plug 'wincent/command-t', { 'do': function('BuildCommandT') } " file finder
 
 Plug 'SirVer/ultisnips' " snippets!
 Plug 'honza/vim-snippets'
-Plug '9999years/snips'
 Plug '9999years/boilerplate-ultisnips' "boilerplate insertion
 
 "lang-specific plugins
-Plug 'rust-lang/rust.vim', { 'for': 'rust' }
-Plug 'cespare/vim-toml', { 'for': 'toml' }
+Plug 'rust-lang/rust.vim',     { 'for': 'rust' }
+Plug 'cespare/vim-toml',       { 'for': 'toml' }
 Plug 'stephenway/postcss.vim', { 'for': ['sass', 'scss'] }
 "Plug 'vim-scripts/Sass'
-Plug 'isobit/vim-caddyfile', { 'for': 'Caddyfile' }
+Plug 'isobit/vim-caddyfile',    { 'for': 'Caddyfile' }
 Plug 'idris-hackers/idris-vim', { 'for': 'idris' }
 
 " color scheme
