@@ -1,0 +1,6 @@
+snippet guard "if g:var exists then exit" b
+if exists('g:did_$1_plugin') | finish | endif
+let g:did_$1_plugin = 1
+
+$0
+endsnippet

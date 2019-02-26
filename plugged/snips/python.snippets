@@ -1,0 +1,21 @@
+snippet _skel "boilerplate" b
+def main():
+	pass
+
+if __name__ == '__main__':
+	main()
+endsnippet
+
+snippet posarg "positional argparse argument" b
+parser.add_argument('${1}'`!p snip.rv = ", nargs=" if t[2] else ""`${2:'+'}`!p snip.rv = ", type=" if t[3] else ""`${3:int}`!p snip.rv = ", help='" if t[4] else ""`${4}`!p snip.rv = "'" if t[4] else ""`)
+endsnippet
+
+snippet arg "argparse argument" b
+parser.add_argument('-`!p snip.rv = t[1][0] if len(t[1]) > 0 else '' `', '--${1}'`!p snip.rv = ", nargs=" if t[2] else ""`${2:'+'}`!p snip.rv = ", type=" if t[3] else ""`${3:int}`!p snip.rv = ", help='" if t[4] else ""`${4:doc}`!p snip.rv = "'" if t[4] else ""`)
+endsnippet
+
+snippet argparse "argparse boilerplate" b
+parser = argparse.ArgumentParser(`!p snip.rv = "description='" if t[1] else ""`${1:usage}`!p snip.rv = "'" if t[1] else ""`)
+$0
+args = parser.parse_args()
+endsnippet

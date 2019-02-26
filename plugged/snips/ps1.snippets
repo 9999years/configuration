@@ -1,0 +1,22 @@
+snippet cmdlet "Cmdlet boilerplate" b
+<#
+.SYNOPSIS
+#>
+function $1 {
+	[CmdletBinding()]
+	Param (
+		[Parameter(ValueFromPipeline=$True)]
+		[String]\$${2:FileName}
+	)
+
+	Process {
+		$0
+	}
+}
+endsnippet
+
+snippet cmdletbinding "[CmdletBinding()] boilerplate" b
+[CmdletBinding()]
+Param (`!p snip.rv = "\n\t[Parameter(ValueFromPipeline=$True)]\n\t[String]$" if t[2] else ""`${2:FileName}
+)
+endsnippet

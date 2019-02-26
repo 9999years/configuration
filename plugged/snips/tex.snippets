@@ -1,0 +1,58 @@
+snippet _skel "Skeleton" b
+\documentclass{article}
+\begin{document}
+$0
+\end{document}
+endsnippet
+
+snippet multicol "multiple columns"
+\multicolumn{${1:1}}{${2:c}}{$0}
+endsnippet
+
+snippet pac "package" b
+\usepackage`!p snip.rv = "[" if t[2] else ""`${2}`!p snip.rv = "]" if t[2] else ""`{$1}$0
+endsnippet
+
+snippet b "begin..end environment"
+\begin{$1}
+$0
+\end{$1}
+endsnippet
+
+snippet cmd "\newcommand" b
+\newcommand{\\$1}`!p snip.rv = "[" if t[2] else ""`${2:1}`!p snip.rv = "]" if t[2] else ""`{$0}
+endsnippet
+
+snippet lst "lstlisting" b
+\begin{lstlisting}`!p snip.rv = "[language=" if t[1] else ""`${1:java}`!p snip.rv = "]" if t[1] else ""`
+$0
+\end{lstlisting}
+endsnippet
+
+snippet env "\newenvironment" b
+\newenvironment{$1}
+	{$2}
+	{$3}
+endsnippet
+
+snippet pb "pagebreak" b
+\pagebreak
+endsnippet
+
+snippet keyval "new keyval command" b
+\usepackage{keyval}
+
+\newcommand{\\$1}[1]
+	{\setkeys{$1}{#1}
+	}
+endsnippet
+
+snippet k "keyval key" b
+`!p snip.rv = "\\newcommand{\\%s@%s}{" % (t[1], t[2]) if t[3] else ""`${3:default}`!p snip.rv = "}\n" if t[3] else ""`\define@key{${1:keyset}}{${2:keyname}}{\\`!p snip.rv = "re" if t[3] else ""`newcommand{\\$1@$2}{#1}}
+$0
+endsnippet
+
+snippet ktf "keyval boolean" b
+\newif\if$1@$2
+\define@key{${1:keyset}}{${2:keyname}}[true]{\\$1@$2true}
+endsnippet
