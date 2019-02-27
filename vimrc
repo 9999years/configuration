@@ -7,15 +7,6 @@
 set encoding=utf-8
 set nocompatible
 
-function! BuildCommandT(info)
-	if a:info.status != 'unchanged' || a:info.force
-		cd ./ruby/command-t/ext/command-t
-		!ruby ./extconf.rb
-		!patch --input=Makefile.patch Makefile
-		!make
-	endif
-endfunction
-
 "---VIM-PLUG---
 call plug#begin()
 Plug 'vim-airline/vim-airline-themes'
@@ -28,17 +19,16 @@ Plug 'scrooloose/nerdcommenter' " better comment toggling
 Plug 'godlygeek/tabular'        " alignment
 Plug '9999years/vim-titlecase'  " titlecasing commands
 "Plug 'tpope/vim-unimpaired'
-Plug 'wincent/command-t', { 'do': function('BuildCommandT') } " file finder
+Plug 'wincent/command-t', { 'do': 'powershell ./make.ps1' } " fuzzy file finder
 
 Plug 'SirVer/ultisnips' " snippets!
-Plug 'honza/vim-snippets'
+Plug 'honza/vim-snippets' " a bunch of predefined snippets
 Plug '9999years/boilerplate-ultisnips' "boilerplate insertion
 
 "lang-specific plugins
-Plug 'rust-lang/rust.vim',     { 'for': 'rust' }
-Plug 'cespare/vim-toml',       { 'for': 'toml' }
-Plug 'stephenway/postcss.vim', { 'for': ['sass', 'scss'] }
-"Plug 'vim-scripts/Sass'
+Plug 'rust-lang/rust.vim',      { 'for': 'rust' }
+Plug 'cespare/vim-toml',        { 'for': 'toml' }
+Plug 'stephenway/postcss.vim',  { 'for': ['sass', 'scss'] }
 Plug 'isobit/vim-caddyfile',    { 'for': 'Caddyfile' }
 Plug 'idris-hackers/idris-vim', { 'for': 'idris' }
 
@@ -92,10 +82,6 @@ nnoremap gk k
 "why is this unreliable? shouldn't vim just intercept the keystrokes?
 "make c-bs delete the current word
 imap <C-BS> <C-W>
-
-"dirty hack for a quick buffer list/switch
-"sorry Ctrl-P users
-nmap <C-p> :ls<cr>:b
 
 "join comments, make numbered lists (!!) work
 set formatoptions+=jnroc
@@ -350,3 +336,6 @@ let g:UltiSnipsEditSplit = 'horizontal'
 let g:UltiSnipsSnippetDirectories = [
 	\ expand('~/vimfiles/plugged/snips'),
 	\ expand('~/vimfiles/plugged/vim-snippets/UltiSnips')]
+
+"---COMMAND-T---
+nmap <C-p> :CommandTBuffer<cr>
