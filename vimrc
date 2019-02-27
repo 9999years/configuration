@@ -11,6 +11,7 @@ function! BuildCommandT(info)
 	if a:info.status != 'unchanged' || a:info.force
 		cd ./ruby/command-t/ext/command-t
 		!ruby ./extconf.rb
+		!patch --input=Makefile.patch Makefile
 		!make
 	endif
 endfunction
