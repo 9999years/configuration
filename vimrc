@@ -9,6 +9,7 @@ set nocompatible
 
 "---VIM-PLUG---
 call plug#begin()
+Plug 'junegunn/vim-plug'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'vim-airline/vim-airline' "status line
 Plug 'tpope/vim-repeat'
@@ -34,6 +35,7 @@ Plug 'idris-hackers/idris-vim', { 'for': 'idris' }
 
 " color scheme
 Plug 'Donearm/Ubaryd'
+Plug 'flazz/vim-colorschemes'
 call plug#end()
 
 "figure out filetype from file
@@ -287,8 +289,9 @@ command! -nargs=? CJKDefine call CJKDefine(<f-args>)
 nmap <Leader>d :CJKDefine<CR>
 
 "---AIRLINE---
-let g:airline_theme='zenburn'
+colorscheme molokai
 function! AirlineInit()
+	AirlineTheme molokai
 	let g:airline#extensions#bufferline#enabled=0
 	let g:airline#extensions#syntastic#enabled=0
 	let g:airline#extensions#whitespace#enabled=0

@@ -8,9 +8,6 @@ set lines=48 columns=85
 "gghhghgh
 hi NonText gui=NONE
 
-"i should probably change this at some point
-colorscheme ubaryd
-
 "fix for box drawing line space
 set linespace=0
 
