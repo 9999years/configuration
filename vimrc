@@ -7,6 +7,26 @@
 set encoding=utf-8
 set nocompatible
 
+if has('win32')
+	let VIMFILES="~/vimfiles"
+else
+	let VIMFILES="~/.vim"
+endif
+
+function! BuildCommandT(info)
+	" info is a dictionary with 3 fields
+	" - name:   name of the plugin
+	" - status: 'installed', 'updated', or 'unchanged'
+	" - force:  set on PlugInstall! or PlugUpdate!
+	if a:info.status != 'unchanged' || a:info.force
+		if has('win32')
+			!powershell ./make.ps1
+		else
+			!./make.sh
+		endif
+	endif
+endfunction
+
 "---VIM-PLUG---
 call plug#begin()
 Plug 'junegunn/vim-plug'
@@ -20,35 +40,37 @@ Plug 'scrooloose/nerdcommenter' " better comment toggling
 Plug 'godlygeek/tabular'        " alignment
 Plug '9999years/vim-titlecase'  " titlecasing commands
 "Plug 'tpope/vim-unimpaired'
-Plug 'wincent/command-t', { 'do': 'powershell ./make.ps1' } " fuzzy file finder
+Plug 'wincent/command-t', { 'do': function('BuildCommandT') } " fuzzy file finder
 
 Plug 'SirVer/ultisnips' " snippets!
 Plug 'honza/vim-snippets' " a bunch of predefined snippets
 Plug '9999years/boilerplate-ultisnips' "boilerplate insertion
 
 "lang-specific plugins
-Plug 'rust-lang/rust.vim',      { 'for': 'rust' }
-Plug 'cespare/vim-toml',        { 'for': 'toml' }
-Plug 'stephenway/postcss.vim',  { 'for': ['sass', 'scss'] }
-Plug 'isobit/vim-caddyfile',    { 'for': 'Caddyfile' }
-Plug 'idris-hackers/idris-vim', { 'for': 'idris' }
+Plug 'rust-lang/rust.vim', { 'for': 'rust' }
+Plug 'cespare/vim-toml'
+Plug 'stephenway/postcss.vim'
+Plug 'isobit/vim-caddyfile'
+Plug 'dag/vim-fish'
+Plug 'idris-hackers/idris-vim'
+Plug 'gabrielelana/vim-markdown'
 
 " color scheme
 Plug 'Donearm/Ubaryd'
 Plug 'flazz/vim-colorschemes'
 call plug#end()
 
-"figure out filetype from file
-filetype indent plugin on
+colorscheme ubaryd
 
 "---MISC---
 "mostly things that should probably be default in the first place
 
+filetype indent plugin on      "figure out filetype from file
+syntax on                      " syntax highlighting
 "show line numbers jesus christ why isn't this on by default
 "seriously what the fuck. even if im in an 80x24 terminal i want this shit.
 "christ
 set number
-syntax on                      " syntax highlighting
 set ruler                      " show cursor position
 set vb t_vb=                   " no visual bell
 set hidden                     " don't just abandon buffers when i switch buffers
@@ -232,7 +254,7 @@ function! EditFtplugin(...)
 	else
 		let ft = a:1
 	endif
-	exe "split ~/vimfiles/ftplugin/" . ft . ".vim"
+	exe "split " . VIMFILES . "/ftplugin/" . ft . ".vim"
 endfunction
 command! -nargs=? -complete=filetype EditFtplugin call EditFtplugin(<f-args>)
 
@@ -242,7 +264,7 @@ function! EditAfterFtplugin(...)
 	else
 		let ft = a:1
 	endif
-	exe "split ~/vimfiles/after/ftplugin/" . ft . ".vim"
+	exe "split " . VIMFILES . "/after/ftplugin/" . ft . ".vim"
 endfunction
 command! -nargs=? -complete=filetype EditAfterFtplugin call EditAfterFtplugin(<f-args>)
 
@@ -252,7 +274,7 @@ function! EditUltiSnips(...)
 	else
 		let ft = a:1
 	endif
-	exe "sp ~/vimfiles/plugged/vim-snippets/UltiSnips/" . ft . ".snippets"
+	exe "sp " . VIMFILES . "/plugged/vim-snippets/UltiSnips/" . ft . ".snippets"
 endfunction
 command! -nargs=? -complete=filetype EditUltiSnips call EditUltiSnips(<f-args>)
 
@@ -337,8 +359,8 @@ let g:NERDAltDelims_fsharp = 1
 let g:UltiSnipsUsePythonVersion = 3
 let g:UltiSnipsEditSplit = 'horizontal'
 let g:UltiSnipsSnippetDirectories = [
-	\ expand('~/vimfiles/plugged/snips'),
-	\ expand('~/vimfiles/plugged/vim-snippets/UltiSnips')]
+	\ expand(VIMFILES . '/plugged/snips'),
+	\ expand(VIMFILES . '/plugged/vim-snippets/UltiSnips')]
 
 "---COMMAND-T---
 nmap <C-p> :CommandTBuffer<cr>
