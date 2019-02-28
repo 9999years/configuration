@@ -7,6 +7,12 @@
 set encoding=utf-8
 set nocompatible
 
+if has('win32')
+	let VIMFILES="~/vimfiles"
+else
+	let VIMFILES="~/.vim"
+endif
+
 "---VIM-PLUG---
 call plug#begin()
 Plug 'vim-airline/vim-airline-themes'
@@ -25,16 +31,18 @@ Plug 'honza/vim-snippets'
 Plug '9999years/snips'
 Plug '9999years/boilerplate-ultisnips' "boilerplate insertion
 
-"lang-specific plugins
-Plug 'rust-lang/rust.vim'
-Plug 'cespare/vim-toml'
-Plug 'stephenway/postcss.vim'
-"Plug 'vim-scripts/Sass'
-Plug 'isobit/vim-caddyfile'
+"lang-specific plugins -> 
+Plug 'rust-lang/rust.vim', { 'for': 'rust' }
+Plug 'cespare/vim-toml', { 'for': 'toml' }
+Plug 'stephenway/postcss.vim', { 'for': ['scss', 'sass'] }
+Plug 'isobit/vim-caddyfile', { 'for': 'Caddyfile' }
+Plug 'dag/vim-fish', { 'for': 'fish' }
 
 " color scheme
 Plug 'Donearm/Ubaryd'
 call plug#end()
+
+colorscheme ubaryd
 
 "figure out filetype from file
 filetype indent plugin on
@@ -234,7 +242,7 @@ function! EditFtplugin(...)
 	else
 		let ft = a:1
 	endif
-	exe "split ~/vimfiles/ftplugin/" . ft . ".vim"
+	exe "split " . VIMFILES . "/ftplugin/" . ft . ".vim"
 endfunction
 command! -nargs=? -complete=filetype EditFtplugin call EditFtplugin(<f-args>)
 
@@ -244,7 +252,7 @@ function! EditAfterFtplugin(...)
 	else
 		let ft = a:1
 	endif
-	exe "split ~/vimfiles/after/ftplugin/" . ft . ".vim"
+	exe "split " . VIMFILES . "/after/ftplugin/" . ft . ".vim"
 endfunction
 command! -nargs=? -complete=filetype EditAfterFtplugin call EditAfterFtplugin(<f-args>)
 
@@ -254,7 +262,7 @@ function! EditUltiSnips(...)
 	else
 		let ft = a:1
 	endif
-	exe "sp ~/vimfiles/plugged/vim-snippets/UltiSnips/" . ft . ".snippets"
+	exe "sp " . VIMFILES . "/plugged/vim-snippets/UltiSnips/" . ft . ".snippets"
 endfunction
 command! -nargs=? -complete=filetype EditUltiSnips call EditUltiSnips(<f-args>)
 
@@ -338,5 +346,5 @@ let g:NERDAltDelims_fsharp = 1
 let g:UltiSnipsUsePythonVersion = 3
 let g:UltiSnipsEditSplit = 'horizontal'
 let g:UltiSnipsSnippetDirectories = [
-	\ expand('~/vimfiles/plugged/snips'),
-	\ expand('~/vimfiles/plugged/vim-snippets/UltiSnips')]
+	\ expand(VIMFILES . '/plugged/snips'),
+	\ expand(VIMFILES . '/plugged/vim-snippets/UltiSnips')]

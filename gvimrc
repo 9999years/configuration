@@ -1,4 +1,8 @@
-set guifont=PragmataPro_Mono:h12:qANTIALIASED
+if has('x11')
+	set guifont=PragmataPro\ Mono\ Liga\ 12
+else
+	set guifont=PragmataPro_Mono:h12:qANTIALIASED
+endif
 "ligatures: -> == =? // <> [ERROR]
 set guioptions-=m "remove menu bar
 set guioptions-=T "remove toolbar
@@ -8,13 +12,10 @@ set lines=48 columns=85
 "gghhghgh
 hi NonText gui=NONE
 
-"i should probably change this at some point
-colorscheme ubaryd
-
 "fix for box drawing line space
 set linespace=0
 
-if has('windows')
+if has('win32')
 	"get dpi, strip out utf-16 chars and new lines
 	"system() converts 0x00 to 0x01 for 'platform independence'
 	"should return something like 'PixelsPerXLogicalInch=192'
