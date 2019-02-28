@@ -8,6 +8,7 @@ let g:tex_comment_nospell= 1
 
 setlocal textwidth=76
 setlocal formatoptions+=t
+setlocal isident+=64
 
 function! s:Mathize(mode)
 	if a:mode =~ '[vV]'

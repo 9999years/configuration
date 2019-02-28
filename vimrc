@@ -25,18 +25,19 @@ Plug 'scrooloose/nerdcommenter' " better comment toggling
 Plug 'godlygeek/tabular'        " alignment
 Plug '9999years/vim-titlecase'  " titlecasing commands
 "Plug 'tpope/vim-unimpaired'
+Plug 'wincent/command-t', { 'do': 'powershell ./make.ps1' } " fuzzy file finder
 
 Plug 'SirVer/ultisnips' " snippets!
-Plug 'honza/vim-snippets'
-Plug '9999years/snips'
+Plug 'honza/vim-snippets' " a bunch of predefined snippets
 Plug '9999years/boilerplate-ultisnips' "boilerplate insertion
 
-"lang-specific plugins -> 
+"lang-specific plugins
 Plug 'rust-lang/rust.vim', { 'for': 'rust' }
 Plug 'cespare/vim-toml', { 'for': 'toml' }
 Plug 'stephenway/postcss.vim', { 'for': ['scss', 'sass'] }
 Plug 'isobit/vim-caddyfile', { 'for': 'Caddyfile' }
 Plug 'dag/vim-fish', { 'for': 'fish' }
+Plug 'idris-hackers/idris-vim', { 'for': 'idris' }
 
 " color scheme
 Plug 'Donearm/Ubaryd'
@@ -90,10 +91,6 @@ nnoremap gk k
 "why is this unreliable? shouldn't vim just intercept the keystrokes?
 "make c-bs delete the current word
 imap <C-BS> <C-W>
-
-"dirty hack for a quick buffer list/switch
-"sorry Ctrl-P users
-nmap <C-p> :ls<cr>:b
 
 "join comments, make numbered lists (!!) work
 set formatoptions+=jnroc
@@ -348,3 +345,6 @@ let g:UltiSnipsEditSplit = 'horizontal'
 let g:UltiSnipsSnippetDirectories = [
 	\ expand(VIMFILES . '/plugged/snips'),
 	\ expand(VIMFILES . '/plugged/vim-snippets/UltiSnips')]
+
+"---COMMAND-T---
+nmap <C-p> :CommandTBuffer<cr>
