@@ -52,6 +52,7 @@ Plug 'stephenway/postcss.vim'
 Plug 'isobit/vim-caddyfile'
 Plug 'dag/vim-fish'
 Plug 'idris-hackers/idris-vim'
+Plug 'gabrielelana/vim-markdown'
 
 " color scheme
 Plug 'Donearm/Ubaryd'
