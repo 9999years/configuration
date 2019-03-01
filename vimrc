@@ -41,6 +41,8 @@ Plug 'godlygeek/tabular'        " alignment
 Plug '9999years/vim-titlecase'  " titlecasing commands
 "Plug 'tpope/vim-unimpaired'
 Plug 'wincent/command-t', { 'do': function('BuildCommandT') } " fuzzy file finder
+Plug 'tpope/vim-fugitive' " git wrapper
+"Plug 'christoomey/vim-conflicted' " git merges
 
 Plug 'SirVer/ultisnips' " snippets!
 Plug 'honza/vim-snippets' " a bunch of predefined snippets
@@ -130,6 +132,11 @@ set incsearch  " jump to results as we find them
 "map \cs to clear search
 nnoremap <Leader>cs :let @/ = ""<CR>
 
+"---SWAP FILES---
+if has('win32')
+	let &directory = expand('~/.swp') . &directory
+end
+
 "---INDENT---
 
 set cinoptions='(1s,M1' " read the docs yourself lol
@@ -142,6 +149,9 @@ set breakindent "preserve indent when wrapping lines
 " account for the cool arrow on the next line
 let &breakindentopt='min:30,shift:-2'
 let &showbreak="↪ " " show a cool arrow to indicate that's what happened
+
+"---DIFFS---
+set diffopt=internal,filler,iwhiteall,vertical,hiddenoff,internal,algorithm:patience
 
 "---CONCISENESS---
 "keep stuff short and clean, in general
