@@ -153,7 +153,19 @@ end
 let &showbreak="↪ " " show a cool arrow to indicate that's what happened
 
 "---DIFFS---
-set diffopt=internal,filler,iwhiteall,vertical,hiddenoff,internal,algorithm:patience
+set diffopt=filler,vertical
+if has('patch-8.0.0360')
+	set diffopt+=internal,algorithm:patience
+end
+if has('patch-8.0.1005')
+	" not sure this is the actual correct patch
+	" but it's where documentation was added:
+	" https://github.com/vim/vim/commit/95bafa296ae97bf420d5c74dd6db517b404c5df7
+	set diffopt+=iwhiteall
+end
+if has('patch-8.0.1361')
+	set diffopt+=hiddenoff
+end
 
 "---CONCISENESS---
 "keep stuff short and clean, in general
