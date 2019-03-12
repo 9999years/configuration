@@ -29,6 +29,7 @@ endfunction
 
 "---VIM-PLUG---
 call plug#begin()
+Plug 'junegunn/vim-plug'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'vim-airline/vim-airline' "status line
 Plug 'tpope/vim-repeat'
@@ -40,6 +41,8 @@ Plug 'godlygeek/tabular'        " alignment
 Plug '9999years/vim-titlecase'  " titlecasing commands
 "Plug 'tpope/vim-unimpaired'
 Plug 'wincent/command-t', { 'do': function('BuildCommandT') } " fuzzy file finder
+Plug 'tpope/vim-fugitive' " git wrapper
+"Plug 'christoomey/vim-conflicted' " git merges
 
 Plug 'SirVer/ultisnips' " snippets!
 Plug 'honza/vim-snippets' " a bunch of predefined snippets
@@ -56,6 +59,7 @@ Plug 'gabrielelana/vim-markdown'
 
 " color scheme
 Plug 'Donearm/Ubaryd'
+Plug 'flazz/vim-colorschemes'
 call plug#end()
 
 colorscheme ubaryd
@@ -128,6 +132,11 @@ set incsearch  " jump to results as we find them
 "map \cs to clear search
 nnoremap <Leader>cs :let @/ = ""<CR>
 
+"---SWAP FILES---
+if has('win32')
+	let &directory = expand('~/.swp') . &directory
+end
+
 "---INDENT---
 
 set cinoptions='(1s,M1' " read the docs yourself lol
@@ -142,6 +151,9 @@ if has('patch-7.4.388')
 	let &breakindentopt='min:30,shift:-2'
 end
 let &showbreak="↪ " " show a cool arrow to indicate that's what happened
+
+"---DIFFS---
+set diffopt=internal,filler,iwhiteall,vertical,hiddenoff,internal,algorithm:patience
 
 "---CONCISENESS---
 "keep stuff short and clean, in general
@@ -315,7 +327,9 @@ nmap <Leader>d :CJKDefine<CR>
 
 "---AIRLINE---
 let g:airline_theme='molokai'
+colorscheme molokai
 function! AirlineInit()
+	AirlineTheme molokai
 	let g:airline#extensions#bufferline#enabled=0
 	let g:airline#extensions#syntastic#enabled=0
 	let g:airline#extensions#whitespace#enabled=0
