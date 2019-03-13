@@ -145,19 +145,36 @@ set tabstop=8 "tabs are 8 characters wide
 set shiftwidth=8
 set autoindent "keep indent when i create a new line
 set shiftround "use C-t and C-d in i-mode to round the indent to a multiple of shiftwidth
-set breakindent "preserve indent when wrapping lines
-" make wrapped lines at least 30 columns wide, and offset -2 columns to
-" account for the cool arrow on the next line
-let &breakindentopt='min:30,shift:-2'
+if has('patch-7.4.388')
+	set breakindent "preserve indent when wrapping lines
+	" make wrapped lines at least 30 columns wide, and offset -2 columns to
+	" account for the cool arrow on the next line
+	let &breakindentopt='min:30,shift:-2'
+end
 let &showbreak="↪ " " show a cool arrow to indicate that's what happened
 
 "---DIFFS---
-set diffopt=internal,filler,iwhiteall,vertical,hiddenoff,internal,algorithm:patience
+set diffopt=filler,vertical
+if has('patch-8.0.0360')
+	set diffopt+=internal,algorithm:patience
+end
+if has('patch-8.0.1005')
+	" not sure this is the actual correct patch
+	" but it's where documentation was added:
+	" https://github.com/vim/vim/commit/95bafa296ae97bf420d5c74dd6db517b404c5df7
+	set diffopt+=iwhiteall
+end
+if has('patch-8.0.1361')
+	set diffopt+=hiddenoff
+end
 
 "---CONCISENESS---
 "keep stuff short and clean, in general
 
-set shortmess=aoOsWAc "help avoid hit-enter prompts
+set shortmess=aoOsWAfil "help avoid hit-enter prompts
+if has('patch-7.4.314')
+	set shortmess+=c
+end
 set lazyredraw "don't redraw while executing macros, etc
 set updatetime=750 "let's keep it Chill howabout
 
@@ -322,6 +339,7 @@ command! -nargs=? CJKDefine call CJKDefine(<f-args>)
 nmap <Leader>d :CJKDefine<CR>
 
 "---AIRLINE---
+let g:airline_theme='molokai'
 colorscheme molokai
 function! AirlineInit()
 	AirlineTheme molokai
@@ -330,7 +348,7 @@ function! AirlineInit()
 	let g:airline#extensions#whitespace#enabled=0
 	let g:airline#extensions#wordcount#enabled=1
 	let g:airline#extensions#wordcount#filetypes =
-	\ 'markdown|rst|org|help|text'
+		\ ['markdown', 'rst', 'org', 'help', 'text']
 	"let g:airline_section_error = airline#section#create(['branch'])
 	let g:airline_section_a     = '%{substitute(mode(), "CTRL-", "^", "g")}'
 	let g:airline_section_b     = airline#section#create(['ffenc'])
@@ -367,7 +385,9 @@ let g:tex_comment_nospell= 1
 let g:NERDAltDelims_fsharp = 1
 
 "---ULTISNIPS---
-let g:UltiSnipsUsePythonVersion = 3
+if has('python3')
+	let g:UltiSnipsUsePythonVersion = 3
+endif
 let g:UltiSnipsEditSplit = 'horizontal'
 let g:UltiSnipsSnippetDirectories = [
 	\ expand(VIMFILES . '/plugged/snips'),
