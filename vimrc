@@ -8,9 +8,9 @@ set encoding=utf-8
 set nocompatible
 
 if has('win32')
-	let VIMFILES="~/vimfiles"
+	let g:VIMFILES="~/vimfiles"
 else
-	let VIMFILES="~/.vim"
+	let g:VIMFILES="~/.vim"
 endif
 
 function! BuildCommandT(info)
@@ -57,13 +57,13 @@ Plug 'dag/vim-fish'
 Plug 'idris-hackers/idris-vim'
 Plug 'gabrielelana/vim-markdown'
 Plug 'chikamichi/mediawiki.vim'
+Plug 'KeitaNakamura/tex-conceal.vim'
+Plug 'lervag/vimtex'
 
 " color scheme
 Plug 'Donearm/Ubaryd'
 Plug 'flazz/vim-colorschemes'
 call plug#end()
-
-colorscheme ubaryd
 
 "---MISC---
 "mostly things that should probably be default in the first place
@@ -88,9 +88,10 @@ set scrolloff=0
 let &breakat=" 	!@*-+;:,./?="
 set linebreak " break at a character in breakat rather than last char on screen
 set list      " display tabs and trailing spaces
-set listchars=tab:│\ ,trail:·,extends:…,nbsp:␣,conceal:
+set listchars=tab:│\ ,trail:·,extends:…,nbsp:␣
 set fillchars=vert:║,fold:═,diff:
 set splitright "make the diff windows make sense
+set conceallevel=2
 
 "instead of giving a ridiculous error just ask are you sure?
 "if i :q when i meant :q!
@@ -282,7 +283,7 @@ function! EditFtplugin(...)
 	else
 		let ft = a:1
 	endif
-	exe "split " . VIMFILES . "/ftplugin/" . ft . ".vim"
+	exe "split " . g:VIMFILES . "/ftplugin/" . ft . ".vim"
 endfunction
 command! -nargs=? -complete=filetype EditFtplugin call EditFtplugin(<f-args>)
 
@@ -292,7 +293,7 @@ function! EditAfterFtplugin(...)
 	else
 		let ft = a:1
 	endif
-	exe "split " . VIMFILES . "/after/ftplugin/" . ft . ".vim"
+	exe "split " . g:VIMFILES . "/after/ftplugin/" . ft . ".vim"
 endfunction
 command! -nargs=? -complete=filetype EditAfterFtplugin call EditAfterFtplugin(<f-args>)
 
@@ -302,41 +303,9 @@ function! EditUltiSnips(...)
 	else
 		let ft = a:1
 	endif
-	exe "sp " . VIMFILES . "/plugged/vim-snippets/UltiSnips/" . ft . ".snippets"
+	exe "sp " . g:VIMFILES . "/plugged/vim-snippets/UltiSnips/" . ft . ".snippets"
 endfunction
 command! -nargs=? -complete=filetype EditUltiSnips call EditUltiSnips(<f-args>)
-
-function! CJKDefine(...)
-	if a:0 == 0
-		let b:cjk_char = matchstr(getline('.'), '\%' . col('.') . 'c.')
-	else
-		let b:cjk_char = a:1
-	endif
-	python3 << EOF
-# unbelievable bullshit
-setattr(sys, '__stdout__', sys.stdout)
-from cihai.core import Cihai
-from cihai.bootstrap import bootstrap_unihan
-
-c = Cihai()
-if not c.is_bootstrapped:
-    bootstrap_unihan(c.metadata)
-    c.reflect_db()
-
-char = vim.current.buffer.vars['cjk_char'].decode('utf-8')
-query = c.lookup_char(char)
-glyph = query.first()
-if glyph:
-	print('{} ({}): {}'.format(
-		char,
-		glyph.kMandarin,
-		glyph.kDefinition))
-else:
-	print('(No definition found)')
-EOF
-endfunction
-command! -nargs=? CJKDefine call CJKDefine(<f-args>)
-nmap <Leader>d :CJKDefine<CR>
 
 "---AIRLINE---
 let g:airline_theme='molokai'
@@ -375,11 +344,15 @@ function! AirlineInit()
 endfunction
 autocmd User AirlineAfterInit call AirlineInit()
 
+"---LaTeX---
 autocmd BufRead *.cls set filetype=tex
-"autocmd BufReadPre *.tex let b:did_indent = 1
 let g:tex_flavor = 'latex'
 "no spellchecking in tex comments
 let g:tex_comment_nospell= 1
+let g:vimtex_compiler_enabled=0
+let g:vimtex_view_enabled=0
+let g:vimtex_quickfix_mode=0
+let g:tex_conceal='abdmg'
 
 "---NERD---
 let g:NERDAltDelims_fsharp = 1
@@ -390,8 +363,8 @@ if has('python3')
 endif
 let g:UltiSnipsEditSplit = 'horizontal'
 let g:UltiSnipsSnippetDirectories = [
-	\ expand(VIMFILES . '/plugged/snips'),
-	\ expand(VIMFILES . '/plugged/vim-snippets/UltiSnips')]
+	\ expand(g:VIMFILES . '/plugged/snips'),
+	\ expand(g:VIMFILES . '/plugged/vim-snippets/UltiSnips')]
 
 "---COMMAND-T---
 nmap <C-p> :CommandTBuffer<cr>

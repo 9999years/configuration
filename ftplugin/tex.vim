@@ -1,10 +1,11 @@
+" note this comes BEFORE the loading check!
+highlight clear Conceal
+
 if exists("b:did_customtex_ftplugin") | finish | endif
 let b:did_customtex_ftplugin = 1
 
 "spellcheck
 setlocal spell
-"but not in comments
-let g:tex_comment_nospell= 1
 
 setlocal textwidth=76
 setlocal formatoptions+=t
