@@ -10,6 +10,7 @@ setlocal spell
 setlocal textwidth=76
 setlocal formatoptions+=t
 setlocal isident+=64
+setlocal includeexpr=
 
 function! s:Mathize(mode)
 	if a:mode =~ '[vV]'
