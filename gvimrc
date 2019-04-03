@@ -2,6 +2,7 @@ if has('x11')
 	set guifont=PragmataPro\ Mono\ Liga\ 12
 elseif has('gui_macvim')
 	set guifont=Menlo-Regular:h14
+	set macligatures
 else
 	set guifont=PragmataPro_Mono:h12:qANTIALIASED
 endif

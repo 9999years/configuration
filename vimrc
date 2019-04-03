@@ -22,7 +22,7 @@ function! BuildCommandT(info)
 		if has('win32')
 			!powershell ./make.ps1
 		else
-			!./make.sh
+			!cd ruby/command-t/ext/command-t && /usr/local/opt/ruby/bin/ruby extconf.rb && make
 		endif
 	endif
 endfunction
@@ -195,6 +195,10 @@ let g:UltiSnipsJumpBackwardTrigger="<c-z>"
 
 "i end up using this a lot ok
 let $PROFILE="~/Documents/PowerShell/Microsoft.PowerShell_profile.ps1"
+
+if has('macunix')
+	set rubydll=/usr/local/opt/ruby/lib/libruby.dylib
+end
 
 "---UNICODE---
 "i made these bindings and i am extremely proud of them
