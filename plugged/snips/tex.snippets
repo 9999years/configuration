@@ -68,3 +68,18 @@ snippet al* "alignat*"
 	$0
 \end{alignat*}
 endsnippet
+
+snippet node "tikzpicture node" b
+\node`!p snip.rv = " [" if t[1] else ""`${1:options}`!p snip.rv = "]" if t[1] else ""` `!p snip.rv = "(" if t[2] else ""`${2:name}`!p snip.rv = ") " if t[2] else ""``!p snip.rv = "at (" if t[3] else ""`${3:coords}`!p snip.rv = ") " if t[3] else ""`{${4:text}};
+endsnippet
+
+snippet ellipse "tikzpicture ellipse" b
+\draw`!p snip.rv = " [" if t[1] else ""`${1:options}`!p snip.rv = "]" if t[1] else ""` (${2:center}) ellipse (${3:width} and ${4:height});
+endsnippet
+
+snippet piecewise "piecewise function"
+\\left\\{\begin{array}{ll}
+	$1 & $2 \\\\
+	$3 & ${4:\text{otherwise}} \\\\
+\end{array}\right.
+endsnippet
