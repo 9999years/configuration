@@ -235,8 +235,8 @@ endfunction
 command! -range=% -nargs=0 StripWhitespace call StripWhitespace(<line1>, <line2>)
 
 "\z and c-z insert best guess for spell checking
-nnoremap <Leader>z 1z=
-inoremap <C-z> <ESC>1z=ea
+nnoremap <Leader>z [s1z=`]
+inoremap <C-z> <c-g>u<Esc>[s1z=`]a<c-g>u
 
 function! HighlightNonASCII()
 	normal! /[^\x0a\x09\x20-\x7e]
