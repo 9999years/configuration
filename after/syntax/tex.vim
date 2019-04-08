@@ -1,6 +1,7 @@
 "(siiighs)
 hi clear texComment
 hi link texComment Comment
+highlight clear Conceal
 
 syn region texZone
 	\ start="\\begin{lstlisting}"

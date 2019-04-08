@@ -22,7 +22,7 @@ function! BuildCommandT(info)
 		if has('win32')
 			!powershell ./make.ps1
 		else
-			!./make.sh
+			!cd ruby/command-t/ext/command-t && /usr/local/opt/ruby/bin/ruby extconf.rb && make
 		endif
 	endif
 endfunction
@@ -196,6 +196,10 @@ let g:UltiSnipsJumpBackwardTrigger="<c-z>"
 "i end up using this a lot ok
 let $PROFILE="~/Documents/PowerShell/Microsoft.PowerShell_profile.ps1"
 
+if has('macunix')
+	set rubydll=/usr/local/opt/ruby/lib/libruby.dylib
+end
+
 "---UNICODE---
 "i made these bindings and i am extremely proud of them
 
@@ -231,8 +235,8 @@ endfunction
 command! -range=% -nargs=0 StripWhitespace call StripWhitespace(<line1>, <line2>)
 
 "\z and c-z insert best guess for spell checking
-nnoremap <Leader>z 1z=
-inoremap <C-z> <ESC>1z=ea
+nnoremap <Leader>z [s1z=`]
+inoremap <C-z> <c-g>u<Esc>[s1z=`]a<c-g>u
 
 function! HighlightNonASCII()
 	normal! /[^\x0a\x09\x20-\x7e]
@@ -350,6 +354,7 @@ let g:tex_flavor = 'latex'
 "no spellchecking in tex comments
 let g:tex_comment_nospell= 1
 let g:vimtex_compiler_enabled=0
+let g:vimtex_include_search_enabled=0
 let g:vimtex_view_enabled=0
 let g:vimtex_quickfix_mode=0
 let g:tex_conceal='abdmg'

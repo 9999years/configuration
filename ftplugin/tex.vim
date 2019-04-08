@@ -1,6 +1,3 @@
-" note this comes BEFORE the loading check!
-highlight clear Conceal
-
 if exists("b:did_customtex_ftplugin") | finish | endif
 let b:did_customtex_ftplugin = 1
 
