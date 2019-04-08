@@ -354,6 +354,7 @@ let g:tex_flavor = 'latex'
 "no spellchecking in tex comments
 let g:tex_comment_nospell= 1
 let g:vimtex_compiler_enabled=0
+let g:vimtex_include_search_enabled=0
 let g:vimtex_view_enabled=0
 let g:vimtex_quickfix_mode=0
 let g:tex_conceal='abdmg'

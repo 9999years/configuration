@@ -1,7 +1,16 @@
+priority -50
 # a pattern i consistently want is an optional value; if the value is PRESENT,
 # i want some static text before/after it. if the value is NOT present, i want
 # to delete that text
 # great for optional parameters
 snippet opt "optional text; wraps some text around a value" i
 `!p snip.rv = '\`!p snip.rv = "' if t[1] else ""`${1:before}`!p snip.rv = '" if t[' + t[2] + '] else ""\`' if t[1] else ""`\$\{${2}${3::}}`!p snip.rv = '\`!p snip.rv = "' if t[4] else ""`${4:after}`!p snip.rv = '" if t[' + t[2] + '] else ""\`' if t[4] else ""`
+endsnippet
+
+# We use a little hack so that the snippet is expanded
+# and parsed correctly
+snippet snip "Ultisnips snippet definition" b
+`!p snip.rv = "snippet"` ${1:Tab_trigger} "${2:Description}" ${3:b}
+${0:${VISUAL}}
+`!p snip.rv = "endsnippet"`
 endsnippet

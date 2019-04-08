@@ -36,6 +36,15 @@ $0
 \end{document}
 endsnippet
 
+snippet thpr "Theorem and proof" b
+\begin{thm}
+	$1
+\end{thm}
+\begin{proof}
+	$0
+\end{proof}
+endsnippet
+
 snippet multicol "multiple columns"
 \multicolumn{${1:1}}{${2:c}}{$0}
 endsnippet
@@ -149,7 +158,8 @@ $${1}$`!p snip.rv = space(t[2])`$2
 endsnippet
 
 snippet dm "Math" wA
-\[${1:${VISUAL}}.\]`!p snip.rv = space(t[2])`$2
+\[${1:${VISUAL}}.\]
+$0
 endsnippet
 
 snippet ali "Align" bA
