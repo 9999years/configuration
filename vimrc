@@ -360,6 +360,9 @@ let g:vimtex_quickfix_mode=0
 let g:tex_conceal='abdmg'
 let g:vimtex_imaps_leader='@'
 
+"---MARKDOWN---
+let g:vim_markdown_toml_frontmatter = 1
+
 "---NERD---
 let g:NERDAltDelims_fsharp = 1
 
