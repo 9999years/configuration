@@ -19,7 +19,7 @@ def math():
 		return False
 
 def space(t):
-	if t and t[0] not in ',.?- ':
+	if t and t[0] not in ',.?- ():;':
 		return ' '
 	else:
 		return ''
@@ -117,7 +117,8 @@ snippet ellipse "tikzpicture ellipse" b
 \draw`!p snip.rv = " [" if t[1] else ""`${1:options}`!p snip.rv = "]" if t[1] else ""` (${2:center}) ellipse (${3:width} and ${4:height});
 endsnippet
 
-snippet pw "piecewise function"
+context "math()"
+snippet pw "piecewise function" Aw
 \begin{cases}
 	$1 & $2 \\\\
 	$3 & ${4:\text{otherwise}} \\\\
@@ -538,15 +539,15 @@ endsnippet
 
 context "math()"
 snippet \\\ "setminus" iA
-\setminus
+\setminus 
 endsnippet
 
 snippet >> ">>" iA
-\gg
+\gg 
 endsnippet
 
 snippet << "<<" iA
-\ll
+\ll 
 endsnippet
 
 snippet DD "delta" iA
@@ -649,8 +650,8 @@ endsnippet
 
 snippet bigfun "Big function" iA
 \begin{align*}
-	$1: $2 &\longrightarrow $3 \\\\
-	$4 &\longmapsto $1($4) = $0
+	${1:f} : ${2:\\Re} &\longrightarrow ${3:\\Re} \\\\
+	${4:x} &\longmapsto $1($4) = $0
 .\end{align*}
 endsnippet
 
@@ -673,7 +674,7 @@ endsnippet
 
 priority 10
 context "math()"
-snippet "hat" "hat" riA
+snippet "hat" "hat" riAw
 \hat{$1}$0
 endsnippet
 
