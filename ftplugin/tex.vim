@@ -7,7 +7,9 @@ setlocal spell
 setlocal textwidth=76
 setlocal formatoptions+=t
 setlocal isident+=64
-setlocal includeexpr=
+
+setlocal shiftwidth=2
+setlocal ts=2
 
 function! s:Mathize(mode)
 	if a:mode =~ '[vV]'

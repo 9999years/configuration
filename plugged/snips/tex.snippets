@@ -293,6 +293,10 @@ snippet lrb "left\{ right\}" i
 \left\\{ ${1:${VISUAL}} \right\\} $0
 endsnippet
 
+snippet \{ "\{ \}" A
+\\{ ${1:${VISUAL}} \\}$0
+endsnippet
+
 snippet lr[ "left[ right]" i
 \left[ ${1:${VISUAL}} \right] $0
 endsnippet
@@ -574,7 +578,7 @@ snippet cc "subset" Ai
 endsnippet
 
 snippet notin "not in " iA
-\not\in 
+\notin 
 endsnippet
 
 context "math()"
@@ -686,4 +690,9 @@ endsnippet
 
 snippet letw "let omega" iA
 Let $\Omega \subset \C$ be open.
+endsnippet
+
+context "math()"
+snippet seq "Sequence" w
+\\left( ${1:s}_${2:n} \\right)_{$2 = 1}^{$2 = \\infty}
 endsnippet
