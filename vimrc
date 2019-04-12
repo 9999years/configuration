@@ -142,6 +142,7 @@ end
 "---INDENT---
 
 set cinoptions='(1s,M1' " read the docs yourself lol
+set smarttab
 set tabstop=8 "tabs are 8 characters wide
 set shiftwidth=8
 set autoindent "keep indent when i create a new line
@@ -362,6 +363,9 @@ let g:vimtex_imaps_leader='@'
 
 "---MARKDOWN---
 let g:vim_markdown_toml_frontmatter = 1
+
+"---YAML---
+let g:yaml_schema='pyyaml'
 
 "---NERD---
 let g:NERDAltDelims_fsharp = 1
