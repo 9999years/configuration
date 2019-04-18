@@ -43,6 +43,7 @@ Plug '9999years/vim-titlecase'  " titlecasing commands
 Plug 'wincent/command-t', { 'do': function('BuildCommandT') } " fuzzy file finder
 Plug 'tpope/vim-fugitive' " git wrapper
 "Plug 'christoomey/vim-conflicted' " git merges
+Plug 'vim-syntastic/syntastic'
 
 Plug 'SirVer/ultisnips' " snippets!
 Plug 'honza/vim-snippets' " a bunch of predefined snippets
@@ -380,4 +381,9 @@ let g:UltiSnipsSnippetDirectories = [
 	\ expand(g:VIMFILES . '/plugged/vim-snippets/UltiSnips')]
 
 "---COMMAND-T---
+let g:CommandTFileScanner='git'
 nmap <C-p> :CommandTBuffer<cr>
+
+"---SYNTASTIC---
+let g:syntastic_error_symbol = "✗"
+let g:syntastic_warning_symbol = "⚠"
