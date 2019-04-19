@@ -43,6 +43,7 @@ Plug '9999years/vim-titlecase'  " titlecasing commands
 Plug 'wincent/command-t', { 'do': function('BuildCommandT') } " fuzzy file finder
 Plug 'tpope/vim-fugitive' " git wrapper
 "Plug 'christoomey/vim-conflicted' " git merges
+Plug 'vim-syntastic/syntastic'
 
 Plug 'SirVer/ultisnips' " snippets!
 Plug 'honza/vim-snippets' " a bunch of predefined snippets
@@ -142,6 +143,7 @@ end
 "---INDENT---
 
 set cinoptions='(1s,M1' " read the docs yourself lol
+set smarttab
 set tabstop=8 "tabs are 8 characters wide
 set shiftwidth=8
 set autoindent "keep indent when i create a new line
@@ -355,10 +357,17 @@ let g:tex_flavor = 'latex'
 "no spellchecking in tex comments
 let g:tex_comment_nospell= 1
 let g:vimtex_compiler_enabled=0
+let g:vimtex_include_search_enabled=0
 let g:vimtex_view_enabled=0
 let g:vimtex_quickfix_mode=0
 let g:tex_conceal='abdmg'
 let g:vimtex_imaps_leader='@'
+
+"---MARKDOWN---
+let g:vim_markdown_toml_frontmatter = 1
+
+"---YAML---
+let g:yaml_schema='pyyaml'
 
 "---NERD---
 let g:NERDAltDelims_fsharp = 1
@@ -373,4 +382,9 @@ let g:UltiSnipsSnippetDirectories = [
 	\ expand(g:VIMFILES . '/plugged/vim-snippets/UltiSnips')]
 
 "---COMMAND-T---
+let g:CommandTFileScanner='git'
 nmap <C-p> :CommandTBuffer<cr>
+
+"---SYNTASTIC---
+let g:syntastic_error_symbol = "✗"
+let g:syntastic_warning_symbol = "⚠"

@@ -24,4 +24,5 @@ if has('conceal')
   syn match texMathSymbol '\\Or\>' contained conceal cchar=∨
   syn match texMathSymbol '\\cross\>' contained conceal cchar=×
   syn match texMathSymbol '\\emptyset\>' contained conceal cchar=∅
+  syn match texMathSymbol '\\coloneq\>' contained conceal cchar=≔
 end
