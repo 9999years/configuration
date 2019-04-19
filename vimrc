@@ -195,6 +195,7 @@ let g:UltiSnipsJumpBackwardTrigger="<c-z>"
 
 "i end up using this a lot ok
 let $PROFILE="~/Documents/PowerShell/Microsoft.PowerShell_profile.ps1"
+let $FISH="~/.config/fish/config.fish"
 
 if has('macunix')
 	set rubydll=/usr/local/opt/ruby/lib/libruby.dylib
