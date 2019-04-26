@@ -42,7 +42,6 @@ Plug '9999years/vim-titlecase'  " titlecasing commands
 "Plug 'tpope/vim-unimpaired'
 Plug 'wincent/command-t', { 'do': function('BuildCommandT') } " fuzzy file finder
 Plug 'tpope/vim-fugitive' " git wrapper
-"Plug 'christoomey/vim-conflicted' " git merges
 Plug 'vim-syntastic/syntastic'
 
 Plug 'SirVer/ultisnips' " snippets!
@@ -215,104 +214,13 @@ nmap <Leader>f "fcl<C-r>=printf('%x', char2nr(@f))<CR><ESC>
 "\F converts codepoint under cursor to char literal
 nmap <Leader>F "fyawea <C-r>=nr2char('0x' . @f)<CR><ESC>
 
-"simple function to fix crlf and weird encodings
-function! NormalizeCurrentFile()
-	set fileformat=unix
-	set fileencoding=utf-8
-endfunction
-
-"but also if it's read only don't complain when
-"it doesn't work
-"the ! is very important apparently
-autocmd BufNewFile,BufRead,BufAdd,BufCreate,BufNew * silent! call NormalizeCurrentFile()
-
-"get rid of whitespace at line ends
-function! StripWhitespace(start, end)
-	normal mx
-	exe a:start . "," . a:end . " s/\\s\\+$//n"
-	exe a:start . "," . a:end . " s/\\s\\+$//eg"
-	noh
-	normal `x
-endfunction
-
-command! -range=% -nargs=0 StripWhitespace call StripWhitespace(<line1>, <line2>)
-
-"\z and c-z insert best guess for spell checking
-nnoremap <Leader>z [s1z=`]
-inoremap <C-z> <c-g>u<Esc>[s1z=`]a<c-g>u
-
-function! HighlightNonASCII()
-	normal! /[^\x0a\x09\x20-\x7e]
-endfunction
-command! -nargs=0 HighlightNonASCII call HighlightNonASCII()
-
-function! UnsavedDiff()
-	"create mark d, copy buffer and return to mark
-	normal! mdgg"dyG`d
-	"save syntax for later
-	let l:syn=&syntax
-	"turn diff on, new buffer, paste, refresh syntax
-	diffthis
-	vnew
-	normal! "dpggdd
-	let &syntax=l:syn
-	diffthis
-	set buftype=nofile
-	set nobuflisted noswapfile readonly
-	"switch windows, refresh content, switch back
-	normal! p
-	edit!
-	normal! p
-endfunction
-
-"will this work in a tab with more than two windows? who knows!
-function! UnsavedDiffOff()
-	"set mark o to jump back to
-	if expand("%") != ""
-		normal! mop
-	else
-		normal! pmop
-	endif
-	"on the local (no filename) window now
-	"copy unsaved changes
-	normal! gg"dyG
-	"get rid of buffer, delete/paste in new buffer, go back to mark o
-	bwipe!
-	lockmarks normal! gg"gdG"dpggdd`o
-endfunction
-
-command! -nargs=0 UnsavedDiffOff call UnsavedDiffOff()
-command! -nargs=0 UnsavedDiff call UnsavedDiff()
-
-function! EditFtplugin(...)
-	if a:0 == 0
-		let ft = &ft
-	else
-		let ft = a:1
-	endif
-	exe "split " . g:VIMFILES . "/ftplugin/" . ft . ".vim"
-endfunction
-command! -nargs=? -complete=filetype EditFtplugin call EditFtplugin(<f-args>)
-
-function! EditAfterFtplugin(...)
-	if a:0 == 0
-		let ft = &ft
-	else
-		let ft = a:1
-	endif
-	exe "split " . g:VIMFILES . "/after/ftplugin/" . ft . ".vim"
-endfunction
-command! -nargs=? -complete=filetype EditAfterFtplugin call EditAfterFtplugin(<f-args>)
-
-function! EditUltiSnips(...)
-	if a:0 == 0
-		let ft = &ft
-	else
-		let ft = a:1
-	endif
-	exe "sp " . g:VIMFILES . "/plugged/vim-snippets/UltiSnips/" . ft . ".snippets"
-endfunction
-command! -nargs=? -complete=filetype EditUltiSnips call EditUltiSnips(<f-args>)
+command! -range=% -nargs=0 StripWhitespace call misc#StripWhitespace(<line1>, <line2>)
+command! -nargs=0 HighlightNonASCII call misc#HighlightNonASCII()
+command! -nargs=0 UnsavedDiffOff call misc#UnsavedDiffOff()
+command! -nargs=0 UnsavedDiff call misc#UnsavedDiff()
+command! -nargs=? -complete=filetype EditFtplugin call misc#EditFtplugin(<f-args>)
+command! -nargs=? -complete=filetype EditAfterFtplugin call misc#EditAfterFtplugin(<f-args>)
+command! -nargs=? -complete=filetype EditUltiSnips call misc#EditUltiSnips(<f-args>)
 
 "---AIRLINE---
 let g:airline_theme='molokai'
@@ -330,7 +238,7 @@ function! AirlineInit()
 	let g:airline_section_b     = airline#section#create(['ffenc'])
 	"let g:airline_section_error = airline#section#create(['syntastic'])
 	"see 'statusline'
-	let g:airline_section_c     = '%{expand(''%:h:t'')}/%t %m %#__accent_red#%{airline#util#wrap(airline#parts#readonly(),0)}%#__restore__#'
+	"let g:airline_section_c     = '%{expand(''%:h:t'')}/%t %m %#__accent_red#%{airline#util#wrap(airline#parts#readonly(),0)}%#__restore__#'
 	let g:airline_section_gutter = '%='
 	let g:airline_section_warning = ''
 	"let g:airline_section_x = '%{airline#util#wrap(airline#parts#filetype(),0)}'
@@ -382,7 +290,7 @@ let g:UltiSnipsSnippetDirectories = [
 	\ expand(g:VIMFILES . '/plugged/vim-snippets/UltiSnips')]
 
 "---COMMAND-T---
-let g:CommandTFileScanner='git'
+"let g:CommandTFileScanner='git'
 nmap <C-p> :CommandTBuffer<cr>
 
 "---SYNTASTIC---
