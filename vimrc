@@ -14,10 +14,6 @@ else
 endif
 
 function! BuildCommandT(info)
-	" info is a dictionary with 3 fields
-	" - name:   name of the plugin
-	" - status: 'installed', 'updated', or 'unchanged'
-	" - force:  set on PlugInstall! or PlugUpdate!
 	if a:info.status != 'unchanged' || a:info.force
 		if has('win32')
 			!powershell ./make.ps1
@@ -33,7 +29,7 @@ Plug 'junegunn/vim-plug'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'vim-airline/vim-airline' "status line
 Plug 'tpope/vim-repeat'
-"Plug 'vim-scripts/AutoComplPop' "show autocomplete menu w/o prompt
+Plug 'vim-scripts/AutoComplPop' "show autocomplete menu w/o prompt
 Plug 'ervandew/supertab'        " tab-completion
 Plug 'tmhedberg/matchit'        " better % matching
 Plug 'scrooloose/nerdcommenter' " better comment toggling
@@ -387,3 +383,7 @@ nmap <C-p> :CommandTBuffer<cr>
 "---SYNTASTIC---
 let g:syntastic_error_symbol = "✗"
 let g:syntastic_warning_symbol = "⚠"
+let g:syntastic_mode_map = {
+	\ "mode": "passive",
+	\ "active_filetypes": ["rust", "python"],
+	\ "passive_filetypes": ["tex"] }
