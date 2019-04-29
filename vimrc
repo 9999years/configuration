@@ -378,7 +378,6 @@ let g:UltiSnipsSnippetDirectories = [
 	\ expand(g:VIMFILES . '/plugged/vim-snippets/UltiSnips')]
 
 "---COMMAND-T---
-let g:CommandTFileScanner='git'
 nmap <C-p> :CommandTBuffer<cr>
 
 "---SYNTASTIC---
