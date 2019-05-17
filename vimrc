@@ -47,23 +47,22 @@ Plug '9999years/vim-titlecase'  " titlecasing commands
 "Plug 'tpope/vim-unimpaired'
 Plug 'wincent/command-t', { 'do': function('BuildCommandT') } " fuzzy file finder
 Plug 'tpope/vim-fugitive' " git wrapper
-"Plug 'vim-syntastic/syntastic'
+Plug 'vim-syntastic/syntastic'
 
 Plug 'SirVer/ultisnips' " snippets!
 Plug 'honza/vim-snippets' " a bunch of predefined snippets
 Plug '9999years/boilerplate-ultisnips' "boilerplate insertion
 
 "lang-specific plugins
-"Plug 'rust-lang/rust.vim', { 'for': 'rust' }
+Plug 'rust-lang/rust.vim', { 'for': 'rust' }
 Plug 'cespare/vim-toml'
 Plug 'stephenway/postcss.vim'
-"Plug 'isobit/vim-caddyfile'
+Plug 'isobit/vim-caddyfile'
 Plug 'dag/vim-fish'
-"Plug 'idris-hackers/idris-vim'
-"Plug 'gabrielelana/vim-markdown'
+Plug 'idris-hackers/idris-vim'
 Plug 'chikamichi/mediawiki.vim'
-"Plug 'KeitaNakamura/tex-conceal.vim'
-"Plug 'lervag/vimtex'
+Plug 'KeitaNakamura/tex-conceal.vim'
+Plug 'lervag/vimtex'
 
 " color scheme
 "Plug 'Donearm/Ubaryd'
@@ -264,7 +263,7 @@ function! AirlineInit()
   let g:airline_left_alt_sep='│' "''
   let g:airline_right_sep='' "''
   let g:airline_right_alt_sep='│' "''
-  if has('macunix')
+  if has('macunix') and !has('nvim')
     let g:airline_symbols.readonly='RO'
     let g:airline_symbols.linenr='L'
   else
@@ -305,16 +304,12 @@ let g:UltiSnipsSnippetDirectories = [
   \ expand(g:VIMFILES . '/plugged/vim-snippets/UltiSnips')]
 
 "---COMMAND-T---
-"let g:CommandTFileScanner='git'
 nmap <C-p> :CommandTBuffer<cr>
 
 "---SYNTASTIC---
 let g:syntastic_error_symbol = "✗"
 let g:syntastic_warning_symbol = "⚠"
-
-"---VV NEOVIM---
-if exists('g:vv')
-  VVset fontfamily=PragmataPro\ Mono\ Liga
-  VVset fontsize=16
-  VVset lineheight=1
-end
+let g:syntastic_mode_map = {
+  \ "mode": "passive",
+  \ "active_filetypes": ["rust", "python"],
+  \ "passive_filetypes": ["tex"] }
