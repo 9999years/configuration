@@ -27,7 +27,7 @@ function! BuildCommandT(info)
     if has('win32')
       !powershell ./make.ps1
     else
-      exe '!cd ruby/command-t/ext/command-t && ' . l:ruby . ' extconf.rb && make'
+      exe '!sh -c "cd ruby/command-t/ext/command-t && ' . l:ruby . ' extconf.rb && make"'
     endif
   endif
 endfunction
