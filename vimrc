@@ -233,7 +233,10 @@ command! -nargs=? -complete=filetype EditUltiSnips call misc#EditUltiSnips(<f-ar
 
 "---AIRLINE---
 let g:airline_theme='molokai'
-colorscheme molokai
+"silent! colorscheme Tomorrow-Night
+"silent! colorscheme nord
+"silent! colorscheme ubaryd
+silent! colorscheme molokai
 function! AirlineInit()
   AirlineTheme molokai
   let g:airline#extensions#bufferline#enabled=0
