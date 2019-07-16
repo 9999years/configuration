@@ -236,7 +236,7 @@ let g:airline_theme='molokai'
 "silent! colorscheme Tomorrow-Night
 "silent! colorscheme nord
 "silent! colorscheme ubaryd
-silent! colorscheme molokai
+silent! colorscheme molokai_dark
 function! AirlineInit()
   AirlineTheme molokai
   let g:airline#extensions#bufferline#enabled=0
