@@ -54,12 +54,16 @@ Plug 'honza/vim-snippets' " a bunch of predefined snippets
 Plug '9999years/boilerplate-ultisnips' "boilerplate insertion
 
 "lang-specific plugins
-Plug 'rust-lang/rust.vim', { 'for': 'rust' }
-Plug 'cespare/vim-toml'
-Plug 'stephenway/postcss.vim'
-Plug 'isobit/vim-caddyfile'
-Plug 'dag/vim-fish'
-Plug 'idris-hackers/idris-vim'
+" polyglot includes:
+"   - rust-lang/rust.vim
+"   - cespare/vim-toml
+"   - wavded/vim-stylus
+"   - typescript
+"   - isobit/vim-caddyfile
+"   - dag/vim-fish
+"   - idris-hackers/idris-vim
+"   - pangloss/vim-javascript
+Plug 'sheerun/vim-polyglot'
 Plug 'chikamichi/mediawiki.vim'
 Plug 'KeitaNakamura/tex-conceal.vim'
 Plug 'lervag/vimtex'
@@ -154,8 +158,9 @@ end
 
 set cinoptions='(1s,M1' " read the docs yourself lol
 set smarttab
-set tabstop=8 "tabs are 8 characters wide
-set shiftwidth=8
+set tabstop=4
+set shiftwidth=4
+set expandtab  " end of an era i tell ya
 set autoindent "keep indent when i create a new line
 set shiftround "use C-t and C-d in i-mode to round the indent to a multiple of shiftwidth
 if has('patch-7.4.388')
@@ -287,6 +292,7 @@ let g:vimtex_view_enabled=0
 let g:vimtex_quickfix_mode=0
 let g:tex_conceal='abdmg'
 let g:vimtex_imaps_leader='@'
+let g:polyglot_disabled = ['latex']
 
 "---MARKDOWN---
 let g:vim_markdown_toml_frontmatter = 1
@@ -310,6 +316,7 @@ let g:UltiSnipsSnippetDirectories = [
 nmap <C-p> :CommandTBuffer<cr>
 
 "---SYNTASTIC---
+let g:syntastic_python_checkers = ['python3', 'mypy']
 let g:syntastic_error_symbol = "✗"
 let g:syntastic_warning_symbol = "⚠"
 let g:syntastic_mode_map = {
