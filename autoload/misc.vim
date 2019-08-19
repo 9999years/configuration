@@ -72,3 +72,38 @@ function misc#EditUltiSnips(...)
 	endif
 	exe "sp " . g:VIMFILES . "/plugged/vim-snippets/UltiSnips/" . ft . ".snippets"
 endfunction
+
+function misc#BuildCommandT(info)
+  " info is a dictionary with 3 fields
+  " - name:   name of the plugin
+  " - status: 'installed', 'updated', or 'unchanged'
+  " - force:  set on PlugInstall! or PlugUpdate!
+  let l:ruby='/usr/bin/ruby'
+  if has('macunix') && !has('nvim')
+    let l:ruby='/usr/local/opt/ruby/bin/ruby'
+  endif
+
+  if a:info.status != 'unchanged' || a:info.force
+    if has('win32')
+      !powershell ./make.ps1
+    else
+      exe '!sh -c "cd ruby/command-t/ext/command-t && ' . l:ruby . ' extconf.rb && make"'
+    endif
+  endif
+endfunction
+
+function misc#GetVimfiles()
+  if has('win32')
+    return expand("~/vimfiles")
+  else
+    return expand("~/.vim")
+  endif
+endfunction
+
+function misc#RelFile(filename)
+  return g:VIMFILES . "/" . a:filename
+endfunction
+
+function misc#SourceRelative(filename)
+  execute "source " . misc#RelFile(a:filename)
+endfunction
