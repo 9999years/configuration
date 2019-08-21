@@ -17,8 +17,6 @@ Plug 'tpope/vim-fugitive' " git wrapper
 Plug 'flazz/vim-colorschemes'
 
 " Autocomplete / language support
-Plug 'Shougo/neco-vim' " VimL support
-Plug 'neoclide/coc-neco'
 "Plug 'vim-scripts/AutoComplPop' "show autocomplete menu w/o prompt
 "Plug 'ervandew/supertab'        " tab-completion
 "Plug 'vim-syntastic/syntastic'

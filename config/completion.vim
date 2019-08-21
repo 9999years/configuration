@@ -1,17 +1,17 @@
 if exists('g:did_completion_opts') | finish | endif
 let g:did_completion_opts = 1
 
-set completeopt=menu,menuone,longest
-set pumheight=10
-let g:SuperTabDefaultCompletionType = "<c-n>"
-let g:SuperTabContextDefaultCompletionType = "<c-n>"
+"set completeopt=menu,menuone,longest
+"set pumheight=10
+"let g:SuperTabDefaultCompletionType = "<c-n>"
+"let g:SuperTabContextDefaultCompletionType = "<c-n>"
 
 if has('python3')
   let g:UltiSnipsUsePythonVersion = 3
 endif
-let g:UltiSnipsExpandTrigger="<tab>"
-let g:UltiSnipsJumpForwardTrigger="<c-b>"
-let g:UltiSnipsJumpBackwardTrigger="<c-z>"
+let g:UltiSnipsExpandTrigger="<c-tab>"
+let g:UltiSnipsJumpForwardTrigger="<c-j>"
+let g:UltiSnipsJumpBackwardTrigger="<c-k>"
 let g:UltiSnipsEditSplit = 'horizontal'
 let g:UltiSnipsSnippetDir = misc#RelFile('plugged/snips')
 let g:UltiSnipsSnippetDirectories = [
@@ -28,13 +28,16 @@ let g:coc_global_extensions = [
       \ 'coc-css',
       \ 'coc-python',
       \ 'coc-ultisnips',
-      \ 'coc-texlab' ]
+      \ 'coc-texlab',
+      \ 'coc-vimlsp' ]
 
 inoremap <silent><expr> <TAB>
-      \ pumvisible() ? coc#_select_confirm() :
-      \ coc#expandableOrJumpable() ? "\<C-r>=coc#rpc#request('doKeymap', ['snippets-expand-jump',''])\<CR>" :
-      \ <SID>check_back_space() ? "\<TAB>" :
-      \ coc#refresh()
+      \ pumvisible()
+      \ ? coc#_select_confirm()
+      \ : (<SID>check_back_space()
+      \ ? "\<TAB>"
+      \ : coc#refresh())
+inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
 
 function! s:check_back_space() abort
   let col = col('.') - 1
@@ -45,6 +48,13 @@ let g:coc_snippet_next = '<tab>'
 
 " Use <c-space> to trigger completion.
 inoremap <silent><expr> <c-space> coc#refresh()
+inoremap <silent><expr> <c-f> coc#_select_confirm()
+
+" Use <cr> to confirm completion, `<C-g>u` means break undo chain at current position.
+" Coc only does snippet and additional edit on confirm.
+inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
+
+command -nargs=0 Format call CocAction('format')
 
 "" Use `[c` and `]c` to navigate diagnostics
 nmap <silent> [c <Plug>(coc-diagnostic-prev)
