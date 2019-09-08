@@ -28,7 +28,7 @@ Plug 'honza/vim-snippets' " a bunch of predefined snippets
 Plug '9999years/boilerplate-ultisnips' "boilerplate insertion
 
 " Lang-specific plugins
-" vim-polyglot includes:
+" vim-polyglot includes (among many others):
 "   - rust-lang/rust.vim
 "   - cespare/vim-toml
 "   - wavded/vim-stylus
