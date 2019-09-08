@@ -23,17 +23,33 @@ def space(t):
 		return ' '
 	else:
 		return ''
+
+FN_BOUNDARY_RE = re.compile(r'[-_ ]+')
+def humanize_fn(fn):
+	return ' '.join(word.capitalize() for word in FN_BOUNDARY_RE.split(fn))
+
 endglobal
 
 snippet _skel "Skeleton" b
+`!p
+from datetime import datetime
+
+if snip.fn.endswith('tex'):
+	snip.rv = (r'''
 \documentclass{article}
-\title{$1}
+\title{'''.strip()
+	+ humanize_fn(snip.basename)
+	+ r'''}
 \author{Rebecca Turner}
-\date{`!v strftime("%Y-%m-%d")`}
+\date{'''
+	+ datetime.now().date().isoformat()
+	+ r'''}
 \begin{document}
 \maketitle
-$0
+
 \end{document}
+'''.strip())
+`
 endsnippet
 
 snippet thpr "Theorem and proof" b
@@ -136,11 +152,6 @@ endsnippet
 
 # Many snippets below from Gilles Castel
 # https://castel.dev/post/lecture-notes-1/
-priority 100
-snippet ... "ldots" iA
-\dots
-endsnippet
-
 snippet => "implies" Ai
 \implies
 endsnippet
@@ -179,26 +190,26 @@ snippet / "Fraction" i
 \\frac{${VISUAL}}{$1}$0
 endsnippet
 
-context "math()"
-snippet '((\d+)|(\d*)(\\)?([A-Za-z]+)((\^|_)(\{\d+\}|\d))*)/' "symbol frac" wrA
-\\frac{`!p snip.rv = match.group(1)`}{$1}$0
-endsnippet
+#context "math()"
+#snippet '((\d+)|(\d*)(\\)?([A-Za-z]+)((\^|_)(\{\d+\}|\d))*)/' "symbol frac" wrA
+#\\frac{`!p snip.rv = match.group(1)`}{$1}$0
+#endsnippet
 
-priority 1000
-context "math()"
-snippet '^.*\)/' "() frac" wrA
-`!p
-stripped = match.string[:-1]
-depth = 0
-i = len(stripped) - 1
-while True:
-	if stripped[i] == ')': depth += 1
-	if stripped[i] == '(': depth -= 1
-	if depth == 0: break;
-	i-=1
-snip.rv = stripped[0:i] + "\\frac{" + stripped[i+1:-1] + "}"
-`{$1}$0
-endsnippet
+#priority 1000
+#context "math()"
+#snippet '^.*\)/' "() frac" wrA
+#`!p
+#stripped = match.string[:-1]
+#depth = 0
+#i = len(stripped) - 1
+#while True:
+	#if stripped[i] == ')': depth += 1
+	#if stripped[i] == '(': depth -= 1
+	#if depth == 0: break;
+	#i-=1
+#snip.rv = stripped[0:i] + "\\frac{" + stripped[i+1:-1] + "}"
+#`{$1}$0
+#endsnippet
 
 context "math()"
 snippet '([A-Za-z])(\d)' "auto subscript" wrA
@@ -247,7 +258,7 @@ snippet == "equals" iA
 endsnippet
 
 snippet != "equals" iA
-\neq 
+\ne 
 endsnippet
 
 context "math()"
@@ -347,7 +358,7 @@ snippet part "d/dx" w
 endsnippet
 
 context "math()"
-snippet sq "\sqrt{}" iA
+snippet sq "\sqrt{}" i
 \sqrt{${1:${VISUAL}}} $0
 endsnippet
 
@@ -648,6 +659,11 @@ snippet case "cases" wA
 \end{cases}
 endsnippet
 
+context "math()"
+snippet "bi" "binom"
+\binom{$1}{$2}
+endsnippet
+
 snippet SI "SI" wA
 \SI{$1}{$2}
 endsnippet
@@ -679,10 +695,20 @@ endsnippet
 priority 10
 context "math()"
 snippet "hat" "hat" riAw
-\hat{$1}$0
+\hat{$1}
+endsnippet
+
+context "math()"
+snippet "vec" "vec" riAw
+\vec{$1}
 endsnippet
 
 priority 100
+context "math()"
+snippet "([a-zA-Z])vec" "vec" riA
+\vec{`!p snip.rv=match.group(1)`}
+endsnippet
+
 context "math()"
 snippet "([a-zA-Z])hat" "hat" riA
 \hat{`!p snip.rv=match.group(1)`}

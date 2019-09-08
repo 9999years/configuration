@@ -42,6 +42,7 @@ Plug 'chikamichi/mediawiki.vim'
 Plug 'KeitaNakamura/tex-conceal.vim'
 Plug 'lervag/vimtex'
 Plug 'alunny/pegjs-vim'
+Plug 'vim-scripts/icalendar.vim'
 call plug#end()
 
 let g:VIMFILES = misc#GetVimfiles()
