@@ -96,7 +96,7 @@ function misc#GetVimfiles()
   if has('win32')
     return expand("~/vimfiles")
   else
-    return expand("~/.vim")
+    return expand("~/.config/nvim")
   endif
 endfunction
 
