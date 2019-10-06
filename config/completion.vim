@@ -29,7 +29,8 @@ let g:coc_global_extensions = [
       \ 'coc-python',
       \ 'coc-ultisnips',
       \ 'coc-texlab',
-      \ 'coc-vimlsp' ]
+      \ 'coc-vimlsp',
+      \ 'coc-rust-analyzer' ]
 
 inoremap <silent><expr> <TAB>
       \ pumvisible()
