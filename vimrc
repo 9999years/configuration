@@ -38,6 +38,7 @@ Plug '9999years/boilerplate-ultisnips' "boilerplate insertion
 "   - idris-hackers/idris-vim
 "   - pangloss/vim-javascript
 Plug 'sheerun/vim-polyglot'
+Plug 'vmchale/dhall-vim'
 Plug 'chikamichi/mediawiki.vim'
 Plug 'KeitaNakamura/tex-conceal.vim'
 Plug 'lervag/vimtex'

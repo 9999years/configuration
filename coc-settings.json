@@ -1,5 +1,11 @@
 {
 	"languageserver": {
+		"dhall": {
+			"command": "dhall-lsp-server",
+			"filetypes": [
+				"dhall"
+			]
+		},
 		"bash": {
 			"command": "bash-language-server",
 			"args": [
