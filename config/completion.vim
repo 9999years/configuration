@@ -29,6 +29,8 @@ let g:coc_global_extensions = [
       \ 'coc-python',
       \ 'coc-ultisnips',
       \ 'coc-texlab',
+      \ 'coc-java',
+      \ 'coc-xml',
       \ 'coc-vimlsp' ]
 
 inoremap <silent><expr> <TAB>
