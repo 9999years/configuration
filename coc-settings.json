@@ -40,5 +40,6 @@
 	"python.autoComplete.addBrackets": true,
 	"python.linting.mypyEnabled": true,
 	"python.linting.pylintEnabled": true,
-	"python.linting.pep8Enabled": true
+	"python.linting.pep8Enabled": false,
+	"java.format.settings.url": "/home/cervina/.config/coc/extensions/node_modules/redhat.java/eclipse-formatter.xml"
 }
