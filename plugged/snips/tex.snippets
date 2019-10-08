@@ -171,7 +171,6 @@ endsnippet
 
 snippet dm "Math" wA
 \[${1:${VISUAL}}.\]
-$0
 endsnippet
 
 snippet ali "Align" b
@@ -573,11 +572,6 @@ snippet ~~ "~" iA
 \sim 
 endsnippet
 
-context "math()"
-snippet set "set" wA
-\\{$1\\} $0
-endsnippet
-
 snippet || "mid" iA
  \mid 
 endsnippet
@@ -698,11 +692,6 @@ snippet "hat" "hat" riAw
 \hat{$1}
 endsnippet
 
-context "math()"
-snippet "vec" "vec" riAw
-\vec{$1}
-endsnippet
-
 priority 100
 context "math()"
 snippet "([a-zA-Z])vec" "vec" riA
@@ -721,4 +710,27 @@ endsnippet
 context "math()"
 snippet seq "Sequence" w
 \\left( ${1:s}_${2:n} \\right)_{$2 = 1}^{$2 = \\infty}
+endsnippet
+
+snippet stix "stix fonts" b
+\usepackage{mathtools}
+\usepackage{amsmath}[2013/01/14]
+\usepackage[amsmath,amsthm,thmmarks]{ntheorem}
+\usepackage[
+	warnings-off={mathtools-colon,mathtools-overbracket}
+]{unicode-math}
+\setmainfont[
+	Extension      = .otf,
+	UprightFont    = *-Regular,
+	BoldFont       = *-Bold,
+	ItalicFont     = *-Italic,
+	BoldItalicFont = *-BoldItalic,
+]{STIX2Text}
+\setmathfont[
+	Extension = .otf,
+	StylisticSet={
+		1, % better caligraphic forms
+		8, % upright integrals
+	},
+]{STIX2Math}
 endsnippet

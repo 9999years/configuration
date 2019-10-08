@@ -20,3 +20,4 @@ nmap <Leader>cp "fcl<C-r>=printf('%x', char2nr(@f))<CR><ESC>
 
 " Correct last spelling mistake; from https://castel.dev/post/lecture-notes-1/
 inoremap <C-l> <c-g>u<Esc>[s1z=`]a<c-g>u
+nnoremap <Leader>l mp[s1z=`p

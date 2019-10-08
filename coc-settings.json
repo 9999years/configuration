@@ -1,33 +1,45 @@
 {
-    "languageserver": {
-        "rust": {
-            "command": "ra_lsp_server",
-            "filetypes": ["rust"],
-            "rootPatterns": ["Cargo.toml"]
-        },
-        "bash": {
-            "command": "bash-language-server",
-            "args": ["start"],
-            "filetypes": ["sh"],
-            "ignoredRootPaths": ["~"]
-        },
-        "haskell": {
-            "command": "hie-wrapper",
-            "rootPatterns": [
-                ".stack.yaml",
-                "cabal.config",
-                "package.yaml"
-            ],
-            "filetypes": [
-                "hs",
-                "lhs",
-                "haskell"
-            ],
-            "initializationOptions": {
-                "languageServerHaskell": {
-                }
-            }
-        }
-    },
-    "suggest.snippetIndicator": " ✂"
+	"languageserver": {
+		"dhall": {
+			"command": "dhall-lsp-server",
+			"filetypes": [
+				"dhall"
+			]
+		},
+		"bash": {
+			"command": "bash-language-server",
+			"args": [
+				"start"
+			],
+			"filetypes": [
+				"sh"
+			],
+			"ignoredRootPaths": [
+				"~"
+			]
+		},
+		"haskell": {
+			"command": "hie-wrapper",
+			"rootPatterns": [
+				".stack.yaml",
+				"cabal.config",
+				"package.yaml"
+			],
+			"filetypes": [
+				"hs",
+				"lhs",
+				"haskell"
+			],
+			"initializationOptions": {
+				"languageServerHaskell": {}
+			}
+		}
+	},
+	"suggest.snippetIndicator": " ✂",
+	"python.formatting.provider": "black",
+	"python.autoComplete.addBrackets": true,
+	"python.linting.mypyEnabled": true,
+	"python.linting.pylintEnabled": true,
+	"python.linting.pep8Enabled": false,
+	"java.format.settings.url": "/home/cervina/.config/coc/extensions/node_modules/redhat.java/eclipse-formatter.xml"
 }
