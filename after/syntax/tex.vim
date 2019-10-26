@@ -2,6 +2,7 @@
 hi clear texComment
 hi link texComment Comment
 highlight clear Conceal
+syn match texStatement "\\[a-zA-Z_:@]\+"
 
 syn region texZone
 	\ start="\\begin{lstlisting}"
@@ -26,3 +27,5 @@ if has('conceal')
   syn match texMathSymbol '\\emptyset\>' contained conceal cchar=∅
   syn match texMathSymbol '\\coloneq\>' contained conceal cchar=≔
 end
+
+hi clear texOnlyMath

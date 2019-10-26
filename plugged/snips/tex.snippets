@@ -381,10 +381,6 @@ snippet rd "to the ... power" iA
 ^{($1)}$0
 endsnippet
 
-snippet __ "subscript" iA
-_{$1}$0
-endsnippet
-
 snippet ooo "\infty" iA
 \infty
 endsnippet
@@ -733,4 +729,12 @@ snippet stix "stix fonts" b
 		8, % upright integrals
 	},
 ]{STIX2Math}
+endsnippet
+
+snippet notion "knowledge package notion" b
+\knowledge{notion, index={${1}}}
+	| $1
+	| `!p snip.rv = t[1].title()`
+	| $1s
+	| `!p snip.rv = t[1].title()`s
 endsnippet

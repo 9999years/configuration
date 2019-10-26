@@ -32,7 +32,8 @@ let g:coc_global_extensions = [
       \ 'coc-java',
       \ 'coc-xml',
       \ 'coc-vimlsp',
-      \ 'coc-rls' ]
+      \ 'coc-rls',
+      \ 'coc-diagnostic' ]
 
 inoremap <silent><expr> <TAB>
       \ pumvisible()

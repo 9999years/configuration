@@ -6,7 +6,7 @@ setlocal spell
 
 setlocal textwidth=76
 setlocal formatoptions+=t
-setlocal isident+=64
+setlocal isident+=64,95
 
 setlocal shiftwidth=2
 setlocal ts=2

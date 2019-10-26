@@ -42,5 +42,13 @@
 	"python.linting.pylintEnabled": true,
 	"python.linting.pep8Enabled": false,
 	"java.format.settings.url": "/home/cervina/.config/coc/extensions/node_modules/redhat.java/eclipse-formatter.xml",
-	"java.home": "/usr/lib/jvm/java-1.11.0-openjdk-amd64/"
+	"java.home": "/usr/lib/jvm/java-1.11.0-openjdk-amd64/",
+	"diagnostic-languageserver.filetypes": {
+		"vim": "vint",
+		"plain": "write-good",
+		"markdown": [ "write-good", "markdownlint" ],
+		"sh": "shellcheck"
+	},
+    "latex.lint.onChange": false,
+    "latex.lint.onSave": false
 }
