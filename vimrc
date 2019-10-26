@@ -38,6 +38,7 @@ Plug '9999years/boilerplate-ultisnips' "boilerplate insertion
 "   - idris-hackers/idris-vim
 "   - pangloss/vim-javascript
 Plug 'sheerun/vim-polyglot'
+Plug 'rust-lang/rust.vim'
 Plug 'vmchale/dhall-vim'
 Plug 'chikamichi/mediawiki.vim'
 Plug 'KeitaNakamura/tex-conceal.vim'
@@ -71,3 +72,4 @@ call misc#SourceRelative('config/mappings.vim')
 call misc#SourceRelative('config/command-t.vim')
 call misc#SourceRelative('config/nerdcommenter.vim')
 "call misc#SourceRelative('config/syntastic.vim')
+call misc#SourceRelative('config/polyglot.vim')
