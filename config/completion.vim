@@ -21,13 +21,16 @@ let g:UltiSnipsSnippetDirectories = [
 """"""""""""""
 "  coc-nvim  "
 """"""""""""""
+" let g:coc_snippet_next = '<c-j>'
+
+      " \ 'coc-ultisnips',
 let g:coc_global_extensions = [
+      \ 'coc-snippets',
       \ 'coc-tsserver',
       \ 'coc-json',
       \ 'coc-html',
       \ 'coc-css',
       \ 'coc-python',
-      \ 'coc-ultisnips',
       \ 'coc-texlab',
       \ 'coc-java',
       \ 'coc-xml',
@@ -37,18 +40,22 @@ let g:coc_global_extensions = [
 
 inoremap <silent><expr> <TAB>
       \ pumvisible()
-      \ ? coc#_select_confirm()
-      \ : (<SID>check_back_space()
-      \ ? "\<TAB>"
-      \ : coc#refresh())
-inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+        \ ? coc#_select_confirm()
+        \ : (<SID>check_back_space()
+          \ ? "\<TAB>"
+          \ : coc#refresh())
+
+inoremap <expr> <S-TAB>
+      \ pumvisible()
+      \ ? "\<C-p>"
+      \ : "\<C-h>"
+
+inoremap <C-j> <Plug>(coc-snippets-expand)
 
 function! s:check_back_space() abort
   let col = col('.') - 1
   return !col || getline('.')[col - 1]  =~# '\s'
 endfunction
-
-let g:coc_snippet_next = '<tab>'
 
 " Use <c-space> to trigger completion.
 inoremap <silent><expr> <c-space> coc#refresh()

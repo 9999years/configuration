@@ -11,6 +11,9 @@ syn region texZone
 	\ start="\\begin{assembly}"
 	\ end="\\end{assembly}\|%stopzone\>"
 
+call TexNewMathZone("E", "alignat", 1)
+syn region texMathText matchgroup=texStatement start='\\\(\(\(short\)\=inter\)\=text\|mbox\)\s*{'	end='}'	contains=@texFoldGroup,@Spell
+
 if has('conceal')
   syn match texMathSymbol '\\after\>' contained conceal cchar=∘
   syn match texMathSymbol '\\Re\>' contained conceal cchar=ℝ

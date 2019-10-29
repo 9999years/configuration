@@ -11,6 +11,7 @@ Plug '9999years/vim-titlecase'  " titlecasing commands
 "Plug 'tpope/vim-unimpaired'
 Plug 'wincent/command-t', { 'do': function('misc#BuildCommandT') } " fuzzy file finder
 Plug 'tpope/vim-fugitive' " git wrapper
+Plug 'airblade/vim-gitgutter' " git gutter!
 
 " Color scheme
 "Plug 'Donearm/Ubaryd'
