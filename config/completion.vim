@@ -21,7 +21,7 @@ let g:UltiSnipsSnippetDirectories = [
 """"""""""""""
 "  coc-nvim  "
 """"""""""""""
-" let g:coc_snippet_next = '<c-j>'
+let g:coc_snippet_next = '<c-n>' " ughh
 
       " \ 'coc-ultisnips',
 let g:coc_global_extensions = [
