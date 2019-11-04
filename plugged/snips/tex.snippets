@@ -166,7 +166,7 @@ snippet iff "iff" w
 endsnippet
 
 snippet mk "Math" wA
-$${1}$`!p snip.rv = space(t[2])`$2
+$${1}$
 endsnippet
 
 snippet dm "Math" wA
@@ -568,9 +568,9 @@ snippet ~~ "~" iA
 \sim 
 endsnippet
 
-snippet || "mid" iA
- \mid 
-endsnippet
+# snippet || "mid" iA
+#  \mid 
+# endsnippet
 
 
 context "math()"
@@ -587,13 +587,9 @@ snippet inn "in " iA
 \in 
 endsnippet
 
-snippet NN "n" iA
-\N
-endsnippet
-
-snippet Nn "cap" iA
-\cap 
-endsnippet
+# snippet Nn "cap" iA
+# \cap 
+# endsnippet
 
 snippet UU "cup" iA
 \cup 
@@ -704,8 +700,8 @@ Let $\Omega \subset \C$ be open.
 endsnippet
 
 context "math()"
-snippet seq "Sequence" w
-\\left( ${1:s}_${2:n} \\right)_{$2 = 1}^{$2 = \\infty}
+snippet seq "Sequence" i
+\\{${1:s}_n\\}
 endsnippet
 
 snippet stix "stix fonts" b
