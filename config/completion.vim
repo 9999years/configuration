@@ -25,9 +25,9 @@ let g:UltiSnipsSnippetDirectories = [
 """"""""""""""
 let g:coc_snippet_next = '<tab>' " ughh
 
+      " \ 'coc-snippets',
 let g:coc_global_extensions = [
       \ 'coc-ultisnips',
-      \ 'coc-snippets',
       \ 'coc-tsserver',
       \ 'coc-json',
       \ 'coc-html',
