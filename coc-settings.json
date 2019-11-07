@@ -43,16 +43,22 @@
     "python.linting.pep8Enabled": false,
     "java.format.settings.url": "/home/cervina/.config/coc/extensions/node_modules/redhat.java/eclipse-formatter.xml",
     "java.home": "/usr/lib/jvm/java-1.11.0-openjdk-amd64/",
-	"diagnostic-languageserver.filetypes": {
-		"vim": "vint",
-		"plain": "write-good",
-		"markdown": [ "write-good", "markdownlint" ],
-		"sh": "shellcheck"
-	},
+    "diagnostic-languageserver.filetypes": {
+        "vim": "vint",
+        "plain": "write-good",
+        "markdown": [
+            "write-good",
+            "markdownlint"
+        ],
+        "sh": "shellcheck"
+    },
     "latex.lint.onChange": false,
     "latex.lint.onSave": false,
     "rust.clippy_preference": "on",
     "rust.rustflags": "-A dead_code -A unused_imports",
-    "coc.preferences.formatOnSaveFiletypes": ["rust"],
+    "coc.preferences.formatOnSaveFiletypes": [
+        "rust",
+        "json"
+    ],
     "snippets.ultisnips.enable": false
 }
