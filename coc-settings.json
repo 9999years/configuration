@@ -53,5 +53,6 @@
     "latex.lint.onSave": false,
     "rust.clippy_preference": "on",
     "rust.rustflags": "-A dead_code -A unused_imports",
-    "coc.preferences.formatOnSaveFiletypes": ["rust"]
+    "coc.preferences.formatOnSaveFiletypes": ["rust"],
+    "snippets.ultisnips.enable": false
 }
