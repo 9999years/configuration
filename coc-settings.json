@@ -59,5 +59,6 @@
     "coc.preferences.formatOnSaveFiletypes": [
         "rust",
         "json"
-    ]
+    ],
+    "snippets.ultisnips.enable": false
 }

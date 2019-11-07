@@ -9,9 +9,11 @@ let g:did_completion_opts = 1
 if has('python3')
   let g:UltiSnipsUsePythonVersion = 3
 endif
-let g:UltiSnipsExpandTrigger="<c-tab>"
-let g:UltiSnipsJumpForwardTrigger="<c-j>"
-let g:UltiSnipsJumpBackwardTrigger="<c-k>"
+let g:UltiSnipsExpandTrigger       = "<s-tab>"  " Default: <tab>
+let g:UltiSnipsListSnippets        = "<c-tab>"  " Default: <c-tab>
+let g:UltiSnipsJumpForwardTrigger  = "<c-j>"  " Default: <c-j>
+let g:UltiSnipsJumpBackwardTrigger = "<c-k>"  " Default: <c-k>
+
 let g:UltiSnipsEditSplit = 'horizontal'
 let g:UltiSnipsSnippetDir = misc#RelFile('plugged/snips')
 let g:UltiSnipsSnippetDirectories = [
@@ -21,10 +23,10 @@ let g:UltiSnipsSnippetDirectories = [
 """"""""""""""
 "  coc-nvim  "
 """"""""""""""
-" let g:coc_snippet_next = '<c-j>'
+let g:coc_snippet_next = '<tab>' " ughh
 
-      " \ 'coc-ultisnips',
 let g:coc_global_extensions = [
+      \ 'coc-ultisnips',
       \ 'coc-snippets',
       \ 'coc-tsserver',
       \ 'coc-json',
@@ -50,7 +52,7 @@ inoremap <expr> <S-TAB>
       \ ? "\<C-p>"
       \ : "\<C-h>"
 
-inoremap <C-j> <Plug>(coc-snippets-expand)
+" inoremap <C-j> <Plug>(coc-snippets-expand)
 
 function! s:check_back_space() abort
   let col = col('.') - 1
@@ -67,9 +69,9 @@ inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
 
 command -nargs=0 Format call CocAction('format')
 
-"" Use `[c` and `]c` to navigate diagnostics
-nmap <silent> [c <Plug>(coc-diagnostic-prev)
-nmap <silent> ]c <Plug>(coc-diagnostic-next)
+"" Use `[d` and `]d` to navigate diagnostics
+nmap <silent> [d <Plug>(coc-diagnostic-prev)
+nmap <silent> ]d <Plug>(coc-diagnostic-next)
 
 " Remap keys for gotos
 nmap <silent> gd <Plug>(coc-definition)
