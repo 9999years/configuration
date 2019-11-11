@@ -728,7 +728,9 @@ snippet stix "stix fonts" b
 endsnippet
 
 snippet notion "knowledge package notion" b
-\knowledge{notion, index={${2:Display@Key!Subkey}}}
+\knowledge{notion, index={${2:`!p
+snip.rv = t[1].capitalize()
+`}}}
 	| $1
 	| $1s
 endsnippet

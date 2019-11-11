@@ -15,8 +15,17 @@ let g:UltiSnipsSnippetDirectories = [
   \ misc#RelFile('plugged/snips'),
   \ misc#RelFile('plugged/vim-snippets/UltiSnips')]
 let g:coc_snippet_prev = '<nop>' " ughh
-let g:coc_snippet_next = '<nop>' " ughh
-inoremap <C-j> <c-r>=UltiSnips#JumpForwards()<cr>
+let g:coc_snippet_next = '<nop>'
+
+function! s:rebind_ctrl_j()
+  inoremap <C-j> <c-r>=UltiSnips#JumpForwards()<cr>
+endfunction
+call <SID>rebind_ctrl_j()
+
+function! s:select_rebind()
+  call <SID>rebind_ctrl_j()
+  return coc#_select_confirm()
+endfunction
 
 """"""""""""""
 "  coc-nvim  "
@@ -39,7 +48,7 @@ let g:coc_global_extensions = [
 
 inoremap <silent><expr> <TAB>
       \ pumvisible()
-        \ ? coc#_select_confirm()
+        \ ? <SID>select_rebind()
         \ : (<SID>check_back_space()
           \ ? "\<TAB>"
           \ : coc#refresh())
