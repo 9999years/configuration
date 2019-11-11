@@ -1,16 +1,11 @@
 if exists('g:did_completion_opts') | finish | endif
 let g:did_completion_opts = 1
 
-"set completeopt=menu,menuone,longest
-"set pumheight=10
-"let g:SuperTabDefaultCompletionType = "<c-n>"
-"let g:SuperTabContextDefaultCompletionType = "<c-n>"
-
 if has('python3')
   let g:UltiSnipsUsePythonVersion = 3
 endif
-let g:UltiSnipsExpandTrigger       = "<s-tab>"  " Default: <tab>
-let g:UltiSnipsListSnippets        = "<c-tab>"  " Default: <c-tab>
+let g:UltiSnipsExpandTrigger       = "<nop>"  " Default: <tab>
+let g:UltiSnipsListSnippets        = "<nop>"  " Default: <c-tab>
 let g:UltiSnipsJumpForwardTrigger  = "<c-j>"  " Default: <c-j>
 let g:UltiSnipsJumpBackwardTrigger = "<c-k>"  " Default: <c-k>
 
@@ -19,11 +14,13 @@ let g:UltiSnipsSnippetDir = misc#RelFile('plugged/snips')
 let g:UltiSnipsSnippetDirectories = [
   \ misc#RelFile('plugged/snips'),
   \ misc#RelFile('plugged/vim-snippets/UltiSnips')]
+let g:coc_snippet_prev = '<nop>' " ughh
+let g:coc_snippet_next = '<nop>' " ughh
+inoremap <C-j> <c-r>=UltiSnips#JumpForwards()<cr>
 
 """"""""""""""
 "  coc-nvim  "
 """"""""""""""
-let g:coc_snippet_next = '<tab>' " ughh
 
       " \ 'coc-snippets',
 let g:coc_global_extensions = [
@@ -52,8 +49,6 @@ inoremap <expr> <S-TAB>
       \ ? "\<C-p>"
       \ : "\<C-h>"
 
-" inoremap <C-j> <Plug>(coc-snippets-expand)
-
 function! s:check_back_space() abort
   let col = col('.') - 1
   return !col || getline('.')[col - 1]  =~# '\s'
@@ -67,7 +62,7 @@ inoremap <silent><expr> <c-f> coc#_select_confirm()
 " Coc only does snippet and additional edit on confirm.
 inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
 
-command -nargs=0 Format call CocAction('format')
+command! -nargs=0 Format call CocAction('format')
 
 "" Use `[d` and `]d` to navigate diagnostics
 nmap <silent> [d <Plug>(coc-diagnostic-prev)

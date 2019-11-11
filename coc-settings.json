@@ -35,7 +35,6 @@
             }
         }
     },
-    "suggest.snippetIndicator": " ✂",
     "python.formatting.provider": "black",
     "python.autoComplete.addBrackets": true,
     "python.linting.mypyEnabled": true,
@@ -60,5 +59,9 @@
         "rust",
         "json"
     ],
-    "snippets.ultisnips.enable": false
+    "snippets.ultisnips.enable": false,
+    "suggest.snippetIndicator": " ✂",
+    "codeLens.enable": true,
+    "suggest.enablePreview": true,
+    "suggest.floatEnable": true
 }
