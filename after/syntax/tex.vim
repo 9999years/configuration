@@ -12,6 +12,7 @@ syn region texZone
 	\ end="\\end{assembly}\|%stopzone\>"
 
 call TexNewMathZone("E", "alignat", 1)
+call TexNewMathZone("F", "gather", 1)
 syn region texMathText matchgroup=texStatement start='\\\(\(\(short\)\=inter\)\=text\|mbox\)\s*{'	end='}'	contains=@texFoldGroup,@Spell
 
 if has('conceal')
