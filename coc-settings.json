@@ -31,7 +31,9 @@
                 "haskell"
             ],
             "initializationOptions": {
-                "languageServerHaskell": {}
+                "languageServerHaskell": {
+                    "hlintOn": true
+                }
             }
         }
     },
