@@ -514,12 +514,6 @@ snippet '(?<!\\)(sin|cos|arccot|cot|csc|ln|log|exp|star|perp)' "ln" rwA
 \\`!p snip.rv = match.group(1)`
 endsnippet
 
-priority 200
-context "math()"
-snippet '(?<!\\)(arcsin|arccos|arctan|arccot|arccsc|arcsec|pi|zeta|int)' "ln" rwA
-\\`!p snip.rv = match.group(1)`
-endsnippet
-
 priority 100
 context "math()"
 snippet -> "to" iA
@@ -699,7 +693,6 @@ snippet letw "let omega" iA
 Let $\Omega \subset \C$ be open.
 endsnippet
 
-context "math()"
 snippet seq "Sequence" i
 \\{${1:s}_n\\}
 endsnippet
