@@ -44,6 +44,7 @@ let g:coc_global_extensions = [
       \ 'coc-xml',
       \ 'coc-vimlsp',
       \ 'coc-rls',
+      \ 'coc-solargraph',
       \ 'coc-diagnostic' ]
 
 inoremap <silent><expr> <TAB>
@@ -110,3 +111,5 @@ nnoremap <silent> <space>k  :<C-u>CocPrev<CR>
 nnoremap <silent> <space>p  :<C-u>CocListResume<CR>
 " Execute autofix
 nnoremap <silent> <space>f  :<C-u>CocFix<CR>
+" Run current code-lens thing
+nmap <space>r  <Plug>(coc-codelens-action)
