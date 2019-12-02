@@ -45,6 +45,7 @@ let g:coc_global_extensions = [
       \ 'coc-vimlsp',
       \ 'coc-rls',
       \ 'coc-diagnostic' ]
+      " \ 'coc-tabnine' ]
 
 inoremap <silent><expr> <TAB>
       \ pumvisible()
