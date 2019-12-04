@@ -35,6 +35,15 @@
                     "hlintOn": true
                 }
             }
+        },
+        "golang": {
+            "command": "gopls",
+            "rootPatterns": [
+                "go.mod"
+            ],
+            "filetypes": [
+                "go"
+            ]
         }
     },
     "python.formatting.provider": "black",
@@ -59,7 +68,8 @@
     "rust.rustflags": "-A dead_code -A unused_imports",
     "coc.preferences.formatOnSaveFiletypes": [
         "rust",
-        "json"
+        "json",
+        "go"
     ],
     "snippets.ultisnips.enable": false,
     "suggest.snippetIndicator": " ✂",
