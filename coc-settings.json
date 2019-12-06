@@ -66,14 +66,14 @@
                 {
                     "line": 1,
                     "column": 2,
-                    "message": [4],
-                    "security": 3
+                    "security": 3,
+                    "message": [4]
                 }
             ],
             "securities": {
                 "error": "Error",
                 "warning": "Warning",
-                "note": "Info"
+                "note": "Hint"
             }
         }
     },
