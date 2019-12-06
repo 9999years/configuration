@@ -53,6 +53,30 @@
     "python.linting.pep8Enabled": false,
     "java.format.settings.url": "/home/cervina/.config/coc/extensions/node_modules/redhat.java/eclipse-formatter.xml",
     "java.home": "/usr/lib/jvm/java-1.11.0-openjdk-amd64/",
+    "diagnostic-languageserver.linters": {
+        "nim": {
+            "command": "nim",
+            "args": ["compile", "-"],
+            "sourceName": "nim",
+            "isStdout": false,
+            "isStderr": true,
+            "formatLines": 1,
+            "formatPattern": [
+                "[^(]+\\((\\d+), (\\d+)\\) ([^:]+): (.*)$",
+                {
+                    "line": 1,
+                    "column": 2,
+                    "message": [4],
+                    "security": 3
+                }
+            ],
+            "securities": {
+                "error": "Error",
+                "warning": "Warning",
+                "note": "Info"
+            }
+        }
+    },
     "diagnostic-languageserver.filetypes": {
         "vim": "vint",
         "plain": "write-good",
@@ -60,7 +84,8 @@
             "write-good",
             "markdownlint"
         ],
-        "sh": "shellcheck"
+        "sh": "shellcheck",
+        "nim": "nim"
     },
     "latex.lint.onChange": false,
     "latex.lint.onSave": false,
