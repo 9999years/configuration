@@ -46,6 +46,8 @@ Plug 'KeitaNakamura/tex-conceal.vim'
 Plug 'lervag/vimtex'
 Plug 'alunny/pegjs-vim'
 Plug 'vim-scripts/icalendar.vim'
+Plug 'https://gitlab.com/n9n/vim-apl.git'
+Plug 'hyhugh/coc-erlang_ls', {'do': 'yarn install --frozen-lockfile'}
 call plug#end()
 
 let g:VIMFILES = misc#GetVimfiles()
