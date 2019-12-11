@@ -44,6 +44,25 @@
             "filetypes": [
                 "go"
             ]
+        },
+        "clangd": {
+            "command": "clangd-8",
+            "args": [
+                "--background-index"
+            ],
+            "rootPatterns": [
+                "compile_flags.txt",
+                "compile_commands.json",
+                ".vim/",
+                ".git/",
+                ".hg/"
+            ],
+            "filetypes": [
+                "c",
+                "cpp",
+                "objc",
+                "objcpp"
+            ]
         }
     },
     "python.formatting.provider": "black",
@@ -51,12 +70,13 @@
     "python.linting.mypyEnabled": true,
     "python.linting.pylintEnabled": true,
     "python.linting.pep8Enabled": false,
-    "java.format.settings.url": "/home/cervina/.config/coc/extensions/node_modules/redhat.java/eclipse-formatter.xml",
-    "java.home": "/usr/lib/jvm/java-1.11.0-openjdk-amd64/",
     "diagnostic-languageserver.linters": {
         "nim": {
             "command": "nim",
-            "args": ["compile", "-"],
+            "args": [
+                "compile",
+                "-"
+            ],
             "sourceName": "nim",
             "isStdout": false,
             "isStderr": true,
@@ -67,7 +87,9 @@
                     "line": 1,
                     "column": 2,
                     "security": 3,
-                    "message": [4]
+                    "message": [
+                        4
+                    ]
                 }
             ],
             "securities": {
@@ -94,7 +116,8 @@
     "coc.preferences.formatOnSaveFiletypes": [
         "rust",
         "json",
-        "go"
+        "go",
+        "cpp"
     ],
     "snippets.ultisnips.enable": false,
     "suggest.snippetIndicator": " ✂",

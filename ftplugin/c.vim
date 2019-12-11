@@ -3,6 +3,9 @@ if exists("b:did_C_ftplugin")
 endif
 let b:did_C_ftplugin = 1
 
+setl ts=2
+setl sw=2
+
 "complete a classical C comment: '/*' => '/* | */'
 inoremap  <buffer>  /*       /*<Space><Space>*/<Left><Left><Left>
 

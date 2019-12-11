@@ -46,6 +46,7 @@ Plug 'KeitaNakamura/tex-conceal.vim'
 Plug 'lervag/vimtex'
 Plug 'alunny/pegjs-vim'
 Plug 'vim-scripts/icalendar.vim'
+Plug 'OmniSharp/omnisharp-vim'
 call plug#end()
 
 let g:VIMFILES = misc#GetVimfiles()
