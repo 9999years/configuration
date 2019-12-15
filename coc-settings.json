@@ -117,7 +117,9 @@
         "rust",
         "json",
         "go",
-        "cpp"
+        "cpp",
+        "python",
+        "javascript"
     ],
     "snippets.ultisnips.enable": false,
     "suggest.snippetIndicator": " ✂",
