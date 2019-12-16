@@ -117,11 +117,12 @@
         "rust",
         "json",
         "go",
-        "cpp"
+        "python",
+        "cpp",
+        "javascript"
     ],
     "snippets.ultisnips.enable": false,
     "suggest.snippetIndicator": " ✂",
-    "codeLens.enable": true,
     "suggest.enablePreview": true,
     "suggest.floatEnable": true
 }
