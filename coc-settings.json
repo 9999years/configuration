@@ -119,6 +119,7 @@
         "go",
         "python",
         "cpp",
+        "python",
         "javascript"
     ],
     "snippets.ultisnips.enable": false,
