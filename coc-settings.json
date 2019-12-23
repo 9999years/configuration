@@ -101,9 +101,7 @@
     },
     "diagnostic-languageserver.filetypes": {
         "vim": "vint",
-        "plain": "write-good",
         "markdown": [
-            "write-good",
             "markdownlint"
         ],
         "sh": "shellcheck",
