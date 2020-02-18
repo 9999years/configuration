@@ -107,6 +107,14 @@
         "sh": "shellcheck",
         "nim": "nim"
     },
+    "diagnostic-languageserver.formatters": {
+        "nixfmt": {
+            "command": "nixfmt"
+        }
+    },
+    "diagnostic-languageserver.formatFiletypes": {
+        "nix": "nixfmt"
+    },
     "latex.lint.onChange": false,
     "latex.lint.onSave": false,
     "rust.clippy_preference": "on",
@@ -118,7 +126,8 @@
         "python",
         "cpp",
         "python",
-        "javascript"
+        "javascript",
+        "nix"
     ],
     "snippets.ultisnips.enable": false,
     "suggest.snippetIndicator": " ✂",
