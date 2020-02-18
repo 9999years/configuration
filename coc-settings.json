@@ -118,8 +118,10 @@
         "python",
         "cpp",
         "python",
-        "javascript"
+        "javascript",
+        "nix"
     ],
+    "yaml.format.enable": true,
     "snippets.ultisnips.enable": false,
     "suggest.snippetIndicator": " ✂",
     "suggest.enablePreview": true,
