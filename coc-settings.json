@@ -132,6 +132,6 @@
     "yaml.format.enable": true,
     "snippets.ultisnips.enable": false,
     "suggest.snippetIndicator": " ✂",
-    "suggest.enablePreview": true,
+    "suggest.enablePreview": false,
     "suggest.floatEnable": true
 }

@@ -48,7 +48,7 @@ Plug 'alunny/pegjs-vim'
 Plug 'vim-scripts/icalendar.vim'
 Plug 'OmniSharp/omnisharp-vim'
 Plug 'https://gitlab.com/n9n/vim-apl.git'
-Plug 'hyhugh/coc-erlang_ls', {'do': 'yarn install --frozen-lockfile'}
+" Plug 'hyhugh/coc-erlang_ls', {'do': 'yarn install --frozen-lockfile'}
 Plug 'qnighy/lalrpop.vim'
 call plug#end()
 

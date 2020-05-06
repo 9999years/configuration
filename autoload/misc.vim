@@ -83,6 +83,12 @@ function misc#BuildCommandT(info)
     let l:ruby='/usr/local/opt/ruby/bin/ruby'
   endif
 
+  if !filereadable(l:ruby)
+    " Our guesses for the ruby binary were wrong -- just use whatever's in the
+    " $PATH
+    let l:ruby='ruby'
+  endif
+
   if a:info.status != 'unchanged' || a:info.force
     if has('win32')
       !powershell ./make.ps1
