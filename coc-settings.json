@@ -109,7 +109,8 @@
     },
     "diagnostic-languageserver.formatters": {
         "nixfmt": {
-            "command": "nixfmt"
+            "command": "nixfmt",
+            "args": [ "--quiet" ]
         }
     },
     "diagnostic-languageserver.formatFiletypes": {
@@ -130,6 +131,12 @@
         "nix"
     ],
     "yaml.format.enable": true,
+    "html.filetypes": [
+        "html",
+        "handlebars",
+        "htmldjango",
+        "jinja.html"
+    ],
     "snippets.ultisnips.enable": false,
     "suggest.snippetIndicator": " ✂",
     "suggest.enablePreview": false,
