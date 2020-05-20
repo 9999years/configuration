@@ -138,6 +138,5 @@
     ],
     "snippets.ultisnips.enable": false,
     "suggest.snippetIndicator": " ✂",
-    "suggest.enablePreview": true,
     "suggest.floatEnable": true
 }
