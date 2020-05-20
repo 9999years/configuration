@@ -130,6 +130,7 @@
         "javascript",
         "nix"
     ],
+    "yaml.format.enable": true,
     "html.filetypes": [
         "html",
         "handlebars",
@@ -138,5 +139,6 @@
     ],
     "snippets.ultisnips.enable": false,
     "suggest.snippetIndicator": " ✂",
+    "suggest.enablePreview": false,
     "suggest.floatEnable": true
 }

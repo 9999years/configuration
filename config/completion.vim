@@ -35,6 +35,7 @@ endfunction
 let g:coc_global_extensions = [
       \ 'coc-ultisnips',
       \ 'coc-tsserver',
+      \ 'coc-yaml',
       \ 'coc-json',
       \ 'coc-html',
       \ 'coc-css',
