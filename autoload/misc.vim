@@ -78,16 +78,8 @@ function misc#BuildCommandT(info)
   " - name:   name of the plugin
   " - status: 'installed', 'updated', or 'unchanged'
   " - force:  set on PlugInstall! or PlugUpdate!
-  let l:ruby='/usr/bin/ruby'
-  if has('macunix') && !has('nvim')
-    let l:ruby='/usr/local/opt/ruby/bin/ruby'
-  endif
 
-  if !filereadable(l:ruby)
-    " Our guesses for the ruby binary were wrong -- just use whatever's in the
-    " $PATH
-    let l:ruby='ruby'
-  endif
+  let l:ruby='ruby'
 
   if a:info.status != 'unchanged' || a:info.force
     if has('win32')
