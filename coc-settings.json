@@ -110,7 +110,9 @@
     "diagnostic-languageserver.formatters": {
         "nixfmt": {
             "command": "nixfmt",
-            "args": [ "--quiet" ]
+            "args": [
+                "--quiet"
+            ]
         }
     },
     "diagnostic-languageserver.formatFiletypes": {
@@ -128,7 +130,8 @@
         "cpp",
         "python",
         "javascript",
-        "nix"
+        "nix",
+        "html"
     ],
     "yaml.format.enable": true,
     "html.filetypes": [

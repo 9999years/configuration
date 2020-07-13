@@ -10,10 +10,6 @@ let g:UltiSnipsJumpForwardTrigger  = "<c-j>"  " Default: <c-j>
 let g:UltiSnipsJumpBackwardTrigger = "<c-k>"  " Default: <c-k>
 
 let g:UltiSnipsEditSplit = 'horizontal'
-let g:UltiSnipsSnippetDir = misc#RelFile('plugged/snips')
-let g:UltiSnipsSnippetDirectories = [
-  \ misc#RelFile('plugged/snips'),
-  \ misc#RelFile('plugged/vim-snippets/UltiSnips')]
 let g:coc_snippet_prev = '<nop>' " ughh
 let g:coc_snippet_next = '<nop>'
 
