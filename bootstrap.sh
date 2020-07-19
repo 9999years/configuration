@@ -32,54 +32,58 @@ function has_cmd() { # CMD TASK
     fi
 }
 
-if announce_clone dotfiles ~/.dotfiles
-then
-    git clone https://github.com/9999years/dotfiles.git ~/.dotfiles
-    if has_cmd just "Linking dotfiles"
+function bootstrap() {
+    if announce_clone dotfiles ~/.dotfiles
     then
-        pushd ~/.dotfiles || exit
-        just
-        popd || exit
-
-        if has_cmd fish && fish --command='type -q fisher'
+        git clone https://github.com/9999years/dotfiles.git ~/.dotfiles
+        if has_cmd just "Linking dotfiles"
         then
-            echo "${green}Installing fish shell fisher plugins$reset"
-            fish --command=fisher
-        else
-            echo "${bold}'fish' not found or 'fisher' not found within fish; skipping fisher install$reset"
+            pushd ~/.dotfiles || exit
+            just
+            popd || exit
+
+            if has_cmd fish && fish --command='type -q fisher'
+            then
+                echo "${green}Installing fish shell fisher plugins$reset"
+                fish --command=fisher
+            else
+                echo "${bold}'fish' not found or 'fisher' not found within fish; skipping fisher install$reset"
+            fi
         fi
     fi
-fi
 
-if announce_clone "tpm (https://github.com/tmux-plugins/tpm)" ~/.tmux/plugins/tpm
-then
-    mkdir -p ~/.tmux/plugins
-    git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
-fi
-
-if announce_clone "vimfiles (for neovim)" ~/.config/nvim
-then
-    git clone https://github.com/9999years/vimfiles.git ~/.config/nvim
-    if [[ ! -e ~/.nvim ]]
+    if announce_clone "tpm (https://github.com/tmux-plugins/tpm)" ~/.tmux/plugins/tpm
     then
-        echo "${green}Creating a symbolic link from ~/.nvim to ~/.config/nvim$reset"
-        ln -s ./.config/nvim ~/.nvim
+        mkdir -p ~/.tmux/plugins
+        git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
     fi
 
-    if has_cmd nvim "installing vim plugins"
+    if announce_clone "vimfiles (for neovim)" ~/.config/nvim
     then
-        nvim +PlugInstall +:qa
-    fi
-fi
-
-case "$(uname -a)" in
-    *NixOS*)
-        if announce_clone "nix-config" ~/nix-config
+        git clone https://github.com/9999years/vimfiles.git ~/.config/nvim
+        if [[ ! -e ~/.nvim ]]
         then
-            git clone https://github.com/9999years/nix-config.git ~/nix-config
+            echo "${green}Creating a symbolic link from ~/.nvim to ~/.config/nvim$reset"
+            ln -s ./.config/nvim ~/.nvim
         fi
-        ;;
-    *)
-        echo "${bold}Not on NixOS; not cloning ~/nix-config$reset"
-        ;;
-esac
+
+        if has_cmd nvim "installing vim plugins"
+        then
+            nvim '+PlugInstall' '+:qa'
+        fi
+    fi
+
+    case "$(uname -a)" in
+        *NixOS*)
+            if announce_clone "nix-config" ~/nix-config
+            then
+                git clone https://github.com/9999years/nix-config.git ~/nix-config
+            fi
+            ;;
+        *)
+            echo "${bold}Not on NixOS; not cloning ~/nix-config$reset"
+            ;;
+    esac
+}
+
+bootstrap
