@@ -8,6 +8,9 @@ let g:UltiSnipsExpandTrigger       = "<nop>"  " Default: <tab>
 let g:UltiSnipsListSnippets        = "<nop>"  " Default: <c-tab>
 let g:UltiSnipsJumpForwardTrigger  = "<c-j>"  " Default: <c-j>
 let g:UltiSnipsJumpBackwardTrigger = "<c-k>"  " Default: <c-k>
+" let g:UltiSnipsSnippetDirectories = [
+      " \ $HOME . "/plugged/snips/UltiSnips",
+      " \ $HOME . "/.config/nvim/plugged/vim-snippets/UltiSnips" ]
 
 let g:UltiSnipsEditSplit = 'horizontal'
 let g:coc_snippet_prev = '<nop>' " ughh

@@ -3,6 +3,3 @@
 /doc/tags
 /autoload/plug.vim.old
 /plugged/*
-!/plugged/snips
-!/plugged/snips/*
-!/plugged/snips/**/*
