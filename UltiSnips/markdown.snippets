@@ -1,5 +1,22 @@
 snippet code "code block" b
-<pre><code class="$1" data-line-numbers="">
+```$1
 $0
-</code></pre>
+```
+endsnippet
+
+snippet sli "Description"
+<slide data-timing=${1:15}>
+endsnippet
+
+priority 100
+snippet "time?" "reveal.js slide timing" r
+data-timing=${1:15}
+endsnippet
+
+snippet tweet "reveal.js tweet" b
+<tweet>
+	$1
+	<date>$2</date>
+	<likes>$3</likes>
+</tweet>
 endsnippet
