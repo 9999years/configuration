@@ -144,3 +144,10 @@ do
 done
 args+=("$@")
 endsnippet
+
+snippet lines
+while IFS="" read -r ${1:line}
+do
+	${0:echo "Line: \$$1"}
+done < ${2:<(ps aux)}
+endsnippet
