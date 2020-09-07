@@ -1,0 +1,10 @@
+snippet _skel "skeleton" b
+{ pkgs ? import <nixpkgs> { } }:
+let inherit (pkgs) stdenv lib;
+in stdenv.mkDerivation {
+	pname = "pname";
+	version = "0.0.1";
+	src = ./.;
+	buildInputs = [ ];
+}
+endsnippet
