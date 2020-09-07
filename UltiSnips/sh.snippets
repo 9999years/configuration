@@ -1,7 +1,8 @@
 snippet _skel "Shebang" b
-#! /bin/bash
+#! /usr/bin/env bash
 set -e
 
+# {{{ Colors, logging functions
 readonly PROG_NAME="\$0"
 
 function RESET            { echo -e "\e[0m";  }
@@ -29,6 +30,7 @@ function RESET_FG         { echo -e "\e[39m"; }
 
 function now { date +%FT%T; }
 
+# _log COLORS LABEL [MESSAGE [...]]
 function _log {
 	color="\$1"
 	shift
@@ -44,6 +46,7 @@ function warn  { _log "$(BRYELLOW)"     "[warn] " "$@"; }
 function error { _log "$(BRRED)"        "[error]" "$@"; }
 function fatal { _log "$(BOLD)$(BRRED)" "[FATAL]" "$@"; exit 1; }
 function cmd   { _log "$(CYAN)"         "[run]  " "\\$ $(BOLD)$(UNDERLINED)$*"; }
+# }}}
 
 endsnippet
 
@@ -123,11 +126,11 @@ snippet arith "arithmetic expression"
 endsnippet
 
 snippet argparse "argument parsing" b
-readonly USAGE="Usage: $0"
+readonly USAGE="Usage: \$0 $1"
 declare -a args
 while (( "$#" ))
 do
-	case "$1" in
+	case "\$1" in
 		-h|--help)
 			echo "$USAGE"
 			exit
@@ -137,7 +140,7 @@ do
 			break
 			;;
 		*)
-			args+=("$1")
+			args+=("\$1")
 			;;
 	esac
 	shift
