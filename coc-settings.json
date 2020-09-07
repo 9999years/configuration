@@ -46,7 +46,7 @@
       ]
     },
     "clangd": {
-      "command": "clangd-8",
+      "command": "clangd",
       "args": [
         "--background-index"
       ],
