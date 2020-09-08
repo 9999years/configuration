@@ -1,3 +1,56 @@
+global !p
+import re
+import subcommand
+
+PLACEHOLDER_HASH = '1111111111111111111111111111111111111111111111111111'
+
+_GH_USER_PARTIAL_RE = re.compile(r'[a-zA-Z0-9-]+')
+_GH_REPO_PARTIAL_RE = re.compile(r'[a-zA-Z0-9.-]+')
+_GH_VERSION_PARTIAL_RE = re.compile(r'[0-9a-f]{40}|v?\d+(\.\d+)*')
+# omitted: e o u t
+NIX_BASE32_RE = re.compile(r'[0123456789abcdfghijklmnpqrsvwxyz]{52}')
+
+def is_valid_github_username(user):
+	return not (
+		(not user or len(user) >= 40)
+		or '--' in user
+		or (user.startswith('-') or user.endswith('-'))
+		or (not _GH_USER_PARTIAL_RE.fullmatch(user))
+	)
+
+def is_valid_github_repo(name):
+	return _GH_REPO_PARTIAL_RE.fullmatch(name)
+
+def is_reasonable_version(version):
+	return _GH_VERSION_PARTIAL_RE.fullmatch(version)
+
+def github_nix_hash(owner, repo, version):
+	proc = subprocess.run(
+		[ 'nix-prefetch-url',
+			'--unpack',
+			# if the version number isn't a valid nix path name, the download might error
+			'--name', 'source',
+			f'https://github.com/{owner}/{repo}/archive/{version}.tar.gz' ],
+		stdout=subprocess.PIPE,
+		stderr=subprocess.DEVNULL,
+	)
+	if proc.returncode != 0:
+		# Download failed, return placeholder hash
+		return PLACEHOLDER_HASH
+
+	try:
+		nix_hash = proc.stdout.decode('utf-8').strip()
+	except UnicodeDecodeError:
+		# Unexpected, return placeholder
+		return PLACEHOLDER_HASH
+
+	if NIX_BASE32_RE.fullmatch(nix_hash):
+		return nix_hash
+	else:
+		# Incorrectly formatted (?) hash
+		return PLACEHOLDER_HASH
+endglobal
+
 snippet _skel "skeleton" b
 { pkgs ? import <nixpkgs> { } }:
 let inherit (pkgs) stdenv lib;
@@ -6,5 +59,21 @@ in stdenv.mkDerivation {
 	version = "0.0.1";
 	src = ./.;
 	buildInputs = [ ];
+}
+endsnippet
+
+snippet github "fetchFromGitHub" w
+fetchFromGitHub {
+	owner = "$1";
+	repo = "$2";
+	rev = "$3";
+	sha256 = "`p
+print('hi')
+snip.rv = "1111111111111111111111111111111111111111111111111111"
+if (is_valid_github_username(t[1])
+	and is_valid_github_repo(t[2])
+	and is_reasonable_version(t[3])):
+	snip.rv = github_nix_hash(t[1], t[2], t[3])
+`";
 }
 endsnippet

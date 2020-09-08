@@ -1,9 +1,6 @@
 if exists('g:did_completion_opts') | finish | endif
 let g:did_completion_opts = 1
 
-if has('python3')
-  let g:UltiSnipsUsePythonVersion = 3
-endif
 let g:UltiSnipsExpandTrigger       = "<nop>"  " Default: <tab>
 let g:UltiSnipsListSnippets        = "<nop>"  " Default: <c-tab>
 let g:UltiSnipsJumpForwardTrigger  = "<c-j>"  " Default: <c-j>
@@ -11,7 +8,6 @@ let g:UltiSnipsJumpBackwardTrigger = "<c-k>"  " Default: <c-k>
 " let g:UltiSnipsSnippetDirectories = [
       " \ $HOME . "/plugged/snips/UltiSnips",
       " \ $HOME . "/.config/nvim/plugged/vim-snippets/UltiSnips" ]
-
 let g:UltiSnipsEditSplit = 'horizontal'
 let g:coc_snippet_prev = '<nop>' " ughh
 let g:coc_snippet_next = '<nop>'
