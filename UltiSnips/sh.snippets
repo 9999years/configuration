@@ -154,3 +154,7 @@ do
 	${0:echo "Line: \$$1"}
 done < ${2:<(ps aux)}
 endsnippet
+
+snippet scriptdir "script directory" b
+${1:SCRIPT_DIR}="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
+endsnippet
