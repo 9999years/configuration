@@ -1,14 +1,30 @@
 global !p
 import re
-import subcommand
+import subprocess
+import functools
+import urllib
 
 PLACEHOLDER_HASH = '1111111111111111111111111111111111111111111111111111'
 
 _GH_USER_PARTIAL_RE = re.compile(r'[a-zA-Z0-9-]+')
 _GH_REPO_PARTIAL_RE = re.compile(r'[a-zA-Z0-9.-]+')
-_GH_VERSION_PARTIAL_RE = re.compile(r'[0-9a-f]{40}|v?\d+(\.\d+)*')
+_BAD_FILENAME_RE = re.compile(r'[^a-zA-Z0-9._-]')
 # omitted: e o u t
 NIX_BASE32_RE = re.compile(r'[0123456789abcdfghijklmnpqrsvwxyz]{52}')
+
+
+def sanitize_filename(name):
+	return _BAD_FILENAME_RE.sub('_', name) if name else 'file'
+
+
+def last_component(url):
+	split = urllib.parse.urlsplit(url)
+	return split.path.rpartition('/')[2]
+
+
+def last_component_sanitized(url):
+	return sanitize_filename(last_component(url))
+
 
 def is_valid_github_username(user):
 	return not (
@@ -18,22 +34,30 @@ def is_valid_github_username(user):
 		or (not _GH_USER_PARTIAL_RE.fullmatch(user))
 	)
 
+
 def is_valid_github_repo(name):
 	return _GH_REPO_PARTIAL_RE.fullmatch(name)
 
-def is_reasonable_version(version):
-	return _GH_VERSION_PARTIAL_RE.fullmatch(version)
 
-def github_nix_hash(owner, repo, version):
-	proc = subprocess.run(
-		[ 'nix-prefetch-url',
-			'--unpack',
-			# if the version number isn't a valid nix path name, the download might error
-			'--name', 'source',
-			f'https://github.com/{owner}/{repo}/archive/{version}.tar.gz' ],
-		stdout=subprocess.PIPE,
-		stderr=subprocess.DEVNULL,
-	)
+def is_reasonable_version(version):
+	return bool(version)
+
+
+def nix_prefetch_url(url, opts=None):
+	args = ['nix-prefetch-url']
+	if opts:
+		args.extend(opts)
+	args.append(url)
+	try:
+		proc = subprocess.run(
+			args,
+			stdout=subprocess.PIPE,
+			stderr=subprocess.DEVNULL,
+		)
+	except:
+		# Keyboard interrupt, whatever, don't complain
+		return PLACEHOLDER_HASH
+
 	if proc.returncode != 0:
 		# Download failed, return placeholder hash
 		return PLACEHOLDER_HASH
@@ -49,6 +73,23 @@ def github_nix_hash(owner, repo, version):
 	else:
 		# Incorrectly formatted (?) hash
 		return PLACEHOLDER_HASH
+
+
+@functools.lru_cache()
+def plain_nix_hash(url):
+	return nix_prefetch_url(url, opts=['--name', last_component_sanitized(url)])
+
+
+@functools.lru_cache()
+def github_nix_hash(owner, repo, version):
+	return nix_prefetch_url(
+		f'https://github.com/{owner}/{repo}/archive/{version}.tar.gz',
+		opts=[
+			'--unpack',
+			# if the version number isn't a valid nix path name, the download might error
+			'--name', sanitize_filename(f'{owner}-{repo}-{version}'),
+		]
+	)
 endglobal
 
 snippet _skel "skeleton" b
@@ -62,18 +103,45 @@ in stdenv.mkDerivation {
 }
 endsnippet
 
-snippet github "fetchFromGitHub" w
+snippet github "fetchFromGitHub" i
 fetchFromGitHub {
 	owner = "$1";
 	repo = "$2";
 	rev = "$3";
-	sha256 = "`p
-print('hi')
-snip.rv = "1111111111111111111111111111111111111111111111111111"
-if (is_valid_github_username(t[1])
+	sha256 = "${4:`!p
+cur = snip.c
+if not cur:
+	snip.rv = PLACEHOLDER_HASH
+elif cur != PLACEHOLDER_HASH:
+	snip.rv = cur
+elif (
+	snip.p.current_text == cur
+	and is_valid_github_username(t[1])
 	and is_valid_github_repo(t[2])
-	and is_reasonable_version(t[3])):
+	and is_reasonable_version(t[3])
+):
 	snip.rv = github_nix_hash(t[1], t[2], t[3])
-`";
+else:
+	snip.rv = PLACEHOLDER_HASH
+`}";
+}
+endsnippet
+
+snippet fetchurl "fetchurl" i
+fetchurl {
+	url = "$1";
+	sha256 = "${4:`!p
+cur = snip.c
+if cur and cur != PLACEHOLDER_HASH:
+	snip.rv = cur
+elif (
+	cur
+	and snip.p.current_text == cur
+	and '://' in t[1]
+):
+	snip.rv = plain_nix_hash(t[1])
+else:
+	snip.rv = PLACEHOLDER_HASH
+`}";
 }
 endsnippet
