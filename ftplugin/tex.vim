@@ -11,6 +11,8 @@ setlocal isident+=64,95
 setlocal shiftwidth=2
 setlocal ts=2
 
+setl foldmethod=marker
+
 function! s:Mathize(mode)
 	if a:mode =~ '[vV]'
 		exe "normal \<ESC>`>a$\<ESC>`<i$\<ESC>"

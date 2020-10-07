@@ -2,7 +2,7 @@ snippet _skel "Shebang" b
 #! /usr/bin/env bash
 set -e
 
-# {{{ Colors, logging functions
+# {{{ Colors, logging boilerplate
 readonly PROG_NAME="\$0"
 
 function RESET            { echo -e "\e[0m";  }
@@ -39,6 +39,7 @@ function _log {
 	echo -n "$color$level $PROG_NAME ${color}[$(now)]:" "$@"
 	RESET
 }
+# }}}
 
 function dbg   { _log "$(GRAY)"         "[debug]" "$@"; }
 function info  { _log "$(BRGREEN)"      "[info] " "$@"; }
@@ -46,7 +47,6 @@ function warn  { _log "$(BRYELLOW)"     "[warn] " "$@"; }
 function error { _log "$(BRRED)"        "[error]" "$@"; }
 function fatal { _log "$(BOLD)$(BRRED)" "[FATAL]" "$@"; exit 1; }
 function cmd   { _log "$(CYAN)"         "[run]  " "\\$ $(BOLD)$(UNDERLINED)$*"; }
-# }}}
 
 endsnippet
 

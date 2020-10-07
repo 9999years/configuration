@@ -76,7 +76,7 @@ $0
 endsnippet
 
 snippet cmd "\newcommand" b
-\newcommand{\\$1}`!p snip.rv = "[" if t[2] else ""`${2:1}`!p snip.rv = "]" if t[2] else ""`{$0}
+\NewDocumentCommand \\$1 { $2 } {$0}
 endsnippet
 
 snippet lst "lstlisting" b
