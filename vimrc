@@ -1,3 +1,7 @@
+let g:VIMFILES = misc#GetVimfiles()
+" polyglot whines if we don't load this first.
+call misc#SourceRelative('config/polyglot.vim')
+
 call plug#begin()
 Plug 'junegunn/vim-plug'
 
@@ -54,8 +58,6 @@ Plug 'leanprover/lean.vim'
 Plug 'sukima/vim-tiddlywiki'
 call plug#end()
 
-let g:VIMFILES = misc#GetVimfiles()
-
 " General 'set' commands, colorscheme
 call misc#SourceRelative('config/options.vim')
 
@@ -79,5 +81,5 @@ call misc#SourceRelative('config/mappings.vim')
 call misc#SourceRelative('config/command-t.vim')
 call misc#SourceRelative('config/nerdcommenter.vim')
 "call misc#SourceRelative('config/syntastic.vim')
-call misc#SourceRelative('config/polyglot.vim')
+" See config/polyglot.vim at top of file.
 call misc#SourceRelative('config/vim-gitgutter.vim')
