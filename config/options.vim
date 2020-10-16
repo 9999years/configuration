@@ -18,7 +18,8 @@ set backspace=indent,eol,start " make backspacing work the way it should
 set wildmenu                   " visual command line completion
 set wildignore=
 \.svn,CVS,.git,*.o,*.a,*.class,*.mo,*.la,*.so,*.obj,*.swp,*.jpg,*.png,*.xpm,
-\*.gif,*.pdf,*.bak,*.beam,*.exe,*.sw*,*~,*fls,*.hi,*.lock
+\*.gif,*.pdf,*.bak,*.beam,*.exe,*.sw*,*~,*fls,*.hi,*.lock,*.aux,*.fdb_latexmk,
+\*.synctex.*
 set wrap              " yeah this should be default too. wraps text
 set display+=lastline " don't cut off the last line when it wont fit on the screen
 set scrolloff=0
@@ -41,12 +42,18 @@ if has('macunix') && exists('&rubydll')
   set rubydll=/usr/local/opt/ruby/lib/libruby.dylib
 end
 
+if has('termguicolors')
+  set termguicolors
+end
+
 if !exists('g:loaded_colorscheme')
   let g:loaded_colorscheme = 1
-  "silent! colorscheme Tomorrow-Night
+  "silent! colorscheme Tomorrow-Night-Bright
   "silent! colorscheme nord
   "silent! colorscheme ubaryd
-  silent! colorscheme molokai_dark
+
+  " See: ../colors/molokai_dark_paren_fix.vim
+  silent! colorscheme molokai_dark_paren_fix
 endif
 
 "join comments, make numbered lists (!!) work

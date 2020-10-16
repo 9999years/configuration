@@ -11,6 +11,6 @@ let b:did_markdown_after_indent_custom = 1
 "     [2]: https://gmail.com/
 " making `[` a comment marker prevents Vim from autoformatting them like this:
 "     [1]: https://github.com/ [2]: https://gmail.com/
-setl comments=fbn:>,fb:*,fb:+,fb:-,f:[
+setl comments=bn:>,fb:*,fb:+,fb:-,f:[
 setl formatoptions+=tcrqanl
 setl formatoptions-=j
