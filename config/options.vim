@@ -65,8 +65,13 @@ set nojoinspaces
 if has('mouse')
   set mouse=nvichar
 end
-" always show signcolumns
-set signcolumn=yes
+" always show signcolumn
+if has('patch-8.1.1564')
+  " merge into number column!
+  set signcolumn=number
+else
+  set signcolumn=yes
+end
 
 "---COMMAND LINE---
 "also other stuff in the bottom few lines of the screen

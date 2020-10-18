@@ -169,14 +169,13 @@
   },
   "snippets.ultisnips.enable": false,
   "codeLens.enable": true,
-  "diagnostic.enableMessage": "never",
-  "diagnostic.virtualText": true,
-  "diagnostic.virtualTextCurrentLineOnly": false,
+  "diagnostic.enableMessage": "always",
+  "diagnostic.checkCurrentLine": true,
   "diagnostic.hintSign": "🖝",
   "diagnostic.infoSign": "🛈",
   "diagnostic.errorSign": "⛔",
   "suggest.snippetIndicator": " ✂",
   "suggest.enablePreview": true,
-  "suggest.enablePreselect": true,
+  "suggest.enablePreselect": false,
   "suggest.floatEnable": true
 }
