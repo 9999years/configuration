@@ -113,6 +113,9 @@
       "args": [
         "--quiet"
       ]
+    },
+    "nixpkgs-fmt": {
+      "command": "nixpkgs-fmt"
     }
   },
   "diagnostic-languageserver.formatFiletypes": {
@@ -128,7 +131,6 @@
     "go",
     "python",
     "cpp",
-    "python",
     "javascript",
     "nix",
     "html"

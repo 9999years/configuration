@@ -21,10 +21,6 @@ Plug 'airblade/vim-gitgutter' " git gutter!
 "Plug 'Donearm/Ubaryd'
 Plug 'flazz/vim-colorschemes'
 
-" Autocomplete / language support
-"Plug 'vim-scripts/AutoComplPop' "show autocomplete menu w/o prompt
-"Plug 'ervandew/supertab'        " tab-completion
-"Plug 'vim-syntastic/syntastic'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
 " Snippets

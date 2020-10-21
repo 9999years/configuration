@@ -1,13 +1,10 @@
-" if exists('g:did_completion_opts') | finish | endif
-" let g:did_completion_opts = 1
+if exists('g:did_completion_opts') | finish | endif
+let g:did_completion_opts = 1
 
 let g:UltiSnipsExpandTrigger       = "<nop>"  " Default: <tab>
 let g:UltiSnipsListSnippets        = "<nop>"  " Default: <c-tab>
 let g:UltiSnipsJumpForwardTrigger  = "<nop>"  " Default: <c-j>
 let g:UltiSnipsJumpBackwardTrigger = "<nop>"  " Default: <c-k>
-" let g:UltiSnipsSnippetDirectories = [
-      " \ $HOME . "/plugged/snips/UltiSnips",
-      " \ $HOME . "/.config/nvim/plugged/vim-snippets/UltiSnips" ]
 let g:UltiSnipsEditSplit = 'horizontal'
 let g:coc_snippet_prev = '<nop>' " ughh
 let g:coc_snippet_next = '<nop>'
@@ -101,6 +98,7 @@ omap ac <Plug>(coc-classobj-a)
 
 " Use F1 to show documentation in preview window
 nnoremap <silent> <F1> :call <SID>show_documentation()<CR>
+inoremap <silent> <F1> <ESC>:call CocActionAsync('showSignatureHelp')<CR>a
 
 " Use K to show documentation in preview window.
 nnoremap <silent> K :call <SID>show_documentation()<CR>
@@ -136,8 +134,10 @@ nmap <F2> <Plug>(coc-rename)
 " Remap for format selected region
 vmap <leader>f  <Plug>(coc-format-selected)
 nmap <leader>f  <Plug>(coc-format-selected)
+" Show actions
+nnoremap <silent><nowait> <space>a  :<C-u>CocAction<cr>
 " Show all diagnostics
-nnoremap <silent><nowait> <space>a  :<C-u>CocList diagnostics<cr>
+nnoremap <silent><nowait> <space>d  :<C-u>CocList diagnostics<cr>
 " Manage extensions
 nnoremap <silent><nowait> <space>e  :<C-u>CocList extensions<cr>
 " Show commands
