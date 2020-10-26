@@ -133,7 +133,8 @@
     "cpp",
     "javascript",
     "nix",
-    "html"
+    "html",
+    "xml"
   ],
   "yaml.format.enable": true,
   "html.filetypes": [
