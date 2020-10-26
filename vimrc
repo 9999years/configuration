@@ -1,10 +1,7 @@
 call misc#begin()
 
-call plug#begin()
-Plug 'junegunn/vim-plug'
-
-"Plug 'vim-airline/vim-airline-themes'
-"Plug 'vim-airline/vim-airline' "status line
+call plug#begin() " {{{ Plugins
+Plug 'junegunn/vim-plug' " The plugin manager itself
 Plug 'tpope/vim-repeat'
 Plug 'tmhedberg/matchit'                         " Better % matching
 Plug 'scrooloose/nerdcommenter'                  " Better commenting / comment toggling
@@ -22,11 +19,14 @@ Plug 'flazz/vim-colorschemes'                    " Color schemes
 Plug 'neoclide/coc.nvim',                        " LSP client
       \ {'branch': 'release'}
 
-" Color scheme
-"Plug 'Donearm/Ubaryd'
-Plug 'flazz/vim-colorschemes'
-
-Plug 'neoclide/coc.nvim', {'branch': 'release'}
+Plug 'lambdalisue/fern.vim' | So config/fern.vim " File explorer
+Plug 'lambdalisue/fern-git-status.vim'           " fern: display git status
+Plug 'lambdalisue/nerdfont.vim'                  " fern: nerdfont support
+Plug 'lambdalisue/fern-renderer-nerdfont.vim'    " fern: enable nerdfont
+Plug 'lambdalisue/fern-hijack.vim'               " fern: use instead of netrw
+Plug 'LumaKernel/fern-mapping-fzf.vim'           " fern: add fzf key bindings
+Plug 'lambdalisue/fern-mapping-git.vim'          " fern: add git key bindings
+Plug 'antoinemadec/FixCursorHold.nvim'           " fern: fix a perf issue in nvim
 
 " Snippets
 Plug 'SirVer/ultisnips'                " Snippet insertion
