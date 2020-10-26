@@ -1,6 +1,4 @@
-let g:VIMFILES = misc#GetVimfiles()
-" polyglot whines if we don't load this first.
-call misc#SourceRelative('config/polyglot.vim')
+call misc#begin()
 
 call plug#begin()
 Plug 'junegunn/vim-plug'
@@ -8,14 +6,21 @@ Plug 'junegunn/vim-plug'
 "Plug 'vim-airline/vim-airline-themes'
 "Plug 'vim-airline/vim-airline' "status line
 Plug 'tpope/vim-repeat'
-Plug 'tmhedberg/matchit'        " better % matching
-Plug 'scrooloose/nerdcommenter' " better comment toggling
-Plug 'godlygeek/tabular'        " alignment
-Plug '9999years/vim-titlecase'  " titlecasing commands
-"Plug 'tpope/vim-unimpaired'
-Plug 'wincent/command-t', { 'do': function('misc#BuildCommandT') } " fuzzy file finder
-Plug 'tpope/vim-fugitive' " git wrapper
-Plug 'airblade/vim-gitgutter' " git gutter!
+Plug 'tmhedberg/matchit'                         " Better % matching
+Plug 'scrooloose/nerdcommenter'                  " Better commenting / comment toggling
+So config/nerdcommenter.vim                      " (local nerdcommenter cfg)
+Plug 'godlygeek/tabular'                         " Text table alignment
+Plug '9999years/vim-titlecase'                   " Titlecasing commands; gtt
+Plug 'tpope/vim-unimpaired'                      " Pairs of mappings
+Plug 'junegunn/fzf'                              " Fuzzy finder
+Plug 'junegunn/fzf.vim'                          " Extra fzf utils / commands: see :h fzf-vim
+So config/fzf.vim                                " (local fzf cfg)
+Plug 'tpope/vim-fugitive'                        " Git wrapper
+Plug 'airblade/vim-gitgutter'                    " Git gutter
+      \ { 'do': ':So config/vim-gitgutter.vim' } " (local gitgutter cfg)
+Plug 'flazz/vim-colorschemes'                    " Color schemes
+Plug 'neoclide/coc.nvim',                        " LSP client
+      \ {'branch': 'release'}
 
 " Color scheme
 "Plug 'Donearm/Ubaryd'
@@ -24,11 +29,11 @@ Plug 'flazz/vim-colorschemes'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
 " Snippets
-Plug 'SirVer/ultisnips' " snippets!
-Plug 'honza/vim-snippets' " a bunch of predefined snippets
-Plug '9999years/boilerplate-ultisnips' "boilerplate insertion
+Plug 'SirVer/ultisnips'                " Snippet insertion
+Plug 'honza/vim-snippets'              " Lots of predefined snippets
+Plug '9999years/boilerplate-ultisnips' " Boilerplate insertion
 
-" Lang-specific plugins
+" Language-specific plugins
 " vim-polyglot includes (among many others):
 "   - rust-lang/rust.vim
 "   - cespare/vim-toml
@@ -38,7 +43,7 @@ Plug '9999years/boilerplate-ultisnips' "boilerplate insertion
 "   - dag/vim-fish
 "   - idris-hackers/idris-vim
 "   - pangloss/vim-javascript
-Plug 'sheerun/vim-polyglot'
+Plug 'sheerun/vim-polyglot' | So config/polyglot.vim
 Plug 'rust-lang/rust.vim'
 Plug 'vmchale/dhall-vim'
 Plug 'chikamichi/mediawiki.vim'
@@ -46,36 +51,33 @@ Plug 'KeitaNakamura/tex-conceal.vim'
 Plug 'lervag/vimtex'
 Plug 'alunny/pegjs-vim'
 Plug 'vim-scripts/icalendar.vim'
-Plug 'OmniSharp/omnisharp-vim'
 Plug 'https://gitlab.com/n9n/vim-apl.git'
-" Plug 'hyhugh/coc-erlang_ls', {'do': 'yarn install --frozen-lockfile'}
 Plug 'qnighy/lalrpop.vim'
 Plug 'leanprover/lean.vim'
 Plug 'sukima/vim-tiddlywiki'
-call plug#end()
+call plug#end() " }}}
 
 " General 'set' commands, colorscheme
-call misc#SourceRelative('config/options.vim')
+So config/options.vim
 
 " Anything autocomplete-related, including ultisnips and coc
-call misc#SourceRelative('config/completion.vim')
+So config/completion.vim
 
 " Useful global variables like $FISH and $PROFILE
-call misc#SourceRelative('config/vars.vim')
+So config/vars.vim
 
 " Custom commands, usually matching a function in autoload/misc.vim
-call misc#SourceRelative('config/commands.vim')
+So config/commands.vim
 
 " Autocommands that override an extension's filetype
-call misc#SourceRelative('config/filetypes.vim')
+So config/filetypes.vim
 
 " Mappings that *don't* relate to a plugin
-call misc#SourceRelative('config/mappings.vim')
+So config/mappings.vim
 
-" Plugin-related configuration
-"call misc#SourceRelative('config/airline.vim')
-call misc#SourceRelative('config/command-t.vim')
-call misc#SourceRelative('config/nerdcommenter.vim')
-"call misc#SourceRelative('config/syntastic.vim')
-" See config/polyglot.vim at top of file.
-call misc#SourceRelative('config/vim-gitgutter.vim')
+" There's a few plugins that rely on global variables for state. Set relevant
+" variables here.
+So config/tex.vim
+So config/markdown.vim
+
+call misc#end()

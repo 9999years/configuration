@@ -1,49 +1,17 @@
-"get rid of whitespace at line ends
+" Delete all end-of-line whitespace in the current buffer.
 function misc#StripWhitespace(start, end)
-	normal mx
-	exe a:start . "," . a:end . " s/\\s\\+$//n"
-	exe a:start . "," . a:end . " s/\\s\\+$//eg"
-	noh
-	normal `x
+  "
+  let l:cursor = getcurpos()
+  " Display number of matches.
+  exe a:start . "," . a:end . " smagic/\\s\\+$//n"
+  " Do not error if no matches.
+  keepjumps exe a:start . "," . a:end . " smagic/\\s\\+$//eg"
+  nohlsearch
+  call setpos('.', l:cursor)
 endfunction
 
 function misc#HighlightNonASCII()
 	normal! /[^\x0a\x09\x20-\x7e]
-endfunction
-
-function misc#UnsavedDiff()
-	"create mark d, copy buffer and return to mark
-	normal! mdgg"dyG`d
-	"save syntax for later
-	let l:syn=&syntax
-	"turn diff on, new buffer, paste, refresh syntax
-	diffthis
-	vnew
-	normal! "dpggdd
-	let &syntax=l:syn
-	diffthis
-	set buftype=nofile
-	set nobuflisted noswapfile readonly
-	"switch windows, refresh content, switch back
-	normal! p
-	edit!
-	normal! p
-endfunction
-
-"will this work in a tab with more than two windows? who knows!
-function misc#UnsavedDiffOff()
-	"set mark o to jump back to
-	if expand("%") != ""
-		normal! mop
-	else
-		normal! pmop
-	endif
-	"on the local (no filename) window now
-	"copy unsaved changes
-	normal! gg"dyG
-	"get rid of buffer, delete/paste in new buffer, go back to mark o
-	bwipe!
-	lockmarks normal! gg"gdG"dpggdd`o
 endfunction
 
 function misc#EditFtplugin(...)
@@ -52,7 +20,7 @@ function misc#EditFtplugin(...)
 	else
 		let ft = a:1
 	endif
-	exe "split " . g:VIMFILES . "/ftplugin/" . ft . ".vim"
+	exe "split " . stdpath("config") . "/ftplugin/" . ft . ".vim"
 endfunction
 
 function misc#EditAfterFtplugin(...)
@@ -61,7 +29,7 @@ function misc#EditAfterFtplugin(...)
 	else
 		let ft = a:1
 	endif
-	exe "split " . g:VIMFILES . "/after/ftplugin/" . ft . ".vim"
+	exe "split " . stdpath("config") . "/after/ftplugin/" . ft . ".vim"
 endfunction
 
 function misc#EditUltiSnips(...)
@@ -70,7 +38,7 @@ function misc#EditUltiSnips(...)
 	else
 		let ft = a:1
 	endif
-	exe "sp " . g:VIMFILES . "/plugged/vim-snippets/UltiSnips/" . ft . ".snippets"
+	exe "sp " . stdpath("config") . "/plugged/vim-snippets/UltiSnips/" . ft . ".snippets"
 endfunction
 
 function misc#BuildCommandT(info)
@@ -90,18 +58,33 @@ function misc#BuildCommandT(info)
   endif
 endfunction
 
-function misc#GetVimfiles()
-  if has('win32')
-    return expand("~/vimfiles")
-  else
-    return expand("~/.config/nvim")
-  endif
+" Start-of-vimrc initialization
+"
+" Tracks sourced scripts in s:sourcefname to enable relative imports.
+function misc#begin() abort
+  augroup misc_rbt
+    autocmd!
+    autocmd SourcePre * call misc#SourcePre()
+    autocmd SourcePost * call misc#SourcePost()
+  augroup end
+  command -nargs=1 So call misc#SourceRel(<f-args>)
+  let s:sourcefname = [fnamemodify($MYVIMRC, ':p:h')]
 endfunction
 
-function misc#RelFile(filename)
-  return g:VIMFILES . "/" . a:filename
+" End-of-vimrc cleanup
+function misc#end() abort
+  autocmd! misc_rbt
+  delcommand So
 endfunction
 
-function misc#SourceRelative(filename)
-  execute "source " . misc#RelFile(a:filename)
+function misc#SourcePre()
+  call add(s:sourcefname, expand('<afile>:p:h'))
+endfunction
+
+function misc#SourcePost()
+  call remove(s:sourcefname, -1)
+endfunction
+
+function misc#SourceRel(filename)
+  exe "source " . s:sourcefname[-1] . "/" . a:filename
 endfunction
