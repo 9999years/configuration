@@ -154,3 +154,15 @@ stdenv.mkDerivation {
 	buildInputs = [ $4 ];
 }
 endsnippet
+
+snippet meta "meta attribute" b
+meta = with stdenv.lib; { # https://nixos.org/manual/nixpkgs/stable/#chap-meta
+	description = "${1:One-line description}";
+	longDescription = ''
+		${2:Longer description.}
+	'';
+	homepage = "${3:URL}";
+	license = ${4:licenses.gpl3Plus};
+	platforms = ${4:platforms.all};
+};
+endsnippet
