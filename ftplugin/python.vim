@@ -1,10 +1,19 @@
 if exists('b:loaded_custom_python_ftplugin') | finish | end
 let b:loaded_custom_python_ftplugin=1
 
-" autocmd BufWritePre <buffer> CocCommand python.sortImports
+function! SortImportsThenSave() abort
+  " 2020-10-26: Yeah, this is fucking weird. Something to do with autocommands
+  " behaving weirdly; writing in the before-write command is not expected; Vim
+  " wants BufWritePost to undo BufWritePre commands, but I just want to make
+  " changes that are *saved*.
+  write
+  call CocAction('runCommand', 'python.sortImports')
+  write
+endfunction
 
-"<CR> on line with only # deletes comment
-imap <expr> <CR> getline('.') =~ '^\s*#\s*$' ? '<C-u>' : '<CR>'
+augroup python_custom
+  autocmd!
+  autocmd BufWritePre,FileWritePre <buffer> call SortImportsThenSave()
+augroup END
 
-"<ESC> on line with only # deletes comment
-imap <expr> <ESC> getline('.') =~ '^\s*#\s*$' ? '<C-u><ESC>' : '<ESC>'
+setl foldmethod=marker
