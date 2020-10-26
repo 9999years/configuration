@@ -1,6 +1,7 @@
 if exists("b:did_vim_ftplugin") | finish | endif
 let b:did_vim_ftplugin = 1
 
+setl foldmethod=marker
 setl sw=2
 setl ts=2
 setl expandtab
