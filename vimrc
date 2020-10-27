@@ -69,9 +69,6 @@ So config/vars.vim
 " Custom commands, usually matching a function in autoload/misc.vim
 So config/commands.vim
 
-" Autocommands that override an extension's filetype
-So config/filetypes.vim
-
 " Mappings that *don't* relate to a plugin
 So config/mappings.vim
 
