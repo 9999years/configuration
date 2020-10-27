@@ -1,6 +1,3 @@
-if exists('g:did_completion_opts') | finish | endif
-let g:did_completion_opts = 1
-
 let g:UltiSnipsExpandTrigger = "<nop>"  " Default: <tab>
 let g:UltiSnipsListSnippets  = "<nop>"  " Default: <c-tab>
 let g:UltiSnipsEditSplit     = "horizontal"
@@ -81,7 +78,7 @@ inoremap <silent> <F1> <ESC>:call CocActionAsync('doHover')<CR>a
 " Use K to show documentation in preview window.
 nnoremap <silent> K <ESC>:call <SID>show_documentation()<CR>
 
-function! s:show_documentation()
+function! s:show_documentation() abort
   if coc#rpc#ready()
     call CocActionAsync('doHover')
   else
