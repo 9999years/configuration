@@ -1,8 +1,8 @@
 call misc#begin()
 
-call plug#begin() " {{{ Plugins
-Plug 'junegunn/vim-plug' " The plugin manager itself
-Plug 'tpope/vim-repeat'
+call plug#begin() " Plugins {{{
+Plug 'junegunn/vim-plug'                         " The plugin manager itself
+Plug 'tpope/vim-repeat'                          " Better repeated mappings with plugins.
 Plug 'tmhedberg/matchit'                         " Better % matching
 Plug 'scrooloose/nerdcommenter'                  " Better commenting / comment toggling
 So config/nerdcommenter.vim                      " (local nerdcommenter cfg)
@@ -44,10 +44,12 @@ Plug '9999years/boilerplate-ultisnips' " Boilerplate insertion
 "   - idris-hackers/idris-vim
 "   - pangloss/vim-javascript
 Plug 'sheerun/vim-polyglot' | So config/polyglot.vim
+So config/markdown.vim " polyglot includes vim-markdown
+
 Plug 'rust-lang/rust.vim'
 Plug 'vmchale/dhall-vim'
 Plug 'chikamichi/mediawiki.vim'
-Plug 'KeitaNakamura/tex-conceal.vim'
+Plug 'KeitaNakamura/tex-conceal.vim' | So config/tex.vim
 Plug 'lervag/vimtex'
 Plug 'alunny/pegjs-vim'
 Plug 'vim-scripts/icalendar.vim'
@@ -63,18 +65,10 @@ So config/options.vim
 " Anything autocomplete-related, including ultisnips and coc
 So config/completion.vim
 
-" Useful global variables like $FISH and $PROFILE
-So config/vars.vim
-
 " Custom commands, usually matching a function in autoload/misc.vim
 So config/commands.vim
 
 " Mappings that *don't* relate to a plugin
 So config/mappings.vim
-
-" There's a few plugins that rely on global variables for state. Set relevant
-" variables here.
-So config/tex.vim
-So config/markdown.vim
 
 call misc#end()
