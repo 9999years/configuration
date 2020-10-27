@@ -1,5 +1,5 @@
 " Delete all end-of-line whitespace in the current buffer.
-function misc#StripWhitespace(start, end)
+function misc#StripWhitespace(start, end) abort
   "
   let l:cursor = getcurpos()
   " Display number of matches.
@@ -14,7 +14,7 @@ function misc#HighlightNonASCII()
 	normal! /[^\x0a\x09\x20-\x7e]
 endfunction
 
-function misc#EditFtplugin(...)
+function misc#EditFtplugin(...) abort
 	if a:0 == 0
 		let ft = &ft
 	else
@@ -23,7 +23,7 @@ function misc#EditFtplugin(...)
 	exe "split " . stdpath("config") . "/ftplugin/" . ft . ".vim"
 endfunction
 
-function misc#EditAfterFtplugin(...)
+function misc#EditAfterFtplugin(...) abort
 	if a:0 == 0
 		let ft = &ft
 	else
@@ -32,7 +32,7 @@ function misc#EditAfterFtplugin(...)
 	exe "split " . stdpath("config") . "/after/ftplugin/" . ft . ".vim"
 endfunction
 
-function misc#EditUltiSnips(...)
+function misc#EditUltiSnips(...) abort
 	if a:0 == 0
 		let ft = &ft
 	else
@@ -41,7 +41,7 @@ function misc#EditUltiSnips(...)
 	exe "sp " . stdpath("config") . "/plugged/vim-snippets/UltiSnips/" . ft . ".snippets"
 endfunction
 
-function misc#BuildCommandT(info)
+function misc#BuildCommandT(info) abort
   " info is a dictionary with 3 fields
   " - name:   name of the plugin
   " - status: 'installed', 'updated', or 'unchanged'
@@ -77,14 +77,14 @@ function misc#end() abort
   delcommand So
 endfunction
 
-function misc#SourcePre()
+function misc#SourcePre() abort
   call add(s:sourcefname, expand('<afile>:p:h'))
 endfunction
 
-function misc#SourcePost()
+function misc#SourcePost() abort
   call remove(s:sourcefname, -1)
 endfunction
 
-function misc#SourceRel(filename)
+function misc#SourceRel(filename) abort
   exe "source " . s:sourcefname[-1] . "/" . a:filename
 endfunction
