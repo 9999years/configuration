@@ -1,22 +1,13 @@
-"make j and k operate on screen lines.
-"text selection still operates on file lines.
-"this might cause problems with macros, idk
+" Make j and k operate on screen lines.
+" Text selection still operates on file lines; these are normal-mode mappings
+" only.
 nnoremap j gj
 nnoremap k gk
 nnoremap gj j
 nnoremap gk k
 
-"muscle memory
-"this is unreliable
-"why is this unreliable? shouldn't vim just intercept the keystrokes?
-"make c-bs delete the current word
-imap <C-BS> <C-W>
-
 "map \cs to clear search
 nnoremap <Leader>cs :let @/ = ""<CR>
-
-" Insert codepoint on line below
-nmap <Leader>cp "fcl<C-r>=printf('%x', char2nr(@f))<CR><ESC>
 
 " Correct last spelling mistake; from https://castel.dev/post/lecture-notes-1/
 inoremap <C-l> <c-g>u<Esc>[s1z=`]a<c-g>u
