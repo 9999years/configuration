@@ -116,5 +116,5 @@ set updatetime=300
 " }}}
 
 " Folds {{{
-set foldlevelstart=2
+set foldlevelstart=0
 " }}}
