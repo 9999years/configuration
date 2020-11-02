@@ -36,6 +36,12 @@
         }
       }
     },
+    "nix": {
+      "command": "rnix-lsp",
+      "filetypes": [
+        "nix"
+      ]
+    },
     "golang": {
       "command": "gopls",
       "rootPatterns": [
