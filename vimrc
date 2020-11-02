@@ -56,7 +56,6 @@ Plug 'vim-scripts/icalendar.vim'
 Plug 'https://gitlab.com/n9n/vim-apl.git'
 Plug 'qnighy/lalrpop.vim'
 Plug 'leanprover/lean.vim'
-Plug 'sukima/vim-tiddlywiki'
 call plug#end() " }}}
 
 " General 'set' commands, colorscheme
