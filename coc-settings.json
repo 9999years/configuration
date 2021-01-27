@@ -108,6 +108,9 @@
     },
     "nixpkgs-fmt": {
       "command": "nixpkgs-fmt"
+    },
+    "stylish-haskell": {
+      "command": "stylish-haskell"
     }
   },
   "diagnostic-languageserver.formatFiletypes": {
