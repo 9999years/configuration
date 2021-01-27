@@ -12,3 +12,4 @@ let b:did_custom_md_plugin = 1
 " setl ts=4
 " setl expandtab
 setl spell
+setl foldlevel=3

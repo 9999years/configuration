@@ -17,7 +17,9 @@ Plug 'airblade/vim-gitgutter'                    " Git gutter
       \ { 'do': ':So config/vim-gitgutter.vim' } " (local gitgutter cfg)
 Plug 'flazz/vim-colorschemes'                    " Color schemes
 Plug 'neoclide/coc.nvim',                        " LSP client
-      \ {'branch': 'release'}
+      \ {'branch': 'release',
+      \  'do': 'yarn install --frozen-lockfile'}
+Plug 'Konfekt/FastFold' | So config/fastfold.vim " Don't recompute folds constantly.
 
 Plug 'lambdalisue/fern.vim' | So config/fern.vim " File explorer
 Plug 'lambdalisue/fern-git-status.vim'           " fern: display git status
@@ -56,6 +58,8 @@ Plug 'vim-scripts/icalendar.vim'
 Plug 'https://gitlab.com/n9n/vim-apl.git'
 Plug 'qnighy/lalrpop.vim'
 Plug 'leanprover/lean.vim'
+Plug 'edwinb/idris2-vim'
+Plug 'tmhedberg/SimpylFold' | So config/simplyfold.vim
 call plug#end() " }}}
 
 " General 'set' commands, colorscheme

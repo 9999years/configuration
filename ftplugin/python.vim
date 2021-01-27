@@ -20,5 +20,3 @@ augroup python_custom
   autocmd!
   autocmd BufWritePre,FileWritePre <buffer> call SortImportsThenSave()
 augroup END
-
-setl foldmethod=marker
