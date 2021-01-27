@@ -1,7 +1,11 @@
 snippet _skel "boilerplate" b
 #!/usr/bin/env python3
+"""TODO
+"""
 
-def main():
+def main() -> None:
+	"""Entry point.
+	"""
 	pass
 
 if __name__ == '__main__':
@@ -24,7 +28,7 @@ def argparser() -> argparse.ArgumentParser:
 endsnippet
 
 snippet main "main method" b
-def main():
+def main() -> None:
 	$0
 
 if __name__ == '__main__':
