@@ -1,0 +1,17 @@
+snippet guard "if g:var exists then exit" b
+if exists('$1')
+	let $1 = 1
+	$0
+endif
+endsnippet
+
+snippet iguard "include guard" b
+if exists('${1:g:did_`!p snip.rv = snip.basename`}') | finish | endif
+let $1 = 1
+endsnippet
+
+snippet _skel "boilerplate" b
+if exists('b:did_custom_`!p snip.rv = snip.basename`_ftplugin') | finish | endif
+let b:did_custom_`!p snip.rv = snip.basename`_ftplugin = 1
+
+endsnippet

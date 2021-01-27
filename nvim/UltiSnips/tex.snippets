@@ -1,0 +1,750 @@
+# This blob of Python from Gilles Castel
+# https://castel.dev/post/lecture-notes-1/
+global !p
+texMathZones = ['texMathZone'+x for x in ['A', 'AS', 'B', 'BS', 'C', 'CS', 'D', 'DS', 'E', 'ES', 'F', 'FS', 'G', 'GS', 'H', 'HS', 'I', 'IS', 'J', 'JS', 'K', 'KS', 'L', 'LS', 'DS', 'V', 'W', 'X', 'Y', 'Z']]
+
+texIgnoreMathZones = ['texMathText']
+
+texMathZoneIds = vim.eval('map('+str(texMathZones)+", 'hlID(v:val)')")
+texIgnoreMathZoneIds = vim.eval('map('+str(texIgnoreMathZones)+", 'hlID(v:val)')")
+
+ignore = texIgnoreMathZoneIds[0]
+
+def math():
+	synstackids = vim.eval("synstack(line('.'), col('.') - (col('.')>=2 ? 1 : 0))")
+	try:
+		first = next(i for i in reversed(synstackids) if i in texIgnoreMathZoneIds or i in texMathZoneIds)
+		return first != ignore
+	except StopIteration:
+		return False
+
+def space(t):
+	if t and t[0] not in ',.?- ():;':
+		return ' '
+	else:
+		return ''
+
+FN_BOUNDARY_RE = re.compile(r'[-_ ]+')
+def humanize_fn(fn):
+	return ' '.join(word.capitalize() for word in FN_BOUNDARY_RE.split(fn))
+
+endglobal
+
+snippet _skel "Skeleton" b
+`!p
+from datetime import datetime
+
+if snip.fn.endswith('tex'):
+	snip.rv = (r'''
+\documentclass{article}
+\title{'''.strip()
+	+ humanize_fn(snip.basename)
+	+ r'''}
+\author{Rebecca Turner}
+\date{'''
+	+ datetime.now().date().isoformat()
+	+ r'''}
+\begin{document}
+\maketitle
+
+\end{document}
+'''.strip())
+`
+endsnippet
+
+snippet thpr "Theorem and proof" b
+\begin{thm}
+	$1
+\end{thm}
+\begin{proof}
+	$0
+\end{proof}
+endsnippet
+
+snippet multicol "multiple columns"
+\multicolumn{${1:1}}{${2:c}}{$0}
+endsnippet
+
+snippet pac "package" b
+\usepackage`!p snip.rv = "[" if t[2] else ""`${2}`!p snip.rv = "]" if t[2] else ""`{$1}$0
+endsnippet
+
+snippet b "begin..end environment"
+\begin{$1}
+$0
+\end{$1}
+endsnippet
+
+snippet cmd "\newcommand" b
+\NewDocumentCommand \\$1 { $2 } {$0}
+endsnippet
+
+snippet lst "lstlisting" b
+\begin{lstlisting}`!p snip.rv = "[language=" if t[1] else ""`${1:java}`!p snip.rv = "]" if t[1] else ""`
+$0
+\end{lstlisting}
+endsnippet
+
+snippet env "\newenvironment" b
+\newenvironment{$1}
+	{$2}
+	{$3}
+endsnippet
+
+snippet pb "pagebreak" b
+\pagebreak
+endsnippet
+
+snippet keyval "new keyval command" b
+\usepackage{keyval}
+
+\newcommand{\\$1}[1]
+	{\setkeys{$1}{#1}
+	}
+endsnippet
+
+snippet k "keyval key" b
+`!p snip.rv = "\\newcommand{\\%s@%s}{" % (t[1], t[2]) if t[3] else ""`${3:default}`!p snip.rv = "}\n" if t[3] else ""`\define@key{${1:keyset}}{${2:keyname}}{\\`!p snip.rv = "re" if t[3] else ""`newcommand{\\$1@$2}{#1}}
+$0
+endsnippet
+
+snippet ktf "keyval boolean" b
+\newif\if$1@$2
+\define@key{${1:keyset}}{${2:keyname}}[true]{\\$1@$2true}
+endsnippet
+
+snippet al "alignat"
+\begin{alignat}{${1:1}}
+	$0
+\end{alignat}
+endsnippet
+
+snippet al* "alignat*"
+\begin{alignat*}{${1:1}}
+	$0
+\end{alignat*}
+endsnippet
+
+snippet node "tikzpicture node" b
+\node`!p snip.rv = " [" if t[1] else ""`${1:options}`!p snip.rv = "]" if t[1] else ""` `!p snip.rv = "(" if t[2] else ""`${2:name}`!p snip.rv = ") " if t[2] else ""``!p snip.rv = "at (" if t[3] else ""`${3:coords}`!p snip.rv = ") " if t[3] else ""`{${4:text}};
+endsnippet
+
+snippet ellipse "tikzpicture ellipse" b
+\draw`!p snip.rv = " [" if t[1] else ""`${1:options}`!p snip.rv = "]" if t[1] else ""` (${2:center}) ellipse (${3:width} and ${4:height});
+endsnippet
+
+context "math()"
+snippet pw "piecewise function" w
+\begin{cases}
+	$1 & $2 \\\\
+	$3 & ${4:\text{otherwise}} \\\\
+\end{cases}
+endsnippet
+
+context "math()"
+snippet fun "function" w
+$1 : $2 \to $3
+endsnippet
+
+snippet tfun "function (text-mode)" w
+\$$1 : $2 \to $3\$ given by \$$1($4) = $5\$$0
+endsnippet
+
+# Many snippets below from Gilles Castel
+# https://castel.dev/post/lecture-notes-1/
+snippet => "implies" Ai
+\implies
+endsnippet
+
+snippet =< "implied by" Ai
+\impliedby
+endsnippet
+
+context "math()"
+snippet iff "iff" w
+\iff
+endsnippet
+
+snippet mk "Math" wA
+$${1}$
+endsnippet
+
+snippet dm "Math" wA
+\[${1:${VISUAL}}.\]
+endsnippet
+
+snippet ali "Align" b
+\begin{align*}
+	${1:${VISUAL}}
+.\end{align*}
+endsnippet
+
+
+context "math()"
+snippet // "Fraction" iA
+\\frac{$1}{$2}$0
+endsnippet
+
+snippet / "Fraction" i
+\\frac{${VISUAL}}{$1}$0
+endsnippet
+
+#context "math()"
+#snippet '((\d+)|(\d*)(\\)?([A-Za-z]+)((\^|_)(\{\d+\}|\d))*)/' "symbol frac" wrA
+#\\frac{`!p snip.rv = match.group(1)`}{$1}$0
+#endsnippet
+
+#priority 1000
+#context "math()"
+#snippet '^.*\)/' "() frac" wrA
+#`!p
+#stripped = match.string[:-1]
+#depth = 0
+#i = len(stripped) - 1
+#while True:
+	#if stripped[i] == ')': depth += 1
+	#if stripped[i] == '(': depth -= 1
+	#if depth == 0: break;
+	#i-=1
+#snip.rv = stripped[0:i] + "\\frac{" + stripped[i+1:-1] + "}"
+#`{$1}$0
+#endsnippet
+
+context "math()"
+snippet '([A-Za-z])(\d)' "auto subscript" wrA
+`!p snip.rv = match.group(1)`_`!p snip.rv = match.group(2)`
+endsnippet
+
+context "math()"
+snippet '([A-Za-z])_(\d\d)' "auto subscript2" wrA
+`!p snip.rv = match.group(1)`_{`!p snip.rv = match.group(2)`}
+endsnippet
+
+
+snippet sympy "sympyblock " w
+sympy $1 sympy$0
+endsnippet
+
+priority 10000
+snippet 'sympy(.*)sympy' "sympy" wr
+`!p
+from sympy import *
+x, y, z, t = symbols('x y z t')
+k, m, n = symbols('k m n', integer=True)
+f, g, h = symbols('f g h', cls=Function)
+init_printing()
+snip.rv = eval('latex(' + match.group(1).replace('\\', '').replace('^', '**').replace('{', '(').replace('}', ')') + ')')
+`
+endsnippet
+
+priority 1000
+snippet math "mathematicablock" w
+math $1 math$0
+endsnippet
+
+priority 10000
+snippet 'math(.*)math' "math" wr
+`!p
+import subprocess
+code = match.group(1)
+code = 'ToString[' + code + ', TeXForm]'
+snip.rv = subprocess.check_output(['wolframscript', '-code', code])
+`
+endsnippet
+
+snippet == "equals" iA
+&= $1 \\\\
+endsnippet
+
+snippet != "equals" iA
+\ne 
+endsnippet
+
+context "math()"
+snippet ceil "ceil" iA
+\left\lceil $1 \right\rceil $0
+endsnippet
+
+context "math()"
+snippet floor "floor" iA
+\left\lfloor $1 \right\rfloor$0
+endsnippet
+
+snippet pmat "pmat" iA
+\begin{pmatrix} $1 \end{pmatrix} $0
+endsnippet
+
+snippet bmat "bmat" iA
+\begin{bmatrix} $1 \end{bmatrix} $0
+endsnippet
+
+context "math()"
+snippet () "left( right)" iA
+\left( ${1:${VISUAL}} \right) $0
+endsnippet
+
+snippet lr "left( right)" i
+\left( ${1:${VISUAL}} \right) $0
+endsnippet
+
+snippet lr( "left( right)" i
+\left( ${1:${VISUAL}} \right) $0
+endsnippet
+
+snippet lr| "left| right|" i
+\left| ${1:${VISUAL}} \right| $0
+endsnippet
+
+snippet lr{ "left\{ right\}" i
+\left\\{ ${1:${VISUAL}} \right\\} $0
+endsnippet
+
+snippet lrb "left\{ right\}" i
+\left\\{ ${1:${VISUAL}} \right\\} $0
+endsnippet
+
+snippet \{ "\{ \}" A
+\\{ ${1:${VISUAL}} \\}$0
+endsnippet
+
+snippet lr[ "left[ right]" i
+\left[ ${1:${VISUAL}} \right] $0
+endsnippet
+
+snippet lra "leftangle rightangle" iA
+\left< ${1:${VISUAL}} \right>$0
+endsnippet
+
+context "math()"
+snippet conj "conjugate" iA
+\overline{$1}$0
+endsnippet
+
+snippet dint "integral" w
+\int_{${1:-\infty}}^{${2:\infty}} ${3:${VISUAL}} $0
+endsnippet
+
+snippet 'z "zeta" wA
+\zeta
+endsnippet
+
+# snippet sum "sum" w
+# \sum_{n=${1:0}}^{${3:\infty}} ${4:${VISUAL}} $0
+# endsnippet
+
+snippet sum "sum" w
+\sum_{n=${1:1}}^{${2:\infty}} ${3:a_n z^n}
+endsnippet
+
+snippet taylor "taylor" w
+\sum_{${1:k}=${2:0}}^{${3:\infty}} ${4:c_$1} (x-a)^$1 $0
+endsnippet
+
+snippet lim "limit" w
+\lim_{${1:n} \to ${2:\infty}} 
+endsnippet
+
+snippet limsup "limsup" w
+\limsup_{${1:n} \to ${2:\infty}} 
+endsnippet
+
+snippet prod "product" w
+\prod_{${1:n=${2:1}}}^{${3:\infty}} ${4:${VISUAL}} $0
+endsnippet
+
+snippet part "d/dx" w
+\frac{\partial ${1:V}}{\partial ${2:x}} $0
+endsnippet
+
+context "math()"
+snippet sq "\sqrt{}" i
+\sqrt{${1:${VISUAL}}} $0
+endsnippet
+
+# context "math()"
+# snippet sr "^2" iA
+# ^2
+# endsnippet
+
+context "math()"
+snippet cb "^3" iA
+^3
+endsnippet
+
+context "math()"
+snippet td "to the ... power" iA
+^{$1}$0
+endsnippet
+
+# context "math()"
+# snippet rd "to the ... power" iA
+# ^{($1)}$0
+# endsnippet
+
+snippet ooo "\infty" iA
+\infty
+endsnippet
+
+snippet rij "mrij" i
+(${1:x}_${2:n})_{${3:$2}\\in${4:\\N}}$0
+endsnippet
+
+snippet <= "leq" iA
+\le 
+endsnippet
+
+snippet >= "geq" iA
+\ge 
+endsnippet
+
+context "math()"
+snippet EE "geq" iA
+\exists 
+endsnippet
+
+context "math()"
+snippet AA "forall" iA
+\forall 
+endsnippet
+
+context "math()"
+snippet xnn "xn" iA
+x_{n}
+endsnippet
+
+context "math()"
+snippet ynn "yn" iA
+y_{n}
+endsnippet
+
+
+context "math()"
+snippet xii "xi" iA
+x_{i}
+endsnippet
+
+context "math()"
+snippet yii "yi" iA
+y_{i}
+endsnippet
+
+context "math()"
+snippet xjj "xj" iA
+x_{j}
+endsnippet
+
+context "math()"
+snippet yjj "yj" iA
+y_{j}
+endsnippet
+
+context "math()"
+snippet xp1 "x" iA
+x_{n+1}
+endsnippet
+
+context "math()"
+snippet xmm "x" iA
+x_{m}
+endsnippet
+
+snippet R0+ "R0+" iA
+\\R_0^+
+endsnippet
+
+snippet plot "Plot" w
+\begin{figure}[$1]
+	\centering
+	\begin{tikzpicture}
+		\begin{axis}[
+			xmin= ${2:-10}, xmax= ${3:10},
+			ymin= ${4:-10}, ymax = ${5:10},
+			axis lines = middle,
+		]
+			\addplot[domain=$2:$3, samples=${6:100}]{$7};
+		\end{axis}
+	\end{tikzpicture}
+	\caption{$8}
+	\label{${9:$8}}
+\end{figure}
+endsnippet
+
+snippet nn "Tikz node" w
+\node[$5] (${1/[^0-9a-zA-Z]//g}${2}) ${3:at (${4:0,0}) }{$${1}$};
+$0
+endsnippet
+
+context "math()"
+snippet mcal "mathcal" iA
+\mathcal{$1}$0
+endsnippet
+
+snippet lll "l" iA
+\ell
+endsnippet
+
+context "math()"
+snippet nabl "nabla" iA
+\nabla 
+endsnippet
+
+context "math()"
+snippet xx "cross" iA
+\times 
+endsnippet
+
+priority 100
+# snippet * "cdot" iA
+# \cdot 
+# endsnippet
+
+# priority 200
+# snippet '\cdot *' "cdot" iA
+# *
+# endsnippet
+
+context "math()"
+snippet norm "norm" iA
+\|$1\|$0
+endsnippet
+
+priority 100
+context "math()"
+snippet '(?<!\\)(sin|cos|arccot|cot|csc|ln|log|exp|star|perp)' "ln" rwA
+\\`!p snip.rv = match.group(1)`
+endsnippet
+
+priority 100
+context "math()"
+snippet -> "to" iA
+\to 
+endsnippet
+
+priority 200
+context "math()"
+snippet <-> "leftrightarrow" iA
+\leftrightarrow
+endsnippet
+
+context "math()"
+snippet !> "mapsto" iA
+\mapsto 
+endsnippet
+
+context "math()"
+snippet invs "inverse" iA
+^{-1}
+endsnippet
+
+context "math()"
+snippet compl "complement" iA
+^{c}
+endsnippet
+
+context "math()"
+snippet \\\ "setminus" iA
+\setminus 
+endsnippet
+
+snippet >> ">>" iA
+\gg 
+endsnippet
+
+snippet << "<<" iA
+\ll 
+endsnippet
+
+snippet DD "delta" iA
+\Delta 
+endsnippet
+
+snippet ~~ "~" iA
+\sim 
+endsnippet
+
+# snippet || "mid" iA
+#  \mid 
+# endsnippet
+
+
+context "math()"
+snippet cc "subset" Ai
+\subset 
+endsnippet
+
+snippet notin "not in " iA
+\notin 
+endsnippet
+
+context "math()"
+snippet inn "in " iA
+\in 
+endsnippet
+
+# snippet Nn "cap" iA
+# \cap 
+# endsnippet
+
+snippet UU "cup" iA
+\cup 
+endsnippet
+
+snippet uuu "bigcup" iA
+\bigcup_{${1:i \in ${2: I}}} $0
+endsnippet
+
+snippet nnn "bigcap" iA
+\bigcap_{${1:i \in ${2: I}}} $0
+endsnippet
+
+snippet OO "emptyset" iA
+\O
+endsnippet
+
+snippet RR "real" iA
+\R
+endsnippet
+
+snippet QQ "Q" iA
+\Q
+endsnippet
+
+snippet ZZ "Z" iA
+\Z
+endsnippet
+
+snippet <! "normal" iA
+\triangleleft 
+endsnippet
+
+snippet <> "hokje" iA
+\diamond 
+endsnippet
+
+
+context "math()"
+snippet '(?<!i)sts' "text subscript" irA
+_{\text{$1}} $0
+endsnippet
+
+context "math()"
+snippet tt "text"
+\text{$1}$0
+endsnippet
+
+context "math()"
+snippet case "cases" wA
+\begin{cases}
+	$1
+\end{cases}
+endsnippet
+
+context "math()"
+snippet "bi" "binom"
+\binom{$1}{$2}
+endsnippet
+
+snippet SI "SI" wA
+\SI{$1}{$2}
+endsnippet
+
+snippet bigfun "Big function" iA
+\begin{align*}
+	${1:f} : ${2:\\Re} &\longrightarrow ${3:\\Re} \\\\
+	${4:x} &\longmapsto $1($4) = $0
+.\end{align*}
+endsnippet
+
+snippet cvec "column vector" iA
+\begin{pmatrix} ${1:x}_${2:1}\\\\ \vdots\\\\ $1_${2:n} \end{pmatrix}
+endsnippet
+
+priority 10
+
+context "math()"
+snippet "bar" "bar" riA
+\overline{$1}$0
+endsnippet
+
+priority 100
+context "math()"
+snippet "([a-zA-Z])bar" "bar" riA
+\overline{`!p snip.rv=match.group(1)`}
+endsnippet
+
+priority 10
+context "math()"
+snippet "hat" "hat" riAw
+\hat{$1}
+endsnippet
+
+priority 100
+context "math()"
+snippet "([a-zA-Z])vec" "vec" riA
+\vec{`!p snip.rv=match.group(1)`}
+endsnippet
+
+context "math()"
+snippet "([a-zA-Z])hat" "hat" riA
+\hat{`!p snip.rv=match.group(1)`}
+endsnippet
+
+snippet letw "let omega" iA
+Let $\Omega \subset \C$ be open.
+endsnippet
+
+snippet seq "Sequence" i
+\\{${1:s}_n\\}
+endsnippet
+
+snippet stix "stix fonts" b
+\usepackage{mathtools}
+\usepackage{amsmath}[2013/01/14]
+\usepackage[amsmath,amsthm,thmmarks]{ntheorem}
+\usepackage[
+	warnings-off={mathtools-colon,mathtools-overbracket}
+]{unicode-math}
+\setmainfont[
+	Extension      = .otf,
+	UprightFont    = *-Regular,
+	BoldFont       = *-Bold,
+	ItalicFont     = *-Italic,
+	BoldItalicFont = *-BoldItalic,
+]{STIX2Text}
+\setmathfont[
+	Extension = .otf,
+	StylisticSet={
+		1, % better caligraphic forms
+		8, % upright integrals
+	},
+]{STIX2Math}
+endsnippet
+
+snippet notion "knowledge package notion" b
+\knowledge{notion, index={${2:`!p
+snip.rv = t[1].capitalize()
+`}}}
+	| $1
+	| $1s
+endsnippet
+
+snippet makeat "\makeatletter...\makeatother block" w
+\makeatletter
+$1
+\makeatother
+endsnippet
+
+snippet expl "\ExplSyntaxOn...\ExplSyntaxOff block" w
+\ExplSyntaxOn
+$1
+\ExplSyntaxOff
+endsnippet
+
+snippet prob "problem env" b
+\begin{problem}% {{{ Problem ${1:n}
+	$0
+\end{problem}
+\begin{proof}
+\end{proof}
+% }}}
+endsnippet

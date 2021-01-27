@@ -1,0 +1,191 @@
+{
+  "languageserver": {
+    "dhall": {
+      "command": "dhall-lsp-server",
+      "filetypes": [
+        "dhall"
+      ]
+    },
+    "bash": {
+      "command": "bash-language-server",
+      "args": [
+        "start"
+      ],
+      "filetypes": [
+        "sh"
+      ],
+      "ignoredRootPaths": [
+        "~"
+      ]
+    },
+    "haskell": {
+      "command": "haskell-language-server-wrapper",
+      "args": [
+        "--lsp"
+      ],
+      "rootPatterns": ["*.cabal", "stack.yaml", "cabal.project", "package.yaml", "hie.yaml"],
+      "filetypes": ["haskell", "lhaskell"],
+      "initializationOptions": { "languageServerHaskell": {} }
+    },
+    "nix": {
+      "command": "rnix-lsp",
+      "filetypes": [
+        "nix"
+      ]
+    },
+    "golang": {
+      "command": "gopls",
+      "rootPatterns": [
+        "go.mod"
+      ],
+      "filetypes": [
+        "go"
+      ]
+    },
+    "clangd": {
+      "command": "clangd",
+      "args": [
+        "--background-index"
+      ],
+      "rootPatterns": [
+        "compile_flags.txt",
+        "compile_commands.json",
+        ".vim/",
+        ".git/",
+        ".hg/"
+      ],
+      "filetypes": [
+        "c",
+        "cpp",
+        "objc",
+        "objcpp"
+      ]
+    }
+  },
+  "diagnostic-languageserver.linters": {
+    "nim": {
+      "command": "nim",
+      "args": [
+        "compile",
+        "-"
+      ],
+      "sourceName": "nim",
+      "isStdout": false,
+      "isStderr": true,
+      "formatLines": 1,
+      "formatPattern": [
+        "[^(]+\\((\\d+), (\\d+)\\) ([^:]+): (.*)$",
+        {
+          "line": 1,
+          "column": 2,
+          "security": 3,
+          "message": [
+            4
+          ]
+        }
+      ],
+      "securities": {
+        "error": "Error",
+        "warning": "Warning",
+        "note": "Hint"
+      }
+    }
+  },
+  "diagnostic-languageserver.filetypes": {
+    "vim": "vint",
+    "markdown": [
+      "markdownlint"
+    ],
+    "sh": "shellcheck",
+    "nim": "nim"
+  },
+  "diagnostic-languageserver.formatters": {
+    "nixfmt": {
+      "command": "nixfmt",
+      "args": [
+        "--quiet"
+      ]
+    },
+    "nixpkgs-fmt": {
+      "command": "nixpkgs-fmt"
+    },
+    "stylish-haskell": {
+      "command": "stylish-haskell"
+    }
+  },
+  "diagnostic-languageserver.formatFiletypes": {
+    "nix": "nixfmt"
+  },
+  "python.formatting.provider": "black",
+  "python.autoComplete.addBrackets": false,
+  "python.linting.mypyEnabled": true,
+  "python.linting.mypyArgs": [
+    "--strict"
+  ],
+  "python.linting.pylintEnabled": true,
+  "python.linting.pep8Enabled": false,
+  "python.linting.pylintArgs": [
+    "--disable=typecheck,no-else-return"
+  ],
+  "latex.lint.onChange": false,
+  "latex.lint.onSave": false,
+  "rust.clippy_preference": "on",
+  "rust.rustflags": "-A dead_code -A unused_imports",
+  "coc.preferences.formatOnSaveFiletypes": [
+    "rust",
+    "json",
+    "go",
+    "python",
+    "cpp",
+    "javascript",
+    "nix",
+    "html",
+    "xml",
+    "haskell"
+  ],
+  "yaml.format.enable": true,
+  "html.filetypes": [
+    "html",
+    "handlebars",
+    "htmldjango",
+    "jinja.html"
+  ],
+  "suggest.completionItemKindLabels": {
+    "keyword": "",
+    "variable": "",
+    "value": "",
+    "operator": "Ψ",
+    "function": "ƒ",
+    "reference": "&",
+    "constant": "",
+    "method": "",
+    "struct": "פּ",
+    "class": "",
+    "interface": "",
+    "text": "",
+    "enum": "",
+    "enumMember": "",
+    "module": "",
+    "color": "",
+    "property": "",
+    "field": ".",
+    "unit": "",
+    "event": "🚲",
+    "file": "",
+    "folder": "",
+    "snippet": "",
+    "typeParameter": "",
+    "default": ""
+  },
+  "snippets.ultisnips.enable": false,
+  "codeLens.enable": true,
+  "diagnostic.enableMessage": "always",
+  "diagnostic.checkCurrentLine": true,
+  "diagnostic.hintSign": "🖝",
+  "diagnostic.infoSign": "🛈",
+  "diagnostic.errorSign": "⛔",
+  "suggest.snippetIndicator": " ✂",
+  "suggest.enablePreview": true,
+  "suggest.enablePreselect": false,
+  "suggest.floatEnable": true
+}

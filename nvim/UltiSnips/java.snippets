@@ -1,0 +1,10 @@
+snippet _skel "class boilerplate" b
+`!p
+if snip.basename.endswith('Test'):
+	snip.rv = '''import static org.junit.jupiter.api.Assertions.*;
+import org.junit.jupiter.api.Test;
+
+''' `public class `!p snip.rv = snip.basename` {
+	$0
+}
+endsnippet
