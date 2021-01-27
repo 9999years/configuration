@@ -119,8 +119,14 @@
   "python.formatting.provider": "black",
   "python.autoComplete.addBrackets": false,
   "python.linting.mypyEnabled": true,
+  "python.linting.mypyArgs": [
+    "--strict"
+  ],
   "python.linting.pylintEnabled": true,
   "python.linting.pep8Enabled": false,
+  "python.linting.pylintArgs": [
+    "--disable=typecheck,no-else-return"
+  ],
   "latex.lint.onChange": false,
   "latex.lint.onSave": false,
   "rust.clippy_preference": "on",
