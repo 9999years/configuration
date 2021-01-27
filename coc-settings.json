@@ -19,22 +19,13 @@
       ]
     },
     "haskell": {
-      "command": "hie-wrapper",
-      "rootPatterns": [
-        ".stack.yaml",
-        "cabal.config",
-        "package.yaml"
+      "command": "haskell-language-server-wrapper",
+      "args": [
+        "--lsp"
       ],
-      "filetypes": [
-        "hs",
-        "lhs",
-        "haskell"
-      ],
-      "initializationOptions": {
-        "languageServerHaskell": {
-          "hlintOn": true
-        }
-      }
+      "rootPatterns": ["*.cabal", "stack.yaml", "cabal.project", "package.yaml", "hie.yaml"],
+      "filetypes": ["haskell", "lhaskell"],
+      "initializationOptions": { "languageServerHaskell": {} }
     },
     "nix": {
       "command": "rnix-lsp",
