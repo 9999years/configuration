@@ -15,7 +15,7 @@ let g:coc_global_extensions = [
       \ 'coc-java',
       \ 'coc-xml',
       \ 'coc-vimlsp',
-      \ 'coc-rls',
+      \ 'coc-rust-analyzer',
       \ 'coc-solargraph',
       \ 'coc-diagnostic' ]
 
