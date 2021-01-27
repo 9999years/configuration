@@ -56,6 +56,7 @@ nmap <silent> gd <Plug>(coc-definition)
 nmap <silent> gy <Plug>(coc-type-definition)
 nmap <silent> gi <Plug>(coc-implementation)
 nmap <silent> gr <Plug>(coc-references)
+nmap <silent> gc <Plug>(coc-codeaction)
 
 " Select inside function
 xmap if <Plug>(coc-funcobj-i)
@@ -90,10 +91,10 @@ endfunction
 autocmd CursorHold * silent call CocActionAsync('highlight')
 
 " Remap <C-f> and <C-b> for scroll float windows/popups.
-nnoremap <expr><C-f> coc#util#has_float() ? coc#util#float_scroll(1) : "\<C-f>"
-nnoremap <expr><C-b> coc#util#has_float() ? coc#util#float_scroll(0) : "\<C-b>"
-inoremap <expr><C-f> coc#util#has_float() ? coc#util#float_scroll(1) : "\<Right>"
-inoremap <expr><C-b> coc#util#has_float() ? coc#util#float_scroll(0) : "\<Left>"
+nnoremap <expr><C-f> coc#float#has_float() ? coc#float#scroll(1) : "\<C-f>"
+nnoremap <expr><C-b> coc#float#has_float() ? coc#float#scroll(0) : "\<C-b>"
+inoremap <expr><C-f> coc#float#has_float() ? coc#float#scroll(1) : "\<Right>"
+inoremap <expr><C-b> coc#float#has_float() ? coc#float#scroll(0) : "\<Left>"
 
 "" Remap for rename current word
 nmap <F2> <Plug>(coc-rename)
