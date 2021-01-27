@@ -140,7 +140,8 @@
     "javascript",
     "nix",
     "html",
-    "xml"
+    "xml",
+    "haskell"
   ],
   "yaml.format.enable": true,
   "html.filetypes": [
