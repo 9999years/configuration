@@ -166,3 +166,8 @@ meta = with stdenv.lib; { # https://nixos.org/manual/nixpkgs/stable/#chap-meta
 	platforms = ${4:platforms.all};
 };
 endsnippet
+
+snippet skel "callPackage skeleton" b
+{ pkgs ? import <nixpkgs> { } }:
+pkgs.callPackage ./build.nix { }
+endsnippet
