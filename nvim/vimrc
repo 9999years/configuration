@@ -55,7 +55,6 @@ Plug 'KeitaNakamura/tex-conceal.vim' | So config/tex.vim
 Plug 'lervag/vimtex'
 Plug 'alunny/pegjs-vim'
 Plug 'vim-scripts/icalendar.vim'
-Plug 'https://gitlab.com/n9n/vim-apl.git'
 Plug 'qnighy/lalrpop.vim'
 Plug 'leanprover/lean.vim'
 Plug 'edwinb/idris2-vim'
