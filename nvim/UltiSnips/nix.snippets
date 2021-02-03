@@ -171,3 +171,37 @@ snippet skel "callPackage skeleton" b
 { pkgs ? import <nixpkgs> { } }:
 pkgs.callPackage ./build.nix { }
 endsnippet
+
+snippet sh "shell script"
+writeShellScript "${1:filename.sh}" ''
+	$0
+''
+endsnippet
+
+snippet opt "NixOS option"
+mkOption {
+	type = ${1:types.nullOr types.str};
+	default = null;
+	description = ''
+		$0
+	'';
+}
+endsnippet
+
+snippet module "NixOS Module" b
+{ config, pkgs, lib, ... }:
+let
+	inherit (lib) recursiveUpdate types mkEnableOption mkOption mkIf;
+
+	cfg = config.${1:moduleName};
+
+in {
+	options.$1 = {
+		enable = mkEnableOption "";
+	};
+
+	config = mkIf cfg.enable {
+		# TODO
+	};
+}
+endsnippet
