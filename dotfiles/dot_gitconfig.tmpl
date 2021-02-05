@@ -4,8 +4,8 @@
 	clean = git-lfs clean -- %f
 	process = git-lfs filter-process
 [user]
-	name = {{ .name }}
-	email = {{ .email }}
+	name = {{ .git_name }}
+	email = {{ .git_email }}
 [push]
 	default = simple
 	followTags = true
@@ -30,8 +30,6 @@
 	prompt = false
 [rerere]
 	enabled = true
-[blame]
-	ignoreRevsFile = .git-blame-ignore-revs
 [alias]
 	c = commit
 	co = commit
