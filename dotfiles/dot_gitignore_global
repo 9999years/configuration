@@ -50,7 +50,6 @@ __pycache__
 
 .idea/libraries/**
 node_modules
-package-lock.json
 *.fls
 .clangd
 auto
