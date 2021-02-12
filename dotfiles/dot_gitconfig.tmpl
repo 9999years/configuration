@@ -20,8 +20,18 @@
 	attributesfile = ~/.gitattributes_global
 	eol = lf
 	pager = delta --features main-theme
+[protocol "http"]
+	allow = never
+[protocol "git"]
+	allow = never
 [interactive]
 	diffFilter = delta --color-only
+[fetch]
+	fsckObjects = true
+[transfer]
+	fsckObjects = true
+[receive]
+	fsckObjects = true
 [merge]
 	conflictstyle = diff3
 [diff]
