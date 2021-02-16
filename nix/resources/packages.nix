@@ -134,7 +134,6 @@ let
       posix_man_pages
       libcap_manpages
       fontconfig.out # gives us fonts.dtd
-      drm_info # display info
       pciutils # lspci
       hwinfo
       lsof
