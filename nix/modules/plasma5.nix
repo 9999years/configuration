@@ -18,7 +18,7 @@ in {
 
       libinput = {
         enable = true;
-        naturalScrolling = true; # Windows-style, baby!
+        touchpad.naturalScrolling = true; # Windows-style, baby!
       };
 
       displayManager = {
