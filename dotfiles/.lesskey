@@ -1,0 +1,41 @@
+# See: `man lesskey`
+
+# Make sure to run `lesskey` to compile changes to `~/.less`.
+
+# Note that `#command`, `#line-edit`, and `#env` are special section markers,
+# not comments.
+
+#command
+h left-scroll
+l right-scroll
+
+#line-edit
+^A home
+^E end
+# <C-Left>
+^\kl word-left
+# <C-Right>
+^\kr word-right
+^W word-backspace
+# Some terminals send these escape sequences instead of <C-Left> and <C-Right>.
+# See: https://unix.stackexchange.com/questions/371954/
+\e[1;5D word-left
+\e[1;5C word-right
+
+# We can't disable ESC entirely because of ANSI escapes / etc (see above + I
+# think they're used internally by less), but we *can* let repeated escapes get
+# us out of a line entry prompt:
+\e\e abort
+
+#env
+
+# --jump-target=.3       Position the "target" line 30% from the top of the
+#                        screen. (E.g., when searching.)
+# --mouse                Enable mouse input!
+# --wheel-lines=5        Scroll 5 lines per scroll-wheel click.
+# --RAW-CONTROL-CHARS    Pass ANSI color escapes through but escape other ANSI
+#                        sequences to caret notation.
+# --ignore-case          Ignore case in search *unless* the search pattern
+#                        contains uppercase letters.
+# --use-color            Enables colored text in "various places".
+LESS = --jump-target=.3 --mouse --wheel-lines=5 --RAW-CONTROL-CHARS --ignore-case --use-color

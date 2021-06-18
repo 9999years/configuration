@@ -1,0 +1,131 @@
+[user]
+	name = Rebecca Turner
+	email = rbt@sent.as
+
+[alias]
+	; Show last commit.
+	last = log -1 HEAD
+	; Show a commit graph.
+	graph = log --decorate --oneline --graph
+
+[core]
+	; Editor for commit messages, etc.
+	editor = nvim
+	; Line-ending type to use in working directory for text files.
+	; 'lf' -> Always use LF, even on Windows.
+	eol = lf
+	; > Setting this variable to "true" is the same as setting the text
+	; > attribute to "auto" on all files and core.eol to "crlf". Set to
+	; > true if you want to have CRLF line endings in your working
+	; > directory and the repository has LF line endings.
+	autocrlf = false
+	; Exclude a bunch of temporary, archive, log files, etc.
+	excludesfile = ~/.gitignore_global
+	; Mostly used for setting `-diff` to treat files as binary.
+	attributesfile = ~/.gitattributes_global
+	; Use Delta when possible; see configuration in later sections.
+	; Delta is a pretty diff filter: https://github.com/dandavison/delta
+	pager = delta
+
+[push]
+	; Push tags missing from the remote that point to the commits we're
+	; pushing.
+	followTags = true
+
+[pull]
+	; > By default, Git does not create an extra merge commit when merging
+	; > a commit that is a descendant of the current commit. Instead, the
+	; > tip of the current branch is fast-forwarded. [...] When set to
+	; > only, only such fast-forward merges are allowed (equivalent to
+	; > giving the --ff-only option from the command line).
+	ff = only
+
+[branch]
+	; > Tells git branch, git switch and git checkout to set up new
+	; > branches so that git-pull will appropriately merge from the
+	; > starting point branch. [...] [When set to] `always` — automatic
+	; > setup is done when the starting point is either a local branch or
+	; > remote-tracking branch. This option defaults to true.
+	autosetupmerge = always
+
+[init]
+	; Use 'main' instead of 'master' when setting up a new repository.
+	defaultBranch = main
+
+[credential]
+	; This block is the source of much pain.
+	; See `man 7 gitcredentials`, maybe. It probably won't help.
+	helper = libsecret
+	; Consider flipping this if you're having trouble???
+	modalPrompt = false
+	; Don't worry about it!
+	canFallBackToInsecureStore = true
+
+[merge]
+	; diff3 shows conflicts in the following format:
+	;     <<<<<<<
+	;     changes made by one side
+	;     |||||||
+	;     original text
+	;     =======
+	;     changes made by other side
+	;     >>>>>>>
+	conflictstyle = diff3
+[diff]
+	; > For patch application, we found that the Histogram is more suitable
+	; > than Myers for providing the changes of code, from our manual
+	; > analysis. Thus, we strongly recommend using the Histogram algorithm
+	; > when mining Git repositories to consider differences in source
+	; > code.
+	; How different are different diff algorithms in Git? (2019; Yusuf
+	;     Sulistyo Nugroho, Hideaki Hata & Kenichi Matsumoto)
+	;     <https://link.springer.com/article/10.1007/s10664-019-09772-z>
+	;
+	; See also: The patience diff algorithm (James Coglan / @jcoglan)
+	;     <https://blog.jcoglan.com/2017/09/19/the-patience-diff-algorithm/>
+	algorithm = histogram
+[rerere]
+	; > Activate recording of resolved conflicts, so that identical
+	; > conflict hunks can be resolved automatically, should they be
+	; > encountered again.
+	enabled = true
+
+; 'http' and 'git' are insecure. Don't use them.
+[protocol "http"]
+	allow = never
+[protocol "git"]
+	allow = never
+
+; > If it is set to true, git-fetch-pack will check all fetched objects.
+; This is also a security setting, IIRC?
+[fetch]
+	fsckObjects = true
+[transfer]
+	fsckObjects = true
+[receive]
+	fsckObjects = true
+
+; See: https://hub.github.com/
+[hub]
+	protocol = https
+
+; Delta is a pretty diff filter: https://github.com/dandavison/delta
+[interactive]
+	; --color-only:
+	;   Do not alter input structurally in any way, but color
+	;   and highlight hunk lines according to your delta
+	;   configuration.
+	diffFilter = delta --color-only
+
+[delta]
+	; Display line numbers next to the diff.
+	line-numbers = true
+	; See `delta --show-syntax-themes`.
+	syntax-theme = Dracula
+
+; Git Large File Storage: https://git-lfs.github.com/
+[filter "lfs"]
+	smudge = git-lfs smudge -- %f
+	required = true
+	clean = git-lfs clean -- %f
+	process = git-lfs filter-process

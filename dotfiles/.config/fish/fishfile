@@ -1,0 +1,13 @@
+# Plugins for fisher.
+# See: https://github.com/jorgebucaran/fisher#using-your-fish_plugins-file
+
+# fzf keybindings.
+jethrokuan/fzf
+# Notify when long tasks finish.
+franciscolourenco/done
+# Run bash scripts that change environment variables.
+edc/bass
+# alt-s to toggle "sudo" on current command
+oh-my-fish/plugin-sudope
+# 'to' command for directory bookmarking
+joehillen/to-fish

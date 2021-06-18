@@ -1,6 +1,0 @@
-{{ $repo := joinPath .chezmoi.homedir "configuration" -}}
-sourceDir = "{{ joinPath $repo "dotfiles" }}"
-[data]
-    repo = "{{ $repo }}"
-    git_name = "{{ promptString "Git: Name" }}"
-    git_email = "{{ promptString "Git: Email address" }}"

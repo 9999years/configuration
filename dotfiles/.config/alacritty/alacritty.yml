@@ -1,0 +1,61 @@
+---
+# Annotated default configuration:
+# https://github.com/alacritty/alacritty/blob/master/alacritty.yml
+
+font:
+  size: 15
+  normal: {family: PragmataPro Mono Liga}
+
+draw_bold_text_with_bright_colors: true
+
+selection: {save_to_clipboard: true}
+
+key_bindings:
+  - { key: V,        mods: Control|Shift, action: Paste            }
+  - { key: C,        mods: Control|Shift, action: Copy             }
+  - { key: N,        mods: Control|Shift, action: SpawnNewInstance }
+
+# https://github.com/alacritty/alacritty/wiki/Color-schemes
+schemes:
+  # Here, we're using YAML anchors and aliases. When we write
+  #     key: &anchor_name
+  # We can later use `*anchor_name` to refer to the value of `key`. In this
+  # file, we use
+  #     colors: *anchor_name
+
+  # https://github.com/dguo/blood-moon/tree/master/applications/alacritty
+  blood_moon: &blood_moon
+    primary: {background: '0x10100E', foreground: '0xC6C6C4'}
+    normal: {black: '0x10100E', red: '0xC40233', green: '0x009F6B',
+             yellow: '0xFFD700', blue: '0x0087BD', magenta: '0x9A4EAE',
+             cyan: '0x20B2AA', white: '0xC6C6C4'}
+    bright: {black: '0x696969', red: '0xFF2400', green: '0x03C03C',
+             yellow: '0xFDFF00', blue: '0x007FFF', magenta: '0xFF1493',
+             cyan: '0x00CCCC', white: '0xFFFAFA'}
+  monokai_pro: &monokai_pro  # From alacritty wiki (see above).
+    primary: {background: '0x2D2A2E', foreground: '0xFCFCFA'}
+    normal: {black: '0x403E41', red: '0xFF6188', green: '0xA9DC76',
+             yellow: '0xFFD866', blue: '0xFC9867', magenta: '0xAB9DF2',
+             cyan: '0x78DCE8', white: '0xFCFCFA'}
+    bright: {black: '0x727072', red: '0xFF6188', green: '0xA9DC76',
+             yellow: '0xFFD866', blue: '0xFC9867', magenta: '0xAB9DF2',
+             cyan: '0x78DCE8', white: '0xFCFCFA'}
+  tomorrow_night_bright: &tomorrow_night_bright  # From alacritty wiki (see above).
+    primary: {background: '0x000000', foreground: '0xeaeaea'}
+    normal: {black: '0x000000', red: '0xd54e53', green: '0xb9ca4a',
+             yellow: '0xe6c547', blue: '0x7aa6da', magenta: '0xc397d8',
+             cyan: '0x70c0ba', white: '0xeaeaea'}
+    bright: {black: '0x666666', red: '0xff3334', green: '0x9ec400',
+             yellow: '0xe7c547', blue: '0x7aa6da', magenta: '0xb77ee0',
+             cyan: '0x54ced6', white: '0xffffff'}
+  # https://github.com/challenger-deep-theme/alacritty
+  challenger_deep: &challenger_deep
+    primary: {background: '0x1b182c', foreground: '0xcbe3e7'}
+    normal: {black: '0x100e23', red: '0xff8080', green: '0x95ffa4',
+             yellow: '0xffe9aa', blue: '0x91ddff', magenta: '0xc991e1',
+             cyan: '0xaaffe4', white: '0xcbe3e7'}
+    bright: {black: '0x565575', red: '0xff5458', green: '0x62d196',
+             yellow: '0xffb378', blue: '0x65b2ff', magenta: '0x906cff',
+             cyan: '0x63f2f1', white: '0xa6b3cc'}
+
+colors: *blood_moon
